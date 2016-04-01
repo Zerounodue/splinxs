@@ -1,0 +1,92 @@
+<!DOCTYPE HTML> 
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>splinxs</title>
+	<link rel="icon" href="Splinxs/resources/images/logo.png" type="image/gif">
+	<link rel="stylesheet" type="text/css" href="Splinxs/resources/css/style.css">
+	<script src="Splinxs/resources/js/jquery-2.2.0.min.js"></script>
+	<script src="Splinxs/resources/js/rmc3@3.2.97.min.js"></script>
+	<script src="Splinxs/resources/js/DetectRTC.js"></script>
+	<script>
+		//check if browser supports all features		
+
+		DetectRTC.load(function() {
+		
+			if(DetectRTC.hasMicrophone) {
+				// seems current system has at least one audio input device
+				console.log('has microphone');
+			}
+
+			if(DetectRTC.hasSpeakers) {
+				// seems current system has at least one audio output device
+				console.log('has speakers');
+			}
+
+			if(DetectRTC.hasWebcam) {
+				// seems current system has at least one video input device
+				console.log('has webcam');
+			}
+			
+			if(!DetectRTC.isWebRTCSupported) {
+				// seems no WebRTC compatible client
+				console.log('does not support WebRTC');
+				showError();
+			}
+			
+			if(DetectRTC.isAudioContextSupported) {
+				// seems Web-Audio compatible client
+				console.log('Web-Audio ok');
+			}
+
+			if(DetectRTC.isScreenCapturingSupported) {
+				// seems WebRTC screen capturing feature is supported on this client
+				console.log('screen capturing ok');
+			}
+
+			if(DetectRTC.isSctpDataChannelsSupported) {
+				// seems WebRTC SCTP data channels feature are supported on this client
+				console.log('SCTP ok');
+			}
+
+			if(DetectRTC.isRtpDataChannelsSupported) {
+				// seems WebRTC (old-fashioned) RTP data channels feature are supported on this client
+				console.log('RTP data channel ok');
+			}
+			
+			
+		});
+		
+		
+		
+		function showError(){
+			var startSection = $("#startSection");
+			var errorSection = $("#errorSection");
+			
+			startSection.hide();
+			errorSection.show();
+		}
+		
+		
+	</script>
+</head>
+<body>
+	<header>
+	<div class="topbar">
+		<div class="topbar-left"></div>
+		<div class="topbar-middle"></div>
+		<div class="topbar-right"></div>
+	</div>
+	</header>
+	<section id="startSection">
+		<a class="guideLink" href="Splinxs/guide.html">Guide</a>
+		<br />
+		<br />
+		<br />
+		<a class="touristLink" href="Splinxs/tourist.html">Tourist ---></a>
+	</section>
+	<section id="errorSection" hidden>
+		<a id="errorSectionContent" class="errorSection" >Your browser does not support WebRTC...</a>
+	</section>
+</body>
+</html>

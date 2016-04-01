@@ -1,0 +1,14 @@
+google maps
+https://developers.google.com/maps/tutorials/fundamentals/adding-a-google-map
+
+GEO location
+https://developers.google.com/maps/documentation/javascript/examples/map-geolocation
+
+markers
+https://developers.google.com/maps/documentation/javascript/examples/marker-simple
+
+API reference
+https://developers.google.com/maps/documentation/javascript/3.exp/reference
+
+reverse geocoding
+https://developers.google.com/maps/documentation/geocoding/intro#ReverseGeocoding

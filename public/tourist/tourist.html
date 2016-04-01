@@ -1,0 +1,265 @@
+<!DOCTYPE HTML> 
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Splinxs Tourist</title>
+        <link rel="icon" href="resources/images/logo.png" type="image/gif">
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css">
+        <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css">
+        <script src="resources/js/jquery-2.2.0.min.js"></script>
+        <script src="resources/js/rmc3@3.2.97.js"></script>
+        <!-- socket.io for signaling -->
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="resources/js/bootstrap.min.js"></script>
+        <script src="resources/js/connection.js"></script>
+        <script src="resources/js/tourist.connection.js"></script>
+        <script src="resources/js/util.js"></script>
+        <script src="resources/js/ui.js"></script>
+        <script src="resources/js/tourist.ui.js"></script>
+        <script src="resources/js/DetectRTC.js"></script>
+        <script src="resources/js/map.js"></script>
+        <script src="resources/js/tourist.map.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing&callback=initMap" async defer></script>
+        <script>
+            //var peer;
+            /*
+            connection.onstreamended = function (e) {
+                console.log('stream ended');
+
+                //$("#myVideo").empty();
+
+                connection.attachStreams.forEach(function (stream) {
+                    stream.stop();
+                });
+
+                //e.mediaElement.parentNode.removeChild(e.mediaElement);
+            };
+            */
+
+            $(document).ready(function () {
+
+                initSplinxS();
+                initUI();
+                initTouristUI();
+                //showGUI();
+                
+                connection.videosContainer = $("#videoContainer");
+                
+                connection.onaddstream = function (e) {
+                    console.log('onaddstream');
+                    debugger;
+                };
+                
+                $("#btn_joinConnection").click(function () {
+                    if(showLogs) console.log('tourist: join connection button clicked');
+                    connectToGuides();
+                });
+
+                $("#btn_chat").click(function () {
+                    console.log('send chat clicked');
+                    var chatInput = $("#inp_chat");
+                    var message = chatInput.val();
+                    sendMessageToPeer(message, true);
+                    chatInput.val("");
+                });
+
+                $("#inp_chat").keypress(function (e) {
+                    //send message when enter key is pressed
+                    if (e.which == 13) {
+                        console.log('enter on chat input');
+                        var chatInput = $("#inp_chat");
+                        var message = chatInput.val();
+                        sendMessageToPeer(message, true);
+                        chatInput.val("");
+                    }
+                });
+
+                $("#inp_chat").keyup(function (e) {
+                    console.log('chat keyup');
+                    meIsTyping();
+                });
+
+                $("#btn_shareVideo").click(function (e) {
+                    console.log('share video clicked');
+                    startVideo();
+                });
+
+                $("#btn_stopVideo").click(function (e) {
+                    console.log('stop video clicked');
+                    stopVideo();
+                });
+
+                $("#btn_minimiseChat").click(function (e) {
+                    console.log('minimise chat');
+                    changeToSmallChat();
+                });
+
+                $("#smallChat").click(function (e) {
+                    console.log('maximising chat');
+                    changeToChat();
+                });
+
+                $("#btn_closeConnection").click(function (e) {
+                    console.log('closing connection');
+                    closeConnection();
+                });
+
+                $("#btn_muteVideo").click(function (e) {
+                    console.log('mude video button clicked');
+                    
+                    connection.attachStreams.forEach(function (stream) {
+                        if(stream.isVideo){
+                            if(showLogs) console.log('muting video stream');
+                            stream.mute();
+                        }
+                    });
+                    
+
+                    /*
+                    connection.attachStreams.forEach(function (stream) {
+                        debugger;
+                        stream.mute();
+                        .mute({
+                        isAudio: true,
+                        remote: true
+                    });
+                    });
+                    */
+
+                });
+
+                $("#btn_unmuteVideo").click(function (e) {
+                    console.log('unmuting video');
+                    
+                    connection.attachStreams.forEach(function (stream) {
+                        if(stream.isVideo){
+                            if(showLogs) console.log('unmuting video stream');
+                            stream.unmute();
+                        }
+                    });
+                    
+                });
+                
+                $("#btn_startAudio").click(function (e) {
+                    if(showLogs) console.log('tourist: start audio button clicked');
+                    
+                    connection.addStream({
+                        audio: true
+                        //,oneway: true
+                    });
+
+
+                });
+                
+                $("#btn_stopAudio").click(function (e) {
+                    if(showLogs) console.log('tourist: stop audio button clicked');
+                    connection.attachStreams.forEach(function(stream) {
+                        stream.stop();
+                    });
+
+                    connection.renegotiate();
+                });
+
+            });
+
+            function startVideo() {
+
+                connection.addStream({
+                    audio: true,
+                    video: true,
+                    oneway: true
+                });
+
+            }
+            
+            
+            connection.onmute = function(event) {
+                event.mediaElement.pause();
+            };
+
+            connection.onunmute = function(event) {
+                 event.mediaElement.play();
+            };
+            
+            
+            
+
+        </script>
+    </head>
+    <body>
+        <header>
+            <div class="topbar">
+                <div class="topbar-left"></div>
+                <div class="topbar-middle"></div>
+                <div class="topbar-right"></div>
+            </div>
+            Welcome Tourist
+        </header>
+        <main id="content">
+            <button type="button" id="btn_joinConnection">join connection</button>
+            <button type="button" id="btn_closeConnection" hidden>close connection</button>
+            <br />
+            <div id="audio" hidden>
+                <button type="button" id="btn_startAudio">start audio</button>
+                <button type="button" id="btn_stopAudio">stop audio</button>
+                <div id="audioDiv"></div>
+            </div>
+            <br />
+            <div id="video" class="video" hidden>
+                <button type="button" id="btn_shareVideo">start video</button>
+                <button type="button" id="btn_stopVideo">stop video</button>
+                <button type="button" id="btn_muteVideo">mute video</button>
+                <button type="button" id="btn_unmuteVideo">unmute video</button>
+                <div id="myVideo" ></div>
+            </div>
+            <div id="map" hidden></div>
+            <div class="container" id="chatBox" hidden>
+                <div class="row">
+                    <!--<div class="col-md-5">-->
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <span class="glyphicon glyphicon-comment"></span> Chat <span id="spn_isTyping" class="text-center"></span>
+                            <div class="btn-group pull-right">
+                                <button id="btn_minimiseChat" type="button" class="btn btn-default btn-xs">
+                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                </button>
+                                <ul class="dropdown-menu slidedown">
+                                    <li><a href="#"><span class="glyphicon glyphicon-refresh">
+                                            </span>Refresh</a></li>
+                                    <li><a href="#"><span class="glyphicon glyphicon-ok-sign">
+                                            </span>Available</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="chat" id="chat">
+                            </ul>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="input-group">
+                                <input id="inp_chat" type="text" class="form-control input-sm" placeholder="Type your message here...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-warning btn-sm" id="btn_chat">Send</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--</div>-->
+                </div>
+            </div>
+            <audio id="audioPlayer" ></audio>
+        </main>
+        <div id="loadBox" class="load" hidden>
+            <div id="load1" class="loadDot" ></div>
+            <div id="load2" class="loadDot" ></div>
+            <div id="load3" class="loadDot" ></div>
+        </div>
+        <footer>
+            <div id="smallChat" class="smallChat" hidden>
+                <img id="smallChatImg" class="smallChatImg" src="resources/images/smallChat.png" alt="chat">
+                <span id="smallChatText" class="smallChatText">Chat</span>
+                <img class="smallChatUp" src="resources/images/arrowUp.png" alt="up">
+            </div>
+        </footer>
+    </body>
+</html>

@@ -15,7 +15,7 @@ var https = require('https');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '1720');
+var port = normalizePort(process.env.PORT || '443');
 app.set('port', port);
 
 /**

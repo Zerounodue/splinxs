@@ -1,5 +1,4 @@
-
-/*html {
+html {
     height: 100%;
     width: 100%;
     margin: 0px;
@@ -21,26 +20,6 @@ main {
 .guideLink {
     font-size: 20px;
     color: #222222;
-}
-*/
-.nav.navbar-nav.navbar-right li a {
-    color: #676A6C;
-  
-}
-.navbar-custom {
-	margin-top: 20px;
-    color: #676A6C;
-    background-color: white;
-    opacity: 0.8;
-    margin-bottom: 200;
-}
-
-body{
-
-width: 100%;
-font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	color:#676A6C; 	
-
 }
 
 .touristLink {
@@ -336,19 +315,3 @@ footer {
     float: left;
 }
 /* map */
-
-
-
-/*button*/
-.btn-green{
-	font-weight: bold;
-	color: white;
-	background-color: #28B294;
-	border: 0px;
-}
-
-.btn-green:hover {
-	background-color: #31C6C7;
-	color: white;
-}
-/*button*/

@@ -1,0 +1,34 @@
+#homeSlide{
+	background-color: white;
+}
+#splinxsSlide{
+	background-color: #2585C4;
+	color:white; 
+}
+#aboutSlide{
+	background-color: #31C6C7;
+	color:white; 
+}
+#contactSlide{
+	background-color: #28B294;
+	color:white; 
+}
+#footerSlide{
+background-color: white;
+	
+}
+.slide{
+	padding-top: 70px;
+	padding-bottom: 70px;
+	
+	
+}
+
+
+
+
+/*index*/
+.btn-index{
+	width: 80%;
+	margin: 10px;
+}

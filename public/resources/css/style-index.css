@@ -32,3 +32,13 @@ background-color: white;
 	width: 80%;
 	margin: 10px;
 }
+
+/* Extra-extra Small */
+@media(max-width:400px){
+	/* the icons are 100% visible*/
+	.splinxsSlideIcon{
+		height: auto;
+		max-width: 100%;
+		
+	}
+}

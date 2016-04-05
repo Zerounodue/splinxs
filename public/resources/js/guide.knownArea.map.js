@@ -12,8 +12,19 @@ var searchBox;
 var drawingModes;
 var circles = [];
 var circleCounter = 0;
+var circleOptions = {
+    fillColor: '#28B294',
+    fillOpacity: 0.6,
+    strokeWeight: 2,
+    clickable: true,
+    editable: true,
+    zIndex: 1,
+    suppressUndo: true,
+    strokeColor: '#2585C4'
+};
 var defaultLocation = {lat: 46.947248, lng: 7.451586}; //Bern
-
+//circles loaded from db
+var existingCircles = null;
 
 /**
  * callback when the map script has been successfully loaded
@@ -40,7 +51,7 @@ function initKnownAreaMap() {
     };
     
     initSearchBox();
-    
+    loadExistingCircles();
 }
 /**
  * add listeners to the map
@@ -69,16 +80,7 @@ function initDrawingManager() {
             ]
          },
          */
-        circleOptions: {
-            fillColor: '#28B294',
-            fillOpacity: 0.6,
-            strokeWeight: 2,
-            clickable: true,
-            editable: true,
-            zIndex: 1,
-            suppressUndo: true,
-            strokeColor: '#2585C4'
-        }
+        circleOptions: circleOptions
     });
 
     drawingManager.removeCircle = false;
@@ -94,7 +96,7 @@ function addDrawingManagerListeners() {
     google.maps.event.addListener(drawingManager, 'circlecomplete', function (circle) {
         var radius = circle.getRadius();
         if (showLogs) console.log('circlecomplete');
-        addCircleListeners(circle);
+        
         addCircle(circle);
     });
 
@@ -130,6 +132,7 @@ function addCircle(circle) {
     circle.id = circleCounter++;
     if (showLogs) console.log('add circle, id: ' + circle.id);
     circles.push(circle);
+    addCircleListeners(circle);
 }
 /**
  * removes a circle
@@ -198,7 +201,13 @@ $(document).ready(function () {
     
     $("#btn_knownAreasContinue").click(function (e) {
         if(showLogs) console.log('knownAreasContinue button clicked');
-        alert('No circles: ' + getNumberOfCircles());
+        var n = getNumberOfCircles();
+        if(n > 0){
+            saveCircles();
+        }else{
+            alert('No circles...');
+        }
+
     });
     
     $("#mapControlPan").click(function () {
@@ -218,6 +227,12 @@ $(document).ready(function () {
         drawingManager.setDrawingMode(null);
         drawingManager.removeCircle = true;
     });
+    
+    //only for test purposes
+    $("#btn_knownAreasLoad").click(function () {
+        if(showLogs) console.log('button knownAreasLoad clicked');
+        loadExistingCircles();
+    });
 
 });
 /**
@@ -225,6 +240,7 @@ $(document).ready(function () {
  * @returns {Array|circles} the array of circles or null
  */
 function getCircles(){
+    if(showLogs) console.log('get circles');
     if(circles.length > 0){
         return circles;
     }else{
@@ -236,7 +252,76 @@ function getCircles(){
  * @returns {Number} number of circles
  */
 function getNumberOfCircles(){
+    if(showLogs) console.log('get number of circles');
     var n = getCircles();
     
     return n == null ? 0 : n.length;
+}
+/**
+ * loads the existing circles and displays them on the map
+ */
+function loadExistingCircles(){
+    if(showLogs) console.log('load existing circles');
+    if(existingCircles == null){
+        if(showLogs) console.log('no existing circles');
+    }else{
+        if(existingCircles.length > 0){
+            if(showLogs) console.log('number of existing circles: ' + existingCircles.length);
+            //display circles on map
+            var ec = JSON.parse(existingCircles);
+            //set properties for each circle
+            $.each(ec, function (index, value) {
+                var c = new google.maps.Circle({
+                    center: value.center,
+                    radius: value.radius,
+                    fillColor: circleOptions.fillColor,
+                    fillOpacity: circleOptions.fillOpacity,
+                    strokeWeight: circleOptions.strokeWeight,
+                    clickable: circleOptions.clickable,
+                    editable: circleOptions.editable,
+                    zIndex: circleOptions.zIndex,
+                    suppressUndo: circleOptions.suppressUndo,
+                    strokeColor: circleOptions.strokeColor,
+                    map: map
+                });
+                //display circle on map and add listeners
+                addCircle(c);
+            });
+        }else{
+            if(showLogs) console.log('less than 1 existing circle...');
+        }
+    }
+}
+/**
+ * prepares the circles to be saved to the server and sends them
+ */
+function saveCircles(){
+    if(showLogs) console.log('save circles');
+    if(getNumberOfCircles() > 0){
+        var ec = [];
+        $.each(circles, function (index, value) {
+            console.log(index + ':' + value);
+            var circle = {
+                radius: value.radius,
+                center: value.center
+            };
+            ec.push(circle);
+            removeCircle(value);
+        });
+        existingCircles = JSON.stringify(ec);
+        sendCirclesToServer();
+    }else{
+        if(showLogs) console.log('no circles to save');
+    }
+}
+/**
+ * sends the saved circles to the server
+ */
+function sendCirclesToServer(){
+    if(existingCircles){
+        if(showLogs) console.log('');
+        //TODO implement here + server
+    }else{
+        if(showLogs) console.log('no circles to send...');
+    }
 }

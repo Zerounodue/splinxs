@@ -13,12 +13,13 @@
         <link rel="stylesheet" href="resources/css/style.css">
         <link rel="stylesheet" href="resources/css/style-index.css">
         <!-- For the moblie menu -->
-        <script type="text/javascript" src="resources/js/jquery-2.0.3.min.js"></script>  
-        <script type="text/javascript" src="resources/js/bootstrap-3.3.4.min.js"></script>
+        <!--<script type="text/javascript" src="resources/js/jquery-2.0.3.min.js"></script> --> 
+       
         <!-- <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>-->
-        <script type="text/javascript" src="resources/js/jquery-1.10.2.min.js"></script>
-        <!--<script src="resources/js/jquery-2.2.0.min.js"></script>-->
+        <!--<script type="text/javascript" src="resources/js/jquery-1.10.2.min.js"></script>-->
+        <script src="resources/js/jquery-2.2.0.min.js"></script>
 	<script src="resources/js/rmc3@3.2.97.min.js"></script>
+	<script type="text/javascript" src="resources/js/bootstrap-3.3.4.min.js"></script>
 	<script src="resources/js/DetectRTC.js"></script>
 	<script>
 		//check if browser supports all features		
@@ -81,32 +82,18 @@
 		
 		
 	</script>
+	
+	<script>
+			/*Scroll transition to anchor*/
+			function scrollTo(section) {
+			    $('html, body').animate({
+			        scrollTop: $(section).offset().top
+			    }, 750);   
+			    return false;
+			};
+    </script> 
 
-        <script>
-
-<!-- JQUERY FOR SLIDING NAVIGATION -->
-            $(document).ready(function () {
-                  $('a[href*=#]').each(function () {
-                    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
-                            && location.hostname == this.hostname
-                            && this.hash.replace(/#/, '')) {
-                          var $targetId = $(this.hash), $targetAnchor = $('[name=' + this.hash.slice(1) + ']');
-                          var $target = $targetId.length ? $targetId : $targetAnchor.length ? $targetAnchor : false;
-                           if ($target) {
-                             var targetOffset = $target.offset().top;
-
-<!----- JQUERY CLICK FUNCTION SCROLL TO THE #DIV-->
-                             $(this).click(function () {
-                                   $('html, body').animate({scrollTop: targetOffset}, 1000);
-                                   return false;
-                             });
-                          }
-                    }
-                  });
-
-            });
-
-        </script>  
+ 
 
     </head>
 
@@ -135,12 +122,12 @@
                         </a>
                     </div>
                     <div class="collapse navbar-collapse" id="navbar-ex-collapse">
-                        <ul class="nav navbar-nav navbar-right" id="myMenue">
-                            <li><a href="#homeSlide">Home</a></li>
-                            <li><a href="#splinxsSlide">What is Splinxs</a></li>
-                            <li><a href="#aboutSlide">About us</a></li>
-                            <li><a href="#contactSlide">Contact</a></li>
-                            <li><a href="#footerSlide">Footer</a></li>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a onclick="scrollTo('#homeSlide')">Home</a></li>
+                            <li><a onclick="scrollTo('#splinxsSlide')">What is Splinxs</a></li>
+                            <li><a onclick="scrollTo('#aboutSlide')">About us</a></li>
+                            <li><a onclick="scrollTo('#contactSlide')">Contact</a></li>
+                            <li><a onclick="scrollTo('#footerSlide')">Footer</a></li>
                         </ul>
                     </div>
                 </div>
@@ -153,18 +140,20 @@
                 <div class="container">
                     <!----- TITLE --> 
                     <div class="row">
-                        <div class="col-md-12 text-center"><h1>The real time tourist guide</h1></div>
+                        <div class="col-sm-12 text-center"><h1>The real time tourist guide</h1></div>
                     </div>
                     <!----- BUTTON --> 
                     <div class="row">
-                        <div class="col-md-6 text-center"><button class="btn btn-default btn-green btn-index" onclick="location.href='tourist.html';">I'm a tourist</button></div>
-                        <div class="col-md-6 text-center"><button class="btn btn-default btn-green btn-index"  onclick="location.href='guide.html';">I'm a guide</button></div>
+                        <div class="col-sm-6 text-center">
+                        	<a class="btn btn-default btn-green btn-index" id="touristButton" href="tourist.html">I'm a tourist</a>
+                        </div>
+                        <div class="col-sm-6 text-center"><a class="btn btn-default btn-green btn-index"  href="guide.html">I'm a guide</a></div>
                     </div>
                     <!----- DESCRIPTION --> 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-sm-12 splinxsDescription">
 
-                            <div id="splinxsDescription">
+                            <div>
                                 <b>Tourist:</b> you are somewhere unfamiliar and need help? Don't worry, a guide will help you. Thanks to camera, microphone, GPS and chat the guide will see what you see, speak with you and guide you to your destination.
                                 <br><br>
                                 <b>Guide:</b> you know some places very well and want to help someone who is there? Sign up and start helping people right now.

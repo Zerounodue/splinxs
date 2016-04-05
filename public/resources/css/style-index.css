@@ -42,3 +42,21 @@ background-color: white;
 		
 	}
 }
+
+/* Small devices (tablets, 768px and up) */
+@media(max-width:768px) { 
+	#touristButton{ 
+	height: 64px; 
+	font-size: 20px;
+    padding-top: 16px;
+	} 
+}
+
+
+.splinxsDescription{
+		
+}
+
+a{
+	cursor: pointer;
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SplinxsList</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="SplinxsList.js"></script>
+		<script>
+		//tests
+		var list = new SplinxsList();
+
+		var item1 = {
+			guide: "guide1",
+			tourist: "tourist1"
+		};
+
+		var item2 = {
+			guide: "guide2",
+			tourist: "tourist2"
+		};
+
+		var item3 = {
+			guide: "guide3",
+			tourist: "tourist3"
+		};
+
+		var item4 = {
+			guide: "guide3",
+			tourist: "tourist2"
+		};
+
+		var item5 = {
+			guide: "guide1",
+			tourist: "tourist3"
+		};
+
+
+
+
+		//tests
+		var logCounter = 1;
+		var ts = Date.now();
+		log(0);	//1
+		ts = Date.now();
+		list.addItem(item1);
+		log(1);	//2
+		ts = Date.now();
+		list.addStrings("1", "2");
+		log(2);	//3
+		ts = Date.now();
+		list.removeItem(item1);
+		log(1);	//4
+		ts = Date.now();
+		list.addStrings("guide2222", "tourist333");
+		log(2);	//5
+		ts = Date.now();
+		list.addItem(item1);
+		list.addItem(item2);
+		list.addItem(item3);
+		list.addItem(item4);
+		list.addItem(item5);
+		list.addStrings("guide1", "tourist4");
+		list.addStrings("guide1", "tourist9");
+		list.addStrings("guide1", "tourist2");
+		log(10);	//6
+		ts = Date.now();
+		list.removeGuide("guide1");
+		log(5);	//7
+		ts = Date.now();
+		list.removeTourist("tourist2");
+		log(2);	//8
+		ts = Date.now();
+		list.clear();
+		log(0);	//9
+		ts = Date.now();
+		list.addStrings("guide1", "tourist1");
+		log(1);	//10
+		ts = Date.now();
+		list.addStrings("guide1", "tourist1");
+		log(1);	//11
+		ts = Date.now();
+
+
+
+		function log(l){
+		  console.log(logCounter++ + ': ' + (list.getLength() == l) + ' --- time taken: ' + (Date.now() - ts) + 'ms');
+		}
+		</script>
+    </head>
+    <body>
+        <div>TODO write content</div>
+    </body>
+</html>

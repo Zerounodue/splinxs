@@ -69,7 +69,7 @@ html.html(lang='en')
       }, 750);
       return false;
       };
-  body
+  body#body
     // --- HEADER START
     header#header
       .topbar
@@ -84,7 +84,7 @@ html.html(lang='en')
               span.icon-bar
               span.icon-bar
               span.icon-bar
-            a.navbar-brand(href='#')
+            a.navbar-brand(onclick="scrollTo('#body')")
               img(style='height:100%', src='resources/images/splinxs.png')
           #navbar-ex-collapse.collapse.navbar-collapse
             ul.nav.navbar-nav.navbar-right
@@ -98,7 +98,39 @@ html.html(lang='en')
                 a(onclick="scrollTo('#contactSlide')") Contact
               li
                 a(onclick="scrollTo('#footerSlide')") Footer
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                  | Dropdown 
+                  span.caret
+                ul.dropdown-menu
+                  li
+                    a(href='/?clang=en') English
+                  li
+                    a(href='/?clang=de') Deutsch
+                  li
+                    a(href='/?clang=it') Italiano
+                  li
+                    a(href='#') Something else here
+                  li
+                    a(href='#') Something else here
+                  li
+                    a(href='#') Something else here
+                  li
+                    a(href='#') Something else here
+                  li
+                    a(href='#') Something else here
+                  li
+                    a(href='#') Something else here
+                  li
+                    a(href='#') Something else here
+ 
+
     main
+    br
+    br
+    br
+    br
+    p #{texts.WELCOME_MSG}
       // --- SLIDES START
       #homeSlide.slide
         .container

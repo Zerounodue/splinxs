@@ -71,8 +71,8 @@ function SplinxsList() {
      * @param {string} t tourist to remove
      */
     this.removeStrings = function (g, t) {
-        this.removeGuides(g);
-        this.removeTourists(t);
+        this.removeGuide(g);
+        this.removeTourist(t);
     };
     /**
      * gets the item with the first occurence of the given guide
@@ -81,7 +81,7 @@ function SplinxsList() {
      */
     this.getFirstGuide = function (g) {
         var item = null;
-        var index = containsGuide(g);
+        var index = this.containsGuide(g);
         if (index > -1) {
             item = list[index];
         }
@@ -95,7 +95,7 @@ function SplinxsList() {
      */
     this.getFirstTourist = function (t) {
         var item = null;
-        var index = containsGuide(t);
+        var index = this.containsTourist(t);
         if (index > -1) {
             item = list[index];
         }

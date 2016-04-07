@@ -73,15 +73,37 @@
 		list.clear();
 		log(0);	//9
 		ts = Date.now();
-		list.addStrings("guide1", "tourist1");
-		log(1);	//10
-		ts = Date.now();
+                list.removeStrings("guide1", "tourist1");
+                log(0); //10
 		list.addStrings("guide1", "tourist1");
 		log(1);	//11
 		ts = Date.now();
-
-
-
+		list.addStrings("guide1", "tourist1");
+		log(1);	//12
+		ts = Date.now();
+                var count = 10000;
+                for(var i = 0; i < count; i++){
+                    list.addStrings("guide" + i, "tourist" + i);
+                }
+                log(count); //13
+                ts = Date.now();
+                console.log(list.getFirstTourist("tourist" + (count - 1)));
+                log(count);  //14
+                ts=Date.now();
+                for(var i = 0; i < count; i++){
+                    list.addStrings("guide1000000", "tourist" + i);
+                }
+                log(count + count); //15
+                ts = Date.now();
+                console.log(list.getFirstTourist("tourist" + (count - 1)));
+                log(count + count);  //16
+                ts = Date.now();
+                list.removeGuide("guide1000000");
+                log(count); //  17
+                
+                
+                
+                
 		function log(l){
 		  console.log(logCounter++ + ': ' + (list.getLength() == l) + ' --- time taken: ' + (Date.now() - ts) + 'ms');
 		}

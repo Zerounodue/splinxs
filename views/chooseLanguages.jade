@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title= title
+    script(src='resources/js/jquery-2.2.0.min.js')
+    script(src='resources/js/selectLanguages.js')
+  body
+    h1 #{texts.TITLE_CHOOSE_LANGUAGES}
+    - var codes = langs.getAllCodes()
+    - var nativeNames = langs.getAllNativeNames()
+    script.
+      codes = !{JSON.stringify(codes)}
+      //TODO add data from db
+        //if(savedLanguages != null){
+          //languages = TODO parsse json from db
+        //}
+    label(for="languages") #{texts.LANGUAGES} 
+    input(id="inp_languages" type="text" list="languages" placeholder="__Type to search")
+    datalist(id='languages')
+      each code, index in codes
+          option(code='' + code + '' value='' + nativeNames[index] + '')
+    br
+    div(id="div_selectedLanguages")
+      p __selected languages
+    //if user is logged in => guide
+    button(id='btn_sendLanguages') __send languages

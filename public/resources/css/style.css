@@ -31,7 +31,7 @@ main {
 	margin-top: 20px;
     color: #676A6C;
     background-color: white;
-    opacity: 0.8;
+    opacity: 0.9;
     margin-bottom: 200;
 }
 
@@ -352,7 +352,10 @@ footer {
 	color: white;
 }
 /*button*/
-
-
-
-
+.btn-green:focus,
+.btn-green:active,
+.btn-green:active:focus,
+.btn-green:active:hover{
+	background-color: #16797A;
+	color: white;
+}

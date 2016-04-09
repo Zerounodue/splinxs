@@ -7,16 +7,18 @@
 //variables
 var showLogs = true;
 var languages = [];
-var codes = [];
+var localStorageKey = "languages";
+//DOM elements
+var langForm;
 var inp_lang;
 var selectedLanguages;
-var localStorageKey = "languages";
 
 $(document).ready(function () {
     if (showLogs) console.log('selectLanguages document ready');
     dataList = $("#languages");
     selectedLanguages = $("#div_selectedLanguages");
     inp_lang = $("#inp_languages");
+    langForm = $("#frm_languages");
     
     //add existing languages
     addSavedLanguages();
@@ -33,7 +35,7 @@ $(document).ready(function () {
         if(showLogs) console.log('send languages button clicked');
         
         if(languages.length > 0){
-            sendLanguages();
+            submitLanguages();
         }else{
             alert('__no languages selected');
         }
@@ -165,4 +167,9 @@ function clearLanguageStorage(){
     if(typeof(Storage) !== "undefined") {
         localStorage.removeItem(localStorageKey);
     }
+}
+
+function submitLanguages(){
+    sendLanguages();
+    langForm.submit();
 }

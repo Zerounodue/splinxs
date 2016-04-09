@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  .container
+    h1 Login Page
+    each user in users
+      tr
+        td name: #{user.username} 
+        br
+        td id: #{user._id}
+        br
+        td version: #{user.__v}
+        br
+        br
+        br

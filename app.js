@@ -1,7 +1,8 @@
 var express = require('express'),
-	session = require('express-session'),
-	geolang=require("geolang-express"),
-	i18n=require("i18n-express");
+	session = require('express-session'), //session (required also for i18n)
+	geolang=require("geolang-express"), //i18n
+	i18n=require("i18n-express");//i18n
+	//enforce = require('express-sslify'); //for redirect everything to ssh
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -23,6 +24,8 @@ var sessionOptions = {
 app.use(session(sessionOptions));
 //
 
+// use HTTPS(true) in case you are behind a load balancer (e.g. Heroku) 
+//app.use(enforce.HTTPS());
 
 //geolang
 app.use(geolang({

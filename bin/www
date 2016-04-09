@@ -8,15 +8,24 @@ var fs = require('fs');
 
 
 var app = require('../app');
+var httpApp = require('../httpApp');
 var debug = require('debug')('test:server');
 var https = require('https');
+var http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '443');
+
 app.set('port', port);
+httpApp.set('port', '80');
+
+
+http.createServer(httpApp).listen(httpApp.get('port'), function() {
+    console.log('Express server listening on port ' + httpApp.get('port') + 'and redirecting everithing on port 443');
+});
 
 /**
  * Create HTTPS server.

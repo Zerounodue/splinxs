@@ -11,6 +11,7 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "express-session": "^1.13.0",
+    "express-sslify": "^1.0.1",
     "geolang-express": "^1.0.0",
     "i18n-express": "^1.0.3",
     "jade": "~1.11.0",

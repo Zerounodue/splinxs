@@ -63,12 +63,17 @@ router.get('/allUsers', function(req, res){
 
 
 router.get('/lang', function(req, res) {
+    console.log('-----lang get -----');
     res.render('chooseLanguages', {langs: ISO6391});
 });
 
 router.post('/lang', function(req, res) {
-    req.body;
+    console.log('-----lang post -----');
+    var b = req.body;
+    var c = b.languages;
+    var d = JSON.parse(c);
     console.log(req.body);
+    var a = req.params;
     debugger;
     res.redirect('/');
 });

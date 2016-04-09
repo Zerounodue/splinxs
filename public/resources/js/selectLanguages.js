@@ -170,6 +170,17 @@ function clearLanguageStorage(){
 }
 
 function submitLanguages(){
-    sendLanguages();
+    //sendLanguages();
+    
+    saveToLocalStorage(localStorageKey, languages);
+    var langs = JSON.stringify(languages);
+    
+    langForm.empty();
+     $('<input id=\'langs\'/>').attr('type', 'hidden')
+          .attr('name', "languages")
+          .attr('value', langs)
+          .appendTo('#frm_languages');
+  debugger;
     langForm.submit();
+    
 }

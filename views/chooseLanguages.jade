@@ -6,7 +6,7 @@ html
     script(src='resources/js/selectLanguages.js')
   body
     h1 #{texts.TITLE_CHOOSE_LANGUAGES}
-    form(id="frm_languages")
+    form(id="frm_languages" method="post" action="/lang")
         - var nativeNames = langs.getAllNativeNames()
         - var codes = langs.getAllCodes()
         script.

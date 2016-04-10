@@ -170,8 +170,8 @@ function clearLanguageStorage(){
 }
 
 function submitLanguages(){
-    //sendLanguages();
-    
+    //sort languages by code
+    languages.sort(compareLanguages);
     saveToLocalStorage(localStorageKey, languages);
     var langs = JSON.stringify(languages);
     
@@ -180,7 +180,18 @@ function submitLanguages(){
           .attr('name', "languages")
           .attr('value', langs)
           .appendTo('#frm_languages');
-  debugger;
     langForm.submit();
     
+}
+/**
+ * compares if the first value is smaller, bigger or the same as the first value
+ * @param {Object{code: string, language: string}} a value to compare
+ * @param {Object{code: string, language: string}} b value to compare against
+ * @returns {Number} -1 if a is smaller, 1 if a is bigger, 0 if they are equal
+ */
+function compareLanguages(a, b)
+{
+    if (a.code < b.code) return -1;
+    if (a.code > b.code) return 1;
+    return 0;
 }

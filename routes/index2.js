@@ -68,14 +68,29 @@ router.get('/lang', function(req, res) {
 });
 
 router.post('/lang', function(req, res) {
-    console.log('-----lang post -----');
-    var b = req.body;
-    var c = b.languages;
-    var d = JSON.parse(c);
-    console.log(req.body);
-    var a = req.params;
-    debugger;
-    res.redirect('/');
+    
+    if (!req.body || !req.body.languages){
+        //TODO redirect somewhere
+        res.send('<a>no post params, cheater!!!</a>');
+    }
+    var langs = JSON.parse(req.body.languages);
+    var validLangs = 0;
+    
+    for (var i = 0; i <  langs.length; i++){
+        console.log('code: ' + langs[i].code);
+        validLangs += ISO6391.validate(langs[i].code);
+    }
+    
+    //TODO save to db, connect with guide...
+    
+    if(validLangs){
+        res.send('<a>' + JSON.stringify(langs) + '</a>');
+    }else{
+        res.send('<a>invalid language detected</a>');
+    }
+    
+    
+    
 });
 
 

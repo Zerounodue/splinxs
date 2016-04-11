@@ -38,6 +38,8 @@ $(document).ready(function () {
             submitLanguages();
         }else{
             alert('__no languages selected');
+            //prevent form from being submitted
+            return false;
         }
         
     });

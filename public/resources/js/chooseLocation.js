@@ -177,7 +177,6 @@ function isValidGEOPosition(pos){
 }
 
 function submitLocation(){
-    //sort languages by code
     var pos = JSON.stringify(marker.position);
     
     locForm.empty();

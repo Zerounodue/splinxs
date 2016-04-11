@@ -1,0 +1,37 @@
+doctype html
+html
+  head
+    title known areas
+    meta(charset='UTF-8')
+    link(rel='icon', href='resources/images/logo.png', type='image/gif')
+    link(rel='stylesheet', type='text/css', href='resources/css/style.css')
+    link(rel='stylesheet', type='text/css', href='resources/css/bootstrap.min.css')
+    script(src='resources/js/jquery-2.2.0.min.js')
+    script(src='resources/js/guide.knownArea.map.js')
+    script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing,places&callback=initKnownAreaMap' async defer)
+    style.
+      #map {
+      width: 500px;
+      height: 400px;
+      }
+  body
+    header
+      .topbar
+        .topbar-left
+        .topbar-middle
+        .topbar-right
+    main
+      script.
+        existingCircles = !{JSON.stringify(dbAreas)}
+      div __Add circles to mark the region that you know well. Only tourists that are in these regions will contact you.  You can change the center and radius of existing circles or delete them.
+      br
+      div(id="mapControls.mapControls")
+        button(id="mapControlPan") pan
+        button(id="mapControlAddCircles") add circles
+        button(id="mapControlRemoveCircles") remove circles
+      input(id="sb_places" type='text' placeholder='Search for place...')
+      br
+      div(id="map")
+      br
+      form(id="frm_areas" method="post" action="/knownAreas")
+        button(id='btn_knownAreasContinue' class="") send areas

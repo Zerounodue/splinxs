@@ -63,7 +63,6 @@ router.get('/allUsers', function(req, res){
 
 
 router.get('/lang', function(req, res) {
-    console.log('-----lang get -----');
     res.render('chooseLanguages', {langs: ISO6391});
 });
 
@@ -74,11 +73,14 @@ router.post('/lang', function(req, res) {
         res.send('<a>no post params, cheater!!!</a>');
     }
     var langs = JSON.parse(req.body.languages);
-    var validLangs = 0;
+    var validLangs = true;
     
     for (var i = 0; i <  langs.length; i++){
         console.log('code: ' + langs[i].code);
-        validLangs += ISO6391.validate(langs[i].code);
+        if(!ISO6391.validate(langs[i].code)){
+            validLangs = false;
+            break;
+        }
     }
     
     //TODO save to db, connect with guide...
@@ -88,10 +90,71 @@ router.post('/lang', function(req, res) {
     }else{
         res.send('<a>invalid language detected</a>');
     }
-    
-    
-    
+
 });
+
+router.get('/chooseLocation', function(req, res) {
+    res.render('chooseLocation');
+});
+
+router.post('/chooseLocation', function(req, res) {
+    
+    if (!req.body || !req.body.position){
+        //TODO redirect somewhere
+        res.send('<a>no post params, cheater!!!</a>');
+    }
+    var position = JSON.parse(req.body.position);
+
+    var validLocation = position.lat != null && position.lng != null;
+    
+    //TODO save to db, connect with guide...
+    
+    if(validLocation){
+        res.send('<a>' + JSON.stringify(position) + '</a>');
+    }else{
+        res.send('<a>invalid location detected</a>');
+    }
+
+});
+
+router.get('/knownAreas', function(req, res) {
+    var areas = null; //TODO get from db
+    res.render('knownAreas', {dbAreas: areas});
+});
+
+router.post('/knownAreas', function(req, res) {
+    
+    if (!req.body || !req.body.areas){
+        //TODO redirect somewhere
+        res.send('<a>no post params, cheater!!!</a>');
+    }
+    var areas = JSON.parse(req.body.areas);
+    console.log(areas);
+    var validAreas = true;
+    
+    for (var i = 0; i <  areas.length; i++){
+        console.log('radius: ' + areas[i].radius + ' lat: ' + areas[i].center.lat + ' lng: ' + areas[i].center.lng);
+        if(areas[i].radius <= 0 || areas[i].center.lat == null || areas[i].center.lng == null){
+            validAreas = false;
+            break;
+        }
+    }
+    
+    //TODO save to db
+    
+    if(validAreas){
+        res.send('<a>' + JSON.stringify(areas) + '</a>');
+    }else{
+        res.send('<a>invalid area detected</a>');
+    }
+
+});
+
+
+
+
+
+
 
 
 

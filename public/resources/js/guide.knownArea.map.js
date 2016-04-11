@@ -26,6 +26,8 @@ var defaultLocation = {lat: 46.947248, lng: 7.451586}; //Bern
 //circles loaded from db
 var existingCircles = null;
 
+var areaForm;
+
 /**
  * callback when the map script has been successfully loaded
  */
@@ -199,6 +201,8 @@ function resizeMap() {
 $(document).ready(function () {
     if (showLogs) console.log('document ready');
     
+    areaForm = $("#frm_areas");
+    
     $("#btn_knownAreasContinue").click(function (e) {
         if(showLogs) console.log('knownAreasContinue button clicked');
         var n = getNumberOfCircles();
@@ -309,19 +313,23 @@ function saveCircles(){
             removeCircle(value);
         });
         existingCircles = JSON.stringify(ec);
-        sendCirclesToServer();
+        submitCircles();
     }else{
         if(showLogs) console.log('no circles to save');
+        //prevent form from being submitted
+        return false;
     }
 }
 /**
  * sends the saved circles to the server
  */
-function sendCirclesToServer(){
-    if(existingCircles){
-        if(showLogs) console.log('');
-        //TODO implement here + server
-    }else{
-        if(showLogs) console.log('no circles to send...');
-    }
+function submitCircles(){
+    
+    areaForm.empty();
+    $('<input id=\'areas\'/>').attr('type', 'hidden')
+          .attr('name', "areas")
+          .attr('value', existingCircles)
+          .appendTo('#frm_areas');
+    areaForm.submit();
 }
+     

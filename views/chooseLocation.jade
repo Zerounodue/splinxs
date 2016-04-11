@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title= title
+    script(src='resources/js/jquery-2.2.0.min.js')
+    script(src='resources/js/chooseLocation.js')
+    script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing&callback=initMap", async, defer)
+    style.
+      #map {
+      width: 500px;
+      height: 400px;
+      }
+  body
+    h1 __Choose Location
+    button(id='btn_getLocation') __get location
+    div(id="map")
+    form(id="frm_location" method="post" action="/chooseLocation")
+        button(id='btn_sendLocation') __send locations

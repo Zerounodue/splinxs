@@ -1,6 +1,17 @@
 {
-"CONTACT_TEXT": "Mehr bla",
-"TITLE_CHOOSE_LANGUAGES": "Sprachen wählen",
-"WELCOME_MSG": "Hallo! Willkommen!"
+    "GENERAL": {
 
+    },
+    "MENU": {
+        
+    },
+    "LANGUAGES": {
+        "ENGLISH": "English",
+        "GERMAN": "Deutsch",
+        "ITALIAN": "Italiano"
+    },
+    "INDEX": {
+
+        
+    }
 }

@@ -1,4 +1,17 @@
 {
-"WELCOME_MSG": "Ciao! Benvenuti!",
-"CONTACT_TEXT": "altre cose..."
+    "GENERAL": {
+
+    },
+    "MENU": {
+        
+    },
+    "LANGUAGES": {
+        "ENGLISH": "English",
+        "GERMAN": "Deutsch",
+        "ITALIAN": "Italiano"
+    },
+    "INDEX": {
+
+        
+    }
 }

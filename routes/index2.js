@@ -196,6 +196,49 @@ router.get('/db', function(req, res) {
 
 
 
+router.get('/touristSettings', function(req, res) {
+    res.render('touristSettings');
+});
+
+
+
+
+router.post('/tourist', function(req, res) {
+	if (!req.body){ //|| !req.body.parameter){
+		console.log(req.body);
+        //TODO redirect somewhere
+        res.send('<a>no post params, cheater!!!</a>');
+        return;
+              
+    }
+	
+	var params ="this are my parameters";
+    //var params = JSON.parse(req.body.parameter);
+
+    
+    //if(params.languages.lenght <1 ){//TODO redirect somewhere
+    
+    //    res.send('<a>no languages.lenght, cheater!!!</a>');
+    //}
+    
+   
+	if(!req.session){ 
+		req.session.guid = generadeID();
+		
+	}
+	req.session.params = params;
+	
+	console.log(3);
+	res.render('tourist', {session: req.session});
+        
+
+});
+
+
+
+function generadeID(){
+	return 'GUID';
+}
 
 
 

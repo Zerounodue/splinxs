@@ -243,6 +243,13 @@ function generadeID(){
 
 
 
+router.get('/guideSocket', function(req, res) {
+    res.render('guideSocket');
+});
+
+
+
+
 
 
 module.exports = router;

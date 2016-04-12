@@ -67,15 +67,70 @@ require('../Signaling-Server.js')(server, function(socket) {
         });
     } catch (e) {}
 });
-       
+
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
+
+
+
+
+//var io = require('socket.io')(server);
+var io = require('socket.io').listen(server);
+/*
+io.on('connection', function(client) {  
+    console.log('----------1: connection');
+});
+
+io.sockets.on('connection', function (socket) {
+    console.log('----------2: sockets connection');
+    
+    socket.on('online', function (msg) {
+        console.log('----------3: online');
+    });
+});
+*/
+var guideSocket = io.of('/guideChannel');
+var touristSocket = io.of('/tourist');
+
+
+guideSocket.on('connection', function (socket) {
+    console.log('----------4: guide connection opened');
+    
+    socket.on('online', function (msg) {
+        console.log('----------5: guide online msg: ' + msg);
+    });
+    
+    socket.on('guide', function (msg) {
+        console.log('----------5: guide: ' + msg);
+        socket.emit(msg, "hoi " + msg);
+    });
+    
+    socket.on('disconnect', function () {
+        console.log('----------5.5: disconnect');
+    });
+    
+});
+
+touristSocket.on('connection', function (socket) {
+    console.log('----------6: tourist connection opened');
+    
+});
+
+
+
+
+
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+
+
+
+
 
 /**
  * Normalize a port into a number, string, or false.

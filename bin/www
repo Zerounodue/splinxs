@@ -18,9 +18,10 @@ var http = require('http');
  */
 
 var port = normalizePort(process.env.PORT || '443');
+var httpPort = normalizePort(process.env.PORT || '80');
 
 app.set('port', port);
-httpApp.set('port', '80');
+httpApp.set('port', httpPort);
 
 
 http.createServer(httpApp).listen(httpApp.get('port'), function() {

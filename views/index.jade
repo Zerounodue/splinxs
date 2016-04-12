@@ -89,15 +89,15 @@ html.html(lang='en')
           #navbar-ex-collapse.collapse.navbar-collapse
             ul.nav.navbar-nav.navbar-right
               li
-                a(onclick="scrollTo('#homeSlide')") Home
+                a(onclick="scrollTo('#homeSlide')") #{texts.HOME}
               li
-                a(onclick="scrollTo('#splinxsSlide')") What is Splinxs
+                a(onclick="scrollTo('#splinxsSlide')") #{texts.WHAT_IS_SPLINXS}
               li
-                a(onclick="scrollTo('#aboutSlide')") About us
+                a(onclick="scrollTo('#aboutSlide')") #{texts.ABOUT_US}
               li
-                a(onclick="scrollTo('#contactSlide')") Contact
+                a(onclick="scrollTo('#contactSlide')") #{texts.CONTACT}
               li
-                a(onclick="scrollTo('#footerSlide')") Footer
+                a(onclick="scrollTo('#footerSlide')") __Footer
               li.dropdown
                 a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
                   | Languages 
@@ -137,7 +137,7 @@ html.html(lang='en')
           // --- TITLE
           .row
             .col-sm-12.text-center
-              h1 The real time tourist guide
+              h1 #{texts.SPLINXS_SUBTITLE}
           // --- BUTTON
           .row
             .col-sm-6.text-center
@@ -148,12 +148,12 @@ html.html(lang='en')
           .row
             .col-sm-12.splinxsDescription
               div
-                b Tourist:
-                |  you are somewhere unfamiliar and need help? Don't worry, a guide will help you. Thanks to camera, microphone, GPS and chat the guide will see what you see, speak with you and guide you to your destination.
+                b #{texts.TOURIST}:
+                |  #{texts.DESCRIPTION_TOURIST}
                 br
                 br
-                b Guide:
-                |  you know some places very well and want to help someone who is there? Sign up and start helping people right now.
+                b #{texts.GUIDE}:
+                |  #{texts.DESCRIPTION_GUIDE}
       #splinxsSlide.slide
         .section
           .container

@@ -18,12 +18,15 @@ var http = require('http');
  */
 
 var port = normalizePort(process.env.PORT || '443');
-var httpPort = normalizePort(process.env.PORT || '80');
+var httpPort = normalizePort('80');
 
 app.set('port', port);
 httpApp.set('port', httpPort);
 
 
+/**
+ * Create HTTP server.
+ */
 http.createServer(httpApp).listen(httpApp.get('port'), function() {
     console.log('Express server listening on port ' + httpApp.get('port') + 'and redirecting everithing on port 443');
 });

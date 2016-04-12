@@ -1,24 +1,36 @@
 {
-    "SPLINXS": "Splinxs",
-    "ABOUT_US": "About us",
-    "CHOOSE_LANGUAGES": "Choose languages",
-    "CONTACT": "Contact",
-    "CONTACT_TEXT": "__TODO",
-    "LANGUAGES": "Languages",
-    "HOME": "Home",
-    "SPLINXS_SUBTITLE": "The real time tourist guide",
-    "WHAT_IS_SPLINXS": "What is Splinxs",
-    "WELCOME_MSG": "Hi! Welcome!",
+    "GENERAL": {
+        "AUDIO": "Audio",
+        "CHAT": "Chat",
+        "GUIDE": "Guide",
+        "ORIENTATION": "Orientation",
+        "SPLINXS": "Splinxs",
+        "TOURIST": "Tourist",
+        "VIDEO": "Video"
+    },
+    "MENU": {
+        "ABOUT_US": "About us",
+        "CONTACT": "Contact",
+        "HOME": "Home",
+        "LANGUAGES": "Languages",
+        "WHAT_IS_SPLINXS": "What is Splinxs"
+    },
+    "LANGUAGES": {
+        "ENGLISH": "English",
+        "GERMAN": "Deutsch",
+        "ITALIAN": "Italiano"
+    },
+    "INDEX": {
+        "DESCRIPTION_GUIDE": "you know some places very well and want to help someone who is there? Sign up and start helping people right now.",
+        "DESCRIPTION_TOURIST": "you are somewhere unfamiliar and need help? Don't worry, a guide will help you. Thanks to camera, microphone, GPS and chat the guide will see what you see, speak with you and guide you to your destination.",
+        "I_AM_GUIDE": "I am a guide",
+        "I_AM_TOURIST": "I am a tourist",
+        
+        "SPLINXS_SUBTITLE": "The real time tourist guide"
+        
+    }
     
     
     
-    
-    "GUIDE": "Guide",
-    "DESCRIPTION_GUIDE": "you know some places very well and want to help someone who is there? Sign up and start helping people right now.",
-    
-    
-    
-    "TOURIST": "Tourist",
-    "DESCRIPTION_TOURIST": "you are somewhere unfamiliar and need help? Don't worry, a guide will help you. Thanks to camera, microphone, GPS and chat the guide will see what you see, speak with you and guide you to your destination."
 
 }

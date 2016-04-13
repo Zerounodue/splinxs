@@ -7,7 +7,7 @@ module.exports = exports = function(app, socketCallback) {
     var shiftedModerationControls = {};
     var ScalableBroadcast;
 
-    var io = require('socket.io');
+    var io = require('socket.io.old');
 
     try {
         io = io(app);

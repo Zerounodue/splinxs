@@ -247,8 +247,9 @@ router.get('/guideSocket', function(req, res) {
     res.render('guideSocket');
 });
 
-
-
+router.get('/index', function(req, res) {
+    res.render('index');
+});
 
 
 

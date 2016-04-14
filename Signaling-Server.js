@@ -2,15 +2,15 @@
 // MIT License    - www.WebRTC-Experiment.com/licence
 // Documentation  - github.com/muaz-khan/RTCMultiConnection
 
-module.exports = exports = function(app, socketCallback) {
+module.exports = exports = function(io, socketCallback) {
     var listOfUsers = {};
     var shiftedModerationControls = {};
     var ScalableBroadcast;
-
-    var io = require('socket.io.old');
+    //TODO remove comments
+    //var io = require('socket.io');
 
     try {
-        io = io(app);
+        //io = io(app);
         io.on('connection', onConnection);
     } catch (e) {
         io = io.listen(app, {

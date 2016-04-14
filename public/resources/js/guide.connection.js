@@ -9,16 +9,39 @@ showLogs = true;
 
 //var connection = new RTCMultiConnection();
 
+var guideSocket;
+var guideStates = {
+    state: "state",
+    available: 1,
+    unavailable: 2
+};
+var guideRequests = {
+    help: 1,
+    cancel: 2
+};
+
+var guideResponses = {
+    response: "response",
+    accept: 1
+};
+
 var ongoingConnectionInterval;
 var ongoingConnectionIntervalTimer = 60 * 1000; //60 seconds
 
 //guide channel
 var channel = "myGuideChannel1";
+
+username = "guide1";
+
+initGuideSocket();
+
+connection = new RTCMultiConnection();
+connection.socketURL = '/';
+
+
 connection.channel = channel;
 
 connection.socketCustomEvent = connection.channel;
-
-username = "guide1";
 
 if (typeof webkitMediaStream !== 'undefined') {
     connection.attachStreams.push(new webkitMediaStream());
@@ -39,7 +62,7 @@ connection.session = {
 };
 
 connection.sdpConstraints.mandatory = {
-    OfferToReceiveAudio: false,
+    OfferToReceiveAudio: true,
     OfferToReceiveVideo: false
 };
 
@@ -139,6 +162,7 @@ connection.connectSocket(function (socket) {
         //a tourist requests to communicate with me
         if(message.customMessage.touristRequestsGuide){
             if (showLogs) console.log('guide: tourist asked for help');
+            /*
             //show prompt if I want to help the tourist
             showTouristRequestsGuidePrompt();
             //hide prompt after timeout (tourist will try to connect to new guide)
@@ -149,6 +173,7 @@ connection.connectSocket(function (socket) {
             }, conEstabTimer);
             
             return;
+            */
         }
         //tourist revoked the connection request (or timeout)
         if(message.customMessage.touristRevokesRequest){
@@ -254,7 +279,7 @@ function mapMessage(mapMessage) {
  * clear the timeout
  */
 function guideAcceptsRequest(){
-    sendGuideAcceptsRequest();
+    guideSocketSendResponse(guideResponses.accept);
     clearTimeout(conEstabTimeout);
     conEstabTimeout = null;
 }
@@ -278,4 +303,62 @@ function informServerOngoingConnection(){
 function ongoingConnectionClosed(){
     if(showLogs) console.log('guide: ongoing connection closed normally');
     clearInterval(ongoingConnectionInterval);
+}
+
+function initGuideSocket(){
+    if(showLogs) console.log('guide: init guideSocket');
+    guideSocket = io.connect('https://localhost/guide');
+    
+    initEvents();
+}
+
+function initEvents(){
+    if(showLogs) console.log('guide: init guideSocket evetns');
+    
+    guideSocket.on('connect', function(){
+        if(showLogs) console.log('guide: guideSocket connect');
+        guideSocketSendState(guideStates.available);
+    });
+    
+    guideSocket.on(username, function(msg){
+        if(showLogs) console.log('guide: guideSocket message on: ' + username);
+
+        if(!msg){
+            if(showLogs) console.log('guide: guideSocket invalid message');
+            return;
+        }
+        
+        if(msg.request){
+            var req = msg.request;
+            if(req == guideRequests.help){
+                if(showLogs) console.log('guide: guideSocket help request');
+                showTouristRequestsGuidePrompt();
+                //hide prompt after timeout (tourist will try to connect to new guide)
+                //=> I mustn't see the prompt anymore
+                conEstabTimeout = setTimeout(function () {
+                    if(showLogs) console.log('tourist: tourist request timeout');
+                    hideTouristRequestGuidePrompt();
+                }, conEstabTimer);
+                return;
+            }else if(req == guideRequests.cancel){
+                if(showLogs) console.log('guide: guideSocket cancel request');
+                hideTouristRequestGuidePrompt();
+                return;
+            }
+        }
+
+    });
+}
+
+function guideSocketSendResponse(r){
+    guideSocketSendMessage(guideResponses.response, {response: r, name: username});
+}
+
+function guideSocketSendState(s){
+    guideSocketSendMessage(guideStates.state, {state: s, name: username});
+}
+
+function guideSocketSendMessage(topic, msg){
+    if(showLogs) console.log('guide: guideSocket send on: ' + topic + ', message: ' + msg);
+    guideSocket.emit(topic, msg);
 }

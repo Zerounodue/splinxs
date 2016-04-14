@@ -36,12 +36,12 @@ var peername;
  * fires once the detect rtc script is ready
  */
 DetectRTC.load(function () {
+    if(showLogs) console.log('DetectRTC load');
     detectRTCcapabilities();
-    
 });
 
-var connection = new RTCMultiConnection();
-connection.socketURL = '/';
+var connection;// = new RTCMultiConnection();
+//connection.socketURL = '/';
 //only for testing
 //rtcMultiConnection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
 

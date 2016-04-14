@@ -11,12 +11,11 @@ $(document).ready(function () {
     chat.on('connect', function () {
         console.log('connected');
 
-        chat.emit('online', 'hi!');
+        chat.emit('online', name);
     });
     
     chat.on(name, function(msg){
        console.log('received message on my private channel: ' + msg);
-       
     });
 
     $("#btn_sendMessage").on('click', function (e) {
@@ -24,7 +23,7 @@ $(document).ready(function () {
         
         console.log('sending on: ' + 'guide' + ', message: ' + name);
         
-        chat.emit('guide', name);
+        chat.emit('guide', "hey!!");
         
         
     });

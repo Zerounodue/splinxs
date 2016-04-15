@@ -8,12 +8,15 @@ var Guide = require('../models/guide');
 
 //https://github.com/meikidd/iso-639-1
 var ISO6391 = require('iso-639-1');
+var views = 0;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
     //set a session to test
     req.session.theUsername = "elia";
 
+    views++;
+    req.session.views=views;
     console.log("req.session.theUsername= " +req.session.theUsername);
 
   res.render('index2', { user : req.user });
@@ -250,7 +253,7 @@ function generadeID(){
 
 
 router.get('/guideSocket', function(req, res) {
-    res.render('guideSocket', {session: req.session.theUsername});
+    res.render('guideSocket', {session: req.session});
 });
 
 router.get('/index', function(req, res) {

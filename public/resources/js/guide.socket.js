@@ -3,6 +3,7 @@
 
 $(document).ready(function () {
     console.log('document ready');
+    //console.log('username:' +  document.session.theUsername);
    
     var name = 'Mike';
     

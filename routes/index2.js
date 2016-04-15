@@ -11,8 +11,14 @@ var ISO6391 = require('iso-639-1');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+    //set a session to test
+    req.session.theUsername = "elia";
+
+    console.log("req.session.theUsername= " +req.session.theUsername);
+
   res.render('index2', { user : req.user });
 });
+
 
 
 
@@ -244,12 +250,13 @@ function generadeID(){
 
 
 router.get('/guideSocket', function(req, res) {
-    res.render('guideSocket');
+    res.render('guideSocket', {session: req.session.theUsername});
 });
 
 router.get('/index', function(req, res) {
     res.render('index');
 });
+
 
 
 

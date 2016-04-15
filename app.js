@@ -14,14 +14,19 @@ var mongoose = require("mongoose");
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-//var routes = require('./routes/index');
-var routes = require('./routes/index2');
-var users = require('./routes/users');
+
 
 var app = express();
 
-//new 
+
+
+
+
+
+//new
+
 var sessionOptions = {
+    //TODO change secret and option
   secret: "secret",
   resave : true,
   saveUninitialized : false
@@ -29,7 +34,9 @@ var sessionOptions = {
 };
 app.use(session(sessionOptions));
 //
-
+//var routes = require('./routes/index');
+var routes = require('./routes/index2');
+var users = require('./routes/users');
 // use HTTPS(true) in case you are behind a load balancer (e.g. Heroku) 
 //app.use(enforce.HTTPS());
 
@@ -133,8 +140,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-
 
 
 module.exports = app;

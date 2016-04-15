@@ -3,9 +3,9 @@
 
 $(document).ready(function () {
     console.log('document ready');
-
+   
     var name = 'Mike';
-
+    
     var chat = io.connect('https://localhost/guideChannel');
 
     chat.on('connect', function () {
@@ -27,9 +27,5 @@ $(document).ready(function () {
         
         
     });
-    
-    
-    
-    
 
 });

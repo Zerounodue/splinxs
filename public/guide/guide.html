@@ -22,7 +22,8 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing&callback=initMap" async defer></script>
         <script>
             //var peer;
-
+            
+            /*
             connection.onNewSession = function (session) {
                 console.log('new session');
                 debugger;
@@ -61,11 +62,23 @@
                 debugger;
                 //connection.accept(request);
             };
+    
+    
+            connection.onmute = function(event) {
+                event.mediaElement.pause();
+            };
 
+            connection.onunmute = function(event) {
+                 event.mediaElement.play();
+            };
+    
+            */
 
 
             $(document).ready(function () {
-
+                
+                initGuide();
+                
                 initSplinxS();
                 initUI();
                 initGuideUI();
@@ -182,13 +195,7 @@
                 
             });
             
-            connection.onmute = function(event) {
-                event.mediaElement.pause();
-            };
-
-            connection.onunmute = function(event) {
-                 event.mediaElement.play();
-            };
+            
 
         </script>
     </head>

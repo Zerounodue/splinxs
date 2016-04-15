@@ -30,7 +30,13 @@ var ongoingConnectionInterval;
 var ongoingConnectionIntervalTimer = 60 * 1000; //60 seconds
 
 //guide channel
-var channel = "myGuideChannel1";
+var channel;// = "myGuideChannel1";
+
+
+
+function initGuide(){
+
+channel = "";
 
 username = "guide1";
 
@@ -185,6 +191,7 @@ connection.connectSocket(function (socket) {
         onMessage(message.customMessage);
     });
 });
+}
 /**
  * checks what kind of message arrived and acts accordingly
  * @param {String} message message sent by peer

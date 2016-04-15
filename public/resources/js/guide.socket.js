@@ -6,12 +6,12 @@ $(document).ready(function () {
    
     var name = 'Mike';
     
-    var chat = io.connect('https://localhost/guideChannel');
+    var chat = io.connect('https://localhost/guide');
 
     chat.on('connect', function () {
         console.log('connected');
 
-        chat.emit('online', name);
+        chat.emit('state', name);
     });
     
     chat.on(name, function(msg){
@@ -24,6 +24,7 @@ $(document).ready(function () {
         console.log('sending on: ' + 'guide' + ', message: ' + name);
         
         chat.emit('guide', "hey!!");
+        chat.emit('state', name);
         
         
     });

@@ -1,6 +1,7 @@
 var express = require('express'),
 	session = require('express-session'), //session (required also for i18n)
 	geolang=require("geolang-express"), //i18n
+    socket_io = require('socket.io'),
 	i18n=require("i18n-express");//i18n
 	//enforce = require('express-sslify'); //for redirect everything to ssh
 var path = require('path');
@@ -17,6 +18,45 @@ var LocalStrategy = require('passport-local').Strategy;
 
 
 var app = express();
+var io = socket_io();
+app.io = io;
+
+
+
+/**
+ *Signaling-server for RTCMultiConnection
+ */
+require('./Signaling-Server.js')(io, function(socket) {
+  try {
+    var params = socket.handshake.query;
+    //TODO remove comments
+    // "socket" object is totally in your own hands!
+    // do whatever you want!
+
+    // in your HTML page, you can access socket as following:
+    // connection.socketCustomEvent = 'custom-message';
+    // var socket = connection.getSocket();
+    // socket.emit(connection.socketCustomEvent, { test: true });
+
+    if (!params.socketCustomEvent) {
+      params.socketCustomEvent = 'custom-message';
+    }
+
+    socket.on(params.socketCustomEvent, function(message) {
+      try {
+        socket.broadcast.emit(params.socketCustomEvent, message);
+      } catch (e) {}
+    });
+  } catch (e) {}
+});
+
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+
+require('./Splinxs-socket.js')(io);
 
 
 

@@ -8,138 +8,168 @@
 showLogs = true;
 
 //guide channel
-var channelCounter = 0;
-var channels = ["myGuideChannel1"];
-var channel = channels[channelCounter];
+//var channelCounter = 0;
+//var channels = ["myGuideChannel1"];
+var channel;// = channels[channelCounter];
 
 //var connection = new RTCMultiConnection();
 
-username = "tourist1";
+var touristRequests = {
+    request: "request",
+    help: 1
+};
+
+var touristResponses = {
+    response: "response",
+    accepted: 1
+};
 
 var saveConnInterval;
 var saveConnIntervalTimer = 60000;
 var localStorageConnectionName = "connection";
 var localStoragePreviousConnectionTimeout = 20 * 60 * 1000;//20 min in milliseconds
 
-connection = new RTCMultiConnection();
-connection.socketURL = '/';
+var touristSocket;
 
-/**
- * sets the channel, media and mandatory constraints
- */
-setSessionConstraints();
+function initTouristConnection(){
 
+    if(showLogs) console.log('init tourist connection');
 
-function setSessionConstraints() {
-    //connection = new RTCMultiConnection();
-    //connection.socketURL = '/';
+    showLoadBox();
     
-    if(showLogs) {
-        console.log('tourist: setting session constraints');
-        console.log('tourist: channel counter: ' + channelCounter);
-        console.log('tourist: channel: ' + channels[channelCounter]);
-    }
+    setTimeout(function(){
+                        hideLoadBox();
+                        alert('__sorry, no guide found...');
+                    }, 60000);
     
-    channel = channels[channelCounter];
+    username = "tourist1";
+
+    //channel = "myGuideChannel1";
+
+    initTouristSocket();
+
+}
+
+function initTouristWebRTC(){
+    //helps to start the signalling server...
+    touristSocket.disconnect();
     
+    connection = new RTCMultiConnection();
+    connection.socketURL = '/';
+
+    if (showLogs) console.log('tourist: set session constraints');
+
+    //channel = channels[channelCounter];
+
     connection.channel = channel;
-    
-    connection.socketCustomEvent = channels[channelCounter];
-    
+
+    //connection.socketCustomEvent = channels[channelCounter];
+
+    connection.socketCustomEvent = connection.channel;
+
     //connection.socketURL = '/';
 
     if (typeof webkitMediaStream !== 'undefined') {
         connection.attachStreams.push(new webkitMediaStream());
-    }
-    else if (typeof MediaStream !== 'undefined') {
+    } else if (typeof MediaStream !== 'undefined') {
         connection.attachStreams.push(new MediaStream());
-    }
-    else {
+    } else {
         console.warn('Neither Chrome nor Firefox. This may NOT work.');
     }
 
     //TODO only add media that is supported by the browser
     connection.session = {
         data: true
-                //, audio: true
-                //, video: true
+        //, audio: true
+        //, video: true
     };
 
     connection.sdpConstraints.mandatory = {
         OfferToReceiveAudio: true,
         OfferToReceiveVideo: false
     };
-}
 
-connection.onopen = function (event) {
-    if (showLogs) console.log('tourist: connection opened');
 
-    if (connection.alreadyOpened)
-        return;
-    connection.alreadyOpened = true;
 
-};
 
-connection.onmessage = function (message) {
-    if (showLogs) console.log('tourist: sctp message arrived');
-    if (!message.data) {
-        if (showLogs) console.log('tourist: empty sctp message');
-        return;
-    }
-    onMessage(message.data);
-};
+    connection.onopen = function (event) {
+        if (showLogs) console.log('tourist: connection opened');
 
-connection.onstream = function (event) {
-    if (showLogs) console.log('tourist: stream started');
-    
-    if (!event.stream.getAudioTracks().length && !event.stream.getVideoTracks().length) {
-        return;
-    }
-    
-    if(event.stream.type == "local"){
-        if (showLogs) console.log('tourist: local stream started');
-        if(event.stream.isVideo){
-            if (showLogs) console.log('tourist: local video stream started');
-            //TODO make nicer code
-            var video = $("#myVideo");
-            video.append(event.mediaElement);
-            
-        }else if(event.stream.isAudio){
-            if (showLogs) console.log('tourist: local audio stream started');
-            
-            var video = $("#myVideo");
-            video.append(event.mediaElement);
-            
-            debugger;
+        if (connection.alreadyOpened)
+            return;
+        connection.alreadyOpened = true;
+
+    };
+
+    connection.onmessage = function (message) {
+        if (showLogs) console.log('tourist: sctp message arrived');
+        if (!message.data) {
+            if (showLogs) console.log('tourist: empty sctp message');
+            return;
         }
-    }else if(event.stream.type == "remote"){
-        if (showLogs) console.log('tourist: remote stream started');
-        if(event.stream.isAudio){
-            if (showLogs) console.log('tourist: remote audio stream started');
-            var audio = $("#audioDiv");
-            audio.append(event.mediaElement);
-            event.mediaElement.play();
-            setTimeout(function () {
+        onMessage(message.data);
+    };
+
+    connection.onstream = function (event) {
+        if (showLogs) console.log('tourist: stream started');
+
+        if (!event.stream.getAudioTracks().length && !event.stream.getVideoTracks().length) {
+            return;
+        }
+
+        if(event.stream.type == "local"){
+            if (showLogs) console.log('tourist: local stream started');
+            if(event.stream.isVideo){
+                if (showLogs) console.log('tourist: local video stream started');
+                //TODO make nicer code
+                var video = $("#myVideo");
+                video.append(event.mediaElement);
+
+            }else if(event.stream.isAudio){
+                if (showLogs) console.log('tourist: local audio stream started');
+
+                var video = $("#myVideo");
+                video.append(event.mediaElement);
+
+                debugger;
+            }
+        }else if(event.stream.type == "remote"){
+            if (showLogs) console.log('tourist: remote stream started');
+            if(event.stream.isAudio){
+                if (showLogs) console.log('tourist: remote audio stream started');
+                var audio = $("#audioDiv");
+                audio.append(event.mediaElement);
                 event.mediaElement.play();
-            }, 2000);
+                setTimeout(function () {
+                    event.mediaElement.play();
+                }, 2000);
 
-            
+
+            }
+            //connection.videosContainer.append(event.mediaElement);
         }
-        //connection.videosContainer.append(event.mediaElement);
-    }
-    
-};
 
-/**
- * fires when the signalling websocket was connected successfully
- * this socket will be used as a fall back if SCTP is not available
- * @param {Websocket} socket Websocket used for signalling and sending other messages
- */
-connection.connectSocket(function (socket) {
-    if (showLogs) console.log('tourist: websocket connected');
-    websocket = socket;
-    setSocketCustomEvent();
-});
+    };
+
+    /**
+     * fires when the signalling websocket was connected successfully
+     * this socket will be used as a fall back if SCTP is not available
+     * @param {Websocket} socket Websocket used for signalling and sending other messages
+     */
+    connection.connectSocket(function (socket) {
+        if (showLogs) console.log('tourist: websocket connected');
+        websocket = socket;
+        setSocketCustomEvent();
+        connection;
+        
+        //debugger;
+        //TODO call guide
+        //establishConnectionWithGuide();
+        
+        initConnectionWithGuide();
+    });
+
+}
 
 function setSocketCustomEvent(){
     if(showLogs) console.log('tourist: setting custom event: ' + connection.socketCustomEvent);
@@ -156,12 +186,15 @@ function setSocketCustomEvent(){
             connectionState.DataChannel = connectionStates.DataChannel.Websocket;
             return;
         }
+        /*
         //guide declines connection
         if(message.customMessage.guideDeclinesRequest){
             if (showLogs) console.log('tourist: guide declined request :(');
             changeToNextChannel();
             return;
         }
+        */
+        /*
         //guide accepts connection
         if(message.customMessage.guideAcceptsRequest) {
             if (showLogs) console.log('tourist: guide accepted request :)');
@@ -174,6 +207,7 @@ function setSocketCustomEvent(){
             sendUsername(username);
             return;
         }
+        */
         
         onMessage(message.customMessage);
     });
@@ -246,35 +280,51 @@ function mapMessage(mapMessage) {
         setUpdateInterval(interval);
     }
 }
-
+/*
 function connectToGuides(){
-    showLoadBox();
+    //showLoadBox();
     //check if connection with previous guide was interrupted, sets first guide to call
     //checkPreviousConnectionInterrupted();
     
     initConnectionWithGuide();
 }
+*/
 /**
  * sends the guide a request for communication
  */
 function initConnectionWithGuide() {
     if(showLogs) console.log('tourist: initiating connection');
     
+    //send message to peer if I do not support sctp
+    if (supportsOnlyWebsocket()) {
+        sendUseWebsocketConnection();
+    }
+    sendUsername(username);
+    
     //setSessionConstraints();
     
     //setSocketCustomEvent();
     
+    /*
     //request connection with current channel (guide)
     sendTouristRequestsGuide();
     //will continue in message.customMessage.guideTouristRequestReply or timeout
+    
     conEstabTimeout = setTimeout(function () {
         if(showLogs) console.log('tourist: connect to guide timeout');
         changeToNextChannel();
     }, conEstabTimer);
+    */
 }
 
 function establishConnectionWithGuide() {
     if (showLogs) console.log('establishing connection with guide');
+    
+    //clearTimeout(conEstabTimeout);
+    //conEstabTimeout = null;
+    
+
+
     //TODO check if also possible in websocket case
     connection.join(connection.channel);
     
@@ -288,6 +338,7 @@ function establishConnectionWithGuide() {
 /**
  * if the guide refused the connection or a timeout occured, try the next channel (guide)
  */
+/*
 function changeToNextChannel(){
     if(showLogs) console.log('tourist: changing to next channel');
     clearTimeout(conEstabTimeout);
@@ -305,6 +356,7 @@ function changeToNextChannel(){
     setSocketCustomEvent();  
     initConnectionWithGuide();
 }
+*/
 /**
  * stores channel name and current minute to localstorage every 60 seconds (if supported)
  */
@@ -341,10 +393,65 @@ function checkPreviousConnectionInterrupted(){
         if(t > 0 && c != ""){
             var currTime = getCurrentTimeMillis();
             var diff = currTime - t;
+            /* //TODO redo
             if(diff < localStoragePreviousConnectionTimeout){
                 if(showLogs) console.log('tourist: previous connection was interrupted, guide: ' + c);
                 channels.splice(0, 0, c);
             }
+            */
         }
     }
+}
+
+function initTouristSocket(){
+    if(showLogs) console.log('tourist: init touristSocket');
+    touristSocket = io.connect('https://localhost/tourist');
+    
+    initEvents();
+}
+
+function initEvents(){
+    if(showLogs) console.log('tourist: init touristSocket evetns');
+    
+    touristSocket.on('connect', function(){
+        if(showLogs) console.log('tourist: touristSocket connect');
+        //guideSocketSendState(guideStates.available);
+        touristSocketSendRequest(touristRequests.help);
+    });
+    
+    touristSocket.on(username, function(msg){
+        if(showLogs) console.log('tourist: touristSocket message on: ' + username);
+        if(!msg){
+            if(showLogs) console.log('tourist: touristSocket invalid message');
+            return;
+        }
+        if(msg.response){
+            var res = msg.response;
+            var guide = msg.guide;
+            if(res == touristResponses.accepted){
+                if(!guide){
+                    if(showLogs) console.log('tourist: touristSocket guide accepted but no name received...');
+                    return;
+                }
+                if(showLogs) console.log('tourist: touristSocket accepted response, guide: ' + guide);
+
+                //TODO call guide
+                guide; //use this variable for channel to call
+                channel = guide;
+                initTouristWebRTC();
+            }
+        }
+        
+    });
+    
+    
+}
+
+function touristSocketSendRequest(r){
+    touristSocketSendMessage(touristRequests.request, {request: r, name: username});
+}
+
+function touristSocketSendMessage(topic, msg){
+    if(showLogs) console.log('tourist: touristSocket send on: ' + topic + ', message: ' + msg);
+    touristSocket.emit(topic, msg);
 }

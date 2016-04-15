@@ -34,163 +34,171 @@ var channel;// = "myGuideChannel1";
 
 
 
-function initGuide(){
+function initGuideConnection(){
 
-channel = "";
-
-username = "guide1";
-
-initGuideSocket();
-
-connection = new RTCMultiConnection();
-connection.socketURL = '/';
-
-
-connection.channel = channel;
-
-connection.socketCustomEvent = connection.channel;
-
-if (typeof webkitMediaStream !== 'undefined') {
-    connection.attachStreams.push(new webkitMediaStream());
-}
-else if (typeof MediaStream !== 'undefined') {
-    connection.attachStreams.push(new MediaStream());
-}
-else {
-    console.error('Neither Chrome nor Firefox. This demo may NOT work.');
-}
-
-
-//connection.dontCaptureUserMedia = true;
-
-connection.session = {
-    data: true
-    //,audio: true
-};
-
-connection.sdpConstraints.mandatory = {
-    OfferToReceiveAudio: true,
-    OfferToReceiveVideo: false
-};
-
-connection.open(connection.channel);
-
-
-connection.onopen = function (event) {
-    if (showLogs) console.log('guide: connection opened in channel: ' + connection.channel);
-
-    if (connection.alreadyOpened)
-        return;
-    connection.alreadyOpened = true;
+    if(showLogs) console.log('init guide connection');
     
-};
-
-
-connection.onmessage = function (message) {
-    if (showLogs) console.log('guide: sctp message arrived');
-    if (!message.data) {
-        if (showLogs) console.log('guide: empty sctp message');
-        return;
-    }
-    onMessage(message.data);
-};
-
-connection.onstream = function (event) {
-    if (showLogs) console.log('guide: stream started');
-    if (!event.stream.getAudioTracks().length && !event.stream.getVideoTracks().length) {
-        return;
-    }
+    username = "guide1";
     
-    if(event.stream.type == "local"){
-        if (showLogs) console.log('guide: local stream started');
-        if(event.stream.isAudio){
-            if (showLogs) console.log('guide: local audio stream started');
-            
+    channel = username;
+
+    
+
+    initGuideSocket();
+
+    connection = new RTCMultiConnection();
+    connection.socketURL = '/';
+
+
+    connection.channel = channel;
+
+    connection.socketCustomEvent = connection.channel;
+
+    if (typeof webkitMediaStream !== 'undefined') {
+        connection.attachStreams.push(new webkitMediaStream());
+    }
+    else if (typeof MediaStream !== 'undefined') {
+        connection.attachStreams.push(new MediaStream());
+    }
+    else {
+        console.error('Neither Chrome nor Firefox. This demo may NOT work.');
+    }
+
+
+    //connection.dontCaptureUserMedia = true;
+
+    connection.session = {
+        data: true
+        //,audio: true
+    };
+
+    connection.sdpConstraints.mandatory = {
+        OfferToReceiveAudio: true,
+        OfferToReceiveVideo: false
+    };
+
+    connection.open(connection.channel);
+
+
+    connection.onopen = function (event) {
+        if (showLogs) console.log('guide: connection opened in channel: ' + connection.channel);
+
+        if (connection.alreadyOpened)
+            return;
+        connection.alreadyOpened = true;
+
+    };
+
+
+    connection.onmessage = function (message) {
+        if (showLogs) console.log('guide: sctp message arrived');
+        if (!message.data) {
+            if (showLogs) console.log('guide: empty sctp message');
+            return;
         }
-        
-    }else if(event.stream.type == "remote"){
-        if (showLogs) console.log('guide: remote stream started');
-        if(event.stream.isAudio){
-            if (showLogs) console.log('guide: remote audio stream started');
-            var audio = $("#audioDiv");
-            audio.append(event.mediaElement);
-            event.mediaElement.play();
-            setTimeout(function () {
+        onMessage(message.data);
+    };
+
+    connection.onstream = function (event) {
+        if (showLogs) console.log('guide: stream started');
+        if (!event.stream.getAudioTracks().length && !event.stream.getVideoTracks().length) {
+            return;
+        }
+
+        if(event.stream.type == "local"){
+            if (showLogs) console.log('guide: local stream started');
+            if(event.stream.isAudio){
+                if (showLogs) console.log('guide: local audio stream started');
+
+            }
+
+        }else if(event.stream.type == "remote"){
+            if (showLogs) console.log('guide: remote stream started');
+            if(event.stream.isAudio){
+                if (showLogs) console.log('guide: remote audio stream started');
+                var audio = $("#audioDiv");
+                audio.append(event.mediaElement);
                 event.mediaElement.play();
-            }, 2000);
-        }else if(event.stream.isVideo){
-            if (showLogs) console.log('guide: remote video stream started');
-            connection.videosContainer.append(event.mediaElement);
-            
+                setTimeout(function () {
+                    event.mediaElement.play();
+                }, 2000);
+            }else if(event.stream.isVideo){
+                if (showLogs) console.log('guide: remote video stream started');
+                connection.videosContainer.append(event.mediaElement);
+
+            }
+
+
+
         }
-        
-        
-        
+
+    };
+    /*
+    connection.onstreamended = function (event) {
+        console.log('stream ended');
+        $("#videoContainer").empty();
+
+        event.mediaElement.remove();
+
+
+        connection.attachStreams.forEach(function (stream) {
+            stream.stop();
+        });
+
     }
-    
-};
-/*
-connection.onstreamended = function (event) {
-    console.log('stream ended');
-    $("#videoContainer").empty();
-    
-    event.mediaElement.remove();
+    */
 
+    /**
+     * fires when the signalling websocket was connected successfully
+     * this socket will be used as a fall back if SCTP is not available
+     * @param {Websocket} socket Websocket used for signalling and sending other messages
+     */
+    connection.connectSocket(function (socket) {
+        if (showLogs) console.log('guide: websocket connected, custom event: ' + connection.socketCustomEvent);
+        websocket = socket;
 
-    connection.attachStreams.forEach(function (stream) {
-        stream.stop();
-    });
-
-}
-*/
-
-/**
- * fires when the signalling websocket was connected successfully
- * this socket will be used as a fall back if SCTP is not available
- * @param {Websocket} socket Websocket used for signalling and sending other messages
- */
-connection.connectSocket(function (socket) {
-    if (showLogs) console.log('guide: websocket connected, custom event: ' + connection.socketCustomEvent);
-    websocket = socket;
-
-    // listen custom messages from server
-    websocket.on(connection.socketCustomEvent, function (message) {
-        if (showLogs) console.log('guide: websocket message arrived');
-        if (!message.customMessage) {
-            if (showLogs) console.log('guide: empty websocket message');
-            return;
-        }
-        //message that peer only supports websockets => I will use only websockets too
-        if(message.customMessage.connection){
-            if (showLogs) console.log('guide: peer only supports websockets, will do the same');
-            connectionState.DataChannel = connectionStates.DataChannel.Websocket;
-            return;
-        }
-        //a tourist requests to communicate with me
-        if(message.customMessage.touristRequestsGuide){
-            if (showLogs) console.log('guide: tourist asked for help');
+        // listen custom messages from server
+        websocket.on(connection.socketCustomEvent, function (message) {
+            if (showLogs) console.log('guide: websocket message arrived');
+            if (!message.customMessage) {
+                if (showLogs) console.log('guide: empty websocket message');
+                return;
+            }
+            //message that peer only supports websockets => I will use only websockets too
+            if(message.customMessage.connection){
+                if (showLogs) console.log('guide: peer only supports websockets, will do the same');
+                connectionState.DataChannel = connectionStates.DataChannel.Websocket;
+                return;
+            }
             /*
-            //show prompt if I want to help the tourist
-            showTouristRequestsGuidePrompt();
-            //hide prompt after timeout (tourist will try to connect to new guide)
-            //=> I mustn't see the prompt anymore
-            conEstabTimeout = setTimeout(function () {
-                if(showLogs) console.log('tourist: tourist request timeout');
-                hideTouristRequestGuidePrompt();
-            }, conEstabTimer);
-            
-            return;
+            //a tourist requests to communicate with me
+            if(message.customMessage.touristRequestsGuide){
+                if (showLogs) console.log('guide: tourist asked for help');
+
+                //show prompt if I want to help the tourist
+                showTouristRequestsGuidePrompt();
+                //hide prompt after timeout (tourist will try to connect to new guide)
+                //=> I mustn't see the prompt anymore
+                conEstabTimeout = setTimeout(function () {
+                    if(showLogs) console.log('tourist: tourist request timeout');
+                    hideTouristRequestGuidePrompt();
+                }, conEstabTimer);
+
+                return;
+
+            }
             */
-        }
-        //tourist revoked the connection request (or timeout)
-        if(message.customMessage.touristRevokesRequest){
-            if (showLogs) console.log('guide: tourist revoked request');
-            hideTouristRequestGuidePrompt();
-            return;
-        }
-        onMessage(message.customMessage);
+            /*
+            //tourist revoked the connection request (or timeout)
+            if(message.customMessage.touristRevokesRequest){
+                if (showLogs) console.log('guide: tourist revoked request');
+                hideTouristRequestGuidePrompt();
+                return;
+            }
+            */
+            onMessage(message.customMessage);
+        });
     });
-});
 }
 /**
  * checks what kind of message arrived and acts accordingly

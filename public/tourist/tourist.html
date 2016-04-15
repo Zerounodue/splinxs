@@ -34,6 +34,21 @@
 
                 //e.mediaElement.parentNode.removeChild(e.mediaElement);
             };
+    
+    
+            connection.onmute = function(event) {
+                event.mediaElement.pause();
+            };
+
+            connection.onunmute = function(event) {
+                 event.mediaElement.play();
+            };
+            
+            connection.onaddstream = function (e) {
+                    console.log('onaddstream');
+                    debugger;
+                };
+    
             */
 
             $(document).ready(function () {
@@ -43,12 +58,11 @@
                 initTouristUI();
                 //showGUI();
                 
-                connection.videosContainer = $("#videoContainer");
+                initTouristConnection();
                 
-                connection.onaddstream = function (e) {
-                    console.log('onaddstream');
-                    debugger;
-                };
+                //connection.videosContainer = $("#videoContainer");
+                
+                
                 
                 $("#btn_joinConnection").click(function () {
                     if(showLogs) console.log('tourist: join connection button clicked');
@@ -173,13 +187,7 @@
             }
             
             
-            connection.onmute = function(event) {
-                event.mediaElement.pause();
-            };
-
-            connection.onunmute = function(event) {
-                 event.mediaElement.play();
-            };
+            
             
             
             

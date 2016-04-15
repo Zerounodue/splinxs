@@ -44,6 +44,8 @@ require('./Signaling-Server.js')(io, function(socket) {
 
     socket.on(params.socketCustomEvent, function(message) {
       try {
+          //TODO delete when everything works
+          console.log('-----rmc signalling server: event, ' + params.socketCustomEvent + ', message, ' + message);
         socket.broadcast.emit(params.socketCustomEvent, message);
       } catch (e) {}
     });

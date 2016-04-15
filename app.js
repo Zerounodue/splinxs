@@ -1,6 +1,7 @@
 var express = require('express'),
 	session = require('express-session'), //session (required also for i18n)
 	geolang=require("geolang-express"), //i18n
+    socket_io = require('socket.io'),
 	i18n=require("i18n-express");//i18n
 	//enforce = require('express-sslify'); //for redirect everything to ssh
 var path = require('path');
@@ -14,14 +15,58 @@ var mongoose = require("mongoose");
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-//var routes = require('./routes/index');
-var routes = require('./routes/index2');
-var users = require('./routes/users');
+
 
 var app = express();
+var io = socket_io();
+app.io = io;
 
-//new 
+
+
+/**
+ *Signaling-server for RTCMultiConnection
+ */
+require('./Signaling-Server.js')(io, function(socket) {
+  try {
+    var params = socket.handshake.query;
+    //TODO remove comments
+    // "socket" object is totally in your own hands!
+    // do whatever you want!
+
+    // in your HTML page, you can access socket as following:
+    // connection.socketCustomEvent = 'custom-message';
+    // var socket = connection.getSocket();
+    // socket.emit(connection.socketCustomEvent, { test: true });
+
+    if (!params.socketCustomEvent) {
+      params.socketCustomEvent = 'custom-message';
+    }
+
+    socket.on(params.socketCustomEvent, function(message) {
+      try {
+        socket.broadcast.emit(params.socketCustomEvent, message);
+      } catch (e) {}
+    });
+  } catch (e) {}
+});
+
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+
+require('./Splinxs-socket.js')(io);
+
+
+
+
+
+
+//new
+
 var sessionOptions = {
+    //TODO change secret and option
   secret: "secret",
   resave : true,
   saveUninitialized : false
@@ -29,7 +74,9 @@ var sessionOptions = {
 };
 app.use(session(sessionOptions));
 //
-
+//var routes = require('./routes/index');
+var routes = require('./routes/index2');
+var users = require('./routes/users');
 // use HTTPS(true) in case you are behind a load balancer (e.g. Heroku) 
 //app.use(enforce.HTTPS());
 
@@ -133,8 +180,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-
 
 
 module.exports = app;

@@ -28,6 +28,7 @@ module.exports = exports = function(io) {
     var count =0;
 /*
     io.sockets.on('connection', function (socket) {
+        console.log('username from session: '+ req.session.theUsername);
         count ++;
         console.log('----------2: sockets connection count: '+count);
 

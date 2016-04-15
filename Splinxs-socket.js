@@ -16,7 +16,8 @@ module.exports = exports = function(io) {
     var guideRequests = {
         request: "request",
         help: 1,
-        cancel: 2
+        cancel: 2,
+        tooLate: 3
     };
     
     var guideResponses = {
@@ -85,6 +86,15 @@ module.exports = exports = function(io) {
             if(res == guideResponses.accept){
                 if(showLogs) console.log('Splinxs-socket: accept, ' + socket.username);
                 //TODO remove guide from Splinxs list, send message to tourist, change state of guide in db
+                
+                //TODO check if tourist still available
+                //assume that tourist is not online
+                
+                //to test cancel request
+                setTimeout(function(){
+                    sendTooLateRequest(socket.username);
+                }, 2500);
+                
             }
             
         });
@@ -101,6 +111,10 @@ module.exports = exports = function(io) {
     
     function sendCancelRequest(guide){
         sendMessageGuide(guide, {request: guideRequests.cancel});
+    }
+    
+    function sendTooLateRequest(guide){
+        sendMessageGuide(guide, {request: guideRequests.tooLate});
     }
     
     function sendMessageGuide(guide, msg){

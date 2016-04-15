@@ -17,7 +17,8 @@ var guideStates = {
 };
 var guideRequests = {
     help: 1,
-    cancel: 2
+    cancel: 2,
+    tooLate: 3
 };
 
 var guideResponses = {
@@ -344,6 +345,9 @@ function initEvents(){
                 if(showLogs) console.log('guide: guideSocket cancel request');
                 hideTouristRequestGuidePrompt();
                 return;
+            }else if(req == guideRequests.tooLate){
+                if(showLogs) console.log('guide: guideSocket tooLate request');
+                alert('__you are too late, another guide helped the tourist');
             }
         }
 

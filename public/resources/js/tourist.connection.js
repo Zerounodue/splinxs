@@ -21,6 +21,9 @@ var saveConnIntervalTimer = 60000;
 var localStorageConnectionName = "connection";
 var localStoragePreviousConnectionTimeout = 20 * 60 * 1000;//20 min in milliseconds
 
+connection = new RTCMultiConnection();
+connection.socketURL = '/';
+
 /**
  * sets the channel, media and mandatory constraints
  */
@@ -52,7 +55,7 @@ function setSessionConstraints() {
         connection.attachStreams.push(new MediaStream());
     }
     else {
-        console.error('Neither Chrome nor Firefox. This may NOT work.');
+        console.warn('Neither Chrome nor Firefox. This may NOT work.');
     }
 
     //TODO only add media that is supported by the browser
@@ -63,7 +66,7 @@ function setSessionConstraints() {
     };
 
     connection.sdpConstraints.mandatory = {
-        OfferToReceiveAudio: false,
+        OfferToReceiveAudio: true,
         OfferToReceiveVideo: false
     };
 }
@@ -135,7 +138,7 @@ connection.onstream = function (event) {
 connection.connectSocket(function (socket) {
     if (showLogs) console.log('tourist: websocket connected');
     websocket = socket;
-    //setSocketCustomEvent();
+    setSocketCustomEvent();
 });
 
 function setSocketCustomEvent(){
@@ -247,7 +250,7 @@ function mapMessage(mapMessage) {
 function connectToGuides(){
     showLoadBox();
     //check if connection with previous guide was interrupted, sets first guide to call
-    checkPreviousConnectionInterrupted();
+    //checkPreviousConnectionInterrupted();
     
     initConnectionWithGuide();
 }
@@ -257,9 +260,9 @@ function connectToGuides(){
 function initConnectionWithGuide() {
     if(showLogs) console.log('tourist: initiating connection');
     
-    setSessionConstraints();
+    //setSessionConstraints();
     
-    setSocketCustomEvent();
+    //setSocketCustomEvent();
     
     //request connection with current channel (guide)
     sendTouristRequestsGuide();

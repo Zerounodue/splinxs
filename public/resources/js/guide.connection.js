@@ -42,10 +42,12 @@ function initGuideConnection(){
     
     channel = username;
 
+    initGuideWebRTC();
     
-
     initGuideSocket();
+}
 
+function initGuideWebRTC(){
     connection = new RTCMultiConnection();
     connection.socketURL = '/';
 
@@ -200,6 +202,7 @@ function initGuideConnection(){
         });
     });
 }
+
 /**
  * checks what kind of message arrived and acts accordingly
  * @param {String} message message sent by peer
@@ -343,7 +346,6 @@ function initEvents(){
             if(showLogs) console.log('guide: guideSocket invalid message');
             return;
         }
-        
         if(msg.request){
             var req = msg.request;
             if(req == guideRequests.help){

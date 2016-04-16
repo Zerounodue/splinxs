@@ -45,14 +45,19 @@ function initTouristConnection(){
     username = "tourist1";
 
     //channel = "myGuideChannel1";
-
+    
+    initTouristWebRTC();
+    
     initTouristSocket();
+    
+    
+    
 
 }
 
 function initTouristWebRTC(){
     //helps to start the signalling server...
-    touristSocket.disconnect();
+    //touristSocket.disconnect();
     
     connection = new RTCMultiConnection();
     connection.socketURL = '/';
@@ -88,9 +93,6 @@ function initTouristWebRTC(){
         OfferToReceiveAudio: true,
         OfferToReceiveVideo: false
     };
-
-
-
 
     connection.onopen = function (event) {
         if (showLogs) console.log('tourist: connection opened');
@@ -159,14 +161,23 @@ function initTouristWebRTC(){
     connection.connectSocket(function (socket) {
         if (showLogs) console.log('tourist: websocket connected');
         websocket = socket;
-        setSocketCustomEvent();
-        connection;
+        //setSocketCustomEvent();
+        //connection;
         
         //debugger;
         //TODO call guide
         //establishConnectionWithGuide();
         
-        initConnectionWithGuide();
+        //initConnectionWithGuide();
+        
+    
+        //channel = 'guide1';
+        //connection.socketCustomEvent = channel;
+        
+        //setSocketCustomEvent();
+        
+        
+        
     });
 
 }
@@ -415,7 +426,6 @@ function initEvents(){
     
     touristSocket.on('connect', function(){
         if(showLogs) console.log('tourist: touristSocket connect');
-        //guideSocketSendState(guideStates.available);
         touristSocketSendRequest(touristRequests.help);
     });
     
@@ -438,7 +448,10 @@ function initEvents(){
                 //TODO call guide
                 guide; //use this variable for channel to call
                 channel = guide;
-                initTouristWebRTC();
+                connection.socketCustomEvent = channel;
+                //initTouristWebRTC();
+                setSocketCustomEvent();
+                initConnectionWithGuide();
             }
         }
         

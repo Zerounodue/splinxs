@@ -120,7 +120,7 @@ module.exports = exports = function(io) {
             }
             
         });
-
+        
         socket.on('disconnect', function () {
             if(showLogs) console.log('Splinxs-socket: guide disconnect: ' + socket.username);
             
@@ -168,7 +168,6 @@ module.exports = exports = function(io) {
                 
                 findMatchingGuide(socket.username, loc, langs);
             }
-            
         });
         
     });

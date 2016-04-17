@@ -26,30 +26,55 @@ app.io = io;
 /**
  *Signaling-server for RTCMultiConnection
  */
-require('./Signaling-Server.js')(io, function(socket) {
-  try {
-    var params = socket.handshake.query;
-    //TODO remove comments
-    // "socket" object is totally in your own hands!
-    // do whatever you want!
+require('./Signaling-Server.js')(io, function (socket) {
+    try {
+        var params = socket.handshake.query;
+        var added = false;
+        //TODO remove comments
+        // "socket" object is totally in your own hands!
+        // do whatever you want!
 
-    // in your HTML page, you can access socket as following:
-    // connection.socketCustomEvent = 'custom-message';
-    // var socket = connection.getSocket();
-    // socket.emit(connection.socketCustomEvent, { test: true });
+        // in your HTML page, you can access socket as following:
+        // connection.socketCustomEvent = 'custom-message';
+        // var socket = connection.getSocket();
+        // socket.emit(connection.socketCustomEvent, { test: true });
 
-    if (!params.socketCustomEvent) {
-      params.socketCustomEvent = 'custom-message';
+
+        if (!params.socketCustomEvent) {
+            //params.socketCustomEvent = 'custom-message';
+            return;
+        } else {
+            //for guides
+            addEvent(params.socketCustomEvent);
+            console.log("guide event: " + params.socketCustomEvent);
+        }
+
+
+        //for tourists
+        //allows to add one additional event (for websocket chat with guide)
+        socket.on('addEvent', function (msg) {
+            if (added) return;
+            if (!msg || !msg.event) return;
+            var event = msg.event;
+            if (typeof event !== 'string') return;
+            addEvent(event);
+            added = true;
+        });
+
+    } catch (e) {
     }
 
-    socket.on(params.socketCustomEvent, function(message) {
-      try {
-          //TODO delete when everything works
-          console.log('-----rmc signalling server: event, ' + params.socketCustomEvent + ', message, ' + message);
-        socket.broadcast.emit(params.socketCustomEvent, message);
-      } catch (e) {}
-    });
-  } catch (e) {}
+    function addEvent(event) {
+        socket.on(event, function (message) {
+            //TODO delete when everything works
+            console.log('-----rmc signalling server: event, ' + event + ', message, ' + message);
+            try {
+                socket.broadcast.emit(event, message);
+            } catch (e) {
+            }
+        });
+    }
+
 });
 
 

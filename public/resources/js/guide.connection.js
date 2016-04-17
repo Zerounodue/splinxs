@@ -55,7 +55,7 @@ function initGuideWebRTC(){
     connection.channel = channel;
 
     connection.socketCustomEvent = connection.channel;
-
+    /*
     if (typeof webkitMediaStream !== 'undefined') {
         connection.attachStreams.push(new webkitMediaStream());
     }
@@ -65,7 +65,7 @@ function initGuideWebRTC(){
     else {
         console.error('Neither Chrome nor Firefox. This demo may NOT work.');
     }
-
+    */
 
     //connection.dontCaptureUserMedia = true;
 
@@ -76,7 +76,7 @@ function initGuideWebRTC(){
 
     connection.sdpConstraints.mandatory = {
         OfferToReceiveAudio: true,
-        OfferToReceiveVideo: false
+        OfferToReceiveVideo: true
     };
 
     connection.open(connection.channel);

@@ -7,7 +7,10 @@
 //variables
 showLogs = true;
 
-var channel;
+//guide channel
+//var channelCounter = 0;
+//var channels = ["myGuideChannel1"];
+var channel;// = channels[channelCounter];
 
 //var connection = new RTCMultiConnection();
 
@@ -33,21 +36,23 @@ function initTouristConnection(){
     if(showLogs) console.log('init tourist connection');
 
     showLoadBox();
-    /*
-    setTimeout(function () {
-        hideLoadBox();
-        alert('__sorry, no guide found...');
-    }, 60000);
-    */
+    
+    setTimeout(function(){
+                        hideLoadBox();
+                        alert('__sorry, no guide found...');
+                    }, 60000);
+    
     username = "tourist1";
 
     //channel = "myGuideChannel1";
     
-    //channel = "guide1";
-    
     initTouristWebRTC();
     
-    //initTouristSocket();
+    initTouristSocket();
+    
+    
+    
+
 }
 
 function initTouristWebRTC(){
@@ -61,11 +66,11 @@ function initTouristWebRTC(){
 
     //channel = channels[channelCounter];
 
-    //connection.channel = channel;
+    connection.channel = channel;
 
     //connection.socketCustomEvent = channels[channelCounter];
 
-    //connection.socketCustomEvent = connection.channel;
+    connection.socketCustomEvent = connection.channel;
 
     //connection.socketURL = '/';
 
@@ -86,7 +91,7 @@ function initTouristWebRTC(){
 
     connection.sdpConstraints.mandatory = {
         OfferToReceiveAudio: true,
-        OfferToReceiveVideo: true
+        OfferToReceiveVideo: false
     };
 
     connection.onopen = function (event) {
@@ -171,10 +176,7 @@ function initTouristWebRTC(){
         
         //setSocketCustomEvent();
         
-        //to make sure everything is ready
         
-        
-        initTouristSocket();
         
     });
 
@@ -446,15 +448,10 @@ function initEvents(){
                 //TODO call guide
                 guide; //use this variable for channel to call
                 channel = guide;
-                connection.channel = channel;
                 connection.socketCustomEvent = channel;
                 //initTouristWebRTC();
-                addWebsocketEvent();
                 setSocketCustomEvent();
                 initConnectionWithGuide();
-                
-                
-                
             }
         }
         
@@ -470,10 +467,4 @@ function touristSocketSendRequest(r){
 function touristSocketSendMessage(topic, msg){
     if(showLogs) console.log('tourist: touristSocket send on: ' + topic + ', message: ' + msg);
     touristSocket.emit(topic, msg);
-}
-
-function addWebsocketEvent(){
-    websocket.emit("addEvent", {
-        event: connection.socketCustomEvent
-    });
 }

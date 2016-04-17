@@ -1,9 +1,19 @@
 {
     "GENERAL": {
-
+        "AUDIO": "Audio",
+        "CHAT": "Chat",
+        "GUIDE": "Guide",
+        "ORIENTATION": "Orientamento",
+        "SPLINXS": "Splinxs",
+        "TOURIST": "Turista",
+        "VIDEO": "Video"
     },
     "MENU": {
-        
+        "ABOUT_US": "Chi siamo",
+        "CONTACT": "Contatto",
+        "HOME": "Home",
+        "LANGUAGES": "Lingue",
+        "WHAT_IS_SPLINXS": "Cosa è Splinxs"
     },
     "LANGUAGES": {
         "ENGLISH": "English",
@@ -11,7 +21,13 @@
         "ITALIAN": "Italiano"
     },
     "INDEX": {
+        "DESCRIPTION_GUIDE": "you know some places very well and want to help someone who is there? Sign up and start helping people right now.",
+        "DESCRIPTION_TOURIST": "you are somewhere unfamiliar and need help? Don't worry, a guide will help you. Thanks to camera, microphone, GPS and chat the guide will see what you see, speak with you and guide you to your destination.",
+        "I_AM_GUIDE": "Sono una guida",
+        "I_AM_TOURIST": "Sono un turista",
 
-        
+        "SPLINXS_SUBTITLE": "The real time tourist guide"
+
     }
+
 }

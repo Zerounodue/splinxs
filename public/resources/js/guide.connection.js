@@ -326,6 +326,7 @@ function ongoingConnectionClosed(){
 
 function initGuideSocket(){
     if(showLogs) console.log('guide: init guideSocket');
+    //guideSocket = io.connect('https://localhost/guide');
     guideSocket = io.connect('https://splinxs.ti.bfh.ch/guide');
     
     initEvents();

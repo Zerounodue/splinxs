@@ -71,7 +71,7 @@ function initGuideWebRTC(){
 
     connection.session = {
         data: true
-        //,audio: true
+        ,audio: true
     };
 
     connection.sdpConstraints.mandatory = {
@@ -127,7 +127,7 @@ function initGuideWebRTC(){
             }else if(event.stream.isVideo){
                 if (showLogs) console.log('guide: remote video stream started');
                 connection.videosContainer.append(event.mediaElement);
-
+                debugger;
             }
 
 

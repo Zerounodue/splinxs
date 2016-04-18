@@ -23,33 +23,36 @@
         <script>
             //var peer;
             /*
-            connection.onstreamended = function (e) {
-                console.log('stream ended');
-
-                //$("#myVideo").empty();
-
-                connection.attachStreams.forEach(function (stream) {
-                    stream.stop();
-                });
-
-                //e.mediaElement.parentNode.removeChild(e.mediaElement);
-            };
-    
-    
-            connection.onmute = function(event) {
-                event.mediaElement.pause();
-            };
-
-            connection.onunmute = function(event) {
-                 event.mediaElement.play();
-            };
+            function addConnectionEvents(){
             
-            connection.onaddstream = function (e) {
-                    console.log('onaddstream');
-                    debugger;
+                connection.onstreamended = function (e) {
+                    console.log('stream ended');
+
+                    //$("#myVideo").empty();
+
+                    connection.attachStreams.forEach(function (stream) {
+                        stream.stop();
+                    });
+
+                    //e.mediaElement.parentNode.removeChild(e.mediaElement);
                 };
+
+
+                connection.onmute = function(event) {
+                    event.mediaElement.pause();
+                };
+
+                connection.onunmute = function(event) {
+                     event.mediaElement.play();
+                };
+
+                connection.onaddstream = function (e) {
+                        console.log('onaddstream');
+                        debugger;
+                    };
     
-            */
+            }
+    */
 
             $(document).ready(function () {
 
@@ -59,6 +62,8 @@
                 //showGUI();
                 
                 initTouristConnection();
+                
+                //addConnectionEvents();
                 
                 connection.videosContainer = $("#videoContainer");
                 
@@ -159,7 +164,7 @@
                     
                     connection.addStream({
                         audio: true
-                        //,oneway: true
+                        ,oneway: true
                     });
 
 
@@ -179,9 +184,9 @@
             function startVideo() {
 
                 connection.addStream({
-                    audio: true,
-                    video: true,
-                    oneway: true
+                    //audio: true,
+                    video: true
+                    ,oneway: true
                 });
 
             }

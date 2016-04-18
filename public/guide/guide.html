@@ -24,54 +24,57 @@
             //var peer;
             
             /*
-            connection.onNewSession = function (session) {
-                console.log('new session');
-                debugger;
-            };
-
-
-            connection.onconnected = function (event) {
-                console.log('connected');
-                debugger;
-            };
-
-            connection.onstreamid = function (e) {
-                console.log('onstreamId');
-                debugger;
-            }
-
-            connection.onaddstream = function (e) {
-                console.log('onaddstream');
-                debugger;
-            };
-
+            function addConnectionEvents(){
             
-            
-            connection.onclose = function (event) {
-                console.log('close');
-                debugger;
-            };
+                connection.onNewSession = function (session) {
+                    console.log('new session');
+                    debugger;
+                };
 
-            connection.onerror = function (error) {
-                console.log('error');
-                debugger;
-            };
 
-            connection.onRequest = function (request) {
-                console.log('connection request');
-                debugger;
-                //connection.accept(request);
-            };
-    
-    
-            connection.onmute = function(event) {
-                event.mediaElement.pause();
-            };
+                connection.onconnected = function (event) {
+                    console.log('connected');
+                    debugger;
+                };
 
-            connection.onunmute = function(event) {
-                 event.mediaElement.play();
-            };
+                connection.onstreamid = function (e) {
+                    console.log('onstreamId');
+                    debugger;
+                }
+
+                connection.onaddstream = function (e) {
+                    console.log('onaddstream');
+                    debugger;
+                };
+
+
+
+                connection.onclose = function (event) {
+                    console.log('close');
+                    debugger;
+                };
+
+                connection.onerror = function (error) {
+                    console.log('error');
+                    debugger;
+                };
+
+                connection.onRequest = function (request) {
+                    console.log('connection request');
+                    debugger;
+                    //connection.accept(request);
+                };
+
+
+                connection.onmute = function(event) {
+                    event.mediaElement.pause();
+                };
+
+                connection.onunmute = function(event) {
+                     event.mediaElement.play();
+                };
     
+            }  
             */
 
 
@@ -86,6 +89,8 @@
                 showGuideUI();
                 
                 initGuideConnection();
+                
+                //addConnectionEvents();
                 
                 //initGuideSocket();                
                 

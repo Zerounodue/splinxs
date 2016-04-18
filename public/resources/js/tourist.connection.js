@@ -69,6 +69,7 @@ function initTouristWebRTC(){
 
     //connection.socketURL = '/';
 
+
     if (typeof webkitMediaStream !== 'undefined') {
         connection.attachStreams.push(new webkitMediaStream());
     } else if (typeof MediaStream !== 'undefined') {
@@ -77,10 +78,11 @@ function initTouristWebRTC(){
         console.warn('Neither Chrome nor Firefox. This may NOT work.');
     }
 
+
     //TODO only add media that is supported by the browser
     connection.session = {
         data: true
-        //, audio: true
+        , audio: true
         //, video: true
     };
 
@@ -121,14 +123,15 @@ function initTouristWebRTC(){
                 //TODO make nicer code
                 var video = $("#myVideo");
                 video.append(event.mediaElement);
-
+                debugger;
+                
             }else if(event.stream.isAudio){
                 if (showLogs) console.log('tourist: local audio stream started');
 
-                var video = $("#myVideo");
-                video.append(event.mediaElement);
+                //var video = $("#myVideo");
+                //video.append(event.mediaElement);
 
-                debugger;
+                //debugger;
             }
         }else if(event.stream.type == "remote"){
             if (showLogs) console.log('tourist: remote stream started');

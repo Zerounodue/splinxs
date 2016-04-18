@@ -1,10 +1,15 @@
 {
+    "ERROR": {
+        
+    },
     "GENERAL": {
         "AUDIO": "Audio",
+        "CANCEL": "Cancel",
         "CHAT": "Chat",
         "GUIDE": "Guide",
         "ORIENTATION": "Orientation",
         "SPLINXS": "Splinxs",
+        "SUBMIT": "Submit",
         "TOURIST": "Tourist",
         "VIDEO": "Video"
     },
@@ -29,8 +34,16 @@
         "SPLINXS_SUBTITLE": "The real time tourist guide"
         
     },
+    "LOGIN": {
+        "LOGIN": "Login",
+        "PASSWORD": "Password",
+        "USERNAME": "Username"
+    },
     "REGISTER": {
-        "REGISTER": "Register"
+        "EMAIL": "Email",
+        "PASSWORD": "Password",
+        "REGISTER": "Register",
+        "USERNAME": "Username"
     }
     
     

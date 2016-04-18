@@ -1,4 +1,7 @@
 {
+    "ERROR": {
+        
+    },
     "GENERAL": {
 
     },
@@ -12,6 +15,9 @@
     },
     "INDEX": {
 
+        
+    },
+    "LOGIN": {
         
     },
     "REGISTER": {

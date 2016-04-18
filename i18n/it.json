@@ -1,4 +1,7 @@
 {
+    "ERROR": {
+        
+    },
     "GENERAL": {
         "AUDIO": "Audio",
         "CHAT": "Chat",
@@ -27,6 +30,9 @@
         "I_AM_TOURIST": "Sono un turista",
 
         "SPLINXS_SUBTITLE": "The real time tourist guide"
+
+    },
+    "LOGIN": {
 
     },
     "REGISTER": {

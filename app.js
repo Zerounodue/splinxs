@@ -150,12 +150,22 @@ app.use(express.static(path.join(__dirname, 'public/tourist')));
 app.use(express.static(path.join(__dirname, 'public/guide')));
 
 
-
+/*
 // passport config
 var Account = require('./models/account');
 passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
+*/
+
+// passport config
+var Guide = require('./models/guide');
+passport.use(new LocalStrategy(Guide.authenticate()));
+passport.serializeUser(Guide.serializeUser());
+passport.deserializeUser(Guide.deserializeUser());
+
+
+
 
 //mongo db stuff
 //http://mherman.org/blog/2015/01/31/local-authentication-with-passport-and-express-4/#.VwaB16R96Uk

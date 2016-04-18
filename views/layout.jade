@@ -1,7 +1,20 @@
 doctype html
 html
   head
-    title= title
-    //link(rel='stylesheet', href='/stylesheets/style.css')
+    title #{title}
+    link(rel='icon', href='resources/images/logo.png', type='image/gif')
+    block stylesheets
+      link(rel='stylesheet', href='resources/css/bootstrap.min.css')
+      link(rel='stylesheet', href='resources/css/style.css')
+    block scripts
+      script(src='resources/js/jquery-2.2.0.min.js')
   body
+    header
+    .topbar
+        .topbar-left
+        .topbar-middle
+        .topbar-right
     block content
+    block foot
+      #footer
+        p __some footer content

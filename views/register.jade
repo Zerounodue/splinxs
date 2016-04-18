@@ -1,15 +1,30 @@
+//- 
+    To change this license header, choose License Headers in Project Properties.
+    To change this template file, choose Tools | Templates
+    and open the template in the editor.
+     
+
 extends layout
 
+//use to append lines to block, not overwrite
+//block append head
+ 
 block content
   .container
-    h1 Register Page
-    p.lead Say something worthwhile here.
+    h1 #{title}
+    p.lead __enter details to create guide account
     br
+    if error
+      br
+      h2 #{error}
+      br
     form(role='form', action="/register",method="post", style='max-width: 300px;')
       .form-group
-          input.form-control(type='text', name="username", placeholder='Enter Username')
+          input.form-control(type='text', name="username", placeholder='#{texts.REGISTER.USERNAME}')
       .form-group
-        input.form-control(type='password', name="password", placeholder='Password')
-      button.btn.btn-default(type='submit') Submit
-      a(href='/')
-        button.btn.btn-primary(type="button") Cancel
+        input.form-control(type='password', name="password", placeholder='#{texts.REGISTER.PASSWORD}')
+      .form-group
+          input.form-control(type='email', name="email", placeholder='#{texts.REGISTER.EMAIL}')
+      button.btn.btn-default(type='submit') #{texts.GENERAL.SUBMIT}
+      a(href='/register')
+        button.btn.btn-primary(type="button") #{texts.GENERAL.CANCEL}

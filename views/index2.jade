@@ -4,7 +4,7 @@ block content
   if (!user)
     a(href="/login") Login
     br
-    a(href="/register") Register
+    a(href="/register_proto") Register proto
     br
     a(href="/lang") lang
     br
@@ -21,6 +21,10 @@ block content
     a(href="/guideSocket") guide socket
     br
     a(href="/index") splinxs
+    br
+    a(href="/login") Login
+    br
+    a(href="/register") Register
   if (user)
     p You are currently logged in as #{user.username}
     a(href="/logout") Logout

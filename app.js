@@ -103,7 +103,9 @@ app.use(session(sessionOptions));
 //
 //var routes = require('./routes/index');
 var routes = require('./routes/index2');
-var users = require('./routes/users');
+var tourist = require('./routes/tourist');
+var guide = require('./routes/guide');
+
 // use HTTPS(true) in case you are behind a load balancer (e.g. Heroku) 
 //app.use(enforce.HTTPS());
 
@@ -184,7 +186,9 @@ db.once("open", function (callback) {
 
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/', tourist);
+app.use('/', guide);
+//app.use('/users', users);
 
 
 // catch 404 and forward to error handler

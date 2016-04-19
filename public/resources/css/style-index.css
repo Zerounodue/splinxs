@@ -62,3 +62,39 @@ background-color: white;
 a{
 	cursor: pointer;
 }
+
+
+/*index*/
+.loginPopup{
+	height: 100%;
+	width: 100%;
+	background: rgba(255,255,255,0.9);
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 10000;
+
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+}
+.loginCernter{
+
+}
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.inputTop{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.inputBottom{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}

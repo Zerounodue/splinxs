@@ -8,7 +8,10 @@ var Guide = require('../models/guide');
 
 //https://github.com/meikidd/iso-639-1
 var ISO6391 = require('iso-639-1');
-//var views = 0;
+
+//functions used in all routes
+var func  = require('../public/resources/js/functions.js');
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -23,121 +26,6 @@ router.get('/', function(req, res, next) {
     res.render('index2');
 });
 
-router.get('/login', function(req, res) {
-    res.render('login', { title: "__Login" });
-});
-
-router.post('/login', function (req, res, next) {
-    passport.authenticate('local', function (err, guide, info) {
-        if (err) {
-            return next(err); // will generate a 500 error
-        }
-        //password username combination not found
-        if (!guide) {
-            res.render('login', {title: "__Login", error: "__wrong username or password"});
-            return;
-        }
-
-        req.login(guide, function (err) {
-            if (err) {
-                return next(err);
-            }
-
-            var name = req.body.username;
-            //check in db if guide entered languages and areas
-            var hasLanguagesAreas = false;
-            Guide.findOne({'username': name}, 'areas, languages', function (err, guide) {
-                //error occured
-                if (err)
-                    return handleError(err);
-                
-                hasLanguagesAreas = guide.hasLanguagesAreas();
-                //TODO delete when tested
-                console.log('-------------is in HAS: ' + hasLanguagesAreas);
-            });
-            
-            //guide needs to add languages annd/or areas
-            if (hasLanguagesAreas) {
-                req.session.complete = true;
-                req.session.username = req.body.username;
-                req.session.guide = true;
-                req.session.loggedIn = true;
-                res.render('guide', {title: "__Guide"});
-                return;
-            } else {
-                req.session.complete = false;
-                req.session.username = req.body.username;
-                req.session.guide = true;
-                req.session.loggedIn = false;
-                renderChooseLangs(res);
-                return;
-            }
-
-        });
-    })(req, res, next);
-});
-
-
-router.get('/register', function(req, res) {
-    res.render('register', {title: "__Register"});
-});
-
-router.post('/register', function(req, res) {
-    if (!req.body || !req.body.username || !req.body.password || !req.body.email){
-        redirectHome(res);
-        return;
-    }
-    //check that fields are not empty
-    var name = req.body.username;
-    var pw = req.body.password;
-    var email = req.body.email;
-    if(!usableString(name) || !usableString(pw) || !usableString(email)){
-        redirectHome(res);
-        return;
-    }
-    
-    //TODO check if email is valid
-    var validEmail = true;
-    if(!validEmail){
-        redirectHome(res);
-        return;
-    }
-    
-    
-    Guide.register(new Guide({ username : req.body.username, email: req.body.email }), req.body.password, function(err, guide) {
-        if (err) {
-            if(err.name == "UserExistsError"){
-                res.render('register', {title: "__Register", error: "__username already taken"});
-                console.log('!!!!!username exists');
-                return;
-            }
-            redirectHome(res);
-            return;
-        }
-
-        passport.authenticate('local')(req, res, function () {
-            //created successfully
-            renderChooseLangs(res);
-            return;
-        });
-    });
-    
-});
-
-router.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
-});
-
-router.get('/allUsers', function(req, res){
-    Account.find(function(err, accounts){
-        console.log(accounts);
-        res.render('allUsers',{title : 'All users', users : accounts});
-    });
-});
-
-
-
 
 
 
@@ -145,19 +33,19 @@ router.get('/allUsers', function(req, res){
 
 router.get('/chooseLanguages', function(req, res) {
     
-    if(!hasSession(req)){
-        redirectHome(res);
+    if(!func.hasSession(req)){
+        func.redirectHome(res);
         return;
     }
-    renderChooseLangs(res);
+    func.renderChooseLangs(res);
 });
 
 router.post('/chooseLanguages', function(req, res) {
-    if(!hasSession(req)){
-        redirectHome(res);
+    if(!func.hasSession(req)){
+        func.redirectHome(res);
     }
     if (!req.body || !req.body.languages){
-        redirectHome(res);
+        func.redirectHome(res);
     }
     var langs = JSON.parse(req.body.languages);
     var validLangs = true;
@@ -325,10 +213,6 @@ router.post('/tourist', function(req, res) {
 
 
 
-function generadeID(){
-	return 'GUID';
-}
-
 
 
 
@@ -339,13 +223,6 @@ router.get('/guideSocket', function(req, res) {
     res.render('guideSocket', {session: req.session});
 });
 
-router.get('/index', function(req, res) {
-    res.render('index');
-});
-
-
-
-
 router.get('/touristLanguages', function(req, res) {
     res.render('touristLanguages', {title: "__Choose Tourist Languages", langs: ISO6391});
 });
@@ -354,68 +231,66 @@ router.get('/touristLanguages', function(req, res) {
 
 
 
-function isGuide(req){
-    var is = false;
-    if(req.session){
-        if(req.session.guide){
-            is = true;
+
+
+router.get('/index', function(req, res) {
+    res.render('index');
+});
+
+
+
+
+router.post('/index', function (req, res, next) {
+    passport.authenticate('local', function (err, guide, info) {
+        if (err) {
+            return next(err); // will generate a 500 error
         }
-    }
-    console.log('     is guide: ' + is);
-    return is;
-}
-
-function isLoggedIn(req){
-    var is = false;
-    if(req.session){
-        if(req.session.loggedIn){
-            is = true;
+        //password username combination not found
+        if (!guide) {
+            res.render('index', {title: "__Login", error: "__wrong username or password", username:req.body.username});
+            return;
         }
-    }
-    console.log('     logged in: ' + is);
-    return is;
-}
 
-function hasSession(req){
-    var has = false;
-    if(req.session){
-        if(req.session.username){
-            has = true;
-        }
-    }
-    console.log('     has session: ' + has);
-    return has;
-}
+        req.login(guide, function (err) {
+            if (err) {
+                return next(err);
+            }
 
-function hasCompleteSession(req){
-    var has = false;
+            var name = req.body.username;
+            //check in db if guide entered languages and areas
+            var hasLanguagesAreas = false;
+            Guide.findOne({'username': name}, 'areas, languages', function (err, guide) {
+                //error occured
+                if (err)
+                    return handleError(err);
 
-    if(req.session){
-        if(req.session.complete){
-            has = true;
-        }
-    }
-    
-    console.log('     complete session: ' + has);
-    return has;
-}
+                hasLanguagesAreas = guide.hasLanguagesAreas();
+                //TODO delete when tested
+                console.log('-------------is in HAS: ' + hasLanguagesAreas);
+            });
 
-function redirectHome(res){
-    res.redirect('/');
-}
+            //guide needs to add languages annd/or areas
+            if (hasLanguagesAreas) {
+                req.session.complete = true;
+                req.session.username = req.body.username;
+                req.session.guide = true;
+                req.session.loggedIn = true;
+                res.render('guide', {title: "__Guide"});
+                return;
+            } else {
+                req.session.complete = false;
+                req.session.username = req.body.username;
+                req.session.guide = true;
+                req.session.loggedIn = false;
+                func.renderChooseLangs(res);
+                return;
+            }
 
-function renderChooseLangs(res){
-    res.render('chooseLanguages', {title: "__Choose Languages", langs: ISO6391});
-}
+        });
+    })(req, res, next);
+});
 
-function renderChooseAreas(res){
-    res.render('knownAreas', {title: "__Choose Areas"});
-}
 
-function usableString(s) {
-    var usable = true;
-    usable = (s !== null && typeof s === 'string' || s.length > 0);
-    return usable;
-}
+
 
 module.exports = router;

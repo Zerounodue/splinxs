@@ -1,28 +1,22 @@
-//- 
-    To change this license header, choose License Headers in Project Properties.
-    To change this template file, choose Tools | Templates
-    and open the template in the editor.
-     
 
-extends layout
-
-//use to append lines to block, not overwrite
-//block append head
- 
-block content
-  .container
-    h1 #{title}
-    p.lead __Say something worthwhile here.
+.container
+  h1 #{texts.LOGIN.LOGIN}
+  p.lead __Say something worthwhile here.
+  br
+  if error
     br
-    if error
-      br
-      h2 #{error}
-      br
-    form(role='form', action="/login",method="post", style='max-width: 300px;')
-      .form-group
-          input.form-control(type='text', name="username", placeholder='#{texts.LOGIN.USERNAME}', required)
-      .form-group
-        input.form-control(type='password', name="password", placeholder='#{texts.LOGIN.PASSWORD}', required)
-      button.btn.btn-default(type='submit') #{texts.GENERAL.SUBMIT}
-      a(href='/')
-        button.btn.btn-primary(type="button") #{texts.GENERAL.CANCEL}
+    h2 #{error}
+    br
+  form.form-signin(role='form', action="/index",method="post", style='max-width: 300px;')
+
+    input.form-control.inputTop(type='text', name="username", placeholder='#{texts.LOGIN.USERNAME}', required, autofocus, value='#{username}')
+
+    input.form-control.inputBottom(type='password', name="password", placeholder='#{texts.LOGIN.PASSWORD}', required)
+    button.btn.btn-green(type='submit') #{texts.GENERAL.SUBMIT}
+    a(onclick='$(".loginPopup").hide();')
+      button.btn.btn-default(type="button") #{texts.GENERAL.CANCEL}
+    .row
+      .col-xs-6
+        a(href="/") Forgot possword?
+      .col-xs-6
+        a(href="/") Sign up now!

@@ -347,7 +347,7 @@ router.get('/index', function(req, res) {
 
 
 router.get('/touristLanguages', function(req, res) {
-    res.render('touristLanguages');
+    res.render('touristLanguages', {title: "__Choose Tourist Languages", langs: ISO6391});
 });
 
 

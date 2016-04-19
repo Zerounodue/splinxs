@@ -19,7 +19,7 @@ html
         input(id="inp_languages" type="text" list="languages" placeholder="__Type to search")
         datalist(id='languages')
           each code, index in codes
-              option(code='' + code + '' value='' + nativeNames[index] + '')
+              option(code='' + code + '' value='' + langs.getNativeName(code) + '')
         br
         div(id="div_selectedLanguages")
           p __selected languages

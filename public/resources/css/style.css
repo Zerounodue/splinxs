@@ -284,17 +284,7 @@ footer {
     }
 }
 
-@-o--moz-keyframes loadAnimation {
-    0% {
-        opacity: 1;
-    }
-    35% {
-        opacity : 0.0;
-    }
-    100% {
-        opacity : 0.0;
-    }
-}
+
 /*loading animation*/
 
 /*modal dialog*/

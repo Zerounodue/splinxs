@@ -6,7 +6,7 @@ block content
     br
     a(href="/register_proto") Register proto
     br
-    a(href="/lang") lang
+    a(href="/chooseLanguages") lang
     br
     a(href="/allUsers") all users
     br
@@ -25,6 +25,8 @@ block content
     a(href="/login") Login
     br
     a(href="/register") Register
+    br
+    a(href="/touristLanguages") Register
   if (user)
     p You are currently logged in as #{user.username}
     a(href="/logout") Logout

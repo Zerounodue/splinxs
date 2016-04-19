@@ -15,7 +15,7 @@ html.html(lang='en')
         // <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
         // <script type="text/javascript" src="resources/js/jquery-1.10.2.min.js"></script>
         script(src='resources/js/jquery-2.2.0.min.js')
-        script(src='resources/js/rmc3@3.2.97.min.js')
+        script(src='resources/js/rmc3@3.3.2.min.js')
         script(type='text/javascript', src='resources/js/bootstrap-3.3.4.min.js')
         script(src='resources/js/DetectRTC.js')
         script.
@@ -132,7 +132,7 @@ html.html(lang='en')
 
     main
         loginPopup.loginPopup(hidden='')
-            img.x(src='resources/images/icons/x.png', alt='close icon', onclick='$(".loginPopup").hide();')
+            img.x(src='resources/images/icons/x.png', alt='close icon', onclick='$(".loginPopup").hide(400);')
             center
                 include login.jade
         // --- SLIDES START
@@ -148,7 +148,7 @@ html.html(lang='en')
                         a#touristButton.btn.btn-default.btn-green.btn-index(href='tourist.html') #{texts.INDEX.I_AM_TOURIST}
                     .col-sm-6.text-center
 
-                        a.btn.btn-default.btn-green.btn-index(onclick='$(".loginPopup").show();') #{texts.INDEX.I_AM_GUIDE}
+                        a.btn.btn-default.btn-green.btn-index(onclick='$(".loginPopup").show(400);') #{texts.INDEX.I_AM_GUIDE}
                         //a.btn.btn-default.btn-green.btn-index(href='guide.html') #{texts.INDEX.I_AM_GUIDE}
                 // --- DESCRIPTION
                 .row
@@ -160,6 +160,8 @@ html.html(lang='en')
                             br
                             b #{texts.GENERAL.GUIDE}:
                             |  #{texts.INDEX.DESCRIPTION_GUIDE}
+        #errorSection(hidden='')
+            h1 WebRT not supported!
         #splinxsSlide.slide
             .section
                 .container

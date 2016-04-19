@@ -24,6 +24,8 @@ $(document).ready(function () {
     $("#btn_sendLanguages").on('click', function (e) {
         if(showLogs) console.log('send languages button clicked');
         
+        langForm = $("#frm_languages");
+        
         if(languages.length > 0){
             submitLanguages();
         }else{

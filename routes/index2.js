@@ -222,11 +222,11 @@ router.post('/tourist', function(req, res) {
 router.get('/guideSocket', function(req, res) {
     res.render('guideSocket', {session: req.session});
 });
-
+/*
 router.get('/touristLanguages', function(req, res) {
     res.render('touristLanguages', {title: "__Choose Tourist Languages", langs: ISO6391});
 });
-
+*/
 
 
 

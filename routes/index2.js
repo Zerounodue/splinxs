@@ -8,58 +8,28 @@ var Guide = require('../models/guide');
 
 //https://github.com/meikidd/iso-639-1
 var ISO6391 = require('iso-639-1');
-var views = 0;
+//var views = 0;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
     //set a session to test
-    req.session.theUsername = "elia";
+    //req.session.theUsername = "elia";
 
-    views++;
-    req.session.views=views;
-    console.log("req.session.theUsername= " +req.session.theUsername);
-
-  res.render('index2', { user : req.user });
+    //views++;
+    //req.session.views=views;
+    //console.log("req.session.theUsername= " +req.session.theUsername);
+    
+    //res.render('index2', { user : req.user });
+    res.render('index2');
 });
 
 router.get('/login', function(req, res) {
     res.render('login', { title: "__Login" });
 });
 
-router.post('/login2', function(req, res) {
-    if (!req.body || !req.body.username || !req.body.password){
-        redirectHome(res);
-        return;
-    }
-    /*
-    //check that fields are not empty
-    var name = req.body.username;
-    var pw = req.body.password;
-    
-    if(!usableString(name) || !usableString(pw)){
-        redirectHome(res);
-        return;
-    }
-    
-   */
-
-    
-    /* use in login
-     if(!req.session){ 
-     req.session.username = req.body.username;
-     }
-     */
-    
-    
-});
-
-
-
 router.post('/login', function (req, res, next) {
     passport.authenticate('local', function (err, guide, info) {
         if (err) {
-            guide;
-            debugger;
             return next(err); // will generate a 500 error
         }
         //password username combination not found
@@ -74,7 +44,7 @@ router.post('/login', function (req, res, next) {
             }
 
             var name = req.body.username;
-            //check in db if user entered languages and areas
+            //check in db if guide entered languages and areas
             var hasLanguagesAreas = false;
             Guide.findOne({'username': name}, 'areas, languages', function (err, guide) {
                 //error occured
@@ -90,11 +60,15 @@ router.post('/login', function (req, res, next) {
             if (hasLanguagesAreas) {
                 req.session.complete = true;
                 req.session.username = req.body.username;
+                req.session.guide = true;
+                req.session.loggedIn = true;
                 res.render('guide', {title: "__Guide"});
                 return;
             } else {
                 req.session.complete = false;
                 req.session.username = req.body.username;
+                req.session.guide = true;
+                req.session.loggedIn = false;
                 renderChooseLangs(res);
                 return;
             }
@@ -123,13 +97,18 @@ router.post('/register', function(req, res) {
     }
     
     //TODO check if email is valid
+    var validEmail = true;
+    if(!validEmail){
+        redirectHome(res);
+        return;
+    }
     
     
     Guide.register(new Guide({ username : req.body.username, email: req.body.email }), req.body.password, function(err, guide) {
         if (err) {
             if(err.name == "UserExistsError"){
                 res.render('register', {title: "__Register", error: "__username already taken"});
-                console.log('----------------------------------username exists');
+                console.log('!!!!!username exists');
                 return;
             }
             redirectHome(res);
@@ -143,33 +122,6 @@ router.post('/register', function(req, res) {
         });
     });
     
-});
-
-
-//mongo db stuff
-router.get('/register_proto', function(req, res) {
-    res.render('register_proto', { });
-});
-
-router.post('/register_proto', function(req, res) {
-    Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
-        if (err) {
-            console.log('authentication failed');
-            return res.render('register', { account : account });
-        }
-
-        passport.authenticate('local')(req, res, function () {
-            res.redirect('/');
-        });
-    });
-});
-
-router.get('/login_proto', function(req, res) {
-    res.render('login_proto', { user : req.user });
-});
-
-router.post('/login_proto', passport.authenticate('local'), function(req, res) {
-    res.redirect('/');
 });
 
 router.get('/logout', function(req, res) {
@@ -191,15 +143,21 @@ router.get('/allUsers', function(req, res){
 
 
 
-router.get('/lang', function(req, res) {
+router.get('/chooseLanguages', function(req, res) {
+    
+    if(!hasSession(req)){
+        redirectHome(res);
+        return;
+    }
     renderChooseLangs(res);
 });
 
-router.post('/lang', function(req, res) {
-    
+router.post('/chooseLanguages', function(req, res) {
+    if(!hasSession(req)){
+        redirectHome(res);
+    }
     if (!req.body || !req.body.languages){
-        //TODO redirect somewhere
-        res.send('<a>no post params, cheater!!!</a>');
+        redirectHome(res);
     }
     var langs = JSON.parse(req.body.languages);
     var validLangs = true;
@@ -215,9 +173,12 @@ router.post('/lang', function(req, res) {
     //TODO save to db, connect with guide...
     
     if(validLangs){
-        res.send('<a>' + JSON.stringify(langs) + '</a>');
+        //send to choose area
+        
+        //res.send('<a>' + JSON.stringify(langs) + '</a>');
     }else{
-        res.send('<a>invalid language detected</a>');
+        //not possible
+        redirectHome(res);
     }
 
 });
@@ -379,6 +340,51 @@ router.get('/index', function(req, res) {
     res.render('index');
 });
 
+function isGuide(req){
+    var is = false;
+    if(req.session){
+        if(req.session.guide){
+            is = true;
+        }
+    }
+    console.log('     is guide: ' + is);
+    return is;
+}
+
+function isLoggedIn(req){
+    var is = false;
+    if(req.session){
+        if(req.session.loggedIn){
+            is = true;
+        }
+    }
+    console.log('     logged in: ' + is);
+    return is;
+}
+
+function hasSession(req){
+    var has = false;
+    if(req.session){
+        if(req.session.username){
+            has = true;
+        }
+    }
+    console.log('     has session: ' + has);
+    return has;
+}
+
+function hasCompleteSession(req){
+    var has = false;
+
+    if(req.session){
+        if(req.session.complete){
+            has = true;
+        }
+    }
+    
+    console.log('     complete session: ' + has);
+    return has;
+}
 
 function redirectHome(res){
     res.redirect('/');
@@ -386,6 +392,14 @@ function redirectHome(res){
 
 function renderChooseLangs(res){
     res.render('chooseLanguages', {title: "__Choose languages", langs: ISO6391});
+}
+
+function renderChooseAreas(res){
+    res.render();
+}
+
+function setAreas(res){
+    res.render('knownAreas', {title: "__Known Areas"});
 }
 
 function usableString(s) {

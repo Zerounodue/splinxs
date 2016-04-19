@@ -100,8 +100,7 @@ function addSavedLanguages(){
 function displaySelectedLanguage(code, skill){
     $("#" + code).prop('checked', true);
     $("#div_" + code).show();
-    //$('#skill_' + code).prop('checked',true);
-    //$("#input:radio[name=skill_" + code + "]")
+    $('input[name="skill_' + code + '"][value="' + skill + '"]').prop('checked', true);
 }
 
 /**

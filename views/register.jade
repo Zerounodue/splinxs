@@ -22,28 +22,35 @@ block content
       .form-group
           input.form-control(type='text', name="username", placeholder='#{texts.REGISTER.USERNAME}', required)
       .form-group
-        input.form-control(type='password', name="password", placeholder='#{texts.REGISTER.PASSWORD}', required)
+        input.form-control(type='password', id="password", name="password", placeholder='#{texts.REGISTER.PASSWORD}', required)
       .form-group
-        input.form-control(type='password', name="password_confirm", placeholder='#{texts.REGISTER.PASSWORD}', required)
+        input.form-control(type='password', id="papssword_confirm", name="password_confirm", placeholder='#{texts.REGISTER.PASSWORD}', required)
       .form-group
           input.form-control(type='email', name="email", placeholder='#{texts.REGISTER.EMAIL}', required)
       button.btn.btn-default(type='submit') #{texts.GENERAL.SUBMIT}
       a(href='/register')
         button.btn.btn-primary(type="button") #{texts.GENERAL.CANCEL}
     script.
-        $(document).ready(function(){
-            var password = $("#password");
-            var confirm_password = $("#password_confirm");
-            function validatePassword(){
-              if(password.value != confirm_password.value) {
-                confirm_password.setCustomValidity("__Passwords Don't Match");
-              } else {
-                confirm_password.setCustomValidity("");
-              }
+        $(document).ready(function () {
+            $("#papssword").blur(validate);
+            $("#papssword_confirm").blur(validate);
+        });
+
+        function validate() {
+            var password1 = $("#password").val();
+            var password2 = $("#papssword_confirm").val();
+            //custom validity does not seem to work with jquery...
+            var pw1 = document.getElementById('password');
+            //var pw2 = document.getElementById('papssword_confirm');
+            
+            if(password1.length > 0 && password2.length > 0){
+                if (password1 == password2) {
+                    pw1.setCustomValidity("");
+                    //pw2.setCustomValidity("");
+                } else {
+                    pw1.setCustomValidity("__Passwords do not match");
+                    //pw2.setCustomValidity("__Passwords do not match");
+                }
             }
 
-            password.change(validatePassword());
-            confirm_password.on("keyup", validatePassword());
-
-
-        });
+        }

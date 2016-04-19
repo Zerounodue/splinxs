@@ -13,6 +13,12 @@ var func  = require('../public/resources/js/functions.js');
 
 
 router.get('/touristLanguages', function(req, res) {
+    /*
+    if(!func.hasSession(req)){
+        func.redirectHome(res);
+        return;
+    }
+    */
     res.render('touristLanguages', {title: "__Choose Tourist Languages", langs: ISO6391});
 });
 
@@ -39,13 +45,54 @@ router.post('/touristLanguages', function(req, res) {
     }
 
     if(validLangs){
+        //TODO save in session
+        //
         //send to choose location
-        //TODO implement
+        res.render('touristLocation', {title: '__Tourist Location'});
     }else{
-        //not possible
+        //invalid language(s)
         redirectHome(res);
     }
 
 });
+
+router.get('/touristLocation', function(req, res) {
+    /*
+    if(!func.hasSession(req)){
+        func.redirectHome(res);
+        return;
+    }
+    */
+    res.render('touristLocation');
+});
+
+router.post('/touristLocation', function(req, res) {
+    /*
+    if(!func.hasSession(req)){
+        func.redirectHome(res);
+        return;
+    }
+    */
+    if (!req.body || !req.body.position){
+        redirectHome(res);
+    }
+    var position = JSON.parse(req.body.position);
+
+    var validLocation = position.lat != null && position.lng != null;
+    
+    if(validLocation){
+        //TODO save in session
+        
+        //tourist site
+        //TODO implement
+    }else{
+        redirectHome(res);
+    }
+
+});
+
+
+
+
 
 module.exports = router;

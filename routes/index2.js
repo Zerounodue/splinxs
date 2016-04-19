@@ -71,6 +71,7 @@ router.post('/chooseLanguages', function(req, res) {
 
 });
 
+/*
 router.get('/chooseLocation', function(req, res) {
     res.render('chooseLocation');
 });
@@ -94,6 +95,7 @@ router.post('/chooseLocation', function(req, res) {
     }
 
 });
+*/
 
 router.get('/knownAreas', function(req, res) {
     var areas = null; //TODO get from db

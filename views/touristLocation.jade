@@ -1,0 +1,22 @@
+
+
+extends layout
+
+block append scripts
+  script(src='resources/js/tourist.languages.js')
+  script(src='resources/js/chooseLocation.js')
+  script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing&callback=initMap", async, defer)
+
+block append head
+    style.
+      #map {
+      width: 500px;
+      height: 400px;
+      }
+      
+block content
+    h1 __Choose Location
+    button(id='btn_getLocation') __get location
+    div(id="map")
+    form(id="frm_location" method="post" action="/chooseLocation")
+        button(id='btn_sendLocation') __send locations

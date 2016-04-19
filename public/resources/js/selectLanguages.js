@@ -148,7 +148,6 @@ function addSavedLanguages(){
  */
 function saveToLocalStorage(key, data){
     if(showLogs) console.log('saving to localstorage, key: ' + key + ' data: ' + data);
-    //clearLanguageStorage();
     localStorage.setItem(key,JSON.stringify(data));
 }
 /**
@@ -160,15 +159,6 @@ function getFromLocalStorage(key){
     if(showLogs) console.log('getting from localstorage, key: ' + key);
     var data = JSON.parse(localStorage.getItem(key));
     return data;
-}
-/**
- * delets all items from localstorage (if localStorage is supported by the device)
- */
-function clearLanguageStorage(){
-    console.log('clear');
-    if(typeof(Storage) !== "undefined") {
-        localStorage.removeItem(localStorageKey);
-    }
 }
 
 function submitLanguages(){

@@ -332,6 +332,9 @@ function generadeID(){
 
 
 
+
+
+
 router.get('/guideSocket', function(req, res) {
     res.render('guideSocket', {session: req.session});
 });
@@ -339,6 +342,17 @@ router.get('/guideSocket', function(req, res) {
 router.get('/index', function(req, res) {
     res.render('index');
 });
+
+
+
+
+router.get('/touristLanguages', function(req, res) {
+    res.render('touristLanguages');
+});
+
+
+
+
 
 function isGuide(req){
     var is = false;
@@ -391,15 +405,11 @@ function redirectHome(res){
 }
 
 function renderChooseLangs(res){
-    res.render('chooseLanguages', {title: "__Choose languages", langs: ISO6391});
+    res.render('chooseLanguages', {title: "__Choose Languages", langs: ISO6391});
 }
 
 function renderChooseAreas(res){
-    res.render();
-}
-
-function setAreas(res){
-    res.render('knownAreas', {title: "__Known Areas"});
+    res.render('knownAreas', {title: "__Choose Areas"});
 }
 
 function usableString(s) {

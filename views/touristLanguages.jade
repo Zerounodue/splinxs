@@ -3,17 +3,49 @@
 
 extends layout
 
+block append scripts
+  script(src='resources/js/tourist.languages.js')
+
 block content
     form(id="frm_languages" method="post" action="/touristLanguages")
-        - var nativeNames = langs.getAllNativeNames()
+        //- var nativeNames = langs.getAllNativeNames()
         - var codes = langs.getAllCodes()
         each code, index in codes
-            label(for='' + code + '') #{langs.getNativeName(code)}
-            input(type="checkbox", name="language", id='' + code + '' code='' + code + '', value='' + nativeNames[index] + '')
+            - var nativeName = langs.getNativeName(code)
+            label(for='' + code + '') #{nativeName}
+            input(type="checkbox", name="language", id='' + code + '' code='' + code + '')
             br
-            input(type="radio", name="" + code + "_skill", value="1" checked)
-            input(type="radio", name="" + code + "_skill", value="2")
-            input(type="radio", name="" + code + "_skill", value="3")
+            div(id="div_" + code + "" hidden)
+                input(type="radio", name="skill_" + code + "", value="1" checked)
+                | 1
+                input(type="radio", name="skill_" + code + "", value="2")
+                | 2
+                input(type="radio", name="skill_" + code + "", value="3")
+                | 3
+            script.
+                $("#!{code}").click(function(){
+                    if(this.checked){
+                        $("#div_!{code}").show();
+                        addLanguage("!{code}", "1");
+                    }else{
+                        $("#div_!{code}").hide();
+                        removeLanguage("!{code}");
+                    }
+                });
+                $('input[type=radio][name=skill_!{code}]').change(function() {
+                    switch(this.value){
+                        case "1":
+                            setSkill("!{code}", "1");
+                            break;
+                        case "2":
+                            setSkill("!{code}", "2");
+                            break;
+                        case "3":
+                            setSkill("!{code}", "3");
+                            break;
+                    };
+                });
+        br
         br
         //if user is logged in => guide
         button(id='btn_sendLanguages') __send languages

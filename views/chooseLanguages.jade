@@ -7,7 +7,7 @@ html
   body
     h1 #{texts.TITLE_CHOOSE_LANGUAGES}
     form(id="frm_languages" method="post" action="/lang")
-        - var nativeNames = langs.getAllNativeNames()
+        //- var nativeNames = langs.getAllNativeNames()
         - var codes = langs.getAllCodes()
         script.
           //codes = !{JSON.stringify(codes)}

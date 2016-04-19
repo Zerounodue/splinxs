@@ -20,11 +20,30 @@ block content
       br
     form(role='form', action="/register",method="post", style='max-width: 300px;')
       .form-group
-          input.form-control(type='text', name="username", placeholder='#{texts.REGISTER.USERNAME}')
+          input.form-control(type='text', name="username", placeholder='#{texts.REGISTER.USERNAME}', required)
       .form-group
-        input.form-control(type='password', name="password", placeholder='#{texts.REGISTER.PASSWORD}')
+        input.form-control(type='password', name="password", placeholder='#{texts.REGISTER.PASSWORD}', required)
       .form-group
-          input.form-control(type='email', name="email", placeholder='#{texts.REGISTER.EMAIL}')
+        input.form-control(type='password', name="password_confirm", placeholder='#{texts.REGISTER.PASSWORD}', required)
+      .form-group
+          input.form-control(type='email', name="email", placeholder='#{texts.REGISTER.EMAIL}', required)
       button.btn.btn-default(type='submit') #{texts.GENERAL.SUBMIT}
       a(href='/register')
         button.btn.btn-primary(type="button") #{texts.GENERAL.CANCEL}
+    script.
+        $(document).ready(function(){
+            var password = $("#password");
+            var confirm_password = $("#password_confirm");
+            function validatePassword(){
+              if(password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("__Passwords Don't Match");
+              } else {
+                confirm_password.setCustomValidity("");
+              }
+            }
+
+            password.change(validatePassword());
+            confirm_password.on("keyup", validatePassword());
+
+
+        });

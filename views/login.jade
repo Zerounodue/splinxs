@@ -20,9 +20,9 @@ block content
       br
     form(role='form', action="/login",method="post", style='max-width: 300px;')
       .form-group
-          input.form-control(type='text', name="username", placeholder='#{texts.LOGIN.USERNAME}')
+          input.form-control(type='text', name="username", placeholder='#{texts.LOGIN.USERNAME}', required)
       .form-group
-        input.form-control(type='password', name="password", placeholder='#{texts.LOGIN.PASSWORD}')
+        input.form-control(type='password', name="password", placeholder='#{texts.LOGIN.PASSWORD}', required)
       button.btn.btn-default(type='submit') #{texts.GENERAL.SUBMIT}
       a(href='/')
         button.btn.btn-primary(type="button") #{texts.GENERAL.CANCEL}

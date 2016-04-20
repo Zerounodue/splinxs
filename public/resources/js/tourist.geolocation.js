@@ -28,15 +28,18 @@ function initMap() {
     // Try HTML5 geolocation.
     if (navGeoLoc) {
         $("loadingPopup").show(400);
-
+        //Returns the current position of the user and continues to return updated position as the user moves
         watchID = navGeoLoc.watchPosition(function(position) {
 
             var pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
+            console.log("heading: " +position.coords.heading);
+
             $("loadingPopup").hide(400);
             placeMarkerAndPanTo(pos, map);
+            //navGeoLoc.clearWatch(watchID);
             //infoWindow.setPosition(pos);
             //infoWindow.setContent('Location found.');
             map.setCenter(pos);
@@ -44,6 +47,7 @@ function initMap() {
 
 
         }, function() {
+            //an error occurred (PERMISSION_DENIED, POSITION_UNAVAILABLE, TIMEOUT,UNKNOWN_ERROR)
             noGPSPosition(false);
             //handleLocationError(true, infoWindow, map.getCenter());
         });

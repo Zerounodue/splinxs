@@ -9,7 +9,7 @@ this.redirectHome = function(res){
 
 
 this.renderChooseLangs = function(res){
-    res.render('chooseLanguages', {title: "__Choose Languages", langs: ISO6391});
+    res.render('guideLanguages', {title: "__Guide Languages", langs: ISO6391});
 };
 
 this.renderChooseAreas = function(res){
@@ -59,15 +59,36 @@ this.hasSession = function(req){
     return has;
 };
 
-this.hasCompleteSession = function(req){
+this.hasLanguages = function(req){
     var has = false;
-
-    if(req.session){
-        if(req.session.complete){
+    if(req.session && req.session.guide){
+        if(req.session.languages){
             has = true;
         }
     }
+    console.log('     has languages: ' + has);
+    return has;
+};
 
-    console.log('     complete session: ' + has);
+this.hasAreas = function(req){
+    var has = false;
+    if(req.session && req.session.guide){
+        if(req.session.areas){
+            has = true;
+        }
+    }
+    console.log('     has areas: ' + has);
+    return has;
+};
+
+this.hasSetLanguages = function(req){
+    var has = false;
+    
+    if(req.session){
+        if(req.session.setLanguages){
+            has = true;
+        }
+    }
+    
     return has;
 };

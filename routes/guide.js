@@ -3,8 +3,9 @@ var router = express.Router();
 
 //mongodb stuff
 var passport = require('passport');
-var Account = require('../models/account');
+//var Account = require('../models/account');
 var Guide = require('../models/guide');
+var GuideLanguage = require('../models/guideLanguage');
 
 //https://github.com/meikidd/iso-639-1
 var ISO6391 = require('iso-639-1');
@@ -72,13 +73,6 @@ router.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
 });
-//TODO delete
-router.get('/allUsers', function(req, res){
-    Account.find(function(err, accounts){
-        console.log(accounts);
-        res.render('allUsers',{title : 'All users', users : accounts});
-    });
-});
 
 
 router.get('/guideLanguages', function(req, res) {
@@ -139,6 +133,8 @@ router.post('/guideLanguages', function(req, res) {
                 return handleError(err);
             }
         });
+        //TODO make work
+        GuideLanguage.update(null, {$addToSet: {codes: {$each: langs}}});
         
         if(func.isLoggedIn(req)){
             //send to guide site
@@ -158,7 +154,38 @@ router.post('/guideLanguages', function(req, res) {
 
 });
 
+router.get('/guideAreas', function(req, res) {
+    var areas = null; //TODO get from db
+    res.render('guideAreas', {dbAreas: areas});
+});
 
+router.post('/guideAreas', function(req, res) {
+    
+    if (!req.body || !req.body.areas){
+        //TODO redirect somewhere
+        res.send('<a>no post params, cheater!!!</a>');
+    }
+    var areas = JSON.parse(req.body.areas);
+    console.log(areas);
+    var validAreas = true;
+    
+    for (var i = 0; i <  areas.length; i++){
+        console.log('radius: ' + areas[i].radius + ' lat: ' + areas[i].center.lat + ' lng: ' + areas[i].center.lng);
+        if(areas[i].radius <= 0 || areas[i].center.lat == null || areas[i].center.lng == null){
+            validAreas = false;
+            break;
+        }
+    }
+    
+    //TODO save to db
+    
+    if(validAreas){
+        res.send('<a>' + JSON.stringify(areas) + '</a>');
+    }else{
+        res.send('<a>invalid area detected</a>');
+    }
+
+});
 
 
 

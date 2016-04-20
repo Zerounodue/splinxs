@@ -98,39 +98,6 @@ router.post('/chooseLocation', function(req, res) {
 });
 */
 
-router.get('/knownAreas', function(req, res) {
-    var areas = null; //TODO get from db
-    res.render('knownAreas', {dbAreas: areas});
-});
-
-router.post('/knownAreas', function(req, res) {
-    
-    if (!req.body || !req.body.areas){
-        //TODO redirect somewhere
-        res.send('<a>no post params, cheater!!!</a>');
-    }
-    var areas = JSON.parse(req.body.areas);
-    console.log(areas);
-    var validAreas = true;
-    
-    for (var i = 0; i <  areas.length; i++){
-        console.log('radius: ' + areas[i].radius + ' lat: ' + areas[i].center.lat + ' lng: ' + areas[i].center.lng);
-        if(areas[i].radius <= 0 || areas[i].center.lat == null || areas[i].center.lng == null){
-            validAreas = false;
-            break;
-        }
-    }
-    
-    //TODO save to db
-    
-    if(validAreas){
-        res.send('<a>' + JSON.stringify(areas) + '</a>');
-    }else{
-        res.send('<a>invalid area detected</a>');
-    }
-
-});
-
 router.get('/db', function(req, res) {
     /*
     Guide.register(new Guide({ username : 'Mike' }), '123', function(err, guide) {

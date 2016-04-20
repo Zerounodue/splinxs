@@ -18,11 +18,11 @@ block content
             br
             div(id="div_" + code + "" hidden)
                 input(type="radio", name="skill_" + code + "", value="1" checked)
-                | 1
+                | +++
                 input(type="radio", name="skill_" + code + "", value="2")
-                | 2
+                | ++
                 input(type="radio", name="skill_" + code + "", value="3")
-                | 3
+                | +
             script.
                 $("#!{code}").click(function(){
                     if(this.checked){

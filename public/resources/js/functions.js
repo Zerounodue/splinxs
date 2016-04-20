@@ -11,12 +11,12 @@ this.renderGuide = function(res){
     res.render('guide', {title: '__Guide'});
 };
 
-this.renderChooseLangs = function(res, sLangs){
+this.renderGuideLangs = function(res, sLangs){
     if(typeof sLangs === 'undefined' || sLangs === null) sLangs = [];
     res.render('guideLanguages', {title: "__Guide Languages", langs: ISO6391, savedLangs: sLangs});
 };
 
-this.renderChooseAreas = function(res, sAreas){
+this.renderGuideAreas = function(res, sAreas){
     if(typeof sAreas === 'undefined' || sAreas === null) sAreas = [];
     res.render('knownAreas', {title: "__Choose Areas", savedAreas: sAreas});
 };

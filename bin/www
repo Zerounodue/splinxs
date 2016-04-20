@@ -40,15 +40,14 @@ app.set('port', port);
  cert: fs.readFileSync('/etc/letsencrypt/live/splinxs.ti.bfh.ch/cert.pem'),
  ca: fs.readFileSync('/etc/letsencrypt/live/splinxs.ti.bfh.ch/chain.pem')
  }, app);
-
 /*
 var server = https.createServer({
 	key: fs.readFileSync('./selfCert/key.pem'),
 	cert: fs.readFileSync('./selfCert/cert.pem')
 }, app);
 
+*/
 
-*7
 
 
 // io = require('socket.io')(server);

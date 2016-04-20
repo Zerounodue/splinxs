@@ -7,6 +7,9 @@ this.redirectHome = function(res){
     res.redirect('/');
 };
 
+this.renderGuide = function(res){
+    res.render('guide', {title: '__Guide'});
+};
 
 this.renderChooseLangs = function(res, sLangs){
     if(typeof sLangs === 'undefined' || sLangs === null) sLangs = [];

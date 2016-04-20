@@ -253,23 +253,23 @@ router.post('/index', function (req, res, next) {
             res.render('index', {title: "__Login", error: "__wrong username or password", username:req.body.username});
             return;
         }
-
+        
+        var name = req.body.username;
+        //check in db if guide entered languages and areas
+        var hasLanguages = false;
+        var hasAreas = false;
+        
         req.login(guide, function (err) {
             if (err) {
                 return next(err);
             }
 
-            var name = req.body.username;
-            //check in db if guide entered languages and areas
-            var hasLanguages = false;
-            var hasAreas = false;
-            Guide.findOne({'username': name}, 'languages, areas', function (err, guide) {
+            Guide.findOne({'username': name}, 'languages areas', function (err, guide) {
                 //error occured
                 if (err){
                     //TODO might need to do something more?
                     return handleError(err);
                 }
-                
                 if(guide.languages){
                     hasLanguages = guide.languages.length > 0;
                 }
@@ -277,29 +277,35 @@ router.post('/index', function (req, res, next) {
                     hasAreas = guide.areas.length > 0;
                 }
                 //TODO delete when tested
-                console.log('has langs: ' + hasLanguages + ', has areas: ' + hasAreas);
+                console.log("has langs: " + hasLanguages + ", has areas: " + hasAreas);
+                
+                callback();
+                
             });
             
+        });
+        //callback when db query completed
+        function callback(){
             req.session.username = req.body.username;
             req.session.guide = true;
             req.session.loggedIn = false;
-            
+
             //guide completed registration
             if (hasLanguages && hasAreas) {;
                 req.session.loggedIn = true;
-                res.render('guide', {title: "__Guide"});
+                func.renderGuide();
                 return;
-            //guide needs to add languages
+            //guide needs to add areas
             } else if(hasLanguages) {
                 req.session.hasLanguages = true;
                 req.session.hasAreas = false;
-                func.renderChooseLangs(res);
+                func.renderChooseAreas(res);
                 return;
-            //guide needs to add areas
+            //guide needs to add languages
             }else if(hasAreas){
                 req.session.hasLanguages = false;
                 req.session.hasAreas = true;
-                func.renderChooseAreas(res);
+                func.renderChooseLangs(res);
                 return;
             //guide needs to add languages and areas
             }else{
@@ -307,7 +313,11 @@ router.post('/index', function (req, res, next) {
                 func.renderChooseLangs(res);
                 return;
             }
-        });
+            
+            
+            
+        }
+        
     })(req, res, next);
 });
 

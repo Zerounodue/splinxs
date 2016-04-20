@@ -83,48 +83,77 @@ router.get('/allUsers', function(req, res){
 
 router.get('/guideLanguages', function(req, res) {
     //needs to be a guide
-    if(!func.hasSession(req) || !func.isGuide()){
+    if(!func.hasSession(req) || !func.isGuide(req)){
         func.redirectHome(res);
         return;
     }
     var savedLangs = [];
     //guide wants to change the languages, get them from the db
-    if(func.isLoggedIn()){
-        //TODO get languages from db
-        //sanedLangs = ...;
+    if(func.isLoggedIn(req)){
+        Guide.findOne({'username': req.session.username}, 'languages', function (err, guide) {
+            //error occured
+            if (err) {
+                //TODO might need to do something more?
+                return handleError(err);
+            }
+            if (guide.languages && guide.languages.length > 0) {
+                savedLangs = guide.languages;
+                debugger;
+            }
+            func.renderChooseLangs(res, savedLangs);
+            return;
+        });
+    }else{
+        func.renderChooseLangs(res);
+        return;
     }
-    func.renderChooseLangs(res, savedLangs);
 });
 
 router.post('/guideLanguages', function(req, res) {
     //needs to be a guide
-    if(!func.hasSession(req) || !func.isGuide()){
+    if(!func.hasSession(req) || !func.isGuide(req)){
         func.redirectHome(res);
         return;
     }
     if (!req.body || !req.body.languages){
         func.redirectHome(res);
+        return;
     }
+
     var langs = JSON.parse(req.body.languages);
     var validLangs = true;
-    
+
     for (var i = 0; i <  langs.length; i++){
-        console.log('code: ' + langs[i].code);
-        if(!ISO6391.validate(langs[i].code)){
+        //TODO delete
+        if(!ISO6391.validate(langs[i])){
             validLangs = false;
             break;
         }
     }
-    
-    //TODO save to db, connect with guide...
-    
+
     if(validLangs){
-        //send to choose area
+        //save to db
+        Guide.update({ username: req.session.username }, { $set: { languages: langs } },  function (err, raw){
+            if(err){
+                //TODO might need to do something more?
+                return handleError(err);
+            }
+        });
         
-        //res.send('<a>' + JSON.stringify(langs) + '</a>');
+        if(func.isLoggedIn(req)){
+            //send to guide site
+            func.renderGuide();
+            return;
+        }else{
+            //send to choose area
+            req.session.hasLanguages = true;
+            func.renderChooseAreas(res);
+            return;
+        }
     }else{
         //not possible
-        redirectHome(res);
+        func.redirectHome(res);
+        return;
     }
 
 });

@@ -14,10 +14,6 @@ block content
         - var codes = langs.getAllCodes()
         script.
           languages = !{JSON.stringify(savedLangs)};
-          //TODO add data from db
-            //if(savedLanguages != null){
-              //languages = TODO parsse json from db
-            //}
         label(for="languages") #{texts.LANGUAGES} 
         input(id="inp_languages" type="text" list="languages" placeholder="__Type to search")
         datalist(id='languages')

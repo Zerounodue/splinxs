@@ -87,13 +87,13 @@ router.get('/guideLanguages', function(req, res) {
         func.redirectHome(res);
         return;
     }
+    var savedLangs = [];
     //guide wants to change the languages, get them from the db
     if(func.isLoggedIn()){
-        var savedLangs = [];
-        res.render('guideLanguages', {title: "__Guide Languages", langs: ISO6391, savedLangs: savedLangs});
-        return;
+        //TODO get languages from db
+        //sanedLangs = ...;
     }
-    func.renderChooseLangs(res);
+    func.renderChooseLangs(res, savedLangs);
 });
 
 router.post('/guideLanguages', function(req, res) {

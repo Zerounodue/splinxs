@@ -8,12 +8,14 @@ this.redirectHome = function(res){
 };
 
 
-this.renderChooseLangs = function(res){
-    res.render('guideLanguages', {title: "__Guide Languages", langs: ISO6391});
+this.renderChooseLangs = function(res, sLangs){
+    if(typeof sLangs === 'undefined' || sLangs === null) sLangs = [];
+    res.render('guideLanguages', {title: "__Guide Languages", langs: ISO6391, savedLangs: sLangs});
 };
 
-this.renderChooseAreas = function(res){
-    res.render('knownAreas', {title: "__Choose Areas"});
+this.renderChooseAreas = function(res, sAreas){
+    if(typeof sAreas === 'undefined' || sAreas === null) sAreas = [];
+    res.render('knownAreas', {title: "__Choose Areas", savedAreas: sAreas});
 };
 
 

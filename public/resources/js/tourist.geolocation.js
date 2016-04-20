@@ -42,7 +42,7 @@ function initMap() {
 
             $("loadingpopup").hide(400);
             placeMarkerAndPanTo(pos, map);
-            //navGeoLoc.clearWatch(watchID);
+            navGeoLoc.clearWatch(watchID);
             //infoWindow.setPosition(pos);
             //infoWindow.setContent('Location found.');
             map.setCenter(pos);

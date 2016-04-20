@@ -8,6 +8,8 @@ var Guide = require('../models/guide');
 
 //https://github.com/meikidd/iso-639-1
 var ISO6391 = require('iso-639-1');
+//https://www.npmjs.com/package/email-validator
+var emailValidator = require("email-validator");
 
 //functions used in all routes
 var func  = require('../public/resources/js/functions.js');
@@ -92,10 +94,8 @@ router.post('/register', function(req, res) {
         func.redirectHome(res);
         return;
     }
-    
-    //TODO valid email
-    var validEmail = true;
-    if(!validEmail){
+    //valid email
+    if(!emailValidator.validate(email)){
         func.redirectHome(res);
         return;
     }

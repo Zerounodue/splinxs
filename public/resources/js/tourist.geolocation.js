@@ -90,3 +90,27 @@ function placeMarkerAndPanTo(latLng, map) {
         map.setZoom(15);
     }
 }
+function getHeading() {
+    // Try HTML5 geolocation.
+    if (navGeoLoc) {
+        $("loadingPopup").show(400);
+        //Returns the current position of the user and continues to return updated position as the user moves
+        watchID = navGeoLoc.watchPosition(function(position) {
+
+            console.log("heading: " +position.coords.heading);
+
+            $("loadingPopup").hide(400);
+
+
+
+        }, function() {
+            //an error occurred (PERMISSION_DENIED, POSITION_UNAVAILABLE, TIMEOUT,UNKNOWN_ERROR)
+            noGPSPosition(false);
+            //handleLocationError(true, infoWindow, map.getCenter());
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        //handleLocationError(false, infoWindow, map.getCenter());
+        noGPSPosition(true);
+    }
+}

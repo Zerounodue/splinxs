@@ -1,0 +1,44 @@
+extends layout
+
+block append stylesheets
+    link(rel='stylesheet', href='resources/css/style-tourist-localisation.css')
+block append scripts
+    script(src='https://www.google.com/jsapi')
+    script(src='resources/js/tourist.geolocation.js')
+block content
+    loadingPopup.loadingPopup(hidden='')
+        // close the popup and stop trying getting position
+        img.x(src='resources/images/icons/x.png', ,='', alt='close icon', onclick="$('loadingPopup').hide(400); navGeoLoc.clearWatch(watchID)")
+        h2(style='text-align: center;')
+            | __Getting GPS position, please wait.
+        .spinner
+            .bounce1
+            .bounce2
+            .bounce3
+        div(style='text-align: center;')
+            p
+                | __you can add position manually
+            a.btn.btn-default.btn-green.btn-map(onclick="$('loadingPopup').hide(400); navGeoLoc.clearWatch(watchID)", ,='') __Close
+    nopospopup.loadingPopup(hidden='')
+        img.x(src='resources/images/icons/x.png', ,='', alt='close icon', onclick="$('noPosPopup').hide(400);")
+        div(style='text-align: center;')
+            h2 __No position, add one by hand ;)
+            a.btn.btn-default.btn-green.btn-map(onclick="$('noPosPopup').hide(400);", ,='') __Ok
+    infopopup.loadingPopup(hidden='')
+        img.x(src='resources/images/icons/x.png', ,='', alt='close icon', onclick="$('infopopup').hide(400);")
+        div(style='text-align: center;')
+            h2 __Add a position
+            p __click on the map to add your current position
+            p __a guide thah knows this region will help you
+            a.btn.btn-default.btn-green.btn-map(onclick="$('infopopup').hide(400);", ,='') __Ok
+    .container.front
+        .row
+            .col-md-6.text-center
+                a.btn.btn-default.btn-white.btn-map(onclick='$("infopopup").show(400);') __Info
+            .col-md-6.text-center
+                a.btn.btn-default.btn-green.btn-map(onclick='sendPosition()') __Continue
+
+    #map.touristMap
+    script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&callback=initMap')
+
+block foot

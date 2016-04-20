@@ -91,8 +91,43 @@ router.post('/touristLocation', function(req, res) {
 
 });
 
+router.get('/touristLocalisation', function(req, res) {
+    res.render('touristLocalisation');
+});
 
 
+
+router.post('/tourist', function(req, res) {
+    if (!req.body){ //|| !req.body.parameter){
+        console.log(req.body);
+        //TODO redirect somewhere
+        res.send('<a>no post params, cheater!!!</a>');
+        return;
+
+    }
+
+    var params ="this are my parameters";
+    //var params = JSON.parse(req.body.parameter);
+
+
+    //if(params.languages.lenght <1 ){//TODO redirect somewhere
+
+    //    res.send('<a>no languages.lenght, cheater!!!</a>');
+    //}
+
+
+    if(!req.session){
+        req.session.guid = generadeID();
+    }
+    req.session.params = params;
+
+    //console.log(3);
+    console.log("Recived params "+ req.body.position);
+    res.send("Tourist site, recived position: "+ req.body.position);
+    //res.render('tourist', {session: req.session});
+
+
+});
 
 
 module.exports = router;

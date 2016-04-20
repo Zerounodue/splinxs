@@ -71,7 +71,7 @@ html.html(lang='en')
             };
 
     if error
-        body#body(onload='$(".loginPopup").show();')
+        body#body(onload='$("loginPopup").show();')
     else
         body#body
 
@@ -120,19 +120,12 @@ html.html(lang='en')
                                     a(href='#') Something else here
                                 li
                                     a(href='#') Something else here
-                                li
-                                    a(href='#') Something else here
-                                li
-                                    a(href='#') Something else here
-                                li
-                                    a(href='#') Something else here
-                                li
-                                    a(href='#') Something else here
+
 
 
     main
         loginPopup.loginPopup(hidden='')
-            img.x(src='resources/images/icons/x.png', alt='close icon', onclick='$(".loginPopup").hide(400);')
+            img.x(src='resources/images/icons/x.png', alt='close icon', onclick='$("loginPopup").hide(400);')
             center
                 include login.jade
         // --- SLIDES START
@@ -148,7 +141,7 @@ html.html(lang='en')
                         a#touristButton.btn.btn-default.btn-green.btn-index(href='tourist.html') #{texts.INDEX.I_AM_TOURIST}
                     .col-sm-6.text-center
 
-                        a.btn.btn-default.btn-green.btn-index(onclick='$(".loginPopup").show(400);') #{texts.INDEX.I_AM_GUIDE}
+                        a.btn.btn-default.btn-green.btn-index(onclick='$("loginPopup").show(400);') #{texts.INDEX.I_AM_GUIDE}
                         //a.btn.btn-default.btn-green.btn-index(href='guide.html') #{texts.INDEX.I_AM_GUIDE}
                 // --- DESCRIPTION
                 .row

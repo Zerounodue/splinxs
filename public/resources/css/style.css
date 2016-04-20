@@ -32,14 +32,15 @@ main {
     color: #676A6C;
     background-color: white;
     opacity: 0.9;
-    margin-bottom: 200;
+
 }
 
 body{
-
-width: 100%;
-font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	color:#676A6C; 	
+    height: 100%;
+    width: 100%;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color:#676A6C;
+    padding-top: 70px; /* for topbar and navbar*/
 
 }
 
@@ -56,6 +57,8 @@ font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 /*topbar*/
 .topbar {
     width: 100%;
+    top: 0;
+    position: absolute;
 }
 .topbar-left::before{
     content: "\200B"; /*zero-width space*/
@@ -87,7 +90,7 @@ font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 footer {
     position: absolute;
     width: 100%;
-    bottom: 0px;
+    bottom: 0;
 }
 /*small chat*/
 .smallChat {
@@ -189,6 +192,7 @@ footer {
     height: 250px;
 }
 
+/* TODO only for chat????
 ::-webkit-scrollbar-track
 {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
@@ -206,6 +210,7 @@ footer {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
     background-color: #555;
 }
+*/
 /* chatbox */
 
 /*loading animation*/
@@ -319,7 +324,11 @@ footer {
 /*modal dialog*/
 
 /* map */
-#map {
+/*do not use #map, this will apply on all maps!!!!! use class */
+
+
+
+.map{
     width: 85%;
     height: 100%;
     float: left;
@@ -334,6 +343,12 @@ footer {
 	color: white;
 	background-color: #28B294;
 	border: 0px;
+}
+.btn-white{
+    font-weight: bold;
+    color: #28B294;
+    background-color: white;
+    border: 0px;
 }
 
 .btn-green:hover {

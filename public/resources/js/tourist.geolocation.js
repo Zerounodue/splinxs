@@ -5,19 +5,22 @@
 var marker;
 var watchID; //used to watchPosition and to clearWatch() --> stop watching position
 var navGeoLoc = navigator.geolocation;
+var currentPosition=null;
 function initMap() {
     var map;
     //center the map automatically
     if (google.loader.ClientLocation != null) {
         map= new google.maps.Map(document.getElementById('map'), {
             center: {lat: google.loader.ClientLocation.latitude, lng: google.loader.ClientLocation.longitude},
-            zoom: 8
+            zoom: 8,
+            streetViewControl: false
         });
     }
-    else{
+    else{//if aproximate position can't be determined (i.e. with a VPN)
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 0, lng: 0},
-            zoom: 3
+            zoom: 3,
+            streetViewControl: false
         });
     }
     map.addListener('click', function(e) {
@@ -30,14 +33,14 @@ function initMap() {
         $("loadingPopup").show(400);
         //Returns the current position of the user and continues to return updated position as the user moves
         watchID = navGeoLoc.watchPosition(function(position) {
-
+            currentPosition=position;
             var pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
-            };
-            console.log("heading: " +position.coords.heading);
 
-            $("loadingPopup").hide(400);
+            };
+
+            $("loadingpopup").hide(400);
             placeMarkerAndPanTo(pos, map);
             //navGeoLoc.clearWatch(watchID);
             //infoWindow.setPosition(pos);
@@ -59,11 +62,11 @@ function initMap() {
 }
 function noGPSPosition(notAllowed){
     if (notAllowed) {
-        $("noPosPopup").show(400);
+        $("nopospopup").show(400);
     }
     else {
-        $("loadingPopup").hide(0);
-        $("noPosPopup").show(0);
+        $("loadingpopup").hide(0);
+        $("nopospopup").show(0);
     }
 }
 /*
@@ -90,27 +93,32 @@ function placeMarkerAndPanTo(latLng, map) {
         map.setZoom(15);
     }
 }
-function getHeading() {
-    // Try HTML5 geolocation.
-    if (navGeoLoc) {
-        $("loadingPopup").show(400);
-        //Returns the current position of the user and continues to return updated position as the user moves
-        watchID = navGeoLoc.watchPosition(function(position) {
-
-            console.log("heading: " +position.coords.heading);
-
-            $("loadingPopup").hide(400);
-
-
-
-        }, function() {
-            //an error occurred (PERMISSION_DENIED, POSITION_UNAVAILABLE, TIMEOUT,UNKNOWN_ERROR)
-            noGPSPosition(false);
-            //handleLocationError(true, infoWindow, map.getCenter());
-        });
-    } else {
-        // Browser doesn't support Geolocation
-        //handleLocationError(false, infoWindow, map.getCenter());
-        noGPSPosition(true);
+function sendPosition() {
+    if(!marker){
+        $("infopopup").show(400);
     }
+    else{
+        //do some things... save in local storage???
+        submitPosition();
+    }
+}
+
+
+function submitPosition(){
+
+    var position = JSON.stringify(marker.position);
+
+    // Create the form object
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", "/tourist");
+    var hiddenField = document.createElement("input");
+    hiddenField.setAttribute("type", "hidden");
+    hiddenField.setAttribute("name", "position");
+    hiddenField.setAttribute("value", position);
+    // append the newly created control to the form
+    form.appendChild(hiddenField);
+    document.body.appendChild(form); // inject the form object into the body section
+    form.submit();
+
 }

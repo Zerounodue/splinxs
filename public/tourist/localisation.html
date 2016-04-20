@@ -5,12 +5,11 @@
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" href="resources/css/bootstrap.min.css"/>
-
-    <link rel="stylesheet" href="resources/css/loading.css"/>
+    <link rel="stylesheet" href="resources/css/style-tourist-localisation.css"/>
     <script src="resources/js/jquery-2.2.0.min.js"></script>
     <script src="https://www.google.com/jsapi"></script>
     <script src="resources/js/tourist.geolocation.js"></script>
-</head>
+
 <body>
 <loadingPopup class="loadingPopup" hidden>
     <!-- close the popup and stop trying getting position -->
@@ -37,10 +36,8 @@
         <a  onclick="$('noPosPopup').hide(400);", class="btn btn-default">__Ok</a>
     </div>
 </noPosPopup>
-<div id="map"></div>
-<a  onclick="getHeading()";", class="btn btn-default">heading</a>
+<div id="map" class="touristMap"></div>
 
-getHeading
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&callback=initMap"></script>
 </body>

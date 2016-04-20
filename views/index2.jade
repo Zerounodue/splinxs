@@ -1,5 +1,11 @@
 extends layout
-
+block navbarli
+  li
+    a(onclick="scrollTo('#homeSlide')") 23423
+  li
+    a(onclick="scrollTo('#splinxsSlide')") dfg
+  li
+    a(onclick="scrollTo('#aboutSlide')") asdas
 block content
   if (!user)
     a(href="/login") Login
@@ -29,8 +35,10 @@ block content
     a(href="/touristLanguages") tourist langs
     br
     a(href="/position.html") position for tourist
+    //br
+    //a(href="/localisation.html") localisation for tourist
     br
-    a(href="/localisation.html") localisation for tourist
+    a(href="/touristLocalisation") localisation for tourist in jade
   if (user)
     p You are currently logged in as #{user.username}
     a(href="/logout") Logout

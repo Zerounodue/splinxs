@@ -175,7 +175,7 @@ passport.deserializeUser(Guide.deserializeUser());
 //https://www.airpair.com/javascript/complete-expressjs-nodejs-mongodb-crud-skeleton
 
 mongoose.set('debug', true);
-mongoose.connect("mongodb://localhost:27017/test");
+mongoose.connect("mongodb://localhost:27017/splinxs");
 
 var db = mongoose.connection;
 

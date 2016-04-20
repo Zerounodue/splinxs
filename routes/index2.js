@@ -27,77 +27,6 @@ router.get('/', function(req, res, next) {
 });
 
 
-
-
-
-/*
-router.get('/chooseLanguages', function(req, res) {
-    
-    if(!func.hasSession(req)){
-        func.redirectHome(res);
-        return;
-    }
-    func.renderChooseLangs(res);
-});
-
-router.post('/chooseLanguages', function(req, res) {
-    if(!func.hasSession(req)){
-        func.redirectHome(res);
-    }
-    if (!req.body || !req.body.languages){
-        func.redirectHome(res);
-    }
-    var langs = JSON.parse(req.body.languages);
-    var validLangs = true;
-    
-    for (var i = 0; i <  langs.length; i++){
-        console.log('code: ' + langs[i].code);
-        if(!ISO6391.validate(langs[i].code)){
-            validLangs = false;
-            break;
-        }
-    }
-    
-    //TODO save to db, connect with guide...
-    
-    if(validLangs){
-        //send to choose area
-        
-        //res.send('<a>' + JSON.stringify(langs) + '</a>');
-    }else{
-        //not possible
-        redirectHome(res);
-    }
-
-});
-*/
-
-/*
-router.get('/chooseLocation', function(req, res) {
-    res.render('chooseLocation');
-});
-
-router.post('/chooseLocation', function(req, res) {
-    
-    if (!req.body || !req.body.position){
-        //TODO redirect somewhere
-        res.send('<a>no post params, cheater!!!</a>');
-    }
-    var position = JSON.parse(req.body.position);
-
-    var validLocation = position.lat != null && position.lng != null;
-    
-    //TODO save to db, connect with guide...
-    
-    if(validLocation){
-        res.send('<a>' + JSON.stringify(position) + '</a>');
-    }else{
-        res.send('<a>invalid location detected</a>');
-    }
-
-});
-*/
-
 router.get('/db', function(req, res) {
     /*
     Guide.register(new Guide({ username : 'Mike' }), '123', function(err, guide) {
@@ -148,25 +77,9 @@ router.get('/touristSettings', function(req, res) {
 });
 
 
-
-
-
-
-
-
-
 router.get('/guideSocket', function(req, res) {
     res.render('guideSocket', {session: req.session});
 });
-/*
-router.get('/touristLanguages', function(req, res) {
-    res.render('touristLanguages', {title: "__Choose Tourist Languages", langs: ISO6391});
-});
-*/
-
-
-
-
 
 
 router.get('/index', function(req, res) {
@@ -232,18 +145,18 @@ router.post('/index', function (req, res, next) {
             } else if(hasLanguages) {
                 req.session.hasLanguages = true;
                 req.session.hasAreas = false;
-                func.renderChooseAreas(res);
+                func.renderGuideAreas(res);
                 return;
             //guide needs to add languages
             }else if(hasAreas){
                 req.session.hasLanguages = false;
                 req.session.hasAreas = true;
-                func.renderChooseLangs(res);
+                func.renderGuideLangs(res);
                 return;
             //guide needs to add languages and areas
             }else{
                 req.session.hasLanguages = req.session.hasAreas = false;
-                func.renderChooseLangs(res);
+                func.renderGuideLangs(res);
                 return;
             }
             

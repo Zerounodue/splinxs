@@ -18,7 +18,7 @@ this.renderGuideLangs = function(res, sLangs){
 
 this.renderGuideAreas = function(res, sAreas){
     if(typeof sAreas === 'undefined' || sAreas === null) sAreas = [];
-    res.render('knownAreas', {title: "__Choose Areas", savedAreas: sAreas});
+    res.render('guideAreas', {title: "__Guide Areas", savedAreas: sAreas});
 };
 
 

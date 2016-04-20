@@ -16,7 +16,7 @@ block append head
 
 block content
     script.
-        existingCircles = !{JSON.stringify(dbAreas)}
+        existingCircles = !{JSON.stringify(savedAreas)};
     div __Add circles to mark the region that you know well. Only tourists that are in these regions will contact you.  You can change the center and radius of existing circles or delete them.
     br
     div(id="mapControls.mapControls")

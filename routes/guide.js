@@ -62,7 +62,7 @@ router.post('/register', function(req, res) {
             req.session.guide = true;
             req.session.loggedIn = false;
             req.session.hasLanguages = req.session.hasAreas = false;
-            func.renderChooseLangs(res);
+            func.renderGuideLangs(res);
             return;
         });
     });
@@ -92,13 +92,12 @@ router.get('/guideLanguages', function(req, res) {
             }
             if (guide.languages && guide.languages.length > 0) {
                 savedLangs = guide.languages;
-                debugger;
             }
-            func.renderChooseLangs(res, savedLangs);
+            func.renderGuideLangs(res, savedLangs);
             return;
         });
     }else{
-        func.renderChooseLangs(res);
+        func.renderGuideLangs(res);
         return;
     }
 });
@@ -141,10 +140,15 @@ router.post('/guideLanguages', function(req, res) {
             func.renderGuide();
             return;
         }else{
-            //send to choose area
             req.session.hasLanguages = true;
-            func.renderChooseAreas(res);
-            return;
+            if(!func.hasAreas()){
+                //send to choose area
+                func.renderGuideAreas(res);
+                return;
+            }else{
+                //send home that guide can login
+                func.redirectHome(res);
+            }
         }
     }else{
         //not possible
@@ -155,12 +159,37 @@ router.post('/guideLanguages', function(req, res) {
 });
 
 router.get('/guideAreas', function(req, res) {
-    var areas = null; //TODO get from db
-    res.render('guideAreas', {dbAreas: areas});
+    //needs to be a guide
+    if(!func.hasSession(req) || !func.isGuide(req)){
+        func.redirectHome(res);
+        return;
+    }
+    var savedAreas = [];
+
+    //guide wants to change the areas, get them from the db
+    if(func.isLoggedIn(req)){
+        Guide.findOne({'username': req.session.username}, 'areas', function (err, guide) {
+            //error occured
+            if (err) {
+                //TODO might need to do something more?
+                return handleError(err);
+            }
+            if (guide.areas && guide.areas.length > 0) {
+                savedAreas = guide.areas;
+            }
+            func.renderGuideAreas(res, savedAreas);
+            return;
+        });
+    }else{
+        func.renderGuideAreas(res);
+        return;
+    }
+
+    func.renderGuideAreas(res, savedAreas);
 });
 
 router.post('/guideAreas', function(req, res) {
-    
+    //TODO implement
     if (!req.body || !req.body.areas){
         //TODO redirect somewhere
         res.send('<a>no post params, cheater!!!</a>');

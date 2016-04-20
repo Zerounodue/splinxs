@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
 
 
 
-
+/*
 router.get('/chooseLanguages', function(req, res) {
     
     if(!func.hasSession(req)){
@@ -70,6 +70,7 @@ router.post('/chooseLanguages', function(req, res) {
     }
 
 });
+*/
 
 /*
 router.get('/chooseLocation', function(req, res) {

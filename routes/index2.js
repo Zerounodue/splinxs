@@ -261,34 +261,52 @@ router.post('/index', function (req, res, next) {
 
             var name = req.body.username;
             //check in db if guide entered languages and areas
-            var hasLanguagesAreas = false;
-            Guide.findOne({'username': name}, 'areas, languages', function (err, guide) {
+            var hasLanguages = false;
+            var hasAreas = false;
+            Guide.findOne({'username': name}, 'languages, areas', function (err, guide) {
                 //error occured
-                if (err)
+                if (err){
+                    //TODO might need to do something more?
                     return handleError(err);
-
-                hasLanguagesAreas = guide.hasLanguagesAreas();
+                }
+                
+                if(guide.languages){
+                    hasLanguages = guide.languages.length > 0;
+                }
+                if(guide.areas){
+                    hasAreas = guide.areas.length > 0;
+                }
                 //TODO delete when tested
-                console.log('-------------is in HAS: ' + hasLanguagesAreas);
+                console.log('has langs: ' + hasLanguages + ', has areas: ' + hasAreas);
             });
-
-            //guide needs to add languages annd/or areas
-            if (hasLanguagesAreas) {
-                req.session.complete = true;
-                req.session.username = req.body.username;
-                req.session.guide = true;
+            
+            req.session.username = req.body.username;
+            req.session.guide = true;
+            req.session.loggedIn = false;
+            
+            //guide completed registration
+            if (hasLanguages && hasAreas) {;
                 req.session.loggedIn = true;
                 res.render('guide', {title: "__Guide"});
                 return;
-            } else {
-                req.session.complete = false;
-                req.session.username = req.body.username;
-                req.session.guide = true;
-                req.session.loggedIn = false;
+            //guide needs to add languages
+            } else if(hasLanguages) {
+                req.session.hasLanguages = true;
+                req.session.hasAreas = false;
+                func.renderChooseLangs(res);
+                return;
+            //guide needs to add areas
+            }else if(hasAreas){
+                req.session.hasLanguages = false;
+                req.session.hasAreas = true;
+                func.renderChooseAreas(res);
+                return;
+            //guide needs to add languages and areas
+            }else{
+                req.session.hasLanguages = req.session.hasAreas = false;
                 func.renderChooseLangs(res);
                 return;
             }
-
         });
     })(req, res, next);
 });

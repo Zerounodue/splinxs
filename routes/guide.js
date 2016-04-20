@@ -15,62 +15,6 @@ var emailValidator = require("email-validator");
 var func  = require('../public/resources/js/functions.js');
 
 
-
-router.get('/login', function(req, res) {
-    res.render('login', { title: "__Login" });
-});
-
-router.post('/login', function (req, res, next) {
-    passport.authenticate('local', function (err, guide, info) {
-        if (err) {
-            return next(err); // will generate a 500 error
-        }
-        //password username combination not found
-        if (!guide) {
-            res.render('login', {title: "__Login", error: "__wrong username or password"});
-            return;
-        }
-
-        req.login(guide, function (err) {
-            if (err) {
-                return next(err);
-            }
-
-            var name = req.body.username;
-            //check in db if guide entered languages and areas
-            var hasLanguagesAreas = false;
-            Guide.findOne({'username': name}, 'areas, languages', function (err, guide) {
-                //error occured
-                if (err)
-                    return handleError(err);
-
-                hasLanguagesAreas = guide.hasLanguagesAreas();
-                //TODO delete when tested
-                console.log('-------------is in HAS: ' + hasLanguagesAreas);
-            });
-
-            //guide needs to add languages annd/or areas
-            if (hasLanguagesAreas) {
-                req.session.complete = true;
-                req.session.username = req.body.username;
-                req.session.guide = true;
-                req.session.loggedIn = true;
-                res.render('guide', {title: "__Guide"});
-                return;
-            } else {
-                req.session.complete = false;
-                req.session.username = req.body.username;
-                req.session.guide = true;
-                req.session.loggedIn = false;
-                renderChooseLangs(res);
-                return;
-            }
-
-        });
-    })(req, res, next);
-});
-
-
 router.get('/register', function(req, res) {
     res.render('register', {title: "__Register"});
 });
@@ -113,6 +57,10 @@ router.post('/register', function(req, res) {
 
         passport.authenticate('local')(req, res, function () {
             //created successfully
+            req.session.username = name;
+            req.session.guide = true;
+            req.session.loggedIn = false;
+            req.session.hasLanguages = req.session.hasAreas = false;
             func.renderChooseLangs(res);
             return;
         });
@@ -124,13 +72,75 @@ router.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
 });
-
+//TODO delete
 router.get('/allUsers', function(req, res){
     Account.find(function(err, accounts){
         console.log(accounts);
         res.render('allUsers',{title : 'All users', users : accounts});
     });
 });
+
+
+router.get('/guideLanguages', function(req, res) {
+    //needs to be a guide
+    if(!func.hasSession(req) || !func.isGuide()){
+        func.redirectHome(res);
+        return;
+    }
+    //guide wants to change the languages, get them from the db
+    if(func.isLoggedIn()){
+        var savedLangs = null;
+        res.render('guideLanguages', {title: "__Guide Languages", langs: ISO6391, savedLangs: savedLangs});
+        return;
+    }
+    func.renderChooseLangs(res);
+});
+
+router.post('/guideLanguages', function(req, res) {
+    //needs to be a guide
+    if(!func.hasSession(req) || !func.isGuide()){
+        func.redirectHome(res);
+        return;
+    }
+    if (!req.body || !req.body.languages){
+        func.redirectHome(res);
+    }
+    var langs = JSON.parse(req.body.languages);
+    var validLangs = true;
+    
+    for (var i = 0; i <  langs.length; i++){
+        console.log('code: ' + langs[i].code);
+        if(!ISO6391.validate(langs[i].code)){
+            validLangs = false;
+            break;
+        }
+    }
+    
+    //TODO save to db, connect with guide...
+    
+    if(validLangs){
+        //send to choose area
+        
+        //res.send('<a>' + JSON.stringify(langs) + '</a>');
+    }else{
+        //not possible
+        redirectHome(res);
+    }
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

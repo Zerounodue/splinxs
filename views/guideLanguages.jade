@@ -1,16 +1,19 @@
-doctype html
-html
-  head
-    title= title
+//- 
+    ...
+
+extends layout
+
+block append scripts
     script(src='resources/js/jquery-2.2.0.min.js')
     script(src='resources/js/guide.languages.js')
-  body
+
+block content
     h1 #{texts.TITLE_CHOOSE_LANGUAGES}
-    form(id="frm_languages" method="post" action="/lang")
+    form(id="frm_languages" method="post" action="/guideLanguages")
         //- var nativeNames = langs.getAllNativeNames()
         - var codes = langs.getAllCodes()
         script.
-          //codes = !{JSON.stringify(savedLangs)}
+          languages = !{JSON.stringify(savedLangs)};
           //TODO add data from db
             //if(savedLanguages != null){
               //languages = TODO parsse json from db

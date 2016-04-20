@@ -20,13 +20,13 @@ block content
       br
     form(role='form', action="/register",method="post", style='max-width: 300px;')
       .form-group
-          input.form-control(type='text', name="username", placeholder='#{texts.REGISTER.USERNAME}', required)
+          input.form-control(type='text', name="username", placeholder='#{texts.REGISTER.USERNAME}', required, autofocus)
       .form-group
         input.form-control(type='password', id="password", name="password", placeholder='#{texts.REGISTER.PASSWORD}', required)
       .form-group
         input.form-control(type='password', id="papssword_confirm", name="password_confirm", placeholder='#{texts.REGISTER.PASSWORD}', required)
       .form-group
-          input.form-control(type='email', name="email", placeholder='#{texts.REGISTER.EMAIL}', required)
+          input.form-control(type='email', name="email", placeholder='#{texts.REGISTER.EMAIL}', value='#{email ? email : ""}', required)
       button.btn.btn-default(type='submit') #{texts.GENERAL.SUBMIT}
       a(href='/register')
         button.btn.btn-primary(type="button") #{texts.GENERAL.CANCEL}

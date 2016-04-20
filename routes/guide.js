@@ -81,13 +81,19 @@ router.post('/register', function(req, res) {
     //check that fields are not empty
     var name = req.body.username;
     var pw = req.body.password;
+    var pw2 = req.body.password_confirm;
     var email = req.body.email;
-    if(!func.usableString(name) || !func.usableString(pw) || !func.usableString(email)){
+    if(!func.usableString(name) || !func.usableString(pw) || !func.usableString(pw2) || !func.usableString(email)){
         func.redirectHome(res);
         return;
     }
-
-    //TODO check if email is valid
+    //passwords must match
+    if(pw != pw2){
+        func.redirectHome(res);
+        return;
+    }
+    
+    //TODO valid email
     var validEmail = true;
     if(!validEmail){
         func.redirectHome(res);
@@ -98,8 +104,7 @@ router.post('/register', function(req, res) {
     Guide.register(new Guide({ username : req.body.username, email: req.body.email }), req.body.password, function(err, guide) {
         if (err) {
             if(err.name == "UserExistsError"){
-                res.render('register', {title: "__Register", error: "__username already taken"});
-                console.log('!!!!!username exists');
+                res.render('register', {title: "__Register", error: "__username already taken", email: email});
                 return;
             }
             func.redirectHome(res);

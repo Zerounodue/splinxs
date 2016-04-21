@@ -75,11 +75,13 @@ function addLanguage(c) {
  */
 function removeLanguage(c) {
     if (showLogs) console.log('remove language: ' + c);
-    //var i = languages.indexOf({code: c});
-    var i = languages.map(function(e) { return e.code; }).indexOf(c);
-    if (languages.length > 0 && i > -1) {
-        languages.splice(i, 1);
-        removeSelectedLanguageFromDOM(c);
+
+    if(languages.length > 0){
+        var i = $.inArray(c, languages);
+        if(i > -1){
+            languages.splice(i, 1);
+            removeSelectedLanguageFromDOM(c);
+        }
     }
 }
 /**
@@ -93,8 +95,7 @@ function addSelectedLanguageToDOM(c) {
     
     var html =
         "<div id='div_lang_" + c + "'>" +
-            "<button id='btn_lang_" + c + "'>-</button>" +
-            "<a>" + nativeName + "</a>" +
+            "<button id='btn_lang_" + c + "'>-</button>" + nativeName +
         "</div>";
     selectedLanguages.append(html);
 

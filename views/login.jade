@@ -8,10 +8,8 @@
     h2 #{error}
     br
   form.form-signin(role='form', action="/index",method="post", style='max-width: 300px;')
-    if username
-      input.form-control.inputTop(type='text', name="username", placeholder='#{texts.LOGIN.USERNAME}', required, autofocus, value='#{username}')
-    else
-      input.form-control.inputTop(type='text', name="username", placeholder='#{texts.LOGIN.USERNAME}', required, autofocus)
+
+    input.form-control.inputTop(type='text', name="username", placeholder='#{texts.LOGIN.USERNAME}', required, autofocus, value='#{username ? username : ""}')
     input.form-control.inputBottom(type='password', name="password", placeholder='#{texts.LOGIN.PASSWORD}', required)
     button.btn.btn-green(type='submit') #{texts.GENERAL.SUBMIT}
     a.btn.btn-default(onclick='$(".loginPopup").hide(400);') #{texts.GENERAL.CANCEL}

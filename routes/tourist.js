@@ -115,12 +115,15 @@ router.post('/tourist', function(req, res) {
     //    res.send('<a>no languages.lenght, cheater!!!</a>');
     //}
 
-
+    //TODO thigns
     if(!req.session){
         req.session.guid = generadeID();
     }
     req.session.params = params;
 
+
+    //TODO chech that req.body.position is ok
+    req.session.position=req.body.position;
     //console.log(3);
     console.log("Recived params "+ req.body.position);
     res.send("Tourist site, recived position: "+ req.body.position);

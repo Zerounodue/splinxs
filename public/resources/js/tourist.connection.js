@@ -69,7 +69,7 @@ function initTouristWebRTC(){
 
     //connection.socketURL = '/';
 
-
+    
     if (typeof webkitMediaStream !== 'undefined') {
         connection.attachStreams.push(new webkitMediaStream());
     } else if (typeof MediaStream !== 'undefined') {
@@ -77,18 +77,18 @@ function initTouristWebRTC(){
     } else {
         console.warn('Neither Chrome nor Firefox. This may NOT work.');
     }
-
+    
 
     //TODO only add media that is supported by the browser
     connection.session = {
         data: true
-        , audio: true
-        //, video: true
+        ,audio: true
+        ,video: true
     };
 
     connection.sdpConstraints.mandatory = {
         OfferToReceiveAudio: true,
-        OfferToReceiveVideo: true
+        OfferToReceiveVideo: false
     };
 
     connection.onopen = function (event) {
@@ -123,15 +123,19 @@ function initTouristWebRTC(){
                 //TODO make nicer code
                 var video = $("#myVideo");
                 video.append(event.mediaElement);
-                debugger;
-                
+                //connection.videosContainer.append(event.mediaElement);
             }else if(event.stream.isAudio){
                 if (showLogs) console.log('tourist: local audio stream started');
-
+                //connection.videosContainer.append(event.mediaElement);
+                /*
+                event.mediaElement.play();
+                setTimeout(function () {
+                    event.mediaElement.play();
+                }, 2000);
+                */
                 //var video = $("#myVideo");
                 //video.append(event.mediaElement);
 
-                //debugger;
             }
         }else if(event.stream.type == "remote"){
             if (showLogs) console.log('tourist: remote stream started');
@@ -139,11 +143,12 @@ function initTouristWebRTC(){
                 if (showLogs) console.log('tourist: remote audio stream started');
                 var audio = $("#audioDiv");
                 audio.append(event.mediaElement);
+                /*
                 event.mediaElement.play();
                 setTimeout(function () {
                     event.mediaElement.play();
                 }, 2000);
-
+                */
 
             }
             //connection.videosContainer.append(event.mediaElement);

@@ -111,27 +111,32 @@ function initGuideWebRTC(){
             if (showLogs) console.log('guide: local stream started');
             if(event.stream.isAudio){
                 if (showLogs) console.log('guide: local audio stream started');
-
-            }
-
-        }else if(event.stream.type == "remote"){
-            if (showLogs) console.log('guide: remote stream started');
-            if(event.stream.isAudio){
-                if (showLogs) console.log('guide: remote audio stream started');
-                var audio = $("#audioDiv");
-                audio.append(event.mediaElement);
+                /*
+                connection.videosContainer.append(event.mediaElement);
                 event.mediaElement.play();
                 setTimeout(function () {
                     event.mediaElement.play();
                 }, 2000);
-            }else if(event.stream.isVideo){
-                if (showLogs) console.log('guide: remote video stream started');
-                connection.videosContainer.append(event.mediaElement);
-                debugger;
+                */
             }
 
-
-
+        }else if(event.stream.type == "remote"){
+            if (showLogs) console.log('guide: remote stream started');
+            if(event.stream.isVideo){
+                if (showLogs) console.log('guide: remote video stream started');
+                connection.videosContainer.append(event.mediaElement);
+            }else if(event.stream.isAudio){
+                if (showLogs) console.log('guide: remote audio stream started');
+                var audio = $("#audioDiv");
+                audio.append(event.mediaElement);
+                
+                /*
+                event.mediaElement.play();
+                setTimeout(function () {
+                    event.mediaElement.play();
+                }, 2000);
+                */
+            }
         }
 
     };

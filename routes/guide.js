@@ -185,6 +185,10 @@ router.get('/guideAreas', function(req, res) {
             return;
         });
     }else{
+        if(func.hasAreas(req)){
+            func.redirectHome(res);
+            return;
+        }
         func.renderGuideAreas(res);
         return;
     }

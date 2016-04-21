@@ -31,8 +31,8 @@ var areaForm;
 /**
  * callback when the map script has been successfully loaded
  */
-function initKnownAreaMap() {
-    if (showLogs) console.log('initialising known areas map');
+function initMap() {
+    if (showLogs) console.log('initialising guide areas map');
     map = new google.maps.Map($("#map")[0],{
         center: defaultLocation,
         zoom: 10,
@@ -199,7 +199,7 @@ function resizeMap() {
 */
 
 $(document).ready(function () {
-    if (showLogs) console.log('document ready');
+    if (showLogs) console.log('guide areas document ready');
     
     areaForm = $("#frm_areas");
     

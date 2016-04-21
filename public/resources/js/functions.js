@@ -11,14 +11,14 @@ this.renderGuide = function(res){
     res.render('guide', {title: '__Guide'});
 };
 
-this.renderChooseLangs = function(res, sLangs){
+this.renderGuideLangs = function(res, sLangs){
     if(typeof sLangs === 'undefined' || sLangs === null) sLangs = [];
     res.render('guideLanguages', {title: "__Guide Languages", langs: ISO6391, savedLangs: sLangs});
 };
 
-this.renderChooseAreas = function(res, sAreas){
+this.renderGuideAreas = function(res, sAreas){
     if(typeof sAreas === 'undefined' || sAreas === null) sAreas = [];
-    res.render('knownAreas', {title: "__Choose Areas", savedAreas: sAreas});
+    res.render('guideAreas', {title: "__Guide Areas", savedAreas: sAreas});
 };
 
 
@@ -67,7 +67,7 @@ this.hasSession = function(req){
 this.hasLanguages = function(req){
     var has = false;
     if(req.session && req.session.guide){
-        if(req.session.languages){
+        if(req.session.hasLanguages){
             has = true;
         }
     }
@@ -78,14 +78,14 @@ this.hasLanguages = function(req){
 this.hasAreas = function(req){
     var has = false;
     if(req.session && req.session.guide){
-        if(req.session.areas){
+        if(req.session.hasAreas){
             has = true;
         }
     }
     console.log('     has areas: ' + has);
     return has;
 };
-
+//TODO delete?
 this.hasSetLanguages = function(req){
     var has = false;
     

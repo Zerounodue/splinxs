@@ -164,7 +164,8 @@
                     
                     connection.addStream({
                         audio: true
-                        ,oneway: true
+                        //video: true
+                        //,oneway: true
                     });
 
 
@@ -184,9 +185,9 @@
             function startVideo() {
 
                 connection.addStream({
-                    //audio: true,
+                    audio: true,
                     video: true
-                    ,oneway: true
+                    //,oneway: true
                 });
 
             }

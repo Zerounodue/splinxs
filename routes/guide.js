@@ -197,34 +197,80 @@ router.get('/guideAreas', function(req, res) {
 });
 
 router.post('/guideAreas', function(req, res) {
-    //TODO implement
+    //needs to be a guide
+    if(!func.hasSession(req) || !func.isGuide(req)){
+        func.redirectHome(res);
+        return;
+    }
+    //no post params
     if (!req.body || !req.body.areas){
-        //TODO redirect somewhere
-        res.send('<a>no post params, cheater!!!</a>');
-    }
+        func.redirectHome(res);
+        return;
+    }    
+
     var areas = JSON.parse(req.body.areas);
-    console.log(areas);
     var validAreas = true;
-    
-    for (var i = 0; i <  areas.length; i++){
-        console.log('radius: ' + areas[i].radius + ' lat: ' + areas[i].center.lat + ' lng: ' + areas[i].center.lng);
-        if(areas[i].radius <= 0 || areas[i].center.lat == null || areas[i].center.lng == null){
-            validAreas = false;
-            break;
+    //TODO check if works
+    if( Object.prototype.toString.call( areas ) === '[object Array]'){
+        for (var i = 0; i <  areas.length; i++){
+            console.log('radius: ' + areas[i].radius + ' lat: ' + areas[i].center.lat + ' lng: ' + areas[i].center.lng);
+            if(!areas[i].radius || areas[i].radius == null || !areas[i].center || areas[i].center == null 
+               || !areas[i].center.lat || !areas[i].center.lng || areas[i].center.lat == null || areas[i].center.lng == null){
+                validAreas = false;
+                break;
+            }
+            if(areas[i].radius <= 0 || !func.isNumeric(areas[i].center.lat) || !func.isNumeric(areas[i].center.lat)){
+                validAreas = false;
+                break;
+            }
         }
+    }else{
+        validAreas = false;
     }
-    
-    //TODO save to db
     
     if(validAreas){
-        res.send('<a>' + JSON.stringify(areas) + '</a>');
+        //save to db
+        Guide.update({ username: req.session.username }, { $set: { areas: areas } },  function (err, raw){
+            if(err){
+                //TODO might need to do something more?
+                return handleError(err);
+            }
+        });
+        
+        if(func.isLoggedIn(req)){
+            //send to guide site
+            func.renderGuide(res);
+            return;
+        }else{
+            req.session.hasAreas = true;
+            if(!func.hasLanguages(req)){
+                //send to choose area
+                func.renderGuideLanguages(res);
+                return;
+            }else{
+                //send home that guide can login
+                func.redirectHome(res);
+            }
+        }
     }else{
-        res.send('<a>invalid area detected</a>');
+        //not possible
+        func.redirectHome(res);
+        return;
     }
-
+    
+    
+    
 });
 
-
+router.get('/guide', function(req, res) {
+    //needs to be a logged in  guide
+    if(!func.hasSession(req) || !func.isLoggedIn(req) || !func.isGuide(req)){
+        func.renderGuide(res);
+        return;
+    }
+    func.redirectHome(res);
+    return;
+});
 
 
 

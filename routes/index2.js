@@ -139,7 +139,7 @@ router.post('/index', function (req, res, next) {
             //guide completed registration
             if (hasLanguages && hasAreas) {;
                 req.session.loggedIn = true;
-                func.renderGuide();
+                func.renderGuide(res);
                 return;
             //guide needs to add areas
             } else if(hasLanguages) {

@@ -86,6 +86,7 @@ this.hasAreas = function(req){
     return has;
 };
 //TODO delete?
+/*
 this.hasSetLanguages = function(req){
     var has = false;
     
@@ -96,4 +97,9 @@ this.hasSetLanguages = function(req){
     }
     
     return has;
+};
+*/
+
+this.isNumeric = function(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
 };

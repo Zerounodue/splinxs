@@ -67,7 +67,7 @@ this.hasSession = function(req){
 this.hasLanguages = function(req){
     var has = false;
     if(req.session && req.session.guide){
-        if(req.session.languages){
+        if(req.session.hasLanguages){
             has = true;
         }
     }
@@ -78,14 +78,14 @@ this.hasLanguages = function(req){
 this.hasAreas = function(req){
     var has = false;
     if(req.session && req.session.guide){
-        if(req.session.areas){
+        if(req.session.hasAreas){
             has = true;
         }
     }
     console.log('     has areas: ' + has);
     return has;
 };
-
+//TODO delete?
 this.hasSetLanguages = function(req){
     var has = false;
     

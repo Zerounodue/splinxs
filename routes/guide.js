@@ -97,6 +97,10 @@ router.get('/guideLanguages', function(req, res) {
             return;
         });
     }else{
+        if(func.hasLanguages(req)){
+            func.redirectHome(res);
+            return;
+        }
         func.renderGuideLangs(res);
         return;
     }

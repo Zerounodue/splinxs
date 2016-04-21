@@ -84,7 +84,7 @@ router.get('/guideLanguages', function(req, res) {
     var savedLangs = [];
     //guide wants to change the languages, get them from the db
     if(func.isLoggedIn(req)){
-        Guide.findOne({'username': req.session.username}, 'languages', function (err, guide) {
+        Guide.findOne({'username': req.session.username}, 'languages', {lean: true}, function (err, guide) {
             //error occured
             if (err) {
                 //TODO might need to do something more?
@@ -141,11 +141,11 @@ router.post('/guideLanguages', function(req, res) {
         
         if(func.isLoggedIn(req)){
             //send to guide site
-            func.renderGuide();
+            func.renderGuide(res);
             return;
         }else{
             req.session.hasLanguages = true;
-            if(!func.hasAreas()){
+            if(!func.hasAreas(req)){
                 //send to choose area
                 func.renderGuideAreas(res);
                 return;
@@ -172,7 +172,7 @@ router.get('/guideAreas', function(req, res) {
 
     //guide wants to change the areas, get them from the db
     if(func.isLoggedIn(req)){
-        Guide.findOne({'username': req.session.username}, 'areas', function (err, guide) {
+        Guide.findOne({'username': req.session.username}, 'areas', {lean: true}, function (err, guide) {
             //error occured
             if (err) {
                 //TODO might need to do something more?
@@ -192,8 +192,6 @@ router.get('/guideAreas', function(req, res) {
         func.renderGuideAreas(res);
         return;
     }
-
-    func.renderGuideAreas(res, savedAreas);
 });
 
 router.post('/guideAreas', function(req, res) {
@@ -213,13 +211,12 @@ router.post('/guideAreas', function(req, res) {
     //TODO check if works
     if( Object.prototype.toString.call( areas ) === '[object Array]'){
         for (var i = 0; i <  areas.length; i++){
-            console.log('radius: ' + areas[i].radius + ' lat: ' + areas[i].center.lat + ' lng: ' + areas[i].center.lng);
-            if(!areas[i].radius || areas[i].radius == null || !areas[i].center || areas[i].center == null 
-               || !areas[i].center.lat || !areas[i].center.lng || areas[i].center.lat == null || areas[i].center.lng == null){
+            console.log('radius: ' + areas[i].radius + ' lat: ' + areas[i].lat + ' lng: ' + areas[i].lng);
+            if(!areas[i].radius || areas[i].radius == null || !areas[i].lat || !areas[i].lng || areas[i].lat == null || areas[i].lng == null){
                 validAreas = false;
                 break;
             }
-            if(areas[i].radius <= 0 || !func.isNumeric(areas[i].center.lat) || !func.isNumeric(areas[i].center.lat)){
+            if(areas[i].radius <= 0 || !func.isNumeric(areas[i].lat) || !func.isNumeric(areas[i].lat)){
                 validAreas = false;
                 break;
             }
@@ -227,7 +224,7 @@ router.post('/guideAreas', function(req, res) {
     }else{
         validAreas = false;
     }
-    
+
     if(validAreas){
         //save to db
         Guide.update({ username: req.session.username }, { $set: { areas: areas } },  function (err, raw){

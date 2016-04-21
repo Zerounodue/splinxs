@@ -271,12 +271,10 @@ function loadExistingCircles(){
     }else{
         if(existingCircles.length > 0){
             if(showLogs) console.log('number of existing circles: ' + existingCircles.length);
-            //display circles on map
-            var ec = JSON.parse(existingCircles);
             //set properties for each circle
-            $.each(ec, function (index, value) {
+            $.each(existingCircles, function (index, value) {
                 var c = new google.maps.Circle({
-                    center: value.center,
+                    center: {lat: value.lat, lng: value.lng},
                     radius: value.radius,
                     fillColor: circleOptions.fillColor,
                     fillOpacity: circleOptions.fillOpacity,
@@ -304,10 +302,10 @@ function saveCircles(){
     if(getNumberOfCircles() > 0){
         var ec = [];
         $.each(circles, function (index, value) {
-            console.log(index + ':' + value);
             var circle = {
                 radius: value.radius,
-                center: value.center
+                lat: value.center.lat(),
+                lng: value.center.lng()
             };
             ec.push(circle);
             removeCircle(value);

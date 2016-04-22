@@ -85,6 +85,19 @@ this.hasAreas = function(req){
     console.log('     has areas: ' + has);
     return has;
 };
+
+this.touristHasLanguages = function(req){
+    var has = false;
+    
+    if(req.session && !req.session.guide){
+        if(req.session.languages && req.session.languages.length > 0){
+            has = true;
+        }
+    }
+    
+    return has;
+};
+
 //TODO delete?
 /*
 this.hasSetLanguages = function(req){
@@ -102,4 +115,17 @@ this.hasSetLanguages = function(req){
 
 this.isNumeric = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
+};
+//-----tourist
+this.createTouristUsername = function(){
+    //TODO make better
+    return Date.now();
+};
+
+this.renderTouristLanguages = function(res){
+    res.render('touristLanguages', {title: "__Tourist Languages", langs: ISO6391});
+};
+
+this.renderTouristLocation = function(res){
+    res.render('touristLocation', {title: "__Tourist Location"});
 };

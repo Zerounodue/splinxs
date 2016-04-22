@@ -259,13 +259,38 @@ router.post('/guideAreas', function(req, res) {
     
 });
 
+router.get('/guidePassword', function(req, res) {
+    //needs to be a logged in  guide
+    if(!func.hasSession(req) || !func.isLoggedIn(req) || !func.isGuide(req)){
+        func.redirectHome(res);
+        return;
+    }
+    func.renderGuidePW(res);
+    return;
+});
+
+router.post('/guidePassword', function(req, res) {
+    //needs to be a logged in  guide
+    if(!func.hasSession(req) || !func.isLoggedIn(req) || !func.isGuide(req)){
+        func.redirectHome(res);
+        return;
+    }
+    //no post params
+    if (!req.body || !req.body.password){
+        func.redirectHome(res);
+        return;
+    }   
+    //TODO implement
+    
+});
+
 router.get('/guide', function(req, res) {
     //needs to be a logged in  guide
     if(!func.hasSession(req) || !func.isLoggedIn(req) || !func.isGuide(req)){
-        func.renderGuide(res);
+        func.redirectHome(res);
         return;
     }
-    func.redirectHome(res);
+    func.renderGuide(res);
     return;
 });
 

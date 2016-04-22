@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-//mongodb stuff
-var passport = require('passport');
-var Account = require('../models/account');
+//only for guide!?
+//var passport = require('passport');
+//var Account = require('../models/account');
 
 //https://github.com/meikidd/iso-639-1
 var ISO6391 = require('iso-639-1');
@@ -13,22 +13,20 @@ var func  = require('../public/resources/js/functions.js');
 
 
 router.get('/touristLanguages', function(req, res) {
-    /*
-    if(!func.hasSession(req)){
+    if(func.isGuide(req)){
         func.redirectHome(res);
         return;
     }
-    */
-    res.render('touristLanguages', {title: "__Choose Tourist Languages", langs: ISO6391});
+    //TODO create guid
+    req.session.username = func.createTouristUsername();
+    func.renderTouristLanguages(res);
 });
 
 router.post('/touristLanguages', function(req, res) {
-    /*
-    if(!func.hasSession(req)){
+    if(!func.hasSession(req) || func.isGuide(req)){
         func.redirectHome(res);
         return;
     }
-    */
     if (!req.body || !req.body.languages){
         func.redirectHome(res);
         return;
@@ -37,7 +35,6 @@ router.post('/touristLanguages', function(req, res) {
     var validLangs = true;
     
     for (var i = 0; i <  langs.length; i++){
-        console.log('code: ' + langs[i].code);
         if(!ISO6391.validate(langs[i].code)){
             validLangs = false;
             break;
@@ -46,9 +43,9 @@ router.post('/touristLanguages', function(req, res) {
 
     if(validLangs){
         //TODO save in session
-        //
-        //send to choose location
-        res.render('touristLocation', {title: '__Tourist Location'});
+        req.session.languages = validLangs;
+        //send to tourist location
+        func.renderTouristLocation(res);
     }else{
         //invalid language(s)
         redirectHome(res);
@@ -57,13 +54,17 @@ router.post('/touristLanguages', function(req, res) {
 });
 
 router.get('/touristLocation', function(req, res) {
-    /*
-    if(!func.hasSession(req)){
+    if(!func.hasSession(req) || func.isGuide(req)){
         func.redirectHome(res);
         return;
     }
-    */
-    res.render('touristLocation');
+    if(!func.touristHasLanguages(req)){
+        func.renderTouristLanguages(res);
+        return;
+    }
+    
+    func.renderTouristLocation(res);
+    return;
 });
 
 router.post('/touristLocation', function(req, res) {
@@ -98,6 +99,11 @@ router.get('/touristLocalisation', function(req, res) {
 
 
 router.post('/tourist', function(req, res) {
+    if(!func.hasSession(req) || func.isLoggedIn(req) || func.isGuide(req) || !func.touristHasLanguages(req)){
+        func.redirectHome(res);
+        return;
+    }
+
     if (!req.body){ //|| !req.body.parameter){
         console.log(req.body);
         //TODO redirect somewhere
@@ -116,9 +122,6 @@ router.post('/tourist', function(req, res) {
     //}
 
     //TODO thigns
-    if(!req.session){
-        req.session.guid = generadeID();
-    }
     req.session.params = params;
 
 
@@ -132,5 +135,16 @@ router.post('/tourist', function(req, res) {
 
 });
 
+/*
+router.get('/tourist', function(req, res) {
+    //needs to be a logged in  guide
+    if(!func.hasSession(req) || func.isLoggedIn(req) || func.isGuide(req) || !func.touristHasLanguages(req)){//TODO check for location
+        func.redirectHome(res);
+        return;
+    }
+    func.renderTourist(res);
+    return;
+});
+*/
 
 module.exports = router;

@@ -3,7 +3,7 @@ var router = express.Router();
 
 //mongodb stuff
 var passport = require('passport');
-var Account = require('../models/account');
+//var Account = require('../models/account');
 var Guide = require('../models/guide');
 
 //https://github.com/meikidd/iso-639-1
@@ -15,14 +15,6 @@ var func  = require('../public/resources/js/functions.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    //set a session to test
-    //req.session.theUsername = "elia";
-
-    //views++;
-    //req.session.views=views;
-    //console.log("req.session.theUsername= " +req.session.theUsername);
-    
-    //res.render('index2', { user : req.user });
     res.render('index2');
 });
 

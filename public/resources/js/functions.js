@@ -21,6 +21,9 @@ this.renderGuideAreas = function(res, sAreas){
     res.render('guideAreas', {title: "__Guide Areas", savedAreas: sAreas});
 };
 
+this.renderGuidePW = function(res){
+    res.render('guidePassword', {title: "__Guide Password"});
+};
 
 //function usableString(s) {
 this.usableString = function(s){

@@ -10,9 +10,9 @@ var area = new Schema({
 
 var Guide = new Schema({
     username: { type: String, index: { unique: true } },
-    password: String,
+    //password: String, not needed due to passport?
     email: { type: String, unique: true },
-    status: { type: Number, min: 0 },
+    state: { type: Number, enum: [1, 2], default: 2 }, //1 available, 2 unavailable
     helped: { type: Number, min: 0 },
     languages: [String],
     areas: [area]

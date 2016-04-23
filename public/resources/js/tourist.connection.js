@@ -33,13 +33,15 @@ function initTouristConnection(){
     if(showLogs) console.log('init tourist connection');
 
     showLoadBox();
+    //TODO add timeout
+    
     /*
     setTimeout(function () {
         hideLoadBox();
         alert('__sorry, no guide found...');
     }, 60000);
     */
-    username = "tourist1";
+    //username = "tourist1";
 
     //channel = "myGuideChannel1";
     
@@ -90,7 +92,15 @@ function initTouristWebRTC(){
         OfferToReceiveAudio: true,
         OfferToReceiveVideo: false
     };
+    
+    connection.videosContainer = $("#videoContainer");
+    
+    initTouristWebRTCEvents();
+    
+    initTouristSocket();
+}
 
+function initTouristWebRTCEvents(){
     connection.onopen = function (event) {
         if (showLogs) console.log('tourist: connection opened');
 
@@ -180,12 +190,7 @@ function initTouristWebRTC(){
         //setSocketCustomEvent();
         
         //to make sure everything is ready
-        
-        
-        initTouristSocket();
-        
     });
-
 }
 
 function setSocketCustomEvent(){
@@ -422,8 +427,8 @@ function checkPreviousConnectionInterrupted(){
 
 function initTouristSocket(){
     if(showLogs) console.log('tourist: init touristSocket');
-    touristSocket = io.connect('https://splinxs.ti.bfh.ch/tourist');
-    //touristSocket = io.connect('https://localhost/tourist');
+   touristSocket = io.connect('https://splinxs.ti.bfh.ch/tourist');
+   //touristSocket = io.connect('https://localhost/tourist');
     
     initEvents();
 }
@@ -452,8 +457,6 @@ function initEvents(){
                 }
                 if(showLogs) console.log('tourist: touristSocket accepted response, guide: ' + guide);
 
-                //TODO call guide
-                guide; //use this variable for channel to call
                 channel = guide;
                 connection.channel = channel;
                 connection.socketCustomEvent = channel;
@@ -461,14 +464,9 @@ function initEvents(){
                 addWebsocketEvent();
                 setSocketCustomEvent();
                 initConnectionWithGuide();
-                
-                
-                
             }
         }
-        
     });
-    
     
 }
 
@@ -482,7 +480,5 @@ function touristSocketSendMessage(topic, msg){
 }
 
 function addWebsocketEvent(){
-    websocket.emit("addEvent", {
-        event: connection.socketCustomEvent
-    });
+    websocket.emit("addEvent", {event: connection.socketCustomEvent});
 }

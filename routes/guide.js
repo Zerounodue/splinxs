@@ -211,7 +211,6 @@ router.post('/guideAreas', function(req, res) {
     //TODO check if works
     if( Object.prototype.toString.call( areas ) === '[object Array]'){
         for (var i = 0; i <  areas.length; i++){
-            console.log('radius: ' + areas[i].radius + ' lat: ' + areas[i].lat + ' lng: ' + areas[i].lng);
             if(!areas[i].radius || areas[i].radius == null || !areas[i].lat || !areas[i].lng || areas[i].lat == null || areas[i].lng == null){
                 validAreas = false;
                 break;

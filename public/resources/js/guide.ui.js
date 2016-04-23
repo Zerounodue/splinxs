@@ -16,8 +16,9 @@ function initGuideUI(){
     modalDialog = $("#modalDialog");
     modalContent = $("#modalContent");
     mapControls = $("#mapControls");
-    
+
     initGuideButtons();
+    initChat();
 }
 
 function showGuideUI(){
@@ -70,4 +71,64 @@ function initGuideButtons() {
         hideTouristRequestGuidePrompt();
     });
 
+    $("#btn_stopVideo").click(function (e) {
+        if (showLogs) console.log('stop video clicked');
+        stopVideo();
+    });
+
+    $("#btn_closeConnection").click(function (e) {
+        if (showLogs) console.log('closing connection');
+        closeConnection();
+    });
+
+    //---map controls to set update interval of tourist---
+    $("#btn_updateIntervalOff").click(function (e) {
+        if (showLogs) console.log('update interval off button clicked');
+        sendUpdateInterval(updateIntervals.off);
+    });
+
+    $("#btn_updateIntervalBatman").click(function (e) {
+        if (showLogs) console.log('update interval batman button clicked');
+        sendUpdateInterval(updateIntervals.batman);
+    });
+
+    $("#btn_updateIntervalSpiderman").click(function (e) {
+        if (showLogs) console.log('update interval spiderman button clicked');
+        sendUpdateInterval(updateIntervals.spiderman);
+    });
+
+    $("#btn_updateIntervalIronman").click(function (e) {
+        if (showLogs) console.log('update interval ironman button clicked');
+        sendUpdateInterval(updateIntervals.ironman);
+    });
+
+    $("#btn_updateIntervalSuperman").click(function (e) {
+        if (showLogs) console.log('update interval superman button clicked');
+        sendUpdateInterval(updateIntervals.superman);
+    });
+
+    $("#btn_updateIntervalFlash").click(function (e) {
+        if (showLogs) console.log('update interval flash button clicked');
+        sendUpdateInterval(updateIntervals.flash);
+    });
+
+
+    $("#btn_startAudio").click(function (e) {
+        if (showLogs) console.log('guide: start audio button clicked');
+        //connection.dontCaptureUserMedia = false;
+        connection.addStream({
+            audio: true
+            //video: true
+            //,oneway: true
+        });
+    });
+
+    $("#btn_stopAudio").click(function (e) {
+        if (showLogs) console.log('guide: stop audio button clicked');
+        connection.attachStreams.forEach(function (stream) {
+            stream.stop();
+        });
+        connection.renegotiate();
+    });
+    
 }

@@ -283,3 +283,40 @@ function showVideo(){
 function hideVideo(){
     videoDiv.hide();
 }
+
+function initChat(){
+    if(showLogs) console.log("init chat");
+    $("#btn_chat").click(function () {
+        if(showLogs) console.log('send chat clicked');
+        var chatInput = $("#inp_chat");
+        var message = chatInput.val();
+        sendMessageToPeer(message, true);
+        chatInput.val("");
+    });
+
+    $("#inp_chat").keypress(function (e) {
+        //send message when enter key is pressed
+        if (e.which == 13) {
+            if(showLogs) console.log('enter on chat input');
+            var chatInput = $("#inp_chat");
+            var message = chatInput.val();
+            sendMessageToPeer(message, true);
+            chatInput.val("");
+        }
+    });
+
+    $("#inp_chat").keyup(function (e) {
+        if(showLogs) console.log('chat input lost focus');
+        meIsTyping();
+    });
+    
+    $("#btn_minimiseChat").click(function (e) {
+        if(showLogs) console.log('minimise chat');
+        changeToSmallChat();
+    });
+
+    $("#smallChat").click(function (e) {
+        if(showLogs) console.log('maximising chat');
+        changeToChat();
+    });
+}

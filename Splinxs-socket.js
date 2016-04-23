@@ -2,9 +2,6 @@
  * Created by Zerododici on 14.04.16.
  */
 module.exports = exports = function(io) {
-    //io = io(server);
-//var io = require('socket.io').listen(server);
-    
     var Guide = require('./models/guide');
     
     var showLogs = true;
@@ -36,20 +33,6 @@ module.exports = exports = function(io) {
         response: "response",
         accepted: 1
     };
-    
-    var count =0;
-/*
-    io.sockets.on('connection', function (socket) {
-        console.log('username from session: '+ req.session.theUsername);
-        count ++;
-        console.log('----------2: sockets connection count: '+count);
-
-        socket.on('online', function (msg) {
-            console.log('----------3: online: ');
-        });
-    });
-*/
-
 
     var guideSocket = io.of('/guide');
     var touristSocket = io.of('/tourist');
@@ -73,8 +56,7 @@ module.exports = exports = function(io) {
                     console.log('Splinxs-socket: available, ' + socket.username);
                 //sendHelpRequest(socket.username);
                 if (socket.username) {
-                    //TODO make work
-                    setGuideState(guideStates.available);
+                    setGuideState(socket.username, guideStates.available);
 
                     /* to test cancel request
                      setTimeout(function(){
@@ -85,6 +67,7 @@ module.exports = exports = function(io) {
             }else if(state == guideStates.unavailable){
                 if(showLogs) console.log('Splinxs-socket: unavailable, ' + socket.username);
                 //TODO set offline in db
+                setGuideState(socket.username, guideStates.unavailable);
             }
         });
         
@@ -107,10 +90,8 @@ module.exports = exports = function(io) {
                 //TODO remove guide from Splinxs list, 
                 
                 sendAcceptedMessageTourist(t, g);
-                setGuideState(guideStates.unavailable);
-                
-                //TODO change state of guide in db
-                
+                setGuideState(g, guideStates.unavailable);
+
                 //TODO check if tourist still available
                 //assume that tourist is not online
                 /*
@@ -126,7 +107,7 @@ module.exports = exports = function(io) {
         
         socket.on('disconnect', function () {
             if(showLogs) console.log('Splinxs-socket: guide disconnect: ' + socket.username);
-            setGuideState(guideStates.unavailable);
+            setGuideState(socket.username, guideStates.unavailable);
         });
 
     });
@@ -147,10 +128,11 @@ module.exports = exports = function(io) {
         guideSocket.emit(g, msg);
     }
 
-    function setGuideState(s){
-        Guide.update({username: socket.username}, {$set: {state: s}}, function (err, raw) {
+    function setGuideState(name, s){
+        Guide.update({username: name}, {$set: {state: s}}, function (err, raw) {
             if (err) {
                 //TODO might need to do something more?
+                console.log('error setting guide state... guide: ' + name + ', state: ' + s);
                 return handleError(err);
             }
         });

@@ -7,8 +7,8 @@ this.redirectHome = function(res){
     res.redirect('/');
 };
 
-this.renderGuide = function(res){
-    res.render('guide', {title: '__Guide'});
+this.renderGuide = function(res, name){
+    res.render('guide', {title: '__Guide', name: name});
 };
 
 this.renderGuideLangs = function(res, sLangs){

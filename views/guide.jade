@@ -4,9 +4,34 @@
 
 extends layout
 
-block content
-    p __Guuuuuuuuuuuuuuuuuiiiiiiiiiiiiiiiiiiiiideeeeeeeeeeeeeeeee
-    
+block append scripts
+    script(src='resources/js/rmc3@3.3.2.js')
+    // socket.io for signaling
+    script(src='/socket.io/socket.io.js')
+    script(src='resources/js/bootstrap.min.js')
+    script(src='resources/js/connection.js')
+    script(src='resources/js/guide.connection.js')
+    script(src='resources/js/util.js')
+    script(src='resources/js/ui.js')
+    script(src='resources/js/guide.ui.js')
+    script(src='resources/js/DetectRTC.js')
+    script(src='resources/js/map.js')
+    script(src='resources/js/guide.map.js')
+    script.
+      $(document).ready(function () {
+            username = "!{name}";
+            initSplinxS();
+            initUI();
+            initGuideUI();
+            showGUI();
+            showGuideUI();
+            initGuideConnection();
+            
+      });
+
+block append stylesheets
+    //TODO remove when it works...
+    link(rel='stylesheet', href='resources/css/styleOld.css')
 
 block append navbarli
     li
@@ -15,3 +40,70 @@ block append navbarli
         a(href="/guideAreas") __areas
     li
         a(href="/guidePassword") __pw
+
+block content
+    main#content
+      button#btn_closeConnection(type='button', hidden='') close connection
+      br
+      #audio(hidden='')
+        button#btn_startAudio(type='button') start audio
+        button#btn_stopAudio(type='button') stop audio
+        #audioDiv
+      br
+      #video.video(hidden='')
+        button#btn_stopVideo(type='button') stop video
+        #videoContainer
+      br
+      div(id="mapControls", hidden)
+        span map update interval
+        br
+        button#btn_updateIntervalOff(type='button') off
+        button#btn_updateIntervalBatman(type='button') batman
+        button#btn_updateIntervalSpiderman(type='button') spiderman
+        button#btn_updateIntervalIronman(type='button') ironman
+        button#btn_updateIntervalSuperman(type='button') superman
+        button#btn_updateIntervalFlash(type='button') flash
+      div(id="map", hidden)
+      div(id="chatBox", class="container", hidden)
+        .row
+          // <div class="col-md-5">
+          .panel.panel-primary
+            .panel-heading
+              span.glyphicon.glyphicon-comment
+              |  Chat 
+              span#spn_isTyping.text-center
+              .btn-group.pull-right
+                button#btn_minimiseChat.btn.btn-default.btn-xs(type='button')
+                  span.glyphicon.glyphicon-chevron-down
+                ul.dropdown-menu.slidedown
+                  li
+                    a(href='#')
+                      span.glyphicon.glyphicon-refresh
+                      | Refresh
+                  li
+                    a(href='#')
+                      span.glyphicon.glyphicon-ok-sign
+                      | Available
+            .panel-body
+              ul#chat.chat
+            .panel-footer
+              .input-group
+                input#inp_chat.form-control.input-sm(type='text', placeholder='Type your message here...')
+                span.input-group-btn
+                  button#btn_chat.btn.btn-warning.btn-sm Send
+          // </div>
+      #modalDialog.modalDialog(hidden='')
+        // <div id="confirmDiv">
+        p#modalContent
+        button#modalNo no
+        button#modalYes yes
+        // </div>
+      audio#audioPlayer
+      script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing,places&callback=initMap')
+    
+block append foot
+    div(id="smallChat", class="smallChat", hidden)
+        img#smallChatImg.smallChatImg(src='resources/images/smallChat.png', alt='chat')
+        span#smallChatText.smallChatText Chat
+        img.smallChatUp(src='resources/images/arrowUp.png', alt='up')
+

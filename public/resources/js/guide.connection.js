@@ -30,16 +30,11 @@ var ongoingConnectionInterval;
 var ongoingConnectionIntervalTimer = 60 * 1000; //60 seconds
 
 //guide channel
-var channel;// = "myGuideChannel1";
-
+var channel;
 
 
 function initGuideConnection(){
-
-    if(showLogs) console.log('init guide connection');
-    
-    username = "guide1";
-    
+    if(showLogs) console.log('init guide connection');    
     channel = username;
 
     initGuideWebRTC();
@@ -48,6 +43,7 @@ function initGuideConnection(){
 }
 
 function initGuideWebRTC(){
+    if(showLogs) console.log("guide: init guide WebRTC");
     connection = new RTCMultiConnection();
     connection.socketURL = '/';
 
@@ -78,10 +74,16 @@ function initGuideWebRTC(){
         OfferToReceiveAudio: true,
         OfferToReceiveVideo: true
     };
-
+    //TODO not when no webRTC available
     connection.open(connection.channel);
 
+    connection.videosContainer = $("#videoContainer");
+    
+    initGuideWebRTCEvents();
+}
 
+function initGuideWebRTCEvents(){
+    if(showLogs) console.log("guide: init guide WebRTC events");
     connection.onopen = function (event) {
         if (showLogs) console.log('guide: connection opened in channel: ' + connection.channel);
 

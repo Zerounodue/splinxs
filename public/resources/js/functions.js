@@ -101,6 +101,18 @@ this.touristHasLanguages = function(req){
     return has;
 };
 
+this.touristHasLocation = function(req){
+    var has = false;
+    
+    if(req.session && !req.session.guide){
+        if(req.session.lat && req.session.lng && req.session.lat.toString().length > 0 && req.session.lng.toString().length > 0){
+            has = true;
+        }
+    }    
+    
+    return has;
+};
+
 //TODO delete?
 /*
 this.hasSetLanguages = function(req){

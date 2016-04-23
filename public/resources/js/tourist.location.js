@@ -9,12 +9,17 @@ var showLogs = true;
 var map;
 var marker;
 
-var defaultLocation = {lat: 46.947248, lng: 7.451586}; //Bern
+var animDur = 250;
+
+var defaultLocation = {lat: 0, lng: 0};
 //used to delay click to allow doubleclick
 var click_timeout;
 var click_timeoutTimer = 200; //ms
-
+//DOM elements
 var locForm;
+var loadPopup;
+var infoPopup;
+var declinedPopup;
 
 /**
  * callback when the map script has been successfully loaded
@@ -23,7 +28,7 @@ function initMap(){
     if(showLogs) console.log('init map');
     map = new google.maps.Map(document.getElementById('map'), {
         center: defaultLocation,
-        zoom: 10,
+        zoom: 3,
         zoomControl: true,
         mapTypeControl: false,
         scaleControl: true,
@@ -33,16 +38,8 @@ function initMap(){
     });
     
     addMapListeners();
-    
-    var pos = getGEOLocation();
-    if(isValidGEOPosition(pos)){
-        addMarker(pos);
-        map.setCenter(pos);
-    }else{
-        //TODO do something
-        addMarker(defaultLocation);
-    }
-    
+    addMarker(defaultLocation);
+    getGEOLocation();
 }
 /**
  * adds listeners on the map element
@@ -86,26 +83,29 @@ function addMarker(position) {
  * gets the geo location
  */
 function getGEOLocation() {
+    showLoadPopup();
     // Try HTML5 geolocation.
-    var pos = {lat: null, lng: null};
-
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
-            pos = {
+            var pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
+            map.setCenter(pos);
+            updateMarker(pos);
+            hideLoadPopup();
         }, function () { //error function
             //user did not allow google maps
             if(showLogs) console.warn('The Geolocation service failed');
-            alert("__please allow to use your location");
+            hideLoadPopup();
+            showDeclinedPopup();
         });
     } else {
         // Browser doesn't support Geolocation
         if(showLogs) console.info('Your browser does not support geolocation');
+        hideLoadPopup();
+        showDeclinedPopup();
     }
-    
-    return pos;
 }
 /**
  * sets the marker to the given position
@@ -120,25 +120,20 @@ function updateMarker(pos){
     }
 }
 
-
-
-
-
-
-
 $(document).ready(function () {
     if(showLogs) console.log('document ready');
     
     locForm = $("#frm_location");
+    loadPopup = $('loadPopup');
+    infoPopup = $('infopopup');
+    declinedPopup = $('noPosPopup');
     
     $("#btn_getLocation").on('click', function (e) {
         if(showLogs) console.log('get location button clicked');
         getTouristLocation();
-        
-        
     });
     
-    $("#btn_sendLocation").on('click', function (e) {
+    $("#btn_submit").on('click', function (e) {
         if(showLogs) console.log('send location button clicked');
         if(isValidGEOPosition(marker.position)){
             submitLocation();
@@ -148,24 +143,71 @@ $(document).ready(function () {
         }
     });
     
+    $("#btn_info").on('click', function(e){
+       if(showLogs) console.log('info button clicked');
+        showInfoPopup();
+    });
     
+    $("#btn_infoOk").on('click', function(e){
+       if(showLogs) console.log('info ok button clicked');
+        hideInfoPopup();
+    });
+    
+    
+    $("#img_infoClose").on('click', function(e){
+       if(showLogs) console.log('info close img clicked');
+        hideInfoPopup();
+    });
+    /*
+    $("#btn_loadClose").on('click', function(e){
+       if(showLogs) console.log('load close button clicked');
+        hideLoadPopup();
+    });
+    
+    $("#img_loadClose").on('click', function(e){
+       if(showLogs) console.log('load close img clicked');
+        hideLoadPopup();
+    });
+    */
+    $("#btn_declinedClose").on('click', function(e){
+       if(showLogs) console.log('declined close button clicked');
+        hideDeclinedPopup();
+    });
+    
+    $("#img_declinedClose").on('click', function(e){
+       if(showLogs) console.log('declined close img clicked');
+        hideDeclinedPopup();
+    });
     
 });
 
+function showInfoPopup(){
+    infoPopup.show(animDur);
+}
+
+function hideInfoPopup(){
+    infoPopup.hide(animDur);
+}
+
+function showLoadPopup(){
+    loadPopup.show(animDur);
+}
+
+function hideLoadPopup(){
+    loadPopup.hide(animDur);
+}
+
+function showDeclinedPopup(){
+    declinedPopup.show(animDur);
+}
+
+function hideDeclinedPopup(){
+    declinedPopup.hide(animDur);
+}
+
 function getTouristLocation(){
     if(showLogs) console.log('get tourist location');
-    var pos = getGEOLocation();
-    console.log('lat: ' + pos.lat + ' lng: ' + pos.lng);
-    if(isValidGEOPosition(pos)){
-        if(showLogs) console.log('valid geo location');
-        
-    }else{
-        if(showLogs) console.log('invalid geo location');
-        alert("__invalid geo location");
-        //TODO do smething
-    }
-    
-    
+    getGEOLocation();
 }
 /**
  * checks if the given position is valid (only if lat and lng are not null)

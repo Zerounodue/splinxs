@@ -17,7 +17,6 @@ router.get('/touristLanguages', function(req, res) {
         func.redirectHome(res);
         return;
     }
-    //TODO create guid
     req.session.username = func.createTouristUsername();
     func.renderTouristLanguages(res);
 });
@@ -42,8 +41,7 @@ router.post('/touristLanguages', function(req, res) {
     }
 
     if(validLangs){
-        //TODO save in session
-        req.session.languages = validLangs;
+        req.session.languages = langs;
         //send to tourist location
         func.renderTouristLocation(res);
     }else{
@@ -54,6 +52,7 @@ router.post('/touristLanguages', function(req, res) {
 });
 
 router.get('/touristLocation', function(req, res) {
+    /*
     if(!func.hasSession(req) || func.isGuide(req)){
         func.redirectHome(res);
         return;
@@ -62,6 +61,7 @@ router.get('/touristLocation', function(req, res) {
         func.renderTouristLanguages(res);
         return;
     }
+    */
     
     func.renderTouristLocation(res);
     return;
@@ -69,28 +69,39 @@ router.get('/touristLocation', function(req, res) {
 
 router.post('/touristLocation', function(req, res) {
     /*
-    if(!func.hasSession(req)){
+    if(!func.hasSession(req) || ){
         func.redirectHome(res);
         return;
     }
     */
     if (!req.body || !req.body.position){
         redirectHome(res);
+        return;
     }
-    var position = JSON.parse(req.body.position);
+    var pos = JSON.parse(req.body.position);
 
-    var validLocation = position.lat != null && position.lng != null;
+    var validLocation = pos.lat != null && pos.lng != null && func.isNumeric(pos.lat) && func.isNumeric(pos.lng);
     
     if(validLocation){
-        //TODO save in session
+        req.session.lat = pos.lat;
+        req.session.lng = pos.lng;
+        
+        //did not set languages
+        if(!func.touristHasLanguages(req)){
+            func.redirectHome(res);
+            return;
+        }
         
         //tourist site
-        //TODO implement
+        func.renderTouristSite(res, req.session.username);
+        return;
     }else{
-        redirectHome(res);
+        func.redirectHome(res);
+        return;
     }
 
 });
+
 
 router.get('/touristLocalisation', function(req, res) {
     res.render('touristLocalisation');
@@ -99,7 +110,7 @@ router.get('/touristLocalisation', function(req, res) {
 
 
 router.post('/tourist', function(req, res) {
-    if(!func.hasSession(req) || func.isLoggedIn(req) || func.isGuide(req) || !func.touristHasLanguages(req)){
+    if(!func.hasSession(req) || func.isLoggedIn(req) || func.isGuide(req) || !func.touristHasLanguages(req) || !func.tourustHasAreas(req)){
         func.redirectHome(res);
         return;
     }

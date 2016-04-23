@@ -1,22 +1,78 @@
-
-
 extends layout
 
+block append stylesheets
+    link(rel='stylesheet', href='resources/css/tourist.location.css')
 block append scripts
-  script(src='resources/js/tourist.languages.js')
-  script(src='resources/js/chooseLocation.js')
-  script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing&callback=initMap", async, defer)
-
-block append head
-    style.
-      #map {
-      width: 500px;
-      height: 400px;
-      }
-      
+    script(src='resources/js/tourist.location.js')
 block content
-    h1 __Choose Location
-    button(id='btn_getLocation') __get location
-    div(id="map")
-    form(id="frm_location" method="post" action="/chooseLocation")
-        button(id='btn_sendLocation') __send locations
+    loadPopup.loadingPopup(id="loadPopup")
+        // close the popup and stop trying getting position
+        //img.x(src='resources/images/icons/x.png', alt='close icon', id="img_loadClose")
+        h2(style='text-align: center;')
+            | __Getting GPS position, please wait.
+        .spinner
+            .bounce1
+            .bounce2
+            .bounce3
+        div(style='text-align: center;')
+            p __you can add position manually
+            //a.btn.btn-default.btn-green.btn-map(id="btn_loadClose") __Close
+    declinedPopup.loadingPopup(id="declinedPopup", hidden)
+        img.x(src='resources/images/icons/x.png', alt='close icon', id="img_declinedClose")
+        div(style='text-align: center;')
+            h2 __No position, add one by hand ;)
+            a.btn.btn-default.btn-green.btn-map(id="btn_declinedClose") __Ok
+    infoPopup.loadingPopup(id="infoPopup", hidden)
+        img.x(src='resources/images/icons/x.png', alt='close icon', id="img_infoClose")
+        div(style='text-align: center;')
+            h2 __Add a position
+            p __click on the map to add your current position
+            p __a guide thah knows this region will help you
+            a.btn.btn-default.btn-green.btn-map(id="btn_infoOk") __Ok
+    .container.front
+        .row
+            .col-md-6.text-center
+                a.btn.btn-default.btn-white.btn-map(id="btn_info") __Info
+            .col-md-6.text-center
+                a.btn.btn-default.btn-green.btn-map(id="btn_submit") __Continue
+    #map.touristMap
+    script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&callback=initMap' async defer)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+    extends layout
+
+    block append scripts
+      script(src='resources/js/tourist.location.js')
+
+    block append head
+        style.
+          #map {
+          width: 500px;
+          height: 400px;
+          }
+
+    block content
+        h1 __Choose Location
+        button(id='btn_getLocation') __get location
+        div(id="map")
+        form(id="frm_location" method="post" action="/touristLocation")
+            button(id='btn_sendLocation') __send locations
+        script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing&callback=initMap")

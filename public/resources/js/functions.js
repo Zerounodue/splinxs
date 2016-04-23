@@ -137,6 +137,10 @@ this.createTouristUsername = function(){
     return Date.now();
 };
 
+this.renderTouristSite = function(res, name){
+    res.render('tourist', {title: "__Tourist", name: name});
+};
+
 this.renderTouristLanguages = function(res){
     res.render('touristLanguages', {title: "__Tourist Languages", langs: ISO6391});
 };

@@ -126,15 +126,15 @@ $(document).ready(function () {
     locForm = $("#frm_location");
     loadPopup = $('loadPopup');
     infoPopup = $('infopopup');
-    declinedPopup = $('noPosPopup');
+    declinedPopup = $('declinedPopup');
     
-    $("#btn_getLocation").on('click', function (e) {
-        if(showLogs) console.log('get location button clicked');
-        getTouristLocation();
+    $("#img_location").on('click', function(e){
+       if(showLogs) console.log('location img clicked');
+        getGEOLocation();
     });
     
     $("#btn_submit").on('click', function (e) {
-        if(showLogs) console.log('send location button clicked');
+        if(showLogs) console.log('submit button clicked');
         if(isValidGEOPosition(marker.position)){
             submitLocation();
         }else{

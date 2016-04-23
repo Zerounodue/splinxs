@@ -30,11 +30,12 @@ block content
             p __a guide thah knows this region will help you
             a.btn.btn-default.btn-green.btn-map(id="btn_infoOk") __Ok
     .container.front
+        img(src='resources/images/icons/orientation_small.png', alt='location', id="img_location")
         .row
             .col-md-6.text-center
                 a.btn.btn-default.btn-white.btn-map(id="btn_info") __Info
             .col-md-6.text-center
-                a.btn.btn-default.btn-green.btn-map(id="btn_submit") __Continue
+                a.btn.btn-default.btn-green.btn-map(id="btn_submit") __Continue      
     #map.touristMap
     script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&callback=initMap' async defer)
 

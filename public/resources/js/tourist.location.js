@@ -16,7 +16,6 @@ var defaultLocation = {lat: 0, lng: 0};
 var click_timeout;
 var click_timeoutTimer = 200; //ms
 //DOM elements
-var locForm;
 var loadPopup;
 var infoPopup;
 var declinedPopup;
@@ -122,8 +121,7 @@ function updateMarker(pos){
 
 $(document).ready(function () {
     if(showLogs) console.log('document ready');
-    
-    locForm = $("#frm_location");
+
     loadPopup = $('loadPopup');
     infoPopup = $('infopopup');
     declinedPopup = $('declinedPopup');
@@ -221,10 +219,15 @@ function isValidGEOPosition(pos){
 function submitLocation(){
     var pos = JSON.stringify(marker.position);
     
-    locForm.empty();
-     $('<input id=\'location\'/>').attr('type', 'hidden')
-          .attr('name', "position")
-          .attr('value', pos)
-          .appendTo('#frm_location');
+    // Create the form object
+    var locForm = document.createElement("form");
+    locForm.setAttribute("method", "post");
+    locForm.setAttribute("action", "/touristLocation");
+    var hiddenField = document.createElement("input");
+    hiddenField.setAttribute("name", "position");
+    hiddenField.setAttribute("value", pos);
+    // append the newly created control to the form
+    locForm.appendChild(hiddenField);
+    document.body.appendChild(locForm); // inject the form object into the body section
     locForm.submit();
 }

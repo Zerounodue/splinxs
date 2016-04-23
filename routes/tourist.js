@@ -52,7 +52,6 @@ router.post('/touristLanguages', function(req, res) {
 });
 
 router.get('/touristLocation', function(req, res) {
-    /*
     if(!func.hasSession(req) || func.isGuide(req)){
         func.redirectHome(res);
         return;
@@ -61,27 +60,23 @@ router.get('/touristLocation', function(req, res) {
         func.renderTouristLanguages(res);
         return;
     }
-    */
-    
     func.renderTouristLocation(res);
     return;
 });
 
 router.post('/touristLocation', function(req, res) {
-    /*
-    if(!func.hasSession(req) || ){
+    if(!func.hasSession(req) || func.isGuide(req) || !func.touristHasLanguages(req)){
         func.redirectHome(res);
         return;
     }
-    */
     if (!req.body || !req.body.position){
         redirectHome(res);
         return;
     }
-    var pos = JSON.parse(req.body.position);
-
-    var validLocation = pos.lat != null && pos.lng != null && func.isNumeric(pos.lat) && func.isNumeric(pos.lng);
     
+    var pos = JSON.parse(req.body.position);
+    var validLocation = pos.lat != null && pos.lng != null && func.isNumeric(pos.lat) && func.isNumeric(pos.lng);
+
     if(validLocation){
         req.session.lat = pos.lat;
         req.session.lng = pos.lng;
@@ -107,7 +102,10 @@ router.get('/touristLocalisation', function(req, res) {
     res.render('touristLocalisation');
 });
 
-
+//not allowed to go here with a get request
+router.get('/tourist', function(req, res) {
+    func.redirectHome(res);
+});
 
 router.post('/tourist', function(req, res) {
     if(!func.hasSession(req) || func.isLoggedIn(req) || func.isGuide(req) || !func.touristHasLanguages(req) || !func.tourustHasAreas(req)){
@@ -146,16 +144,5 @@ router.post('/tourist', function(req, res) {
 
 });
 
-/*
-router.get('/tourist', function(req, res) {
-    //needs to be a logged in  guide
-    if(!func.hasSession(req) || func.isLoggedIn(req) || func.isGuide(req) || !func.touristHasLanguages(req)){//TODO check for location
-        func.redirectHome(res);
-        return;
-    }
-    func.renderTourist(res);
-    return;
-});
-*/
 
 module.exports = router;

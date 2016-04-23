@@ -1,10 +1,11 @@
 extends layout
 
 block append stylesheets
-    link(rel='stylesheet', href='resources/css/style-tourist-localisation.css')
+    link(rel='stylesheet', href='resources/css/tourist.location.css')
 block append scripts
     script(src='https://www.google.com/jsapi')
-    script(src='resources/js/tourist.geolocation.js')
+    script(src='resources/js/tourist.location.js')
+    //script(src='resources/js/tourist.geolocation.js')
 block content
     loadingPopup.loadingPopup(hidden='')
         // close the popup and stop trying getting position
@@ -37,8 +38,6 @@ block content
                 a.btn.btn-default.btn-white.btn-map(onclick='$("infopopup").show(400);') __Info
             .col-md-6.text-center
                 a.btn.btn-default.btn-green.btn-map(onclick='sendPosition()') __Continue
-
     #map.touristMap
-    script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&callback=initMap')
+    script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&callback=initMap')
 
-block foot

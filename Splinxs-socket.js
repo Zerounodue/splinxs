@@ -49,6 +49,9 @@ module.exports = exports = function(io) {
                 if(showLogs) console.log('Splinxs-socket: guide no name');
                 return;
             }
+            
+            //TODO check if guide is same as in session
+            
             var state = msg.state;
             socket.username = msg.name;
             if (state == guideStates.available) {

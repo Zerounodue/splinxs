@@ -88,19 +88,30 @@ require('./Splinxs-socket.js')(io);
 
 
 
-
-
-//new
-
+/*
 var sessionOptions = {
-    //TODO change secret and option
+  //TODO change secret and option
   secret: "secret",
   resave : true,
   saveUninitialized : false
-
 };
-app.use(session(sessionOptions));
-//
+*/
+
+var sessionMiddleware = session({
+    //TODO change secret and option
+    secret: "secret",
+    resave: true,
+    saveUninitialized: false
+});
+//http://stackoverflow.com/questions/25532692/how-to-share-sessions-with-socket-io-1-x-and-express-4-x
+app.io.use(function(socket, next) {
+    sessionMiddleware(socket.request, socket.request.res, next);
+});
+
+//app.use(session(sessionOptions));
+
+app.use(sessionMiddleware);
+
 //var routes = require('./routes/index');
 var routes = require('./routes/index2');
 var tourist = require('./routes/tourist');

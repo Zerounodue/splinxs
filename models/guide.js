@@ -18,6 +18,8 @@ var Guide = new Schema({
     areas: [area]
 });
 
+
+
 Guide.methods.isInArea = function isInArea (pos) {
     var inArea = false;
     

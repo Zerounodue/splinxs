@@ -4,6 +4,8 @@
 module.exports = exports = function(io) {
     var Guide = require('./models/guide');
     
+    var splinxsList = require('./public/splinxsList/SplinxsList');
+
     var showLogs = true;
     
     var guideStates = {
@@ -40,6 +42,7 @@ module.exports = exports = function(io) {
 
     guideSocket.on('connection', function (socket) {
         if(showLogs) console.log('Splinxs-socket: guide connection');
+        
         socket.on(guideStates.state, function(msg){
             if(!msg || !msg.state){
                 if(showLogs) console.log('Splinxs-socket: guide invalid state');
@@ -50,14 +53,19 @@ module.exports = exports = function(io) {
                 return;
             }
             
-            //TODO check if guide is same as in session
-            
             var state = msg.state;
             socket.username = msg.name;
+            
+            //check if guide is same as in session
+            if(socket.request.session.username != socket.username){
+                if(showLogs) console.log('session username and socket name do not match');
+                //TODO something useful...
+                //send a request to redirect home? or simply do nothing at all
+                return;
+            }
+            
             if (state == guideStates.available) {
-                if (showLogs)
-                    console.log('Splinxs-socket: available, ' + socket.username);
-                //sendHelpRequest(socket.username);
+                if (showLogs) console.log('Splinxs-socket: available, ' + socket.username);
                 if (socket.username) {
                     setGuideState(socket.username, guideStates.available);
 
@@ -69,7 +77,6 @@ module.exports = exports = function(io) {
                 }
             }else if(state == guideStates.unavailable){
                 if(showLogs) console.log('Splinxs-socket: unavailable, ' + socket.username);
-                //TODO set offline in db
                 setGuideState(socket.username, guideStates.unavailable);
             }
         });
@@ -77,24 +84,30 @@ module.exports = exports = function(io) {
         socket.on(guideResponses.response, function(msg){
             if(showLogs) console.log('Splinxs-socket: guide response');
             
+            //check if guide is same as in session
+            if(socket.request.session.username != socket.username){
+                if(showLogs) console.log('session username and socket name do not match');
+                //TODO something useful...
+                //send a request to redirect home? or simply do nothing at all
+                return;
+            }
+            
             if(!msg || !msg.response){
                 if(showLogs) console.log('Splinxs-socket: guide invalid response');
                 return;
             }
-            
+
             var res = msg.response;
             if(res == guideResponses.accept){
                 if(showLogs) console.log('Splinxs-socket: guide accept, ' + socket.username);
-                
-                //TODO get guide/tourist pair from list
-                var g = socket.username;
-                var t = "tourist1";
-                
-                //TODO remove guide from Splinxs list, 
-                
-                sendAcceptedMessageTourist(t, g);
-                setGuideState(g, guideStates.unavailable);
 
+                var item = splinxsList.getFirstGuide(socket.username);
+                
+                sendAcceptedMessageTourist(item.tourist, item.guide);
+                setGuideState(g, guideStates.unavailable);
+                
+                splinxsList.removeGuide(socket.username);
+                
                 //TODO check if tourist still available
                 //assume that tourist is not online
                 /*
@@ -156,14 +169,31 @@ module.exports = exports = function(io) {
             }
             var req = msg.request;
             socket.username = msg.name;
+            
+            //check if tourist is same as in session
+            if(socket.request.session.username != socket.username){
+                if(showLogs) console.log('session username and socket name do not match');
+                //TODO something useful...
+                //send a request to redirect home? or simply do nothing at all
+                return;
+            }
+            
             if(req == touristRequests.help){
                 if(showLogs) console.log('Splinxs-socket: tourist help request, ' + socket.username);
-                
-                //TODO get tourist location and languages from session
-                var loc = {lat: 5, lng: 5};
-                var langs = ['de', 'en'];
-                
-                findMatchingGuide(socket.username, loc, langs);
+                //check if values in session are correct
+                if(socket.request.session){
+                    var session = socket.request.session;
+                    if(session.languages && session.lat && session.lng){
+                        var lat = session.lat;
+                        var lng = session.lng;
+                        var langs = session.languages;
+                        if(langs.length > 0 && isNumeric(lat) && isNumeric(lng)){
+                            findMatchingGuide(socket.username, {lat: lat, lng: lng}, langs);
+                        }
+                        
+                    }
+                    
+                }
             }
         });
         
@@ -180,36 +210,42 @@ module.exports = exports = function(io) {
     
     function findMatchingGuide(tourist, location, languages){
                 
-        
+        var list = [];
         //TODO find matching list in db and return array of guides
-        //guide.find(...)...
+        //Guide.find(...);
+        //list with guides that match the tourist
         
-        //TODO add list to queue
-        //list.add()...
+        var query = Guide.find({});
+
+        query.where('languages', { $in: languages});
+
+        query.exec(function (err, docs) {
+          // called when the `query.complete` or `query.error` are called
+          // internally
+          debugger;
+        });
         
-        //TODO give list to callback callback function to use: askGuidesForHelp()
-        var list = ['guide1'];
-        askGuidesForHelp(list);
         
         
         
-    }
-    
-    function askGuidesForHelp(guides){
-        //for each guide in list
-        //sendHelpRequest(guide)...
-        if(guides.length < 1){
-            if(showLogs) console.log('Splinxs-socket: matching guides list < 1');
-        }else{
-            for(var i = 0; i < guides.length; i++){
-                sendHelpRequest(guides[i]);
-            }
+        
+        
+        list.push('guide1');
+        //add guide tourist pair to splinxs list and send help request to guide
+        for(var i = 0; i < list.length; i++)
+        {
+            splinxsList.addStrings(list[i], tourist);
+            sendGuideHelpRequest(list[i]);
         }
-        
-        
     }
     
-    
+    function sendGuideHelpRequest(g){
+        sendHelpRequest(g);
+    }   
+   
+    function isNumeric(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    }
     
     
     

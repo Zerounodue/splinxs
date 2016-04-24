@@ -225,18 +225,19 @@ module.exports = exports = function(io) {
           debugger;
         });
         
-        
-        
-        
-        
-        
+        //TODO remove when working
         list.push('guide1');
-        //add guide tourist pair to splinxs list and send help request to guide
-        for(var i = 0; i < list.length; i++)
-        {
-            splinxsList.addStrings(list[i], tourist);
-            sendGuideHelpRequest(list[i]);
+        
+        
+        if(list.length > 0){
+            //add guide tourist pair to splinxs list and send help request to guide
+            for(var i = 0; i < list.length; i++)
+            {
+                splinxsList.addStrings(list[i], tourist);
+                sendGuideHelpRequest(list[i]);
+            }
         }
+        
     }
     
     function sendGuideHelpRequest(g){

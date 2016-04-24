@@ -100,23 +100,26 @@ module.exports = exports = function(io) {
             var res = msg.response;
             if(res == guideResponses.accept){
                 if(showLogs) console.log('Splinxs-socket: guide accept, ' + socket.username);
-
+                
+                console.log('----------SplinxsList length: ' + splinxsList.getLength());
+                
+                
+                
                 var item = splinxsList.getFirstGuide(socket.username);
                 
-                sendAcceptedMessageTourist(item.tourist, item.guide);
-                setGuideState(g, guideStates.unavailable);
-                
-                splinxsList.removeGuide(socket.username);
-                
-                //TODO check if tourist still available
-                //assume that tourist is not online
-                /*
-                //to test cancel request
-                setTimeout(function(){
+                if(item == null){
+                    if(showLogs) console.log('guide too late: ' + socket.username);
                     sendTooLateRequest(socket.username);
-                }, 2500);
-                */
-               
+                }else{
+                    //remove tourist from list
+                    splinxsList.removeTourist(item.tourist);
+                    console.log('----------SplinxsList length: ' + splinxsList.getLength());
+                    sendAcceptedMessageTourist(item.tourist, item.guide);
+                    setGuideState(item.guide, guideStates.unavailable);
+                }
+
+                splinxsList.removeGuide(socket.username);
+                console.log('----------SplinxsList length: ' + splinxsList.getLength());
             }
             
         });
@@ -215,28 +218,65 @@ module.exports = exports = function(io) {
         //Guide.find(...);
         //list with guides that match the tourist
         
+        //db.getCollection('guides').findMatchingGuides({params: {languages: ['de', 'en'], position: {lat: 46.947248, lng: 7.451586}}});
+        
+        Guide.find({languages: { $in: languages}, state: guideStates.available}, 'username areas', function(err, guides){
+            if(err){
+                console.log(err.msg);
+            }
+
+            for(var i = 0; i < guides.length; i++){
+                var g = guides[i];
+                if(g.isInArea(location)){
+                    list.push(g.username);
+                    console.log("matching guide: " + g.username);
+                }
+            }
+            
+            if (list.length > 0) {
+                //add guide tourist pair to splinxs list and send help request to guide
+                for (var i = 0; i < list.length; i++){
+                    splinxsList.addStrings(list[i], tourist);
+                    sendGuideHelpRequest(list[i]);
+                }
+            }
+            
+            //debugger;
+            //var is = guide.isInArea(location);
+            //list.push(guide.username);
+            
+        });
+        /*
+        Guide.findMatchingGuides({params: {languages: languages, position: location}}, function (err, guide) {
+            if (err)
+            {
+                console.log('error');
+                return;
+            }
+            guide;
+            debugger;
+        });
+        */
+        /*
         var query = Guide.find({});
 
         query.where('languages', { $in: languages});
+        query.where();
 
         query.exec(function (err, docs) {
           // called when the `query.complete` or `query.error` are called
           // internally
           debugger;
         });
-        
+        */
+       
+       
+       
         //TODO remove when working
-        list.push('guide1');
+        //list.push('guide1');
         
         
-        if(list.length > 0){
-            //add guide tourist pair to splinxs list and send help request to guide
-            for(var i = 0; i < list.length; i++)
-            {
-                splinxsList.addStrings(list[i], tourist);
-                sendGuideHelpRequest(list[i]);
-            }
-        }
+        
         
     }
     

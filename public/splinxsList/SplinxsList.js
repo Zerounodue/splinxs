@@ -46,12 +46,19 @@ module.exports = {
      */
     removeGuide: function (g) {
         if (list.length > 0) {
+            var gIndex = this.containsGuide(g);
+            while(gIndex > -1){
+                removeAtIndex(gIndex);
+                gIndex = this.containsGuide(g);
+            }
+            /*
             var guides = getAllGuides(g);
             if (guides.length > 0) {
                 for (var i = 0; i < guides.length; i++) {
                     removeAtIndex(i);
                 }
             }
+            */
         }
     },
     /**
@@ -60,11 +67,10 @@ module.exports = {
      */
     removeTourist: function (t) {
         if (list.length > 0) {
-            var tourists = getAllTourists(t);
-            if (tourists.length > 0) {
-                for (var i = 0; i < tourists.length; i++) {
-                    removeAtIndex(i);
-                }
+            var tIndex = this.containsTourist(t);
+            while(tIndex > -1){
+                removeAtIndex(tIndex);
+                tIndex = this.containsTourist(t);
             }
         }
     },

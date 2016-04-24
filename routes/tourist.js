@@ -33,15 +33,19 @@ router.post('/touristLanguages', function(req, res) {
     var langs = JSON.parse(req.body.languages);
     var validLangs = true;
     
+    var codes = [];
+    
     for (var i = 0; i <  langs.length; i++){
         if(!ISO6391.validate(langs[i].code)){
             validLangs = false;
             break;
+        }else{
+            codes.push(langs[i].code);
         }
     }
 
     if(validLangs){
-        req.session.languages = langs;
+        req.session.languages = codes;
         //send to tourist location
         func.renderTouristLocation(res);
     }else{

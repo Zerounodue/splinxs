@@ -35,8 +35,10 @@ html
               span.icon-bar
               span.icon-bar
               span.icon-bar
-            a.navbar-brand(onclick="scrollTo('#body')")
-              img(style='height:100%', src='resources/images/splinxs.png')
+
+            block navbar-brand
+              a.navbar-brand
+                img(style='height:100%', src='resources/images/splinxs.png')
           #navbar-ex-collapse.collapse.navbar-collapse
             ul.nav.navbar-nav.navbar-right
               block navbarli

@@ -363,3 +363,9 @@ footer {
 	background-color: #16797A;
 	color: white;
 }
+
+/*navbar splinxs logo*/
+.navbar-brand {
+
+    padding: 10px 10px;
+}

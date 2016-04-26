@@ -7,7 +7,7 @@ block append scripts
 block content
     loadPopup.loadingPopup(id="loadPopup")
         // close the popup and stop trying getting position
-        //img.x(src='resources/images/icons/x.png', alt='close icon', id="img_loadClose")
+        img.x(src='resources/images/icons/x.png', alt='close icon', id="img_loadClose")
         h2(style='text-align: center;')
             | __Getting GPS position, please wait.
         .spinner
@@ -16,7 +16,7 @@ block content
             .bounce3
         div(style='text-align: center;')
             p __you can add position manually
-            //a.btn.btn-default.btn-green.btn-map(id="btn_loadClose") __Close
+            a.btn.btn-default.btn-green.btn-map(id="btn_loadClose") __Close
     declinedPopup.loadingPopup(id="declinedPopup", hidden)
         img.x(src='resources/images/icons/x.png', alt='close icon', id="img_declinedClose")
         div(style='text-align: center;')

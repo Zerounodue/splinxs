@@ -9,7 +9,10 @@ var showLogs = true;
 var map;
 var marker;
 
-var animDur = 250;
+var animDur = 400;
+
+//used to watchPosition and to clearWatch() --> stop watching position
+var watchID;
 
 var defaultLocation = {lat: 0, lng: 0};
 //used to delay click to allow doubleclick
@@ -30,14 +33,14 @@ function initMap(){
         zoom: 3,
         zoomControl: true,
         mapTypeControl: false,
-        scaleControl: true,
+        scaleControl: false,
         streetViewControl: false,
         rotateControl: true,
         fullscreenControl: false
     });
     
     addMapListeners();
-    addMarker(defaultLocation);
+    //addMarker(defaultLocation);
     getGEOLocation();
 }
 /**
@@ -51,7 +54,7 @@ function addMapListeners(){
         //waits ms for marker to be placed		
         click_timeout = setTimeout(function () {
             if(showLogs) console.log('map click timeout ended');
-            updateMarker(event.latLng);
+            updateMarker(event.latLng, map);
         }, click_timeoutTimer);
     });
     //double click zooms
@@ -70,7 +73,7 @@ function addMarker(position) {
     marker = new google.maps.Marker({
         position: position,
         map: map,
-        icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+        icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
     });
     /* not needed
     marker.addListener('click', function (event) {
@@ -85,14 +88,17 @@ function getGEOLocation() {
     showLoadPopup();
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
+        watchID = navigator.geolocation.watchPosition(function (position) {
             var pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
+            //stop watching (updating and trying to get the position) when the position is found
+            navigator.geolocation.clearWatch(watchID);
             map.setCenter(pos);
-            updateMarker(pos);
+            updateMarker(pos, map);
             hideLoadPopup();
+            map.setZoom(15);
         }, function () { //error function
             //user did not allow google maps
             if(showLogs) console.warn('The Geolocation service failed');
@@ -110,14 +116,28 @@ function getGEOLocation() {
  * sets the marker to the given position
  * @param {object{lat: double, lng: double}} pos to set marker at
  */
-function updateMarker(pos){
+function updateMarker(pos, map){
     if(showLogs) console.log("update marker");
+   // var firstMarker = false;
+    //if(!marker){firstMarker=true;}
     if(isValidGEOPosition(pos)){
-        marker.setPosition(pos);
+        if(!marker){
+            addMarker(pos);
+            map.setZoom(15);
+        }
+        else {
+            marker.setPosition(pos);
+        }
+        map.panTo(pos);
+
+        //if(firstMarker){ map.setZoom(15);}
     }else{
         if(showLogs) console.log("invalid position");
     }
 }
+
+
+
 
 $(document).ready(function () {
     if(showLogs) console.log('document ready');
@@ -133,11 +153,12 @@ $(document).ready(function () {
     
     $("#btn_submit").on('click', function (e) {
         if(showLogs) console.log('submit button clicked');
-        if(isValidGEOPosition(marker.position)){
+        if(marker && isValidGEOPosition(marker.position)){
             submitLocation();
         }else{
             //prevent form from being submitted
-            return false;
+            //return false;
+            showInfoPopup();
         }
     });
     
@@ -156,17 +177,21 @@ $(document).ready(function () {
        if(showLogs) console.log('info close img clicked');
         hideInfoPopup();
     });
-    /*
+
     $("#btn_loadClose").on('click', function(e){
        if(showLogs) console.log('load close button clicked');
+        //stop watching (updating and trying to get the position) if the user close the popup
+        navigator.geolocation.clearWatch(watchID);
         hideLoadPopup();
     });
     
     $("#img_loadClose").on('click', function(e){
        if(showLogs) console.log('load close img clicked');
+        //stop watching (updating and trying to get the position) if the user close the popup
+        navigator.geolocation.clearWatch(watchID);
         hideLoadPopup();
     });
-    */
+
     $("#btn_declinedClose").on('click', function(e){
        if(showLogs) console.log('declined close button clicked');
         hideDeclinedPopup();

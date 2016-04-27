@@ -1,4 +1,4 @@
-img.x(src='resources/images/icons/x.png', alt='close icon', onclick='$("loginPopup").hide(400);enableScroll();')
+img#x-login-img.x(src='resources/images/icons/x.png', alt='close icon')
 center
   .container
     h1 #{texts.LOGIN.LOGIN}
@@ -16,7 +16,7 @@ center
         .col-xs-6
           button.btn.btn-green.btn-login(type='submit') #{texts.GENERAL.SUBMIT}
         .col-xs-6
-          a.btn.btn-default.btn-login(onclick='$(".loginPopup").hide(400);enableScroll();') #{texts.GENERAL.CANCEL}
+          a#btn-close-login.btn.btn-default.btn-login #{texts.GENERAL.CANCEL}
       .row
         .col-xs-6
           a(href="/") Forgot possword?

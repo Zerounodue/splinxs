@@ -163,16 +163,12 @@ $(document).ready(function () {
         if(marker && isValidGEOPosition(marker.position)){
             submitLocation();
         }else{
-            //prevent form from being submitted
-            //return false;
+            //TODO return false needed?
             showInfoPopup();
+            //return false;
         }
     });
     
-    $("#btn_info").on('click', function(e){
-       if(showLogs) console.log('info button clicked');
-        showInfoPopup();
-    });
     
     $("#btn_infoOk").on('click', function(e){
        if(showLogs) console.log('info ok button clicked');

@@ -11,77 +11,14 @@ block append scripts
     //TODO is rmc needed here???
     script(src='resources/js/rmc3@3.3.2.min.js')
     script(src='resources/js/DetectRTC.js')
-    script.
-        //check if browser supports all features
-        DetectRTC.load(function () {
-            if (DetectRTC.hasMicrophone) {
-                // seems current system has at least one audio input device
-                console.log('has microphone');
-            }
-            if (DetectRTC.hasSpeakers) {
-                // seems current system has at least one audio output device
-                console.log('has speakers');
-            }
-            if (DetectRTC.hasWebcam) {
-                // seems current system has at least one video input device
-                console.log('has webcam');
-            }
-            if (!DetectRTC.isWebRTCSupported) {
-                // seems no WebRTC compatible client
-                console.log('does not support WebRTC');
-                showError();
-            }
-            if (DetectRTC.isAudioContextSupported) {
-                // seems Web-Audio compatible client
-                console.log('Web-Audio ok');
-            }
-            if (DetectRTC.isScreenCapturingSupported) {
-                // seems WebRTC screen capturing feature is supported on this client
-                console.log('screen capturing ok');
-            }
-            if (DetectRTC.isSctpDataChannelsSupported) {
-                // seems WebRTC SCTP data channels feature are supported on this client
-                console.log('SCTP ok');
-            }
-            if (DetectRTC.isRtpDataChannelsSupported) {
-                // seems WebRTC (old-fashioned) RTP data channels feature are supported on this client
-                console.log('RTP data channel ok');
-            }
-        });
-        function showError() {
-            var startSection = $("#startSection");
-            var errorSection = $("#errorSection");
-            startSection.hide();
-            errorSection.show();
-        }
+    script(src='resources/js/index.functions.js')
 
-    script.
-        var animating = false;
-        /*Scroll transition to anchor*/
-        function scrollTo(section) {
-            //animate only if it's not already animating
-            if (!animating) {
-                animating = true;
-                $('body').animate({
-                    scrollTop: $(section).offset().top
-                    }, 750, function () {
-                        animating = false;
-                    }
-                );
-            }
-            return false;
-        };
-    script.
-        function disableScroll(){
-            $( "#body" ).addClass( "indexBody" );
-        }
-        function enableScroll(){
-            $( "#body" ).removeClass( "indexBody" );
-        }
+
 block navbar-brand
-    a.navbar-brand(onclick="scrollTo('#body')")
+    a#navbar-brand-scroll.navbar-brand
         img(style='height:100%', src='resources/images/splinxs.png')
 block append navbarli
+    //TODO do it in js file? is it worth it?
     li
         a(onclick="scrollTo('#homeSlide')") #{texts.MENU.HOME}
     li
@@ -95,6 +32,7 @@ block append navbarli
 
 block content
     if error
+        //TODO do it in js file? is it worth it?
         body#body(onload='$("loginPopup").show();')
     else
         body#body
@@ -116,8 +54,7 @@ block content
                     a#touristButton.btn.btn-default.btn-green.btn-index(href='/touristLanguages') #{texts.INDEX.I_AM_TOURIST}
                 .col-sm-6.text-center
 
-                    a.btn.btn-default.btn-green.btn-index(onclick='$("loginPopup").show(400); disableScroll()') #{texts.INDEX.I_AM_GUIDE}
-                    //a.btn.btn-default.btn-green.btn-index(href='guide.html') #{texts.INDEX.I_AM_GUIDE}
+                    a#btn-guide.btn.btn-default.btn-green.btn-index #{texts.INDEX.I_AM_GUIDE}
             // --- DESCRIPTION
             .row
                 .col-sm-12.splinxsDescription

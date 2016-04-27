@@ -1,5 +1,6 @@
 #homeSlide{
 	background-color: white;
+	padding-top: 20px;
 }
 #splinxsSlide{
 	background-color: #2585C4;
@@ -75,12 +76,18 @@ a{
 	bottom: 0;
 	left: 0;
 	z-index: 10000;
-	 overflow-y:scroll;
-
-
 }
-.loginCernter{
 
+.registerPopup{
+	height: 100%;
+	width: 100%;
+	background: rgba(255,255,255,0.9);
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 10000;
 }
 .center-block {
     display: block;

@@ -20,7 +20,7 @@ block navbar-brand
 block append navbarli
     //TODO do it in js file? is it worth it?
     li
-        a(onclick="scrollTo('#homeSlide')") #{texts.MENU.HOME}
+        a(onclick="scrollTo('#body')") #{texts.MENU.HOME}
     li
         a(onclick="scrollTo('#splinxsSlide')") #{texts.MENU.WHAT_IS_SPLINXS}
     li
@@ -31,16 +31,21 @@ block append navbarli
         a(onclick="scrollTo('#footerSlide')") __Footer
 
 block content
-    if error
+    if registerError
+        //TODO do it in js file? is it worth it?
+        body#body(onload='$("registerPopup").show();')
+    else if error
         //TODO do it in js file? is it worth it?
         body#body(onload='$("loginPopup").show();')
+
     else
         body#body
     //asdsa
 
     loginPopup.loginPopup(hidden='')
-
         include login.jade
+    registerPopup.registerPopup(hidden='')
+        include register.jade
     // --- SLIDES START
     #homeSlide.slide
         .container

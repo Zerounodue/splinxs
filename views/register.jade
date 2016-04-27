@@ -1,17 +1,7 @@
-//- 
-    To change this license header, choose License Headers in Project Properties.
-    To change this template file, choose Tools | Templates
-    and open the template in the editor.
-     
-
-extends layout
-
-//use to append lines to block, not overwrite
-//block append head
- 
-block content
+img#x-register-img.x(src='resources/images/icons/x.png', alt='close icon')
+center
   .container
-    h1 #{title}
+    h1 #{texts.REGISTER.REGISTER}
     p.lead __enter details to create guide account
     br
     if error
@@ -21,36 +11,15 @@ block content
     form(role='form', action="/register",method="post", style='max-width: 300px;')
       .form-group
           input.form-control(type='text', name="username", placeholder='#{texts.REGISTER.USERNAME}', required, autofocus)
-      .form-group
+      #firstPasswordGroup.form-group
         input.form-control(type='password', id="password", name="password", placeholder='#{texts.REGISTER.PASSWORD}', required)
-      .form-group
-        input.form-control(type='password', id="papssword_confirm", name="password_confirm", placeholder='#{texts.REGISTER.PASSWORD}', required)
+      #secondPasswordGroup.form-group
+        input.form-control(type='password', id="papssword_confirm", name="password_confirm", placeholder='#{texts.REGISTER.R_PASSWORD}', required)
       .form-group
           input.form-control(type='email', name="email", placeholder='#{texts.REGISTER.EMAIL}', value='#{email ? email : ""}', required)
-      button.btn.btn-default(type='submit') #{texts.GENERAL.SUBMIT}
-      a(href='/register')
-        button.btn.btn-primary(type="button") #{texts.GENERAL.CANCEL}
-    script.
-        $(document).ready(function () {
-            $("#papssword").blur(validate);
-            $("#papssword_confirm").blur(validate);
-        });
+      .row.row-login
+        .col-xs-6
+          button.btn.btn-green.btn-login(type='submit') #{texts.GENERAL.SUBMIT}
+        .col-xs-6
+          a#btn-register-close.btn.btn-default.btn-login #{texts.GENERAL.CANCEL}
 
-        function validate() {
-            var password1 = $("#password").val();
-            var password2 = $("#papssword_confirm").val();
-            //custom validity does not seem to work with jquery...
-            var pw1 = document.getElementById('password');
-            //var pw2 = document.getElementById('papssword_confirm');
-            
-            if(password1.length > 0 && password2.length > 0){
-                if (password1 == password2) {
-                    pw1.setCustomValidity("");
-                    //pw2.setCustomValidity("");
-                } else {
-                    pw1.setCustomValidity("__Passwords do not match");
-                    //pw2.setCustomValidity("__Passwords do not match");
-                }
-            }
-
-        }

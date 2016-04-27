@@ -82,17 +82,19 @@ router.get('/index', function(req, res) {
 
 
 router.post('/index', function (req, res, next) {
+
     passport.authenticate('local', function (err, guide, info) {
         if (err) {
             return next(err); // will generate a 500 error
         }
         //password username combination not found
         if (!guide) {
+            //TODO title not needed?
             res.render('index', {title: "__Login", error: "__wrong username or password", username:req.body.username});
             return;
         }
         
-        var name = req.body.username;
+        var name = req.body.usernameLogin;
         //check in db if guide entered languages and areas
         var hasLanguages = false;
         var hasAreas = false;

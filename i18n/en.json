@@ -42,6 +42,7 @@
     "REGISTER": {
         "EMAIL": "Email",
         "PASSWORD": "Password",
+        "R_PASSWORD": "Repeat password",
         "REGISTER": "Register",
         "USERNAME": "Username"
     },

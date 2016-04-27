@@ -1,7 +1,7 @@
 /**
  * index.functions.js
  * contains functions for scrolling
- * used in the index and login 
+ * used in the index and login
  */
 
 
@@ -12,6 +12,11 @@ $(document).ready(function () {
     if(showLogs) console.log('document ready');
 
     loginPopup = $('loginPopup');
+    registerPopup = $('registerPopup');
+
+    //for registration
+    $("#papssword").blur(validate);
+    $("#papssword_confirm").blur(validate);
 
 
     $("#navbar-brand-scroll").on('click', function(e){
@@ -25,17 +30,40 @@ $(document).ready(function () {
     });
     $("#x-login-img").on('click', function(e){
         if(showLogs) console.log('x login image clicked');
-        hideAndScroll();
+        hideAndScroll(true);
     });
     $("#btn-close-login").on('click', function(e){
         if(showLogs) console.log('btn logine close clicked');
-        hideAndScroll();
+        hideAndScroll(true);
     });
+    $("#a-register").on('click', function(e){
+        if(showLogs) console.log('regiser link clicked');
+        loginPopup.hide(0);
+        registerPopup.show(0);
+    });
+    $("#x-register-img").on('click', function(e){
+        if(showLogs) console.log('x register image clicked');
+        hideAndScroll(false);
+    });
+    $("#btn-register-close").on('click', function(e){
+        if(showLogs) console.log('x register image clicked');
+        hideAndScroll(false);
+    });
+
+
+
+
+
 
 });
 
-function hideAndScroll(){
-    loginPopup.hide(animDur);
+function hideAndScroll(isLogin){
+    if(isLogin) {
+        loginPopup.hide(animDur);
+    }
+    else{
+        registerPopup.hide(animDur);
+    }
     enableScroll();
 }
 
@@ -108,4 +136,34 @@ function disableScroll(){
 }
 function enableScroll(){
     $( "#body" ).removeClass( "indexBody" );
+}
+
+
+
+
+
+//for registartion
+function validate() {
+    var password1 = $("#password").val();
+    var password2 = $("#papssword_confirm").val();
+    //custom validity does not seem to work with jquery...
+    var pw1 = document.getElementById('password');
+    //var pw2 = document.getElementById('papssword_confirm');
+
+    if(password1.length > 0 && password2.length > 0){
+        if (password1 == password2) {
+            $( "#firstPasswordGroup" ).removeClass( "has-error" );
+            $( "#secondPasswordGroup" ).removeClass( "has-error" );
+            pw1.setCustomValidity("");
+            //pw2.setCustomValidity("");
+        } else {
+            $( "#firstPasswordGroup" ).addClass( "has-error" );
+            $( "#secondPasswordGroup" ).addClass( "has-error" );
+            pw1.setCustomValidity("__Passwords do not match");
+
+            //pw2.setCustomValidity("__Passwords do not match");
+        }
+    }
+
+
 }

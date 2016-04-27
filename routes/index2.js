@@ -90,7 +90,7 @@ router.post('/index', function (req, res, next) {
         //password username combination not found
         if (!guide) {
             //TODO title not needed?
-            res.render('index', {title: "__Login", error: "__wrong username or password", username:req.body.username});
+            res.render('index', {title: "__Login", loginError: "__wrong username or password", username:req.body.username});
             return;
         }
         

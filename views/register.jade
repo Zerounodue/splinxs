@@ -5,9 +5,9 @@ center
       h1 #{texts.REGISTER.REGISTER}
       p.lead __enter details to create guide account
       br
-      if error
+      if registerError
         br
-        h2 #{error}
+        h2 #{registerError}
         br
       form(role='form', action="/register",method="post", style='max-width: 300px;')
         .form-group

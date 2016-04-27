@@ -5,9 +5,9 @@ center
       h1 #{texts.LOGIN.LOGIN}
       p.lead __Say something worthwhile here.
       br
-      if error
+      if loginError
         br
-        h2 #{error}
+        h2 #{loginError}
         br
       form.form-signin(role='form', action="/index",method="post", style='max-width: 300px;')
 

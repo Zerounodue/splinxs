@@ -17,7 +17,7 @@ var func  = require('../public/resources/js/functions.js');
 
 
 router.get('/register', function(req, res) {
-    res.render('register', {title: "__Register"});
+    res.render('index', {title: "__Register"});
 });
 
 router.post('/register', function(req, res) {
@@ -50,7 +50,7 @@ router.post('/register', function(req, res) {
         if (err) {
             if(err.name == "UserExistsError"){
                 //TODO title not needed?
-                res.render('index', {title: "__Register", error: "__username already taken", email: email, registerError: true});
+                res.render('index', {title: "__Register", registerError: "__username already taken", email: email});
                 //TODO remove comment line if the above line works
                 //res.render('register', {title: "__Register", error: "__username already taken", email: email});
                 return;

@@ -4,49 +4,81 @@
 
 extends layout
 
+block append stylesheets
+    link(rel='stylesheet', href='resources/css/tourist.languages.css')
 block append scripts
   script(src='resources/js/tourist.languages.js')
 
+
 block content
-    form(id="frm_languages" method="post" action="/touristLanguages")
-        //- var nativeNames = langs.getAllNativeNames()
-        - var codes = langs.getAllCodes()
-        each code, index in codes
-            - var nativeName = langs.getNativeName(code)
-            label(for='' + code + '') #{nativeName}
-            input(type="checkbox", name="language", id='' + code + '' code='' + code + '')
+    center
+        h2 #{texts.T_SETTINGS.SPOKEN_LANGUAGES}
+        p #{texts.T_SETTINGS.LANGUAGES_INTRO}
+        form.centerForm(id="frm_languages" method="post" action="/touristLanguages" )
+
+
+            //- var nativeNames = langs.getAllNativeNames()
+            - var codes = langs.getAllCodes()
+            each code, index in codes
+                div(data-toggle='buttons')
+                    - var nativeName = langs.getNativeName(code)
+                    //TODO change id   code1 is not so good
+                    //for the first element (rounded border) else if for the last element
+                    if index == 0
+                        label.btn.btn-primary.btn-checkbox.btn-checkbox-first(for='' + code + '',id='' + code + '1') #{nativeName}
+                            input(type="checkbox", name="language", id='' + code + '' code='' + code + '')
+                    else if index == codes.length -1
+                        label.btn.btn-primary.btn-checkbox.btn-checkbox-last(for='' + code + '',id='' + code + '1') #{nativeName}
+                            input(type="checkbox", name="language", id='' + code + '' code='' + code + '')
+                    else
+                        label.btn.btn-primary.btn-checkbox(for='' + code + '',id='' + code + '1') #{nativeName}
+                            input(type="checkbox", name="language", id='' + code + '' code='' + code + '')
+
+                    //TODO is defualt skill already saved???
+                    // whitout setSkill()
+
+                    .row(id="div_" + code + "",style="display: none;"   )
+                        .col-xs-6.skillText
+                            |#{texts.T_SETTINGS.SKILL}:
+                        .col-xs-6
+                            div.div-radio(  data-toggle='buttons')
+
+
+                                label.btn.btn-primary.btn-radio.radio-left(id="rb" + code + "3")
+                                    input( type="radio", name="skill_" + code + "", value="3" checked)
+                                    | +
+                                label.btn.btn-primary.btn-radio.radio-middle(id="rb"+ code +"2")
+                                    input(type="radio", name="skill_" + code + "", value="2")
+                                    | ++
+                                label.btn.btn-primary.btn-radio.radio-right.active(id="rb" + code + "1")
+                                    input( type="radio", name="skill_" + code + "", value="1" checked)
+                                    | +++
+
+                    script.
+                        $("#!{code}1").click(function(){
+                            if( $("#!{code}").prop( "checked" ) ){
+                                $("#div_!{code}").hide(150);
+                                removeLanguage("!{code}");
+                            }
+                            else{
+                                $("#div_!{code}").show(150);
+                                addLanguage("!{code}", "1");
+                            }
+                        });
+                        $('input[type=radio][name=skill_!{code}]').change(function() {
+                            switch(this.value){
+                                case "1":
+                                    setSkill("!{code}", "1");
+                                    break;
+                                case "2":
+                                    setSkill("!{code}", "2");
+                                    break;
+                                case "3":
+                                    setSkill("!{code}", "3");
+                                    break;
+                            };
+                        });
             br
-            div(id="div_" + code + "" hidden)
-                input(type="radio", name="skill_" + code + "", value="1" checked)
-                | +++
-                input(type="radio", name="skill_" + code + "", value="2")
-                | ++
-                input(type="radio", name="skill_" + code + "", value="3")
-                | +
-            script.
-                $("#!{code}").click(function(){
-                    if(this.checked){
-                        $("#div_!{code}").show();
-                        addLanguage("!{code}", "1");
-                    }else{
-                        $("#div_!{code}").hide();
-                        removeLanguage("!{code}");
-                    }
-                });
-                $('input[type=radio][name=skill_!{code}]').change(function() {
-                    switch(this.value){
-                        case "1":
-                            setSkill("!{code}", "1");
-                            break;
-                        case "2":
-                            setSkill("!{code}", "2");
-                            break;
-                        case "3":
-                            setSkill("!{code}", "3");
-                            break;
-                    };
-                });
-        br
-        br
-        //if user is logged in => guide
-        button(id='btn_sendLanguages') #{texts.T_SETTINGS.SEND}
+            br
+            //if user is logged in => guide
+            button.btn.btn-primary.btn-send(id='btn_sendLanguages') #{texts.T_SETTINGS.SEND}

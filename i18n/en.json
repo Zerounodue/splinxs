@@ -62,7 +62,10 @@
         "OTHER_ERROR": "an error occurred"
     },
     "T_SETTINGS":{
-        "SEND": "Send languages"
+        "SEND": "Send languages",
+        "SKILL": "Choose you skill",
+        "SPOKEN_LANGUAGES": "Spoken languages",
+        "LANGUAGES_INTRO": "Select all your spoken languages and the relative skill"
     }
     
     

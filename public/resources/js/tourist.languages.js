@@ -100,9 +100,17 @@ function addSavedLanguages(){
 }
 
 function displaySelectedLanguage(code, skill){
+    //checkbox
     $("#" + code).prop('checked', true);
-    $("#div_" + code).show();
+    $("#" + code+"1").addClass("active");//this is important!
+    //radio button
+    //remove default active skill
+    $("#rb"+ code + "1").removeClass("active");//this is important!
+
     $('input[name="skill_' + code + '"][value="' + skill + '"]').prop('checked', true);
+    $("#rb"+ code + skill).addClass("active");//this is important!
+
+    $("#div_" + code).show();
 }
 
 /**

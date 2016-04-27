@@ -6,39 +6,61 @@ block append scripts
     script(src='resources/js/tourist.location.js')
 block content
     loadPopup.loadingPopup(id="loadPopup")
+
         // close the popup and stop trying getting position
-        img.x(src='resources/images/icons/x.png', alt='close icon', id="img_loadClose")
-        h2(style='text-align: center;')
-            | __Getting GPS position, please wait.
-        .spinner
-            .bounce1
-            .bounce2
-            .bounce3
-        div(style='text-align: center;')
-            p __you can add position manually
-            a.btn.btn-default.btn-green.btn-map(id="btn_loadClose") __Close
+        .row
+            .col-sm-12
+                img.x(src='resources/images/icons/x.png', alt='close icon', id="img_loadClose")
+        .row
+            .col-sm-12
+                h2(style='text-align: center;')
+                    | #{texts.T_LOCATION.GETTING_GPS}
+                .spinner
+                    .bounce1
+                    .bounce2
+                    .bounce3
+                div(style='text-align: center;')
+                    p #{texts.T_LOCATION.ADD_POS_MAN}
+                    a.btn.btn-default.btn-green.btn-map(id="btn_loadClose") #{texts.T_LOCATION.CLOSE}
     declinedPopup.loadingPopup(id="declinedPopup", hidden)
-        img.x(src='resources/images/icons/x.png', alt='close icon', id="img_declinedClose")
-        div(style='text-align: center;')
-            h2 __No position, add one by hand ;)
-            a.btn.btn-default.btn-green.btn-map(id="btn_declinedClose") __Ok
+        .row
+            .col-sm-12
+                img.x(src='resources/images/icons/x.png', alt='close icon', id="img_declinedClose")
+        .row
+            .col-sm-12
+                div(style='text-align: center;')
+                    h2 #{texts.T_LOCATION.IMP_GET_GPS}
+                    //if permissionDenied=="true"
+                        p permissione denied
+                    //else
+                        p ciao
+                    //if showLogs
+                        p che bello
+                    a.btn.btn-default.btn-green.btn-map(id="btn_declinedClose") #{texts.T_LOCATION.OK}
     infoPopup.loadingPopup(id="infoPopup", hidden)
-        img.x(src='resources/images/icons/x.png', alt='close icon', id="img_infoClose")
-        div(style='text-align: center;')
-            h2 __Add a position
-            p __click on the map to add your current position
-            p __a guide thah knows this region will help you
-            a.btn.btn-default.btn-green.btn-map(id="btn_infoOk") __Ok
+        .row
+            .col-sm-12
+                img.x(src='resources/images/icons/x.png', alt='close icon', id="img_infoClose")
+        .row
+            .col-sm-12
+                div(style='text-align: center;')
+                    h2 #{texts.T_LOCATION.ADD_POS}
+                    p #{texts.T_LOCATION.CLICK_MAP}, #{texts.T_LOCATION.GUIDE_WILL_HELP}
+                    a.btn.btn-default.btn-green.btn-map(id="btn_infoOk") #{texts.T_LOCATION.OK}
+                    //if !permissionDenied
+                        a.btn.btn-default.btn-white.btn-map(id="btn_infoLocation") #{texts.T_LOCATION.AUTO_GPS}
+
+
     .container.front
-        img(src='resources/images/icons/orientation_small.png', alt='location', id="img_location")
+        //img(src='resources/images/icons/orientation_small.png', alt='location', id="img_location")
         .row
             .col-md-6.text-center
-                a.btn.btn-default.btn-white.btn-map(id="btn_info") __Info
+                a.btn.btn-default.btn-white.btn-map(id="btn_info") #{texts.T_LOCATION.INFO}
             .col-md-6.text-center
-                a.btn.btn-default.btn-green.btn-map(id="btn_submit") __Continue      
+                a.btn.btn-default.btn-green.btn-map(id="btn_submit") #{texts.T_LOCATION.CONTINUE}
     #map.touristMap
     script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&callback=initMap' async defer)
-
+block foot
 
 
 

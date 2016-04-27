@@ -9,6 +9,7 @@ var showLogs = true;
 var map;
 var marker;
 
+var permissionDenied="#{false}";
 var animDur = 400;
 
 //used to watchPosition and to clearWatch() --> stop watching position
@@ -99,12 +100,17 @@ function getGEOLocation() {
             updateMarker(pos, map);
             hideLoadPopup();
             map.setZoom(15);
-        }, function () { //error function
+        }, function (error) { //error function
             //user did not allow google maps
             if(showLogs) console.warn('The Geolocation service failed');
+            if (error.code == error.PERMISSION_DENIED){
+                permissionDenied="#{true}";
+                console.log("permission deniedd......");
+            }
             hideLoadPopup();
             showDeclinedPopup();
         });
+
     } else {
         // Browser doesn't support Geolocation
         if(showLogs) console.info('Your browser does not support geolocation');
@@ -146,8 +152,9 @@ $(document).ready(function () {
     infoPopup = $('infopopup');
     declinedPopup = $('declinedPopup');
     
-    $("#img_location").on('click', function(e){
-       if(showLogs) console.log('location img clicked');
+    $("#btn_infoLocation").on('click', function(e){
+        hideInfoPopup();
+        if(showLogs) console.log('location img clicked');
         getGEOLocation();
     });
     

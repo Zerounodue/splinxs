@@ -44,6 +44,22 @@
         "PASSWORD": "Password",
         "REGISTER": "Register",
         "USERNAME": "Username"
+    },
+    "T_LOCATION":{
+        "GETTING_GPS": "Getting GPS position, please wait....",
+        "ADD_POS_MAN":"you can add position manually",
+        "CLOSE": "Close",
+        "OK": "Ok",
+        "IMP_GET_GPS": "Impossible get the location, add one by hand",
+        "ADD_POS": "Add a position",
+        "CLICK_MAP": "click on the map to add your current position",
+        "GUIDE_WILL_HELP": "a guide thah knows this region will help you",
+        "INFO": "Info",
+        "CONTINUE": "Continue",
+        "AUTO_GPS": "Use GPS"
+    },
+    "T_SETTINGS":{
+        "SEND": "Send languages"
     }
     
     

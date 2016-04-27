@@ -5,3 +5,28 @@
     margin-top: 10px;
     margin-bottom: 20px;
 }
+
+.loginRegisterForm{
+    background-color: #f5f5f5;
+    border-radius: 15px;
+    max-width: 350px;
+    padding-top: 5px;
+    padding-bottom: 20px;
+    margin-top: 40px;
+    border: 2px;
+    border-style: solid;
+    border-color: #F2F2F2;
+}
+.inputTop{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    height: 38px;
+    font-size: 15px;
+}
+.inputBottom{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top-width: 0;
+    height: 38px;
+    font-size: 15px;
+}

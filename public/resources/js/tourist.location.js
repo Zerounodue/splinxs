@@ -89,7 +89,9 @@ function getGEOLocation() {
     showLoadPopup();
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
+        //watchPosition() is used instead of getCurrentPosition() so this action can be stopped
         watchID = navigator.geolocation.watchPosition(function (position) {
+
             var pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
@@ -253,6 +255,10 @@ function fillTryAgainDiv(){
     });
 }
 
+/**
+ * submits the position with a POST method
+ * action ="/touristLocation"
+ */
 function submitLocation(){
     var pos = JSON.stringify(marker.position);
     

@@ -1,25 +1,26 @@
 img#x-login-img.x(src='resources/images/icons/x.png', alt='close icon')
 center
   .container
-    h1 #{texts.LOGIN.LOGIN}
-    p.lead __Say something worthwhile here.
-    br
-    if error
+    .loginRegisterForm
+      h1 #{texts.LOGIN.LOGIN}
+      p.lead __Say something worthwhile here.
       br
-      h2 #{error}
-      br
-    form.form-signin(role='form', action="/index",method="post", style='max-width: 300px;')
+      if error
+        br
+        h2 #{error}
+        br
+      form.form-signin(role='form', action="/index",method="post", style='max-width: 300px;')
 
-      input.form-control.inputTop(type='text', name="username", placeholder='#{texts.LOGIN.USERNAME}', required, autofocus, value='#{username ? username : ""}')
-      input.form-control.inputBottom(type='password', name="password", placeholder='#{texts.LOGIN.PASSWORD}', required)
-      .row.row-login
-        .col-xs-6
-          button.btn.btn-green.btn-login(type='submit') #{texts.GENERAL.SUBMIT}
-        .col-xs-6
-          a#btn-close-login.btn.btn-default.btn-login #{texts.GENERAL.CANCEL}
-      .row
-        .col-xs-6
-          a(href="/") __Forgot possword?
-        .col-xs-6
-          a#a-register __Sign up now!
-          //a(href="/register") __Sign up now!
+        input.form-control.inputTop(type='text', name="username", placeholder='#{texts.LOGIN.USERNAME}', required, autofocus, value='#{username ? username : ""}')
+        input.form-control.inputBottom(type='password', name="password", placeholder='#{texts.LOGIN.PASSWORD}', required)
+        .row.row-login
+          .col-xs-6
+            button.btn.btn-green.btn-login(type='submit') #{texts.GENERAL.SUBMIT}
+          .col-xs-6
+            a#btn-close-login.btn.btn-default.btn-login #{texts.GENERAL.CANCEL}
+        .row
+          .col-xs-6
+            a(href="/") __Forgot possword?
+          .col-xs-6
+            a#a-register __Sign up now!
+            //a(href="/register") __Sign up now!

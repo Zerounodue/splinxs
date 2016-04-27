@@ -1,20 +1,24 @@
-
-.container
-  h1 #{texts.LOGIN.LOGIN}
-  p.lead __Say something worthwhile here.
-  br
-  if error
+img.x(src='resources/images/icons/x.png', alt='close icon', onclick='$("loginPopup").hide(400);enableScroll();')
+center
+  .container
+    h1 #{texts.LOGIN.LOGIN}
+    p.lead __Say something worthwhile here.
     br
-    h2 #{error}
-    br
-  form.form-signin(role='form', action="/index",method="post", style='max-width: 300px;')
+    if error
+      br
+      h2 #{error}
+      br
+    form.form-signin(role='form', action="/index",method="post", style='max-width: 300px;')
 
-    input.form-control.inputTop(type='text', name="username", placeholder='#{texts.LOGIN.USERNAME}', required, autofocus, value='#{username ? username : ""}')
-    input.form-control.inputBottom(type='password', name="password", placeholder='#{texts.LOGIN.PASSWORD}', required)
-    button.btn.btn-green(type='submit') #{texts.GENERAL.SUBMIT}
-    a.btn.btn-default(onclick='$(".loginPopup").hide(400);') #{texts.GENERAL.CANCEL}
-    .row
-      .col-xs-6
-        a(href="/") Forgot possword?
-      .col-xs-6
-        a(href="/register") Sign up now!
+      input.form-control.inputTop(type='text', name="username", placeholder='#{texts.LOGIN.USERNAME}', required, autofocus, value='#{username ? username : ""}')
+      input.form-control.inputBottom(type='password', name="password", placeholder='#{texts.LOGIN.PASSWORD}', required)
+      .row.row-login
+        .col-xs-6
+          button.btn.btn-green.btn-login(type='submit') #{texts.GENERAL.SUBMIT}
+        .col-xs-6
+          a.btn.btn-default.btn-login(onclick='$(".loginPopup").hide(400);enableScroll();') #{texts.GENERAL.CANCEL}
+      .row
+        .col-xs-6
+          a(href="/") Forgot possword?
+        .col-xs-6
+          a(href="/register") Sign up now!

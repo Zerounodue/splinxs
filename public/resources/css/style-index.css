@@ -3,25 +3,25 @@
 }
 #splinxsSlide{
 	background-color: #2585C4;
-	color:white; 
+	color:white;
 }
 #aboutSlide{
 	background-color: #31C6C7;
-	color:white; 
+	color:white;
 }
 #contactSlide{
 	background-color: #28B294;
-	color:white; 
+	color:white;
 }
 #footerSlide{
 background-color: white;
-	
+
 }
 .slide{
 	padding-top: 70px;
 	padding-bottom: 70px;
-	
-	
+
+
 }
 
 
@@ -41,22 +41,22 @@ background-color: white;
 	.splinxsSlideIcon{
 		height: auto;
 		max-width: 100%;
-		
+
 	}
 }
 
 /* Small devices (tablets, 768px and up) */
-@media(max-width:768px) { 
-	#touristButton{ 
-	height: 64px; 
+@media(max-width:768px) {
+	#touristButton{
+	height: 64px;
 	font-size: 20px;
     padding-top: 16px;
-	} 
+	}
 }
 
 
 .splinxsDescription{
-		
+
 }
 
 a{
@@ -75,6 +75,7 @@ a{
 	bottom: 0;
 	left: 0;
 	z-index: 10000;
+	 overflow-y:scroll;
 
 
 }
@@ -97,8 +98,9 @@ a{
     border-top-right-radius: 0;
 }
 
-.x{
-    margin: 10px;
-    width:20px;
-    height:20px;
+.indexBody{
+
+	position: fixed;
+	overflow-y:scroll;
+
 }

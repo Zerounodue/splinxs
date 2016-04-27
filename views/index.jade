@@ -2,6 +2,7 @@ extends layout
 
 block append stylesheets
     link(rel='stylesheet', href='resources/css/style-index.css')
+    link(rel='stylesheet', href='resources/css/login.css')
 // For the moblie menu
 // <script type="text/javascript" src="resources/js/jquery-2.0.3.min.js"></script>
 // <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
@@ -70,6 +71,13 @@ block append scripts
             }
             return false;
         };
+    script.
+        function disableScroll(){
+            $( "#body" ).addClass( "indexBody" );
+        }
+        function enableScroll(){
+            $( "#body" ).removeClass( "indexBody" );
+        }
 block navbar-brand
     a.navbar-brand(onclick="scrollTo('#body')")
         img(style='height:100%', src='resources/images/splinxs.png')
@@ -93,9 +101,8 @@ block content
     //asdsa
 
     loginPopup.loginPopup(hidden='')
-        img.x(src='resources/images/icons/x.png', alt='close icon', onclick='$("loginPopup").hide(400);')
-        center
-            include login.jade
+
+        include login.jade
     // --- SLIDES START
     #homeSlide.slide
         .container
@@ -109,7 +116,7 @@ block content
                     a#touristButton.btn.btn-default.btn-green.btn-index(href='/touristLanguages') #{texts.INDEX.I_AM_TOURIST}
                 .col-sm-6.text-center
 
-                    a.btn.btn-default.btn-green.btn-index(onclick='$("loginPopup").show(400);') #{texts.INDEX.I_AM_GUIDE}
+                    a.btn.btn-default.btn-green.btn-index(onclick='$("loginPopup").show(400); disableScroll()') #{texts.INDEX.I_AM_GUIDE}
                     //a.btn.btn-default.btn-green.btn-index(href='guide.html') #{texts.INDEX.I_AM_GUIDE}
             // --- DESCRIPTION
             .row

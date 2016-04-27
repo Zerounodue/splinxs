@@ -100,12 +100,18 @@ function getGEOLocation() {
             updateMarker(pos, map);
             hideLoadPopup();
             map.setZoom(15);
+            fillTryAgainDiv();
         }, function (error) { //error function
             //user did not allow google maps
             if(showLogs) console.warn('The Geolocation service failed');
             if (error.code == error.PERMISSION_DENIED){
-                permissionDenied="#{true}";
-                console.log("permission deniedd......");
+                document.getElementById('errorMessage').innerHTML = permissionError;
+
+            }
+            else{
+                document.getElementById('errorMessage').innerHTML = otherError
+                fillTryAgainDiv();
+
             }
             hideLoadPopup();
             showDeclinedPopup();
@@ -116,6 +122,7 @@ function getGEOLocation() {
         if(showLogs) console.info('Your browser does not support geolocation');
         hideLoadPopup();
         showDeclinedPopup();
+        fillTryAgainDiv();
     }
 }
 /**
@@ -124,8 +131,6 @@ function getGEOLocation() {
  */
 function updateMarker(pos, map){
     if(showLogs) console.log("update marker");
-   // var firstMarker = false;
-    //if(!marker){firstMarker=true;}
     if(isValidGEOPosition(pos)){
         if(!marker){
             addMarker(pos);
@@ -136,7 +141,6 @@ function updateMarker(pos, map){
         }
         map.panTo(pos);
 
-        //if(firstMarker){ map.setZoom(15);}
     }else{
         if(showLogs) console.log("invalid position");
     }
@@ -152,11 +156,7 @@ $(document).ready(function () {
     infoPopup = $('infopopup');
     declinedPopup = $('declinedPopup');
     
-    $("#btn_infoLocation").on('click', function(e){
-        hideInfoPopup();
-        if(showLogs) console.log('location img clicked');
-        getGEOLocation();
-    });
+
     
     $("#btn_submit").on('click', function (e) {
         if(showLogs) console.log('submit button clicked');
@@ -246,6 +246,15 @@ function getTouristLocation(){
  */
 function isValidGEOPosition(pos){
     return (pos.lat != null && pos.lng != null);
+}
+
+function fillTryAgainDiv(){
+    document.getElementById('tryAgain').innerHTML = '<a id="btn_infoLocation" class="btn btn-default btn-white btn-map">'+tryAgainMessage+'</a>';
+    $("#btn_infoLocation").on('click', function(e){
+        hideInfoPopup();
+        if(showLogs) console.log('location img clicked');
+        getGEOLocation();
+    });
 }
 
 function submitLocation(){

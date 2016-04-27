@@ -67,6 +67,9 @@
     width:20px;
     height:20px;
 }
+.x:hover {
+    cursor: pointer;
+}
 
 
 
@@ -92,4 +95,7 @@ html, body {
     bottom: 20px;
     width: 100%;
     z-index: 9999;
+}
+#errorMessage{
+    margin-bottom: 10px;
 }

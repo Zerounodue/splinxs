@@ -50,13 +50,15 @@
         "ADD_POS_MAN":"you can add position manually",
         "CLOSE": "Close",
         "OK": "Ok",
-        "IMP_GET_GPS": "Impossible get the location, add one by hand",
+        "IMP_GET_GPS": "Impossible get the location",
         "ADD_POS": "Add a position",
         "CLICK_MAP": "click on the map to add your current position",
         "GUIDE_WILL_HELP": "a guide thah knows this region will help you",
         "INFO": "Info",
         "CONTINUE": "Continue",
-        "AUTO_GPS": "Use GPS"
+        "AUTO_GPS": "Use GPS",
+        "PERMISSION_DENIED": "permission denied, add your position by hand",
+        "OTHER_ERROR": "an error occurred"
     },
     "T_SETTINGS":{
         "SEND": "Send languages"

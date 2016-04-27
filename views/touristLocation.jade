@@ -1,10 +1,15 @@
 extends layout
 
+
 block append stylesheets
     link(rel='stylesheet', href='resources/css/tourist.location.css')
 block append scripts
     script(src='resources/js/tourist.location.js')
 block content
+    script.
+        var permissionError = '#{texts.T_LOCATION.PERMISSION_DENIED}';
+        var otherError = '#{texts.T_LOCATION.OTHER_ERROR}';
+        var tryAgainMessage = '#{texts.T_LOCATION.AUTO_GPS}';
     loadPopup.loadingPopup(id="loadPopup")
 
         // close the popup and stop trying getting position
@@ -28,14 +33,12 @@ block content
                 img.x(src='resources/images/icons/x.png', alt='close icon', id="img_declinedClose")
         .row
             .col-sm-12
+
                 div(style='text-align: center;')
                     h2 #{texts.T_LOCATION.IMP_GET_GPS}
-                    //if permissionDenied=="true"
-                        p permissione denied
-                    //else
-                        p ciao
-                    //if showLogs
-                        p che bello
+                    //the div errorMessage will be filled from the JS file depending on the error
+
+                    div#errorMessage
                     a.btn.btn-default.btn-green.btn-map(id="btn_declinedClose") #{texts.T_LOCATION.OK}
     infoPopup.loadingPopup(id="infoPopup", hidden)
         .row
@@ -47,8 +50,10 @@ block content
                     h2 #{texts.T_LOCATION.ADD_POS}
                     p #{texts.T_LOCATION.CLICK_MAP}, #{texts.T_LOCATION.GUIDE_WILL_HELP}
                     a.btn.btn-default.btn-green.btn-map(id="btn_infoOk") #{texts.T_LOCATION.OK}
-                    //if !permissionDenied
-                        a.btn.btn-default.btn-white.btn-map(id="btn_infoLocation") #{texts.T_LOCATION.AUTO_GPS}
+                    //the div tryAgain will be filled from the JS if permission is not denied
+                    div#tryAgain
+
+
 
 
     .container.front

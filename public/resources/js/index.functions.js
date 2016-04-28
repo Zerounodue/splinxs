@@ -49,7 +49,7 @@ $(document).ready(function () {
     $("#papssword").blur(validate);
     $("#papssword_confirm").blur(validate);
 
-
+    //index
     $("#navbar-brand-scroll").on('click', function(e){
         if(showLogs) console.log('navbar logo clicked');
         scrollTo('#body');
@@ -59,6 +59,8 @@ $(document).ready(function () {
         loginPopup.show(animDur);
         disableScroll();
     });
+
+    //login page
     $("#x-login-img").on('click', function(e){
         if(showLogs) console.log('x login image clicked');
         hideAndScroll(true);
@@ -72,6 +74,8 @@ $(document).ready(function () {
         loginPopup.hide(0);
         registerPopup.show(0);
     });
+
+    //register page
     $("#x-register-img").on('click', function(e){
         if(showLogs) console.log('x register image clicked');
         hideAndScroll(false);
@@ -79,6 +83,11 @@ $(document).ready(function () {
     $("#btn-register-close").on('click', function(e){
         if(showLogs) console.log('x register image clicked');
         hideAndScroll(false);
+    });
+    $("#a-login").on('click', function(e){
+        if(showLogs) console.log('back to login link clicked');
+        loginPopup.show(0);
+        registerPopup.hide(0);
     });
 
 

@@ -11,6 +11,7 @@ var GuideLanguage = new Schema({
 },{ _id : false });
 */
 
+//TODO remove languages if a guide removes it in his settings
 
 
 

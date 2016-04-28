@@ -170,8 +170,12 @@ $(document).ready(function () {
             //return false;
         }
     });
-    
-    
+
+    $("#btn_info").on('click', function(e){
+        if(showLogs) console.log('info ok button clicked');
+        showInfoPopup();
+    });
+
     $("#btn_infoOk").on('click', function(e){
        if(showLogs) console.log('info ok button clicked');
         hideInfoPopup();
@@ -187,6 +191,7 @@ $(document).ready(function () {
        if(showLogs) console.log('load close button clicked');
         //stop watching (updating and trying to get the position) if the user close the popup
         navigator.geolocation.clearWatch(watchID);
+        fillTryAgainDiv();
         hideLoadPopup();
     });
     

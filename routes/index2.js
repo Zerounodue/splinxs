@@ -93,8 +93,8 @@ router.post('/index', function (req, res, next) {
             res.render('index', {title: "__Login", loginError: "__wrong username or password", username:req.body.username});
             return;
         }
-        
-        var name = req.body.usernameLogin;
+
+        var name = req.body.username;
         //check in db if guide entered languages and areas
         var hasLanguages = false;
         var hasAreas = false;
@@ -103,7 +103,6 @@ router.post('/index', function (req, res, next) {
             if (err) {
                 return next(err);
             }
-
             Guide.findOne({'username': name}, 'languages areas', function (err, guide) {
                 //error occured
                 if (err){
@@ -112,8 +111,6 @@ router.post('/index', function (req, res, next) {
                 }
                 //TODO error occurred  when testing:
                 // if(guide.languages)      {TypeError: Cannot read property 'languages' of null
-                //registered but added nothing?
-
                 if(guide.languages){
                     hasLanguages = guide.languages.length > 0;
                 }

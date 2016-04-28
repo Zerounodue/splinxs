@@ -64,7 +64,7 @@ router.post('/register', function(req, res) {
             if(err.name == "UserExisstsError"){
                 //TODO title not needed?
                 res.render('index', {title: "__Register", registerError: "__username already taken", email: email});
-                //TODO remove comment line if the above line works
+                //TODO remove commented old version line if the above line works
                 //res.render('register', {title: "__Register", error: "__username already taken", email: email});
                 return;
             }
@@ -231,11 +231,15 @@ router.get('/guideAreas', function(req, res) {
 router.post('/guideAreas', function(req, res) {
     //needs to be a guide
     if(!func.hasSession(req) || !func.isGuide(req)){
+        //TODO remove console.log
+        console.log("no session or is no guide --> redirect home");
         func.redirectHome(res);
         return;
     }
     //no post params
     if (!req.body || !req.body.areas){
+        //TODO remove console.log
+        console.log("no post paramenter --> redirect home");
         func.redirectHome(res);
         return;
     }    
@@ -262,27 +266,37 @@ router.post('/guideAreas', function(req, res) {
         //save to db
         Guide.update({ username: req.session.username }, { $set: { areas: areas } },  function (err, raw){
             if(err){
+                //TODO remove console.log
+                console.log("error in guide.update --> errors");
                 //TODO might need to do something more?
                 return handleError(err);
             }
         });
         
         if(func.isLoggedIn(req)){
+            //TODO remove console.log
+            console.log("isLoggedIn --> redirect guide");
             //send to guide site
             func.renderGuide(res, req.session.username);
             return;
         }else{
             req.session.hasAreas = true;
             if(!func.hasLanguages(req)){
+                //TODO remove console.log
+                console.log("not logged in & has no languages --> redirect guideLanguage");
                 //send to choose area
                 func.renderGuideLanguages(res, req.session.username);
                 return;
             }else{
+                //TODO remove console.log
+                console.log("not logged in but has languages  --> redirect home so it can login --> all OK");
                 //send home that guide can login
                 func.redirectHome(res);
             }
         }
     }else{
+        //TODO remove console.log
+        console.log("impossible! no areas  --> redirect home");
         //not possible
         func.redirectHome(res);
         return;

@@ -18,8 +18,7 @@
         "CONTACT": "Contact",
         "HOME": "Home",
         "LANGUAGES": "Languages",
-        "WHAT_IS_SPLINXS": "What is Splinxs",
-        "SETTINGS": "Settings"
+        "WHAT_IS_SPLINXS": "What is Splinxs"
     },
     "LANGUAGES": {
         "ENGLISH": "English",
@@ -52,10 +51,10 @@
         "ADD_POS_MAN":"you can add position manually",
         "CLOSE": "Close",
         "OK": "Ok",
-        "IMP_GET_GPS": "Impossible to get the current location",
+        "IMP_GET_GPS": "Impossible get the location",
         "ADD_POS": "Add a position",
         "CLICK_MAP": "click on the map to add your current position",
-        "GUIDE_WILL_HELP": "a guide that knows this region will help you",
+        "GUIDE_WILL_HELP": "a guide thah knows this region will help you",
         "INFO": "Info",
         "CONTINUE": "Continue",
         "AUTO_GPS": "Use GPS",

@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+var GuideLanguage = require('../models/guideLanguage');
+
+
 //only for guide!?
 //var passport = require('passport');
 //var Account = require('../models/account');
@@ -13,12 +16,27 @@ var func  = require('../public/resources/js/functions.js');
 
 
 router.get('/touristLanguages', function(req, res) {
+
+    //TODO querry is maybe unsable or not 100% correct?
+    GuideLanguage.findOne(function (err, languages) {
+        if (err) return handleError(err);
+        console.log('languages codes; ', languages.codes); // Space Ghost is a talk show host.
+
+
+        req.session.username = func.createTouristUsername();
+
+        func.renderTouristLanguages(res, languages.codes);
+        console.log('2');
+    });
+
+    //TODO is this intelligent? can't a guide do tourist things?
+    //do an automatic logout or tell the guide he has to logout
+    // hard redirect is not user friendly
     if(func.isGuide(req)){
         func.redirectHome(res);
         return;
     }
-    req.session.username = func.createTouristUsername();
-    func.renderTouristLanguages(res);
+
 });
 
 router.post('/touristLanguages', function(req, res) {

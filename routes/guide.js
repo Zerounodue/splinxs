@@ -44,11 +44,24 @@ router.post('/register', function(req, res) {
         func.redirectHome(res);
         return;
     }
+    //TODO this must be done the first time or create the collection by hand
+    /*
+    var myArr= ['en','de'];
+
+    GuideLanguage.create({ codes: myArr }, function (err, small) {
+        if (err) return handleError(err);
+        // saved!
+    })
+    */
+
+
+
+
 
 
     Guide.register(new Guide({ username : req.body.username, email: req.body.email }), req.body.password, function(err, guide) {
         if (err) {
-            if(err.name == "UserExistsError"){
+            if(err.name == "UserExisstsError"){
                 //TODO title not needed?
                 res.render('index', {title: "__Register", registerError: "__username already taken", email: email});
                 //TODO remove comment line if the above line works
@@ -146,8 +159,20 @@ router.post('/guideLanguages', function(req, res) {
             }
         });
         //TODO make work
-        GuideLanguage.update(null, {$addToSet: {codes: {$each: langs}}});
-        
+        GuideLanguage.update(null, {$addToSet: {codes: {$each: langs}}}, function (err, raw){
+            if(err){
+                console.log("GuideLanguage update error");
+                //TODO might need to do something more?
+                return handleError(err);
+            }
+            else{
+                console.log("GuideLanguage all ok?");
+            }
+        });
+
+
+
+
         if(func.isLoggedIn(req)){
             //send to guide site
             func.renderGuide(res, req.session.username);

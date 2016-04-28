@@ -110,6 +110,10 @@ router.post('/index', function (req, res, next) {
                     //TODO might need to do something more?
                     return handleError(err);
                 }
+                //TODO error occurred  when testing:
+                // if(guide.languages)      {TypeError: Cannot read property 'languages' of null
+                //registered but added nothing?
+
                 if(guide.languages){
                     hasLanguages = guide.languages.length > 0;
                 }

@@ -7,10 +7,41 @@
 
 var showLogs = true;
 var animDur = 400;
+var goodBrowser=false;
 
 $(document).ready(function () {
-    if(showLogs) console.log('document ready');
+    if(showLogs) console.log('document index.functions ready');
+/*
+    // Opera 8.0+
+    var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+    // Firefox 1.0+
+    var isFirefox = typeof InstallTrigger !== 'undefined';
+    // At least Safari 3+: "[object HTMLElementConstructor]"
+    var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+    // Internet Explorer 6-11
+    var isIE = /*@cc_on!@*/false || !!document.documentMode;
+    // Edge 20+
+    /*
+    var isEdge = !isIE && !!window.StyleMedia;
+    // Chrome 1+
+    var isChrome = !!window.chrome && !!window.chrome.webstore;
+    // Blink engine detection
+    var isBlink = (isChrome || isOpera) && !!window.CSS;
 
+    if (isChrome || isFirefox || isOpera || is) {
+        //
+        console.log('Browser '+ isChrome);
+    }
+*/
+    if(Modernizr.geolocation && Modernizr.eventlistener && Modernizr.input && Modernizr.inputtypes && Modernizr.json && Modernizr.websockets && Modernizr.datalistelem && Modernizr.localstorage &&  Modernizr.getusermedia &&  Modernizr.datachannel &&  Modernizr.peerconnection){
+        if(showLogs) console.log('Good browser');
+        goodBrowser=true;
+    }
+    else{
+        if(showLogs) console.log('The browser is bullshit');
+        goodBrowser=false;
+        alert("__\nYour browser does not support the required features\nWe recommend to use Google Chrome");
+    }
     loginPopup = $('loginPopup');
     registerPopup = $('registerPopup');
 
@@ -104,6 +135,7 @@ DetectRTC.load(function () {
         // seems WebRTC (old-fashioned) RTP data channels feature are supported on this client
         console.log('RTP data channel ok');
     }
+
 });
 function showError() {
     var startSection = $("#startSection");

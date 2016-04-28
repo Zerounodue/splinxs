@@ -141,8 +141,9 @@ this.renderTouristSite = function(res, name){
     res.render('tourist', {title: "__Tourist", name: name});
 };
 
-this.renderTouristLanguages = function(res){
-    res.render('touristLanguages', {title: "__Tourist Languages", langs: ISO6391});
+this.renderTouristLanguages = function(res, codes){
+    console.log("function codes: "+codes);
+    res.render('touristLanguages', {title: "__Tourist Languages", langs: ISO6391, codes:codes});
 };
 
 this.renderTouristLocation = function(res){

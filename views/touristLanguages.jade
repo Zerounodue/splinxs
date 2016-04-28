@@ -4,6 +4,8 @@
 
 extends layout
 
+
+
 block append stylesheets
     link(rel='stylesheet', href='resources/css/tourist.languages.css')
 block append scripts
@@ -14,11 +16,14 @@ block content
     center
         h2 #{texts.T_SETTINGS.SPOKEN_LANGUAGES}
         p #{texts.T_SETTINGS.LANGUAGES_INTRO}
+
+
         form.centerForm(id="frm_languages" method="post" action="/touristLanguages" )
 
 
-            //- var nativeNames = langs.getAllNativeNames()
-            - var codes = langs.getAllCodes()
+            //- var nativeNames = langs.getAllNativeNames()//"#{codes}"
+            //- var codes = langs.getAllCodes()
+            //codes is passed ad parameter when rendering the page
             each code, index in codes
                 div(data-toggle='buttons')
                     - var nativeName = langs.getNativeName(code)

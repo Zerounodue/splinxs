@@ -31,16 +31,22 @@ router.post('/register', function(req, res) {
     var pw2 = req.body.password_confirm;
     var email = req.body.email;
     if(!func.usableString(name) || !func.usableString(pw) || !func.usableString(pw2) || !func.usableString(email)){
+        //TODO remove console.log
+        console.log("error in username , pw or email something wrong (not usable string) --> redirect home");
         func.redirectHome(res);
         return;
     }
     //passwords must match
     if(pw != pw2){
+        //TODO remove console.log
+        console.log("error password not match --> redirect home");
         func.redirectHome(res);
         return;
     }
     //valid email
     if(!emailValidator.validate(email)){
+        //TODO remove console.log
+        console.log("error email not valid  --> redirect home");
         func.redirectHome(res);
         return;
     }
@@ -61,13 +67,20 @@ router.post('/register', function(req, res) {
 
     Guide.register(new Guide({ username : req.body.username, email: req.body.email }), req.body.password, function(err, guide) {
         if (err) {
-            if(err.name == "UserExisstsError"){
+
+            if(err.name == "UserExistsError"){
+                //TODO remove console.log
+                console.log("usernam existe error  --> redirect index");
                 //TODO title not needed?
                 res.render('index', {title: "__Register", registerError: "__username already taken", email: email});
                 //TODO remove commented old version line if the above line works
                 //res.render('register', {title: "__Register", error: "__username already taken", email: email});
                 return;
             }
+            //TODO remove console.log
+            console.log("Error: " + err.name);
+            console.log("Message: " + err.message);
+            console.log("other error in guide.register  --> redirect home");
             func.redirectHome(res);
             return;
         }
@@ -78,6 +91,8 @@ router.post('/register', function(req, res) {
             req.session.guide = true;
             req.session.loggedIn = false;
             req.session.hasLanguages = req.session.hasAreas = false;
+            //TODO remove console.log
+            console.log("all OK!  --> redirect guide languages");
             func.renderGuideLangs(res);
             return;
         });

@@ -4,7 +4,7 @@
 extends layout
 
 block append scripts
-    script(src='resources/js/rmc3@3.3.3.js')
+    script(src='resources/js/rmc3@3.3.2.js')
     // socket.io for signaling
     script(src='/socket.io/socket.io.js')
     script(src='resources/js/connection.js')
@@ -32,13 +32,18 @@ block append stylesheets
 
 block append navbarli
     li
-        a(href="/guideLanguages") __langs
-    li
-        a(href="/guideAreas") __areas
-    li
-        a(href="/guidePassword") __pw
-    li
         a(href="/logout") __Logout
+    li.dropdown
+        a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+            | #{texts.MENU.SETTINGS}
+            span.caret
+        ul.dropdown-menu
+            li
+                a(href="/guideLanguages") __langs
+            li
+                a(href="/guideAreas") __areas
+            li
+                a(href="/guidePassword") __pw
 
 block content
     main#content

@@ -33,15 +33,7 @@ $(document).ready(function () {
         console.log('Browser '+ isChrome);
     }
 */
-    if(Modernizr.geolocation && Modernizr.eventlistener && Modernizr.input && Modernizr.inputtypes && Modernizr.json && Modernizr.websockets && Modernizr.datalistelem && Modernizr.localstorage &&  Modernizr.getusermedia &&  Modernizr.datachannel &&  Modernizr.peerconnection){
-        if(showLogs) console.log('Good browser');
-        goodBrowser=true;
-    }
-    else{
-        if(showLogs) console.log('The browser is bullshit');
-        goodBrowser=false;
-        alert("__\nYour browser does not support the required features\nWe recommend to use Google Chrome");
-    }
+
     loginPopup = $('loginPopup');
     registerPopup = $('registerPopup');
 
@@ -49,7 +41,7 @@ $(document).ready(function () {
     $("#papssword").blur(validate);
     $("#papssword_confirm").blur(validate);
 
-
+    //index
     $("#navbar-brand-scroll").on('click', function(e){
         if(showLogs) console.log('navbar logo clicked');
         scrollTo('#body');
@@ -59,6 +51,8 @@ $(document).ready(function () {
         loginPopup.show(animDur);
         disableScroll();
     });
+
+    //login page
     $("#x-login-img").on('click', function(e){
         if(showLogs) console.log('x login image clicked');
         hideAndScroll(true);
@@ -72,6 +66,8 @@ $(document).ready(function () {
         loginPopup.hide(0);
         registerPopup.show(0);
     });
+
+    //register page
     $("#x-register-img").on('click', function(e){
         if(showLogs) console.log('x register image clicked');
         hideAndScroll(false);
@@ -80,9 +76,26 @@ $(document).ready(function () {
         if(showLogs) console.log('x register image clicked');
         hideAndScroll(false);
     });
+    $("#a-login").on('click', function(e){
+        if(showLogs) console.log('back to login link clicked');
+        loginPopup.show(0);
+        registerPopup.hide(0);
+    });
 
 
-
+    if(Modernizr.geolocation && Modernizr.eventlistener && Modernizr.input && Modernizr.inputtypes && Modernizr.json && Modernizr.websockets && Modernizr.datalistelem && Modernizr.localstorage &&  Modernizr.getusermedia &&  Modernizr.datachannel &&  Modernizr.peerconnection){
+        if(showLogs) console.log('Good browser');
+        //TODO want to use this variable?
+        goodBrowser=true;
+    }
+    else{
+        if(showLogs) console.log('The browser is bullshit');
+        //TODO want to use this variable?
+        goodBrowser=false;
+        setTimeout(function(){
+            alert("__\nYour browser does not support the required features\nWe recommend to use Google Chrome");
+        }, 500);
+    }
 
 
 

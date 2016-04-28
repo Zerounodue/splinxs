@@ -112,8 +112,7 @@ app.io.use(function(socket, next) {
 
 app.use(sessionMiddleware);
 
-//var routes = require('./routes/index');
-var routes = require('./routes/index2');
+var routes = require('./routes/index');
 var tourist = require('./routes/tourist');
 var guide = require('./routes/guide');
 

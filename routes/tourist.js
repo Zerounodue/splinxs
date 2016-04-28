@@ -32,10 +32,13 @@ router.get('/touristLanguages', function(req, res) {
     //TODO is this intelligent? can't a guide do tourist things?
     //do an automatic logout or tell the guide he has to logout
     // hard redirect is not user friendly
+
     if(func.isGuide(req)){
         func.redirectHome(res);
         return;
     }
+    
+
 
 });
 

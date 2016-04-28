@@ -32,14 +32,18 @@ block append stylesheets
 
 block append navbarli
     li
-        a(href="/guideLanguages") __langs
-    li
-        a(href="/guideAreas") __areas
-    li
-        a(href="/guidePassword") __pw
-    li
         a(href="/logout") __Logout
-
+    li.dropdown
+        a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+            | #{texts.MENU.SETTINGS}
+            span.caret
+        ul.dropdown-menu
+            li
+                a(href="/guideLanguages") __langs
+            li
+                a(href="/guideAreas") __areas
+            li
+                a(href="/guidePassword") __pw
 block content
     main#content
       button#btn_closeConnection(type='button', hidden='') close connection

@@ -20,6 +20,9 @@ block navbar-brand
     a#navbar-brand-scroll.navbar-brand
         img(style='height:100%', src='resources/images/splinxs.png')
 block append navbarli
+    //TODO remove index2
+    li
+        a(href="/index2") prototypes
     //TODO do it in js file? is it worth it?
     li
         a(onclick="scrollTo('#body')") #{texts.MENU.HOME}
@@ -29,8 +32,6 @@ block append navbarli
         a(onclick="scrollTo('#aboutSlide')") #{texts.MENU.ABOUT_US}
     li
         a(onclick="scrollTo('#contactSlide')") #{texts.MENU.CONTACT}
-    li
-        a(onclick="scrollTo('#footerSlide')") __Footer
 
 block content
     if registerError
@@ -133,7 +134,7 @@ block content
                         img.center-block.img-responsive(src='resources/images/icons/mailWhite.png', style='height:150px')
                         h1.text-center  #{texts.MENU.CONTACT}
                         p.text-center __For information and bla bla you can contact us via mail
-                        h2.text-center __info.splinxs@gmail.com
+                        h2.text-center info.splinxs@gmail.com
     #footerSlide.slide
         .content
             h2 __Footer and copiright here, no link to this section

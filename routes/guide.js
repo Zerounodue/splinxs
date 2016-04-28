@@ -51,14 +51,14 @@ router.post('/register', function(req, res) {
         return;
     }
     //TODO this must be done the first time or create the collection by hand
-
+    /*
     var myArr= ['en','de'];
 
     GuideLanguage.create({ codes: myArr }, function (err, small) {
         if (err) return handleError(err);
         // saved!
     })
-    
+    */
 
 
 

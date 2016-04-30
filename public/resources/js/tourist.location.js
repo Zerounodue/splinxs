@@ -55,7 +55,7 @@ function addMapListeners(){
         //waits ms for marker to be placed		
         click_timeout = setTimeout(function () {
             if(showLogs) console.log('map click timeout ended');
-            updateMarker(event.latLng, map);
+            updateMarker(event.latLng);
         }, click_timeoutTimer);
     });
     //double click zooms
@@ -74,7 +74,7 @@ function addMarker(position) {
     marker = new google.maps.Marker({
         position: position,
         map: map,
-        icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+        icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
     });
     /* not needed
     marker.addListener('click', function (event) {
@@ -91,29 +91,26 @@ function getGEOLocation() {
     if (navigator.geolocation) {
         //watchPosition() is used instead of getCurrentPosition() so this action can be stopped
         watchID = navigator.geolocation.watchPosition(function (position) {
-
             var pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
             //stop watching (updating and trying to get the position) when the position is found
             navigator.geolocation.clearWatch(watchID);
-            map.setCenter(pos);
-            updateMarker(pos, map);
+            //map.setCenter(pos);
+            updateMarker(pos);
             hideLoadPopup();
-            map.setZoom(15);
+            //map.setZoom(15);
             fillTryAgainDiv();
         }, function (error) { //error function
             //user did not allow google maps
             if(showLogs) console.warn('The Geolocation service failed');
             if (error.code == error.PERMISSION_DENIED){
                 document.getElementById('errorMessage').innerHTML = permissionError;
-
             }
             else{
                 document.getElementById('errorMessage').innerHTML = otherError
                 fillTryAgainDiv();
-
             }
             hideLoadPopup();
             showDeclinedPopup();
@@ -131,17 +128,18 @@ function getGEOLocation() {
  * sets the marker to the given position
  * @param {object{lat: double, lng: double}} pos to set marker at
  */
-function updateMarker(pos, map){
+function updateMarker(pos){
     if(showLogs) console.log("update marker");
     if(isValidGEOPosition(pos)){
         if(!marker){
             addMarker(pos);
             map.setZoom(15);
+            map.panTo(pos);
         }
         else {
             marker.setPosition(pos);
         }
-        map.panTo(pos);
+        //map.panTo(pos);
 
     }else{
         if(showLogs) console.log("invalid position");

@@ -22,7 +22,7 @@ var circleOptions = {
     suppressUndo: true,
     strokeColor: '#2585C4'
 };
-var defaultLocation = {lat: 46.947248, lng: 7.451586}; //Bern
+var defaultLocation = {lat: 0, lng: 0};
 //circles loaded from db
 var existingCircles = null;
 
@@ -35,7 +35,7 @@ function initMap() {
     if (showLogs) console.log('initialising guide areas map');
     map = new google.maps.Map($("#map")[0],{
         center: defaultLocation,
-        zoom: 10,
+        zoom: 1,
         zoomControl: true,
         mapTypeControl: false,
         scaleControl: true,
@@ -74,14 +74,6 @@ function initDrawingManager() {
     drawingManager = new google.maps.drawing.DrawingManager({
         drawingMode: google.maps.drawing.OverlayType.Circle,
         drawingControl: false,
-        /*
-         drawingControlOptions: {
-            position: google.maps.ControlPosition.TOP_CENTER,
-            drawingModes: [
-                google.maps.drawing.OverlayType.CIRCLE
-            ]
-         },
-         */
         circleOptions: circleOptions
     });
 
@@ -96,9 +88,7 @@ function initDrawingManager() {
 function addDrawingManagerListeners() {
     if (showLogs) console.log('add drawing manager listeners');
     google.maps.event.addListener(drawingManager, 'circlecomplete', function (circle) {
-        var radius = circle.getRadius();
         if (showLogs) console.log('circlecomplete');
-        
         addCircle(circle);
     });
 
@@ -189,9 +179,8 @@ function addSearchBoxListeners(){
         });
         map.fitBounds(bounds);
     });
-    
 }
-/* might be needed if map does show gray
+/* might be needed if map shows gray
 function resizeMap() {
     google.maps.event.trigger(map, 'resize');
     map.setZoom(map.getZoom());
@@ -209,7 +198,8 @@ $(document).ready(function () {
         if(n > 0){
             saveCircles();
         }else{
-            alert('No circles...');
+            //TODO something useful
+            alert('__No areas selected...');
         }
 
     });
@@ -230,12 +220,6 @@ $(document).ready(function () {
         if(showLogs) console.log('mapControlRemoveCircles clicked');
         drawingManager.setDrawingMode(null);
         drawingManager.removeCircle = true;
-    });
-    
-    //only for test purposes
-    $("#btn_knownAreasLoad").click(function () {
-        if(showLogs) console.log('button knownAreasLoad clicked');
-        loadExistingCircles();
     });
 
 });
@@ -258,8 +242,7 @@ function getCircles(){
 function getNumberOfCircles(){
     if(showLogs) console.log('get number of circles');
     var n = getCircles();
-    
-    return n == null ? 0 : n.length;
+    return (n == null || n == 'undefined') ? 0 : n.length;
 }
 /**
  * loads the existing circles and displays them on the map
@@ -290,7 +273,7 @@ function loadExistingCircles(){
                 addCircle(c);
             });
         }else{
-            if(showLogs) console.log('less than 1 existing circle...');
+            if(showLogs) console.log('less than 1 existing circle');
         }
     }
 }
@@ -322,12 +305,16 @@ function saveCircles(){
  * sends the saved circles to the server
  */
 function submitCircles(){
-    
-    areaForm.empty();
-    $('<input id=\'areas\'/>').attr('type', 'hidden')
-          .attr('name', "areas")
-          .attr('value', existingCircles)
-          .appendTo('#frm_areas');
+    // Create the form object
+    var areaForm = document.createElement("form");
+    areaForm.setAttribute("method", "post");
+    areaForm.setAttribute("action", "/guideAreas");
+    var hiddenField = document.createElement("input");
+    hiddenField.setAttribute("name", "areas");
+    hiddenField.setAttribute("value", existingCircles);
+    // append the newly created control to the form
+    areaForm.appendChild(hiddenField);
+    document.body.appendChild(areaForm); // inject the form object into the body section
     areaForm.submit();
 }
      

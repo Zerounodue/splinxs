@@ -31,46 +31,30 @@ router.post('/register', function(req, res) {
     var pw2 = req.body.password_confirm;
     var email = req.body.email;
     if(!func.usableString(name) || !func.usableString(pw) || !func.usableString(pw2) || !func.usableString(email)){
-        //TODO remove console.log
-        console.log("error in username , pw or email something wrong (not usable string) --> redirect home");
         func.redirectHome(res);
         return;
     }
     //passwords must match
     if(pw != pw2){
-        //TODO remove console.log
-        console.log("error password not match --> redirect home");
         func.redirectHome(res);
         return;
     }
     //valid email
     if(!emailValidator.validate(email)){
-        //TODO remove console.log
-        console.log("error email not valid  --> redirect home");
         func.redirectHome(res);
         return;
     }
-    //TODO this must be done the first time or create the collection by hand
+    //this must be done the first time or create the collection by hand
     /*
-    var myArr= ['en','de'];
-
-    GuideLanguage.create({ codes: myArr }, function (err, small) {
+    GuideLanguage.create({ codes: ['en'] }, function (err, small) {
         if (err) return handleError(err);
         // saved!
     })
     */
 
-
-
-
-
-
     Guide.register(new Guide({ username : req.body.username, email: req.body.email }), req.body.password, function(err, guide) {
         if (err) {
-
             if(err.name == "UserExistsError"){
-                //TODO remove console.log
-                console.log("usernam existe error  --> redirect index");
                 //TODO title not needed?
                 res.render('index', {title: "__Register", registerError: "__username already taken", email: email});
                 //TODO remove commented old version line if the above line works
@@ -91,8 +75,6 @@ router.post('/register', function(req, res) {
             req.session.guide = true;
             req.session.loggedIn = false;
             req.session.hasLanguages = req.session.hasAreas = false;
-            //TODO remove console.log
-            console.log("all OK!  --> redirect guide languages");
             func.renderGuideLangs(res);
             return;
         });
@@ -156,9 +138,8 @@ router.post('/guideLanguages', function(req, res) {
 
     var langs = JSON.parse(req.body.languages);
     var validLangs = true;
-
+    //check if code is ISO-6391, in case there are evil users...
     for (var i = 0; i <  langs.length; i++){
-        //TODO delete
         if(!ISO6391.validate(langs[i])){
             validLangs = false;
             break;
@@ -173,21 +154,17 @@ router.post('/guideLanguages', function(req, res) {
                 return handleError(err);
             }
         });
-        //TODO make work
+        //save languages in list of all languages that guides can speak
         GuideLanguage.update(null, {$addToSet: {codes: {$each: langs}}}, function (err, raw){
             if(err){
-                console.log("GuideLanguage update error");
+                console.log("GuideLanguage update error: " + err);
                 //TODO might need to do something more?
                 return handleError(err);
-            }
-            else{
-                console.log("GuideLanguage all ok?");
+            }else{
+                //everything ok
+                console.log("GuideLanguage all ok: " + raw);
             }
         });
-
-
-
-
         if(func.isLoggedIn(req)){
             //send to guide site
             func.renderGuide(res, req.session.username);
@@ -322,7 +299,7 @@ router.post('/guideAreas', function(req, res) {
 });
 
 router.get('/guidePassword', function(req, res) {
-    //needs to be a logged in  guide
+    //needs to be a logged in guide
     if(!func.hasSession(req) || !func.isLoggedIn(req) || !func.isGuide(req)){
         func.redirectHome(res);
         return;

@@ -11,6 +11,15 @@
         "TOURIST": "Turista",
         "VIDEO": "Video"
     },
+    "G_AREAS":{
+        
+    },
+    "G_LANGUAGES":{
+        
+    },
+    "G_PASSWORD":{
+        
+    },
     "MENU": {
         "ABOUT_US": "Chi siamo",
         "CONTACT": "Contatto",
@@ -36,6 +45,9 @@
 
     },
     "REGISTER": {
+        
+    },
+    "T_LANGUAGES":{
         
     },
     "T_LOCATION":{

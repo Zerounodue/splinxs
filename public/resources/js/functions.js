@@ -2,37 +2,39 @@
  * Created by Zerododici on 19.04.16.
  */
 var ISO6391 = require('iso-639-1');
+var i18n = require("i18n-express");
 
 this.redirectHome = function(res){
     res.redirect('/');
 };
 
 this.renderGuide = function(res, name){
-    res.render('guide', {title: '__Guide', name: name});
+    var texts = res.req.i18n_texts;
+    res.render('guide', {title: texts.GENERAL.GUIDE, name: name});
 };
 
 this.renderGuideLangs = function(res, sLangs){
+    var texts = res.req.i18n_texts;
     if(typeof sLangs === 'undefined' || sLangs === null) sLangs = [];
-    res.render('guideLanguages', {title: "__Guide Languages", langs: ISO6391, savedLangs: sLangs});
+    res.render('guideLanguages', {title: texts.G_LANGUAGES.G_LANGUAGES, langs: ISO6391, savedLangs: sLangs});
 };
 
 this.renderGuideAreas = function(res, sAreas){
+    var texts = res.req.i18n_texts;
     if(typeof sAreas === 'undefined' || sAreas === null) sAreas = [];
-    res.render('guideAreas', {title: "__Guide Areas", savedAreas: sAreas});
+    res.render('guideAreas', {title: texts.G_AREAS.G_AREAS, savedAreas: sAreas});
 };
 
 this.renderGuidePW = function(res){
-    res.render('guidePassword', {title: "__Guide Password"});
+    var texts = res.req.i18n_texts;
+    res.render('guidePassword', {title: texts.G_PASSWORD.G_PASSWORD});
 };
 
-//function usableString(s) {
 this.usableString = function(s){
     var usable = true;
     usable = (s !== null && typeof s === 'string' || s.length > 0);
     return usable;
 };
-
-
 
 this.isGuide = function(req){
     var is = false;
@@ -41,7 +43,6 @@ this.isGuide = function(req){
             is = true;
         }
     }
-    console.log('     is guide: ' + is);
     return is;
 };
 
@@ -52,7 +53,6 @@ this.isLoggedIn = function(req){
             is = true;
         }
     }
-    console.log('     logged in: ' + is);
     return is;
 };
 
@@ -63,7 +63,6 @@ this.hasSession = function(req){
             has = true;
         }
     }
-    console.log('     has session: ' + has);
     return has;
 };
 
@@ -74,7 +73,6 @@ this.hasLanguages = function(req){
             has = true;
         }
     }
-    console.log('     has languages: ' + has);
     return has;
 };
 
@@ -85,31 +83,26 @@ this.hasAreas = function(req){
             has = true;
         }
     }
-    console.log('     has areas: ' + has);
     return has;
 };
 
 this.touristHasLanguages = function(req){
     var has = false;
-    
     if(req.session && !req.session.guide){
         if(req.session.languages && req.session.languages.length > 0){
             has = true;
         }
     }
-    
     return has;
 };
 
 this.touristHasLocation = function(req){
     var has = false;
-    
     if(req.session && !req.session.guide){
         if(req.session.lat && req.session.lng && req.session.lat.toString().length > 0 && req.session.lng.toString().length > 0){
             has = true;
         }
     }    
-    
     return has;
 };
 
@@ -138,15 +131,16 @@ this.createTouristUsername = function(){
 };
 
 this.renderTouristSite = function(res, name){
-    res.render('tourist', {title: "__Tourist", name: name});
+    var texts = res.req.i18n_texts;
+    res.render('tourist', {title: texts.GENERAL.TOURIST, name: name});
 };
 
 this.renderTouristLanguages = function(res, codes){
-    console.log("function codes: "+codes);
-
-    res.render('touristLanguages', {title: "__Tourist Languages", langs: ISO6391, codes:codes.sort()});
+    var texts = res.req.i18n_texts;
+    res.render('touristLanguages', {title: texts.T_LANGUAGES, langs: ISO6391, codes:codes.sort()});
 };
 
 this.renderTouristLocation = function(res){
-    res.render('touristLocation', {title: "__Tourist Location"});
+    var texts = res.req.i18n_texts;
+    res.render('touristLocation', {title: texts.T_LOCATION});
 };

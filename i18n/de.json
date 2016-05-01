@@ -5,6 +5,15 @@
     "GENERAL": {
 
     },
+    "G_AREAS":{
+        
+    },
+    "G_LANGUAGES":{
+        
+    },
+    "G_PASSWORD":{
+
+    },
     "MENU": {
         
     },
@@ -21,6 +30,9 @@
         
     },
     "REGISTER": {
+        
+    },
+    "T_LANGUAGES":{
         
     },
     "T_LOCATION":{

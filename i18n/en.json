@@ -13,6 +13,15 @@
         "TOURIST": "Tourist",
         "VIDEO": "Video"    
     },
+    "G_AREAS":{
+        "G_AREAS": "Guide Areas"
+    },
+    "G_LANGUAGES":{
+        "G_LANGUAGES": "Guide Languages"
+    },
+    "G_PASSWORD":{
+        "G_PASSWORD": "Guide Password"
+    },
     "MENU": {
         "ABOUT_US": "About us",
         "CONTACT": "Contact",
@@ -47,6 +56,9 @@
         "REGISTER": "Register",
         "USERNAME": "Username"
     },
+    "T_LANGUAGES":{
+        "T_LANGUAGES": "Tourist Languages"
+    },
     "T_LOCATION":{
         "GETTING_GPS": "Getting GPS position, please wait....",
         "ADD_POS_MAN":"you can add position manually",
@@ -60,7 +72,8 @@
         "CONTINUE": "Continue",
         "AUTO_GPS": "Use GPS",
         "PERMISSION_DENIED": "permission denied, add your position by hand",
-        "OTHER_ERROR": "an error occurred"
+        "OTHER_ERROR": "an error occurred",
+        "T_LOCATION": "Tourist Location"
     },
     "T_SETTINGS":{
         "SEND": "Send languages",

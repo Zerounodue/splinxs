@@ -16,7 +16,7 @@ var func  = require('../public/resources/js/functions.js');
 /* GET home page. */
 router.get('/', function(req, res, next) {
     //TODO is this good?
-    if(func.isGuide(req)){
+    if(func.isGuide(req) && func.isLoggedIn(req)){
         func.renderGuide(res);
         return;
     }
@@ -81,7 +81,7 @@ router.get('/guideSocket', function(req, res) {
 
 router.get('/index', function(req, res) {
     //TODO is this good?
-    if(func.isGuide(req)){
+    if(func.isGuide(req) && func.isLoggedIn(req)){
         func.renderGuide(res);
         return;
     }
@@ -105,7 +105,7 @@ router.post('/index', function (req, res, next) {
         }
 
         var name = req.body.username;
-        //check in db if guide entered languages and areas
+        //check in db if guide has already set languages and areas
         var hasLanguages = false;
         var hasAreas = false;
         
@@ -121,6 +121,7 @@ router.post('/index', function (req, res, next) {
                 }
                 //TODO error occurred  when testing:
                 // if(guide.languages)      {TypeError: Cannot read property 'languages' of null
+                //cannot reproduce
                 if(guide.languages){
                     hasLanguages = guide.languages.length > 0;
                 }
@@ -128,7 +129,7 @@ router.post('/index', function (req, res, next) {
                     hasAreas = guide.areas.length > 0;
                 }
                 //TODO delete when tested
-                console.log("has langs: " + hasLanguages + ", has areas: " + hasAreas);
+                //console.log("has langs: " + hasLanguages + ", has areas: " + hasAreas);
                 
                 callback();
                 
@@ -140,7 +141,7 @@ router.post('/index', function (req, res, next) {
             req.session.username = req.body.username;
             req.session.guide = true;
             req.session.loggedIn = false;
-
+            
             //guide completed registration
             if (hasLanguages && hasAreas) {;
                 req.session.loggedIn = true;

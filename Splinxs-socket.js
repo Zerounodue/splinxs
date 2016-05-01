@@ -59,7 +59,6 @@ module.exports = exports = function(io) {
             //check if guide is same as in session
             if(socket.request.session.username != socket.username){
                 if(showLogs) console.log('session username and socket name do not match');
-                //TODO something useful...
                 //send a request to redirect home? or simply do nothing at all
                 return;
             }
@@ -87,7 +86,6 @@ module.exports = exports = function(io) {
             //check if guide is same as in session
             if(socket.request.session.username != socket.username){
                 if(showLogs) console.log('session username and socket name do not match');
-                //TODO something useful...
                 //send a request to redirect home? or simply do nothing at all
                 return;
             }
@@ -100,26 +98,18 @@ module.exports = exports = function(io) {
             var res = msg.response;
             if(res == guideResponses.accept){
                 if(showLogs) console.log('Splinxs-socket: guide accept, ' + socket.username);
-                
-                console.log('----------SplinxsList length: ' + splinxsList.getLength());
-                
-                
-                
                 var item = splinxsList.getFirstGuide(socket.username);
-                
+                //another guide already helped the tourist
                 if(item == null){
                     if(showLogs) console.log('guide too late: ' + socket.username);
                     sendTooLateRequest(socket.username);
+                //remove tourist from splinxsList, send guide name to tourist, set guide state to unavailable
                 }else{
-                    //remove tourist from list
                     splinxsList.removeTourist(item.tourist);
-                    console.log('----------SplinxsList length: ' + splinxsList.getLength());
                     sendAcceptedMessageTourist(item.tourist, item.guide);
                     setGuideState(item.guide, guideStates.unavailable);
                 }
-
                 splinxsList.removeGuide(socket.username);
-                console.log('----------SplinxsList length: ' + splinxsList.getLength());
             }
             
         });
@@ -142,7 +132,11 @@ module.exports = exports = function(io) {
     function sendTooLateRequest(g){
         sendMessageGuide(g, {request: guideRequests.tooLate});
     }
-    
+    /**
+     * sends a message to a guide
+     * @param {string} g guide to send message to 
+     * @param {object} msg message to send
+     */
     function sendMessageGuide(g, msg){
         guideSocket.emit(g, msg);
     }
@@ -176,7 +170,6 @@ module.exports = exports = function(io) {
             //check if tourist is same as in session
             if(socket.request.session.username != socket.username){
                 if(showLogs) console.log('session username and socket name do not match');
-                //TODO something useful...
                 //send a request to redirect home? or simply do nothing at all
                 return;
             }
@@ -193,9 +186,7 @@ module.exports = exports = function(io) {
                         if(langs.length > 0 && isNumeric(lat) && isNumeric(lng)){
                             findMatchingGuide(socket.username, {lat: lat, lng: lng}, langs);
                         }
-                        
                     }
-                    
                 }
             }
         });
@@ -205,85 +196,46 @@ module.exports = exports = function(io) {
     function sendAcceptedMessageTourist(t, g){
         sendMessageTourist(t, {response: touristResponses.accepted, guide: g});
     }
-    
+    /**
+     * sends a message to a tourist
+     * @param {string} t tourist to send message to
+     * @param {object} msg message to send
+     */
     function sendMessageTourist(t, msg){
         touristSocket.emit(t, msg);
     }
     
-    
+    /**
+     * finds matching guides in the database, adds the guides found and the tourist in the queue (splinxsList), sends help request to guide
+     * @param {string} tourist name of tourist
+     * @param {{lat: number, lng: number}} location geolocation in lat and lng object
+     * @param {[string]} languages array of 2 letter language codes
+     */
     function findMatchingGuide(tourist, location, languages){
-                
-        var list = [];
-        //TODO find matching list in db and return array of guides
-        //Guide.find(...);
-        //list with guides that match the tourist
-        
-        //db.getCollection('guides').findMatchingGuides({params: {languages: ['de', 'en'], position: {lat: 46.947248, lng: 7.451586}}});
-        
+        //find matching guide in db
         Guide.find({languages: { $in: languages}, state: guideStates.available}, 'username areas', function(err, guides){
             if(err){
                 console.log(err.msg);
             }
-
+            //get matching guides
             for(var i = 0; i < guides.length; i++){
                 var g = guides[i];
                 if(g.isInArea(location)){
-                    list.push(g.username);
-                    console.log("matching guide: " + g.username);
+                    splinxsList.addStrings(g.username, tourist);
+                    sendGuideHelpRequest(g.username);
                 }
             }
-            
-            if (list.length > 0) {
-                //add guide tourist pair to splinxs list and send help request to guide
-                for (var i = 0; i < list.length; i++){
-                    splinxsList.addStrings(list[i], tourist);
-                    sendGuideHelpRequest(list[i]);
-                }
-            }
-            
-            //debugger;
-            //var is = guide.isInArea(location);
-            //list.push(guide.username);
-            
         });
-        /*
-        Guide.findMatchingGuides({params: {languages: languages, position: location}}, function (err, guide) {
-            if (err)
-            {
-                console.log('error');
-                return;
-            }
-            guide;
-            debugger;
-        });
-        */
-        /*
-        var query = Guide.find({});
-
-        query.where('languages', { $in: languages});
-        query.where();
-
-        query.exec(function (err, docs) {
-          // called when the `query.complete` or `query.error` are called
-          // internally
-          debugger;
-        });
-        */
-       
-       
-       
-        //TODO remove when working
-        //list.push('guide1');
-        
-        
-        
-        
     }
     
     function sendGuideHelpRequest(g){
         sendHelpRequest(g);
     }   
-   
+    /**
+     * checks if a given value is numeric
+     * @param {object} n value to check
+     * @returns {Boolean} true if numeric, false otherwise
+     */
     function isNumeric(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
@@ -291,8 +243,5 @@ module.exports = exports = function(io) {
     
     
     
-    
-    
-    
-    
+
 };

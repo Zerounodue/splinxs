@@ -89,7 +89,9 @@ router.get('/index', function(req, res) {
 });
 
 
-
+router.get('/index2', function(req, res) {
+    res.render('index2');
+});
 
 router.post('/index', function (req, res, next) {
 

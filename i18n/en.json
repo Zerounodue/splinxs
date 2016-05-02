@@ -61,7 +61,7 @@
     },
     "T_LOCATION":{
         "GETTING_GPS": "Getting GPS position, please wait....",
-        "ADD_POS_MAN":"you can add position manually",
+        "ADD_POS_MAN":"you can add a position manually",
         "CLOSE": "Close",
         "OK": "Ok",
         "IMP_GET_GPS": "Impossible to get the current location",

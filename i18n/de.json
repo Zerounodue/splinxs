@@ -3,19 +3,32 @@
         
     },
     "GENERAL": {
-
+        "AUDIO": "Audio",
+        "CANCEL": "Abbrechen",
+        "CHAT": "Chat",
+        "GUIDE": "Guide",
+        "ORIENTATION": "Orientierung",
+        "SPLINXS": "Splinxs",
+        "SUBMIT": "Senden",
+        "TOURIST": "Tourist",
+        "VIDEO": "Video"
     },
     "G_AREAS":{
-        
+        "G_AREAS": "Guide Gebietw"
     },
     "G_LANGUAGES":{
-        
+        "G_LANGUAGES": "Guide Sprachen"
     },
     "G_PASSWORD":{
-
+        "G_PASSWORD": "Guide Passwort"
     },
     "MENU": {
-        
+        "ABOUT_US": "Über uns",
+        "CONTACT": "Kontakt",
+        "HOME": "Home",
+        "LANGUAGES": "Sprachen",
+        "WHAT_IS_SPLINXS": "Was ist Splinxs",
+        "SETTINGS": "Einstellungen"
     },
     "LANGUAGES": {
         "ENGLISH": "English",
@@ -23,22 +36,48 @@
         "ITALIAN": "Italiano"
     },
     "INDEX": {
+        "DESCRIPTION_GUIDE": "you know some places very well and want to help someone who is there? Sign up and start helping people right now.",
+        "DESCRIPTION_TOURIST": "you are somewhere unfamiliar and need help? Don't worry, a guide will help you. Thanks to camera, microphone, GPS and chat the guide will see what you see, speak with you and guide you to your destination.",
+        "I_AM_GUIDE": "Ich bin ein Guide",
+        "I_AM_TOURIST": "Ich bin ein Tourist",
 
+        "SPLINXS_SUBTITLE": "The real time tourist guide"
         
     },
     "LOGIN": {
-        
+        "LOGIN": "Login",
+        "PASSWORT": "Passwort",
+        "USERNAME": "Username"
     },
     "REGISTER": {
-        
+        "E-MAIL": "E-Mail",
+        "PASSWORT": "Passwort",
+        "R_PASSWORD": "Passwort wiederholen",
+        "REGISTER": "Registrieren",
+        "USERNAME": "Username"
     },
     "T_LANGUAGES":{
-        
+        "T_LANGUAGES": "Tourist Sprachen"
     },
     "T_LOCATION":{
-        
+        "GETTING_GPS": "Suche die GPS-Position, bitte warten ....",
+        "ADD_POS_MAN": "Sie können ihre Position auch manuell hinzufügen",
+        "CLOSE": "Schliesse",
+        "OK": "Ok",
+        "IMP_GET_GPS": "Unmöglich ihr aktuellen Standort zu ermittlen",
+        "ADD_POS": "Position hinzufügen",
+        "CLICK_MAP": "Klicken Sie auf der Karte um ihre aktuelle Position hinzuzufügen",
+        "GUIDE_WILL_HELP": "ein Guide, die diese Region kennt, wird Ihnen helfen",
+        "INFO": "Info",
+        "CONTINUE": "Weiter",
+        "AUTO_GPS": "GPS benutzen",
+        "PERMISSION_DENIED": "Erlaubnis verweigert, fügen Sie Ihre Position manuell ein",
+        "OTHER_ERROR": "Ein Fehler ist aufgetreten"
     },
     "T_SETTINGS":{
-        
+        "SEND": "Sprache senden",
+        "SKILL": "Niveau wählen",
+        "SPOKEN_LANGUAGES": "Sprachen",
+        "LANGUAGES_INTRO": "Wählen Sie alle Ihre gesprochenen Sprachen und der relative Niveau"
     }
 }

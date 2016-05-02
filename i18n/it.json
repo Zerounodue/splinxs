@@ -4,21 +4,23 @@
     },
     "GENERAL": {
         "AUDIO": "Audio",
+        "CANCEL": "Annulla",
         "CHAT": "Chat",
         "GUIDE": "Guide",
-        "ORIENTATION": "Orientamento",
+        "ORIENTATION": "Orinetamento",
         "SPLINXS": "Splinxs",
+        "SUBMIT": "Invia",
         "TOURIST": "Turista",
         "VIDEO": "Video"
     },
     "G_AREAS":{
-        
+        "G_AREAS": "Aree della guide"
     },
     "G_LANGUAGES":{
-        
+        "G_LANGUAGES": "Lingue della guide"
     },
     "G_PASSWORD":{
-        
+        "G_PASSWORD": "Password della guida"
     },
     "MENU": {
         "ABOUT_US": "Chi siamo",
@@ -42,19 +44,40 @@
 
     },
     "LOGIN": {
-
+        "LOGIN": "Login",
+        "PASSWORD": "Password",
+        "USERNAME": "Username"
     },
     "REGISTER": {
-        
+        "EMAIL": "Email",
+        "PASSWORD": "Password",
+        "R_PASSWORD": "Ripeti password",
+        "REGISTER": "Registarti",
+        "USERNAME": "Username"
     },
     "T_LANGUAGES":{
-        
+        "T_LANGUAGES": "Lingue del turista"
     },
     "T_LOCATION":{
-        
+        "GETTING_GPS": "Ricerco la posizione, prego attendere....",
+        "ADD_POS_MAN":"puoi agguinungere la tu posizione manualemnte",
+        "CLOSE": "Chiudi",
+        "OK": "Ok",
+        "IMP_GET_GPS": "Impossibile localizzare",
+        "ADD_POS": "Aggiungi una posizione",
+        "CLICK_MAP": "clicca sulla mappa per aggionugere la tua posizione",
+        "GUIDE_WILL_HELP": "una guida che conosce la zona la aiuterà",
+        "INFO": "Info",
+        "CONTINUE": "Continua",
+        "AUTO_GPS": "Usa il GPS",
+        "PERMISSION_DENIED": "permesso negato, aggiungi la tua posizione manualmente",
+        "OTHER_ERROR": "C'è stato un errore"
     },
     "T_SETTINGS":{
-        
+        "SEND": "Invia le lingue",
+        "SKILL": "Seleziona il livello",
+        "SPOKEN_LANGUAGES": "Lingue parlate",
+        "LANGUAGES_INTRO": "Selezione le lingue che parli e il relativo livello di conoscenza"
     }
     
 

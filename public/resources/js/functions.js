@@ -137,7 +137,7 @@ this.renderTouristSite = function(res, name){
 
 this.renderTouristLanguages = function(res, codes){
     var texts = res.req.i18n_texts;
-    res.render('touristLanguages', {title: texts.T_LANGUAGES, langs: ISO6391, codes:codes.sort()});
+    res.render('touristLanguages', {title: texts.T_LANGUAGES, langs: ISO6391, codes:codes});
 };
 
 this.renderTouristLocation = function(res){

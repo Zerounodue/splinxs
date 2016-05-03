@@ -16,7 +16,30 @@ var func  = require('../public/resources/js/functions.js');
 
 
 router.get('/touristLanguages', function(req, res) {
+    //TODO is this intelligent? can't a guide do tourist things?
+    //do an automatic logout or tell the guide he has to logout
+    // hard redirect is not user friendly
 
+    //1. there is no link for the guide to go to this website, if he does, then he has to enter the url himself
+    //-> he does something that is not "allowed" thus it does not have to be user friendly
+    //2. it just makes no sense at all that a guide does tourist things, a guide is there to help, when he wants to get help, he becomes a tourist...
+    //-> he can log out and use the link to go to the tourit site, which is "allowed"
+    if(func.isGuide(req)){
+        func.redirectHome(res);
+        return;
+    }
+    
+    GuideLanguage.findOne({}, 'codes', {lean: true}, function (err, langs){
+        if (err) {
+            console.log('error getting guide languages: ' + err);
+            return handleError(err);
+        }
+        req.session.username = func.createTouristUsername();
+        func.renderTouristLanguages(res, langs.codes.sort());
+    });
+    
+    
+    /*
     //TODO querry is maybe unsable or not 100% correct?
     GuideLanguage.findOne(function (err, languages) {
         if (err) return handleError(err);
@@ -28,14 +51,11 @@ router.get('/touristLanguages', function(req, res) {
         func.renderTouristLanguages(res, languages.codes);
         console.log('2');
     });
-
-    //TODO is this intelligent? can't a guide do tourist things?
-    //do an automatic logout or tell the guide he has to logout
-    // hard redirect is not user friendly
-    if(func.isGuide(req)){
-        func.redirectHome(res);
-        return;
-    }
+    */
+    
+    
+    
+    
 
 });
 
@@ -86,6 +106,8 @@ router.get('/touristLocation', function(req, res) {
     return;
 });
 
+/*
+//moved code to post(/tourist)
 router.post('/touristLocation', function(req, res) {
     if(!func.hasSession(req) || func.isGuide(req) || !func.touristHasLanguages(req)){
         func.redirectHome(res);
@@ -97,7 +119,9 @@ router.post('/touristLocation', function(req, res) {
     }
     
     var pos = JSON.parse(req.body.position);
-    var validLocation = pos.lat != null && pos.lng != null && func.isNumeric(pos.lat) && func.isNumeric(pos.lng);
+    //TODO test if works, else use commented line
+    //var validLocation = pos.lat != null && pos.lng != null && func.isNumeric(pos.lat) && func.isNumeric(pos.lng);
+    var validLocation = func.isNumeric(pos.lat) && func.isNumeric(pos.lng);
 
     if(validLocation){
         req.session.lat = pos.lat;
@@ -116,13 +140,9 @@ router.post('/touristLocation', function(req, res) {
         func.redirectHome(res);
         return;
     }
-
+   
 });
-
-
-router.get('/touristLocalisation', function(req, res) {
-    res.render('touristLocalisation');
-});
+*/
 
 //not allowed to go here with a get request
 router.get('/tourist', function(req, res) {
@@ -130,40 +150,37 @@ router.get('/tourist', function(req, res) {
 });
 
 router.post('/tourist', function(req, res) {
-    if(!func.hasSession(req) || func.isLoggedIn(req) || func.isGuide(req) || !func.touristHasLanguages(req) || !func.tourustHasAreas(req)){
+    if(!func.hasSession(req) || func.isGuide(req) || !func.touristHasLanguages(req)){
         func.redirectHome(res);
         return;
     }
-
-    if (!req.body){ //|| !req.body.parameter){
-        console.log(req.body);
-        //TODO redirect somewhere
-        res.send('<a>no post params, cheater!!!</a>');
+    if (!req.body || !req.body.position){
+        redirectHome(res);
         return;
-
     }
+    
+    var pos = JSON.parse(req.body.position);
+    //TODO test if works, else use commented line
+    //var validLocation = pos.lat != null && pos.lng != null && func.isNumeric(pos.lat) && func.isNumeric(pos.lng);
+    var validLocation = func.isNumeric(pos.lat) && func.isNumeric(pos.lng);
 
-    var params ="this are my parameters";
-    //var params = JSON.parse(req.body.parameter);
-
-
-    //if(params.languages.lenght <1 ){//TODO redirect somewhere
-
-    //    res.send('<a>no languages.lenght, cheater!!!</a>');
-    //}
-
-    //TODO thigns
-    req.session.params = params;
-
-
-    //TODO chech that req.body.position is ok
-    req.session.position=req.body.position;
-    //console.log(3);
-    console.log("Recived params "+ req.body.position);
-    res.send("Tourist site, recived position: "+ req.body.position);
-    //res.render('tourist', {session: req.session});
-
-
+    if(validLocation){
+        req.session.lat = pos.lat;
+        req.session.lng = pos.lng;
+        
+        //did not set languages
+        if(!func.touristHasLanguages(req)){
+            func.redirectHome(res);
+            return;
+        }
+        
+        //tourist site
+        func.renderTouristSite(res, req.session.username);
+        return;
+    }else{
+        func.redirectHome(res);
+        return;
+    }
 });
 
 

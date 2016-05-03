@@ -23,6 +23,9 @@ router.get('/', function(req, res, next) {
     res.render('index');
 });
 
+router.get('/touristLocalisation', function(req, res) {
+    res.render('touristLocalisation');
+});
 
 router.get('/db', function(req, res) {
     /*

@@ -268,7 +268,7 @@ function submitLocation(){
     // Create the form object
     var locForm = document.createElement("form");
     locForm.setAttribute("method", "post");
-    locForm.setAttribute("action", "/touristLocation");
+    locForm.setAttribute("action", "/tourist");
     var hiddenField = document.createElement("input");
     hiddenField.setAttribute("name", "position");
     hiddenField.setAttribute("value", pos);

@@ -55,13 +55,17 @@ block content
 
 
 
-
+    .container.right
+        .row
+            .col-md-12
+                a.get-gps(id="btn_gps")
+                    img.gps-image(src='resources/images/icons/gps.png', alt='gps', id="img_location")
     .container.front
         //img(src='resources/images/icons/orientation_small.png', alt='location', id="img_location")
         .row
-            .col-md-6.text-center
+            .col-sm-6.text-center
                 a.btn.btn-default.btn-white.btn-map(id="btn_info") #{texts.T_LOCATION.INFO}
-            .col-md-6.text-center
+            .col-sm-6.text-center
                 a.btn.btn-default.btn-green.btn-map(id="btn_submit") #{texts.T_LOCATION.CONTINUE}
     #map.touristMap
     script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&callback=initMap' async defer)

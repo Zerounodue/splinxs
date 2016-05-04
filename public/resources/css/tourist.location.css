@@ -86,8 +86,38 @@ html, body {
     position: fixed;
     bottom: 20px;
     width: 100%;
-    z-index: 9999;
+    z-index: 9998;
+}
+.right{
+    padding-left: 10px;
+    padding-right: 10px;
+    position: fixed;
+    bottom: 90px;
+    width: 100%;
+    z-index: 1;
 }
 #errorMessage{
     margin-bottom: 10px;
+}
+
+.get-gps{
+
+    float: right;
+    height: 28px;
+    width: 28px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+    border-radius: 2px;
+
+}
+
+.gps-image{
+    cursor: pointer;
+    padding: 4px;
+    height: inherit;
+    width: inherit;
+    opacity: 0.75;
+}
+.gps-image:hover{
+    opacity: 1;
 }

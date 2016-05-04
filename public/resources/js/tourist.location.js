@@ -209,6 +209,10 @@ $(document).ready(function () {
        if(showLogs) console.log('declined close img clicked');
         hideDeclinedPopup();
     });
+    $("#btn_gps").on('click', function(e){
+        if(showLogs) console.log('gps img clicked');
+        getGEOLocation();
+    });
     
 });
 

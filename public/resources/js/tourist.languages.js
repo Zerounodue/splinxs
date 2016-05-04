@@ -10,8 +10,7 @@ var showLogs = true;
 var languages = [];
 var localStorageKey = "languages";
 
-//DOM elements
-var langForm;
+
 
 $(document).ready(function () {
     if(showLogs) console.log('tourist languages document ready');
@@ -23,8 +22,7 @@ $(document).ready(function () {
     
     $("#btn_sendLanguages").on('click', function (e) {
         if(showLogs) console.log('send languages button clicked');
-        
-        langForm = $("#frm_languages");
+
         
         if(languages.length > 0){
             submitLanguages();
@@ -144,17 +142,27 @@ function clearLanguageStorage(){
 }
 
 function submitLanguages(){
+
     //sort languages by code
     languages.sort(compareLanguages);
     saveToLocalStorage(localStorageKey, languages);
     var langs = JSON.stringify(languages);
-    
-    langForm.empty();
-     $('<input id=\'langs\'/>').attr('type', 'hidden')
-          .attr('name', "languages")
-          .attr('value', langs)
-          .appendTo('#frm_languages');
+
+    // Create form html object
+    var langForm = document.createElement("form");
+    langForm.setAttribute("method", "post");
+    langForm.setAttribute("action", "/touristLanguages");
+    //create input html object
+    var langsInput = document.createElement("input");
+    langsInput.setAttribute("id", "langs");
+    langsInput.setAttribute("type", "hidden");
+    langsInput.setAttribute("name", "languages");
+    langsInput.setAttribute("value", langs);
+    //append and submit form with the imput
+    langForm.appendChild(langsInput);
+    document.body.appendChild(langForm); // inject the form object into the body section
     langForm.submit();
+    
     
 }
 

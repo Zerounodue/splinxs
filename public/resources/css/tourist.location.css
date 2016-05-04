@@ -76,17 +76,17 @@ html, body {
 }
 
 .btn-map{
-    width: 90%;
+    width: 100%;
     margin-bottom: 10px;
 
 }
 .front{
-    padding-left: 60px;
-    right: 20px;
+    padding-left: 80px;
+    right: 40px;
     position: fixed;
     bottom: 14px;
     width: 100%;
-    z-index: 9998;
+    z-index: 10;
 }
 .right{
     padding-left: 10px;

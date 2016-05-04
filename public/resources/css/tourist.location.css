@@ -81,10 +81,10 @@ html, body {
 
 }
 .front{
-    padding-left: 80px;
-    right: 40px;
+    padding-left: 60px;
+    right: 20px;
     position: fixed;
-    bottom: 20px;
+    bottom: 14px;
     width: 100%;
     z-index: 9998;
 }
@@ -101,7 +101,6 @@ html, body {
 }
 
 .get-gps{
-
     float: right;
     height: 28px;
     width: 28px;

@@ -97,10 +97,10 @@ function getGEOLocation() {
             };
             //stop watching (updating and trying to get the position) when the position is found
             navigator.geolocation.clearWatch(watchID);
-            //map.setCenter(pos);
+            map.setCenter(pos);
             updateMarker(pos);
             hideLoadPopup();
-            //map.setZoom(15);
+            map.setZoom(15);
             fillTryAgainDiv();
         }, function (error) { //error function
             //user did not allow google maps

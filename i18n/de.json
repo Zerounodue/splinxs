@@ -14,10 +14,14 @@
         "VIDEO": "Video"
     },
     "G_AREAS":{
-        "G_AREAS": "Guide Gebietw"
+        "G_AREAS": "Guide Gebiete"
     },
     "G_LANGUAGES":{
-        "G_LANGUAGES": "Guide Sprachen"
+        "TITLE": "Guide Sprachen",
+        "SEARCH": "Tippe zum suchen",
+        "SEND": "Sprachen senden",
+        "LANGUAGES_INTRO": "Bille wählen sie ihre Sprachen",
+        "OPTIONS": "Wähle eine option"
     },
     "G_PASSWORD":{
         "G_PASSWORD": "Guide Passwort"
@@ -75,7 +79,7 @@
         "OTHER_ERROR": "Ein Fehler ist aufgetreten"
     },
     "T_SETTINGS":{
-        "SEND": "Sprache senden",
+        "SEND": "Sprachen senden",
         "SKILL": "Niveau wählen",
         "SPOKEN_LANGUAGES": "Sprachen",
         "LANGUAGES_INTRO": "Wählen Sie alle Ihre gesprochenen Sprachen und der relative Niveau"

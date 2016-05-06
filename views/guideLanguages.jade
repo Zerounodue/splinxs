@@ -3,24 +3,37 @@
 
 extends layout
 
+block append stylesheets
+    link(rel='stylesheet', href='resources/css/guide.languages.css')
 block append scripts
     script(src='resources/js/jquery-2.2.0.min.js')
     script(src='resources/js/guide.languages.js')
+    script(src='resources/js/modernizr-custom.min.js')
 
 block content
-    h1 #{texts.TITLE_CHOOSE_LANGUAGES}
-    form(id="frm_languages" method="post" action="/guideLanguages")
-        //- var nativeNames = langs.getAllNativeNames()
-        - var codes = langs.getAllCodes()
-        script.
-          languages = !{JSON.stringify(savedLangs)};
-        label(for="languages") #{texts.LANGUAGES} 
-        input(id="inp_languages" type="text" list="languages" placeholder="__Type to search")
-        datalist(id='languages')
-          each code, index in codes
-              option(code='' + code + '' value='' + langs.getNativeName(code) + '')
-        br
-        div(id="div_selectedLanguages")
-          p __selected languages
-        //if user is logged in => guide
-        button(id='btn_sendLanguages') __send languages
+    center
+        h2 #{texts.G_LANGUAGES.TITLE}
+        .centerForm
+            form(id="frm_languages" method="post" action="/guideLanguages")
+            //- var nativeNames = langs.getAllNativeNames()
+            - var codes = langs.getAllCodes()
+            script.
+              languages = !{JSON.stringify(savedLangs)};
+            p #{texts.G_LANGUAGES.LANGUAGES_INTRO}
+
+            .row
+                .col-sm-12
+                    input.form-control.datalist(id="inp_languages" type="text" list="languages" placeholder="#{texts.G_LANGUAGES.SEARCH}")
+                    datalist.datalist(id='languages')
+                        select.form-control(id="sel_languages")
+                            option(value='', disabled='', selected='') #{texts.G_LANGUAGES.OPTIONS}
+                            each code, index in codes
+                                option(code='' + code + '' value='' + langs.getNativeName(code) + '') #{langs.getNativeName(code)}
+            .row
+                .col-sm-12
+                    div(id="div_selectedLanguages")
+                      //p __selected languages
+                    //if user is logged in => guides
+            .row
+                .col-sm-12
+                    button.btn.btn-primary.btn-send(id='btn_sendLanguages') #{texts.G_LANGUAGES.SEND}

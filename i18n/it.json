@@ -17,7 +17,11 @@
         "G_AREAS": "Aree della guide"
     },
     "G_LANGUAGES":{
-        "G_LANGUAGES": "Lingue della guide"
+        "TITLE": "Lingue della guide",
+        "SEARCH": "Scrivi per cercare",
+        "SEND": "Invia le lingue",
+        "LANGUAGES_INTRO": "Prego selezioni le lingue parlate",
+        "OPTIONS": "Seletiona un opzione"
     },
     "G_PASSWORD":{
         "G_PASSWORD": "Password della guida"

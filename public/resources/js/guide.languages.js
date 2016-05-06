@@ -13,24 +13,33 @@ var nativeNames = [];
 var langForm;
 var inp_lang;
 var selectedLanguages;
+var animDur = 150;
 
 $(document).ready(function () {
+
     if (showLogs) console.log('selectLanguages document ready');
+
+    
+    
     dataList = $("#languages");
     selectedLanguages = $("#div_selectedLanguages");
     inp_lang = $("#inp_languages");
+    sel_languages = $("#sel_languages");
     langForm = $("#frm_languages");
+
 
     //add existing languages
     addSavedLanguages();
-    
-    $("#inp_languages").on('input', function (e) {
-        var input = $(this).val();
-        var code = $("#languages option[value='" + input + "']").attr('code');
-        if(code != undefined){
-            addLanguage(code, input);
-        }
+
+    inp_lang.on('input', function (e) {
+        tryaddLanguage($(this).val());
     });
+
+    sel_languages.on('change', function (e) {
+        tryaddLanguage($(this).val());
+    });
+
+
     
     $("#btn_sendLanguages").on('click', function (e) {
         if(showLogs) console.log('send languages button clicked');
@@ -44,7 +53,12 @@ $(document).ready(function () {
         }
         
     });
-    
+
+    if (!Modernizr.datalistelem) {
+        //alert('This browser does not support HTML5 datalist element');
+        $("#inp_languages").hide();
+    }
+
 });
 /**
  * adds the selected language, if it is not already in the list
@@ -67,6 +81,7 @@ function addLanguage(c) {
         languages.push(c);
         addSelectedLanguageToDOM(c);
     }
+
     inp_lang.val('');
 }
 /**
@@ -80,7 +95,7 @@ function removeLanguage(c) {
         var i = $.inArray(c, languages);
         if(i > -1){
             languages.splice(i, 1);
-            removeSelectedLanguageFromDOM(c);
+            removeSelectedLanguageFromDOM(c, i);
         }
     }
 }
@@ -92,24 +107,53 @@ function addSelectedLanguageToDOM(c) {
     if (showLogs) console.log('add language to DOM');
     
     var nativeName = $("#languages option[code='" + c + "']").attr('value');
-    
+
+
     var html =
-        "<div id='div_lang_" + c + "'>" +
-            "<button id='btn_lang_" + c + "'>-</button>" + nativeName +
-        "</div>";
+        "<div class='div-languages ' style='display:none' id='div_lang_" + c + "'>"
+            + nativeName
+            + "<img class='img-close'  id='btn_lang_" + c + "' src='resources/images/icons/close.png' alt='close'>"
+        +"</div>";
     selectedLanguages.append(html);
+
+    //add class to the first element
+    $("#div_lang_"+languages[0]).addClass('div-languages-first');
+    //add class to the last element
+    $("#div_lang_"+languages[languages.length-1]).addClass('div-languages-last');
+    //remove class to the previous last element
+    if(languages.length >1){
+        $("#div_lang_"+languages[languages.length-2]).removeClass('div-languages-last');
+    }
+
 
     $("#btn_lang_" + c).click(function () {
         if (showLogs) console.log('remove lang ' + c + ' button clicked');
-        removeLanguage(c);
+        $("#div_lang_" + c).hide(animDur, function() {
+            removeLanguage(c);
+        });
     });
+
+    $("#div_lang_" + c).show(animDur);
+
+
+
 }
 /**
  * removes a selected language element
  * @param {string} c code of the language to remove
  */
-function removeSelectedLanguageFromDOM(c) {
+function removeSelectedLanguageFromDOM(c, i) {
     $("#div_lang_" + c).remove();
+    //if the first element was removed
+    if(i ==0 && languages.length>0){
+        //add class to the new first element
+        $("#div_lang_"+languages[0]).addClass('div-languages-first');
+    }
+    //if the last element was removed
+    if(i == (languages.length) && languages.length>0){
+        //add class to the new last element
+        $("#div_lang_"+languages[languages.length-1]).addClass('div-languages-last');
+    }
 }
 /**
  * checks if the languages array contains elements => guide
@@ -155,6 +199,15 @@ function submitLanguages(){
     langForm.submit();
     
 }
+
+function tryaddLanguage(input){
+    var code = $("#languages option[value='" + input + "']").attr('code');
+    if(code != undefined){
+        addLanguage(code, input);
+    }
+}
+
+
 /**
  * compares if the first value is smaller, bigger or the same as the first value
  * @param {string} a value to compare
@@ -167,3 +220,5 @@ function compareLanguages(a, b)
     if (a > b) return 1;
     return 0;
 }
+
+

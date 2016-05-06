@@ -17,7 +17,11 @@
         "G_AREAS": "Guide Areas"
     },
     "G_LANGUAGES":{
-        "G_LANGUAGES": "Guide Languages"
+        "TITLE": "Guide Languages",
+        "SEARCH": "Type to search",
+        "SEND": "Send languages",
+        "LANGUAGES_INTRO": "Please choose all your spooken languages",
+        "OPTIONS": "Select your option"
     },
     "G_PASSWORD":{
         "G_PASSWORD": "Guide Password"

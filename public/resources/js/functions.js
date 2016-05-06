@@ -16,7 +16,7 @@ this.renderGuide = function(res, name){
 this.renderGuideLangs = function(res, sLangs){
     var texts = res.req.i18n_texts;
     if(typeof sLangs === 'undefined' || sLangs === null) sLangs = [];
-    res.render('guideLanguages', {title: texts.G_LANGUAGES.G_LANGUAGES, langs: ISO6391, savedLangs: sLangs});
+    res.render('guideLanguages', {title: texts.G_LANGUAGES.TITLE, langs: ISO6391, savedLangs: sLangs});
 };
 
 this.renderGuideAreas = function(res, sAreas){

@@ -41,10 +41,14 @@ block content
     else if loginError
         //TODO do it in js file? is it worth it?
         body#body(onload='$("loginPopup").show();')
+    else if registrationOK
+        body#body(onload='$("registartionOKPopup").show();')
 
     else
         body#body
-    //asdsa
+
+    registartionOKPopup.registartionOKPopup(hidden='')
+        include registrationOK.jade
 
     loginPopup.loginPopup(hidden='')
         include login.jade

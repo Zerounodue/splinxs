@@ -344,16 +344,21 @@ footer {
 	color: white;
 	background-color: #28B294;
 	border: 0px;
+    border-bottom: 3px solid #208b74;
+    border-radius: 5px;
 }
 .btn-white{
     font-weight: bold;
-    color: #28B294;
+    color: #5b5d5f;
     background-color: white;
     border: 0px;
+    border-bottom: 3px solid #d8d8d8;
+    border-radius: 5px;
 }
 
 .btn-green:hover {
-	background-color: #31C6C7;
+    background-color: #1e6d6d;
+    border-bottom: 3px solid #1e4d4d;
 	color: white;
 }
 /*button*/
@@ -361,7 +366,8 @@ footer {
 .btn-green:active,
 .btn-green:active:focus,
 .btn-green:active:hover{
-	background-color: #16797A;
+    background-color: #1e5b5b;;
+    border-bottom: 3px solid #1e4d4d;
 	color: white;
 }
 

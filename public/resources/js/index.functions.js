@@ -36,6 +36,7 @@ $(document).ready(function () {
 
     loginPopup = $('loginPopup');
     registerPopup = $('registerPopup');
+    okPopup = $('registartionOKPopup');
 
     //for registration
     $("#papssword").blur(validate);
@@ -85,6 +86,15 @@ $(document).ready(function () {
         loginPopup.show(0);
         registerPopup.hide(0);
     });
+    $("#btn-ok-close").on('click', function(e){
+        if(showLogs) console.log('ok btn clicked');
+        okPopup.hide(animDur);
+    });
+    $("#x-ok-img").on('click', function(e){
+        if(showLogs) console.log('x btn clicked');
+        okPopup.hide(animDur);
+    });
+
 
 
     if(Modernizr.geolocation && Modernizr.eventlistener && Modernizr.input && Modernizr.inputtypes && Modernizr.json && Modernizr.websockets && Modernizr.datalistelem && Modernizr.localstorage &&  Modernizr.getusermedia &&  Modernizr.datachannel &&  Modernizr.peerconnection){

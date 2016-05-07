@@ -21,7 +21,10 @@
 .btn-checkbox-last{
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
+    border-bottom: 3px solid #208b74;
+    border-bottom-radius: 5px;
 }
+
 .btn-checkbox.hover,
 .btn-checkbox:hover,
 .btn-checkbox.focus,
@@ -35,6 +38,11 @@
     background-color: #22947b;
     border-color: #22947b;
 
+}
+
+.btn-checkbox-last:hover{
+    border-bottom: 3px solid #208b74;
+    border-bottom-radius: 5px;
 }
 .col-xs-6{
     padding: 0;
@@ -104,4 +112,6 @@
     height: 60px;
     font-size: 25px;
     font-weight: 100;
+    border-bottom: 4px solid #2e6da4;
+    border-radius: 8px;
 }

@@ -59,7 +59,8 @@ body{
 .topbar {
     width: 100%;
     top: 0;
-    position: absolute;
+    position: fixed;
+    z-index: 100;
 }
 .topbar-left::before{
     content: "\200B"; /*zero-width space*/

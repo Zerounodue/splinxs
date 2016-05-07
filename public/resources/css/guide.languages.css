@@ -34,6 +34,13 @@
 .div-languages-last{
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
+    border-bottom: 3px solid #208b74;
+    border-bottom-radius: 5px;
+}
+
+.div-languages-last:hover{
+    border-bottom: 3px solid #208b74;
+    border-bottom-radius: 5px;
 }
 .btn-send {
     margin-top: 30px;
@@ -41,6 +48,8 @@
     height: 60px;
     font-size: 25px;
     font-weight: 100;
+    border-bottom: 4px solid #2e6da4;
+    border-radius: 8px;
 }
 .img-close{
     float: right;

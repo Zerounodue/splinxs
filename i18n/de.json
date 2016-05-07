@@ -14,7 +14,17 @@
         "VIDEO": "Video"
     },
     "G_AREAS":{
-        "G_AREAS": "Guide Gebiete"
+        "G_AREAS": "Guide Gebiete",
+        "PAN": "Ziehe",
+        "ADD": "Hinzufügen",
+        "REMOVE": "Entfernen",
+        "SEARCH": "Suche ein Ort...",
+        "OK":"Ok",
+        "SEND_AREAS": "Sende Gebiete",
+        "DESCRIPTION": "Füge Kreise hinzu um die Region zu markieren, die Sie gut kennen. Nur Touristen, die in diesen Regionen sind, werden mit Ihnen Verbunden. Sie können das Zentrum und den Radius der bestehenden Kreise ändern oder löschen.",
+        "PAN_DESCRIPTION": "Pan on the map to move around ",
+        "ADD_DESCRIPTION": "Click on the map to draw an area",
+        "REMOVE_DESCRIPTION": "Click on an area to delete it"
     },
     "G_LANGUAGES":{
         "TITLE": "Guide Sprachen",

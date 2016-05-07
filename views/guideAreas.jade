@@ -3,28 +3,73 @@
 
 extends layout
 
+block append stylesheets
+    link(rel='stylesheet', href='resources/css/guide.areas.css')
 block append scripts
     script(src='resources/js/guide.areas.js')
+    script(src='resources/js/modernizr-custom.min.js')
 
-block append head
-    style.
-        .guideAreaMap {
-            width: 500px;
-            height: 400px;
-        }
 
 block content
     script.
         existingCircles = !{JSON.stringify(savedAreas)};
-    div __Add circles to mark the region that you know well. Only tourists that are in these regions will contact you.  You can change the center and radius of existing circles or delete them.
-    br
-    div(id="mapControls.mapControls")
-        button(id="mapControlPan") __pan
-        button(id="mapControlAddCircles") __add circles
-        button(id="mapControlRemoveCircles") __remove circles
-    input(id="sb_places" type='text' placeholder='Search for place...')
-    br
-    div(id="map" class="guideAreaMap")
-    br
-    button(id='btn_knownAreasContinue' class="") __send areas
+
+    .container.info(id="infoPopup")
+        .row
+            .col-sm-12
+                img.x(src='resources/images/icons/x.png', alt='close icon', id="img_infoClose")
+        .row
+            .col-sm-12
+                h2 #{texts.G_AREAS.G_AREAS}
+        .row
+            .col-sm-12
+                p #{texts.G_AREAS.DESCRIPTION}
+                .bottom-button
+                    .center-button
+                        a.btn.btn-default.btn-green.btn-info-bottom(id="infoBottom") #{texts.G_AREAS.OK}
+        .row
+            .col-sm-4
+                .desc-container
+                    img.icon-desc(src='resources/images/icons/pan.png', draggable='false')
+                    p.img-text #{texts.G_AREAS.PAN_DESCRIPTION}
+
+            .col-sm-4
+                .desc-container
+                    img.icon-desc(src='resources/images/icons/add.png', draggable='false' )
+                    p.img-text #{texts.G_AREAS.ADD_DESCRIPTION}
+            .col-sm-4
+                .desc-container
+                    img.icon-desc(src='resources/images/icons/remove.png', draggable='false' )
+                    p.img-text #{texts.G_AREAS.REMOVE_DESCRIPTION}
+    .top-controls
+        .row
+            .col-sm-12
+                //(id="top-controls")
+                .controls.controls-move(id="mapControls"  data-toggle='buttons-radio')
+                    .control.selected-control(id="mapControlPan")
+                        img.icon(src='resources/images/icons/pan.png', draggable='false')
+                        .p.description #{texts.G_AREAS.PAN}
+
+
+                    .separator
+                    .control(id="mapControlAddCircles")
+                        img.icon(src='resources/images/icons/add.png', draggable='false' )
+                        .p.description #{texts.G_AREAS.ADD}
+                    .separator
+                    .control(id="mapControlRemoveCircles")
+                        img.icon(src='resources/images/icons/remove.png', draggable='false' )
+                        .p.description #{texts.G_AREAS.REMOVE}
+                .infoButton.info-move(id="mapInfos")
+                    .control(id="mapInfoOpener")
+                        img.icon(src='resources/images/icons/infoMap.png', draggable='false' )
+
+    .container.front
+        .row
+            .col-sm-12
+                .center-button
+                    a.btn.btn-default.btn-green.btn-map-bottom(id="btn_knownAreasContinue") #{texts.G_AREAS.SEND_AREAS}
+
+    #map.guideAreaMap
     script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing,places&callback=initMap' async defer)
+    input.form-control.inp-map(id="sb_places" type='text' placeholder="#{texts.G_AREAS.SEARCH}")
+block foot

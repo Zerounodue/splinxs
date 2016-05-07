@@ -55,7 +55,7 @@ $(document).ready(function () {
     });
 
     if (!Modernizr.datalistelem) {
-        //alert('This browser does not support HTML5 datalist element');
+        alert('This browser does not support HTML5 datalist element, please use the select');
         $("#inp_languages").hide();
     }
 
@@ -112,7 +112,7 @@ function addSelectedLanguageToDOM(c) {
     var html =
         "<div class='div-languages ' style='display:none' id='div_lang_" + c + "'>"
             + nativeName
-            + "<img class='img-close'  id='btn_lang_" + c + "' src='resources/images/icons/close.png' alt='close'>"
+            + "<img class='img-close'  id='btn_lang_" + c + "' src='resources/images/icons/close.png' draggable='false' alt='close'>"
         +"</div>";
     selectedLanguages.append(html);
 

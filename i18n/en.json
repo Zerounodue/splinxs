@@ -14,7 +14,18 @@
         "VIDEO": "Video"    
     },
     "G_AREAS":{
-        "G_AREAS": "Guide Areas"
+        "G_AREAS": "Guide Areas",
+        "PAN": "Pan",
+        "ADD": "Add",
+        "REMOVE": "Remove",
+        "SEARCH": "Search for places...",
+        "OK":"Ok",
+        "SEND_AREAS": "Send areas",
+        "DESCRIPTION": "Add circles to mark the region that you know well. Only tourists that are in these regions will contact you.  You can change the center and radius of existing circles or delete them.",
+        "PAN_DESCRIPTION": "Drag on the map to move around ",
+        "ADD_DESCRIPTION": "Click on the map to draw an area",
+        "REMOVE_DESCRIPTION": "Click on an area to delete it"
+
     },
     "G_LANGUAGES":{
         "TITLE": "Guide Languages",

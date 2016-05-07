@@ -14,7 +14,18 @@
         "VIDEO": "Video"
     },
     "G_AREAS":{
-        "G_AREAS": "Aree della guide"
+        "G_AREAS": "Aree della guide",
+        "PAN": "Muovi",
+        "ADD": "Aggiungi",
+        "REMOVE": "Rimuovi",
+        "SEARCH": "Cerca un luogo...",
+        "OK":"Ok",
+        "SEND_AREAS": "Invia aree",
+        "DESCRIPTION": "Add circles to mark the region that you know well. Only tourists that are in these regions will contact you.  You can change the center and radius of existing circles or delete them.",
+        "PAN_DESCRIPTION": "Clicca sulla mappa per muoverti",
+        "ADD_DESCRIPTION": "Clicca sulla mappa per disegnare un area",
+        "REMOVE_DESCRIPTION": "Clicca su un area per rimuoverla"
+
     },
     "G_LANGUAGES":{
         "TITLE": "Lingue della guide",

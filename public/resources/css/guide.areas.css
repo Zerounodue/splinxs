@@ -1,0 +1,205 @@
+.guideAreaMap{
+    width: 100%;
+    height: 100%;
+}
+html, body {
+    height: 100%;
+}
+.info{
+    position: fixed;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.9);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+.inp-map{
+    margin-top:10px;
+    max-width: 500px;
+    z-index: 1;
+    position: fixed;
+    -webkit-user-select: none;
+    box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+    cursor: pointer;
+    height: 28px;
+
+}
+
+
+
+.front{
+    padding-left: 80px;
+    right: 40px;
+    position: fixed;
+    bottom: 14px;
+    width: 100%;
+    z-index: 1;
+}
+.center-button{
+    margin: 0 auto;
+    max-width: 500px;
+    bottom: 14px;
+    margin-bottom: 10px;
+
+}
+.btn-map-bottom{
+    width: 100%;
+
+}
+.btn-info-bottom{
+    width: 100%;
+}
+.bottom-button{
+    bottom: 14px;
+    position: fixed;
+    width: 100%;
+    right: 40px;
+    padding-left: 80px;
+}
+.separator{
+    float: left;
+    overflow: hidden;
+    width: 1px;
+    height: 20px;
+    left: 0;
+    margin-top: 5px;
+    background-color: rgb(230, 230, 230);
+
+}
+.top-controls{
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+}
+.control{
+    float: left;
+    width: 27px;
+    height: 28px;
+    left: 0px;
+    top: 0px;
+}
+.controls{
+    z-index: 1;
+    position: fixed;
+    margin-top: 10px;
+    margin-left: 10px;
+
+
+    box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+    border-radius: 2px;
+    cursor: pointer;
+    width: 83px;
+    height: 28px;
+    background-color: rgb(255, 255, 255);
+    transition: margin-top 0.2s;
+}
+
+
+@media (max-width: 710px) {
+    .controls-move {
+        margin-top: 50px
+    }
+}
+
+
+.infoButton{
+    float: right;
+    width: 27px;
+    height: 28px;
+    margin-right: 10px;
+    margin-top: 10px;
+    -webkit-user-select: none;
+    box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+    border-radius: 2px;
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);
+    transition: margin-top 0.2s;
+}
+@media (max-width: 590px) {
+    .info-move {
+        margin-top: 50px
+    }
+}
+
+.icon{
+    height: 15px;
+    width: 15px;
+    margin-left: 6px;
+    margin-top: 7px;
+    opacity: 0.75;
+
+}
+
+
+.icon:focus{
+     opacity: 1;
+ }
+.icon:hover{
+    opacity: 1;
+}
+
+.description{
+    padding-left: 5px;
+    background-color: white;
+    margin-top: 10px;
+    height: 20px;
+    width: 100px;
+    box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+    border-radius: 2px;
+    visibility: hidden;
+    opacity: 0;
+
+}
+
+.control:hover .description {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.4s linear;
+}
+
+.selected-control{
+    background-color: #e0e0e0;
+    -moz-box-shadow:    inset 0 0 3px #959595;
+    -webkit-box-shadow: inset 0 0 3px #959595;
+    box-shadow:         inset 0 0 3px #959595;
+    -o-box-shadow: inset 0 0 3px #959595;
+
+
+}
+.icon-desc{
+    height: 20px;
+    width: 20px;
+    margin: 10px;
+    transition: margin 0.4s;
+
+}
+.img-text{
+    margin: 10px;
+    transition: margin 0.4s;
+}
+.desc-container{
+    margin-top: 30px;
+    height:70px;
+    transition: margin-top 0.4s;
+    transition: margin 0.4s;
+}
+
+@media (max-height: 630px) and  (max-width: 770px){
+    .desc-container{
+        margin-top: 0px;
+    }
+}
+@media (max-height: 530px) and  (max-width: 770px){
+    .icon-desc{
+        margin: 0;
+        height: 15px;
+        width: 15px;
+    }
+    .img-text{
+        margin: 0;
+    }
+    .desc-container{
+        margin-top: 0px;
+        height: 45px;
+    }
+}

@@ -167,7 +167,7 @@ router.post('/guideLanguages', function(req, res) {
         });
         if(func.isLoggedIn(req)){
             //send to guide site
-            func.renderGuide(res, req.session.username);
+            func.renderGuide(res);
             return;
         }else{
             req.session.hasLanguages = true;
@@ -269,7 +269,7 @@ router.post('/guideAreas', function(req, res) {
             //TODO remove console.log
             console.log("isLoggedIn --> redirect guide");
             //send to guide site
-            func.renderGuide(res, req.session.username);
+            func.renderGuide(res);
             return;
         }else{
             req.session.hasAreas = true;
@@ -329,7 +329,7 @@ router.get('/guide', function(req, res) {
         func.redirectHome(res);
         return;
     }
-    func.renderGuide(res, req.session.username);
+    func.renderGuide(res);
     return;
 });
 

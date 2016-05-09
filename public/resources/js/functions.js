@@ -8,8 +8,9 @@ this.redirectHome = function(res){
     res.redirect('/');
 };
 
-this.renderGuide = function(res, name){
+this.renderGuide = function(res){
     var texts = res.req.i18n_texts;
+    var name = res.req.session.username;
     res.render('guide', {title: texts.GENERAL.GUIDE, name: name});
 };
 

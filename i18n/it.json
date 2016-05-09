@@ -7,12 +7,18 @@
         "CANCEL": "Annulla",
         "CHAT": "Chat",
         "GUIDE": "Guide",
+        "NO": "No",
         "ORIENTATION": "Orinetamento",
+        "SEND": "Inviare",
         "SPLINXS": "Splinxs",
         "SUBMIT": "Invia",
         "TOURIST": "Turista",
         "VIDEO": "Video",
-        "OK": "Ok"
+        "OK": "Ok",
+        "YES": "Si"
+    },
+    "G":{
+        "TYPE_MESSAGE": "_____Messaggio..."
     },
     "G_AREAS":{
         "G_AREAS": "Aree della guide",
@@ -40,9 +46,13 @@
     },
     "MENU": {
         "ABOUT_US": "Chi siamo",
+        "CHANGE_AREAS": "Alterare aree",
+        "CHANGE_LANGUAGES": "Alterare lingue",
+        "CHANGE_PASSWORD": "Alterare password",
         "CONTACT": "Contatto",
         "HOME": "Home",
         "LANGUAGES": "Lingue",
+        "LOGOUT": "Scollegarsi",
         "WHAT_IS_SPLINXS": "Cosa è Splinxs"
     },
     "LANGUAGES": {
@@ -70,6 +80,9 @@
         "R_PASSWORD": "Ripeti password",
         "REGISTER": "Registarti",
         "USERNAME": "Username"
+    },
+    "T":{
+        
     },
     "T_LANGUAGES":{
         "T_LANGUAGES": "Lingue del turista"

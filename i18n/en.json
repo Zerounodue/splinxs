@@ -7,42 +7,51 @@
         "CANCEL": "Cancel",
         "CHAT": "Chat",
         "GUIDE": "Guide",
+        "NO": "No",
+        "OK": "Ok",
         "ORIENTATION": "Orientation",
+        "SEND": "Send",
         "SPLINXS": "Splinxs",
         "SUBMIT": "Submit",
         "TOURIST": "Tourist",
         "VIDEO": "Video",
-        "OK": "Ok"
+        "YES": "Yes"
+    },
+    "G":{
+        "TYPE_MESSAGE": "Type message..."
     },
     "G_AREAS":{
-        "G_AREAS": "Guide Areas",
-        "PAN": "Pan",
         "ADD": "Add",
-        "REMOVE": "Remove",
-        "SEARCH": "Search for places...",
-        "OK":"Ok",
-        "SEND_AREAS": "Send areas",
-        "DESCRIPTION": "Add circles to mark the region that you know well. Only tourists that are in these regions will contact you.  You can change the center and radius of existing circles or delete them.",
-        "PAN_DESCRIPTION": "Drag on the map to move around ",
         "ADD_DESCRIPTION": "Click on the map to draw an area",
-        "REMOVE_DESCRIPTION": "Click on an area to delete it"
-
+        "DESCRIPTION": "Add circles to mark the region that you know well. Only tourists that are in these regions will contact you.  You can change the center and radius of existing circles or delete them.",
+        "G_AREAS": "Guide Areas",
+        "OK":"Ok",
+        "PAN": "Pan",
+        "PAN_DESCRIPTION": "Drag on the map to move around ",
+        "REMOVE": "Remove",
+        "REMOVE_DESCRIPTION": "Click on an area to delete it",
+        "SEARCH": "Search for places...",
+        "SEND_AREAS": "Send areas"
     },
     "G_LANGUAGES":{
-        "TITLE": "Guide Languages",
+        "LANGUAGES_INTRO": "Please choose all your spooken languages",
+        "OPTIONS": "Select your option",
         "SEARCH": "Type to search",
         "SEND": "Send languages",
-        "LANGUAGES_INTRO": "Please choose all your spooken languages",
-        "OPTIONS": "Select your option"
+        "TITLE": "Guide Languages"
     },
     "G_PASSWORD":{
         "G_PASSWORD": "Guide Password"
     },
     "MENU": {
         "ABOUT_US": "About us",
+        "CHANGE_AREAS": "Change areas",
+        "CHANGE_LANGUAGES": "Change languages",
+        "CHANGE_PASSWORD": "Change password",
         "CONTACT": "Contact",
         "HOME": "Home",
         "LANGUAGES": "Languages",
+        "LOGOUT": "Logout",
         "WHAT_IS_SPLINXS": "What is Splinxs",
         "SETTINGS": "Settings"
     },
@@ -56,9 +65,7 @@
         "DESCRIPTION_TOURIST": "you are somewhere unfamiliar and need help? Don't worry, a guide will help you. Thanks to camera, microphone, GPS and chat the guide will see what you see, speak with you and guide you to your destination.",
         "I_AM_GUIDE": "I am a guide",
         "I_AM_TOURIST": "I am a tourist",
-        
         "SPLINXS_SUBTITLE": "The real time tourist guide"
-        
     },
     "LOGIN": {
         "LOGIN": "Login",
@@ -72,33 +79,33 @@
         "REGISTER": "Register",
         "USERNAME": "Username"
     },
+    "T":{
+        
+    },
     "T_LANGUAGES":{
         "T_LANGUAGES": "Tourist Languages"
     },
     "T_LOCATION":{
-        "GETTING_GPS": "Getting GPS position, please wait....",
-        "ADD_POS_MAN":"you can add a position manually",
-        "CLOSE": "Close",
-        "OK": "Ok",
-        "IMP_GET_GPS": "Impossible to get the current location",
         "ADD_POS": "Add a position",
-        "CLICK_MAP": "click on the map to add your current position",
-        "GUIDE_WILL_HELP": "a guide that knows this region will help you",
-        "INFO": "Info",
-        "CONTINUE": "Continue",
+        "ADD_POS_MAN":"you can add a position manually",
         "AUTO_GPS": "Use GPS",
-        "PERMISSION_DENIED": "permission denied, add your position by hand",
+        "CLICK_MAP": "click on the map to add your current position",
+        "CLOSE": "Close",
+        "CONTINUE": "Continue",
+        "GETTING_GPS": "Getting GPS position, please wait....",
+        "GUIDE_WILL_HELP": "a guide that knows this region will help you",
+        "IMP_GET_GPS": "Impossible to get the current location",
+        "INFO": "Info",
+        "OK": "Ok",
         "OTHER_ERROR": "an error occurred",
+        "PERMISSION_DENIED": "permission denied, add your position by hand",
         "T_LOCATION": "Tourist Location"
     },
     "T_SETTINGS":{
+        "LANGUAGES_INTRO": "Select all your spoken languages and the relative skill",
         "SEND": "Send languages",
         "SKILL": "Choose you skill",
-        "SPOKEN_LANGUAGES": "Spoken languages",
-        "LANGUAGES_INTRO": "Select all your spoken languages and the relative skill"
+        "SPOKEN_LANGUAGES": "Spoken languages"
     }
     
-    
-    
-
 }

@@ -32,34 +32,35 @@ block append stylesheets
 
 block append navbarli
     li
-        a(href="/logout") __Logout
+        a(href="/logout") #{texts.MENU.LOGOUT}
     li.dropdown
         a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
             | #{texts.MENU.SETTINGS}
             span.caret
         ul.dropdown-menu
             li
-                a(href="/guideLanguages") __langs
+                a(href="/guideLanguages") #{texts.MENU.CHANGE_LANGUAGES}
             li
-                a(href="/guideAreas") __areas
+                a(href="/guideAreas") #{texts.MENU.CHANGE_AREAS}
             li
-                a(href="/guidePassword") __pw
+                a(href="/guidePassword") #{texts.MENU.CHANGE_PASSWORD}
 
 block content
     main#content
-      button#btn_closeConnection(type='button', hidden='') close connection
+      button#btn_closeConnection(type='button', hidden) __close connection
       br
       #audio(hidden='')
-        button#btn_startAudio(type='button') start audio
-        button#btn_stopAudio(type='button') stop audio
+        button#btn_startAudio(type='button') __start audio
+        button#btn_stopAudio(type='button') __stop audio
         #audioDiv
       br
       #video.video(hidden='')
-        button#btn_stopVideo(type='button') stop video
+        button#btn_stopVideo(type='button') __stop video
         #videoContainer
       br
       div(id="mapControls", hidden)
-        span map update interval
+      // not needed anymore
+        span __map update interval
         br
         button#btn_updateIntervalOff(type='button') off
         button#btn_updateIntervalBatman(type='button') batman
@@ -74,7 +75,7 @@ block content
           .panel.panel-primary
             .panel-heading
               span.glyphicon.glyphicon-comment
-              |  Chat 
+              |  __Chat 
               span#spn_isTyping.text-center
               .btn-group.pull-right
                 button#btn_minimiseChat.btn.btn-default.btn-xs(type='button')
@@ -83,24 +84,24 @@ block content
                   li
                     a(href='#')
                       span.glyphicon.glyphicon-refresh
-                      | Refresh
+                      | __Refresh
                   li
                     a(href='#')
                       span.glyphicon.glyphicon-ok-sign
-                      | Available
+                      | __Available
             .panel-body
               ul#chat.chat
             .panel-footer
               .input-group
-                input#inp_chat.form-control.input-sm(type='text', placeholder='Type your message here...')
+                input#inp_chat.form-control.input-sm(type='text', placeholder='#{texts.GENERAL.TYPE_MESSAGE}')
                 span.input-group-btn
-                  button#btn_chat.btn.btn-warning.btn-sm Send
+                  button#btn_chat.btn.btn-warning.btn-sm #{texts.GENERAL.Send}
           // </div>
-      #modalDialog.modalDialog(hidden='')
+      #modalDialog.modalDialog(hidden)
         // <div id="confirmDiv">
         p#modalContent
-        button#modalNo no
-        button#modalYes yes
+        button#modalNo #{texts.GENERAL.NO}
+        button#modalYes #{texts.GENERAL.YES}
         // </div>
       audio#audioPlayer
       script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing,places&callback=initMap')
@@ -108,6 +109,6 @@ block content
 block append foot
     div(id="smallChat", class="smallChat", hidden)
         img#smallChatImg.smallChatImg(src='resources/images/smallChat.png', alt='chat')
-        span#smallChatText.smallChatText Chat
+        span#smallChatText.smallChatText #{texts.GENERAL.CHAT}
         img.smallChatUp(src='resources/images/arrowUp.png', alt='up')
 

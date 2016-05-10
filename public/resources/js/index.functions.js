@@ -112,6 +112,11 @@ $(document).ready(function () {
     }
 
 
+    //close the collapsed navbar (movile view) after clicking on it
+    $('.navbar-collapse').click('li', function() {
+        $('.navbar-collapse').collapse('hide');
+    });
+
 
 });
 

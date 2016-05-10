@@ -9,7 +9,7 @@ var reqAnimationFrame = (function () {
         };
 })();
 
-
+var showLogs=true;
 
 var log;
 var el;
@@ -34,6 +34,9 @@ transform = {
 $(document).ready(function () {
     log = document.querySelector("#log");
     el = document.querySelector("#hammerdrag");
+    //the hammerJS element must be insite this DOM element.
+    //the hammerJS element can't be dragged outside this element
+    hammerContainer = document.querySelector("#hammerContainer");
 
 
     mc= new Hammer.Manager(el);
@@ -61,12 +64,12 @@ $( window ).resize(checkPos);
 
 function checkPos () {
     var position = $('#hammerdrag').position();
-    console.log('X: ' + position.left + ", Y: " + position.top );
+    if(showLogs)console.log('element X: ' + position.left + ", elemnt Y: " + position.top );
     var changes = false;
-    if(position.top < 0){START_Y=0; changes=true;}
-    if(position.left <0){START_X=0;changes=true;}
-    if(position.left+el.offsetWidth > $(window).width()){START_X=$(window).width()-el.offsetWidth;changes=true;}
-    if(position.top +el.offsetHeight > $(window).height()){START_Y=$(window).height()-el.offsetHeight;changes=true;}
+    if(position.top < $(hammerContainer).position().top){START_Y=0; changes=true;}
+    if(position.left < $(hammerContainer).position().left){START_X=0;changes=true;}
+    if(position.left+el.offsetWidth > $(hammerContainer).width()){START_X=$(hammerContainer).width()-el.offsetWidth;changes=true;}
+    if(position.top +el.offsetHeight > $(hammerContainer).height()){START_Y=$(hammerContainer).height()-el.offsetHeight;changes=true;}
 
     if (changes){
         el.className = 'animate';
@@ -78,28 +81,6 @@ function checkPos () {
         requestElementUpdate();
     }
 }
-function resetElement() {
-    /*
-     el.className = 'animate';
-     transform = {
-     translate: { x: START_X, y: START_Y },
-     scale: 1,
-     angle: 0,
-     rx: 0,
-     ry: 0,
-     rz: 0
-     };
-
-
-
-     requestElementUpdate();
-
-     if (log.textContent.length > 2000) {
-     log.textContent = log.textContent.substring(0, 2000) + "...";
-     }
-     */
-}
-
 
 
 function updateElementTransform() {
@@ -125,12 +106,10 @@ function requestElementUpdate() {
     }
 }
 
-function logEvent(str) {
-    //log.insertBefore(document.createTextNode(str +"\n"), log.firstChild);
-}
+
 
 function onPan(ev) {
-    console.log(ev.deltaX);
+    if(showLogs) console.log(ev.deltaX);
     el.className = '';
     transform.translate = {
 
@@ -141,5 +120,4 @@ function onPan(ev) {
     };
 
     requestElementUpdate();
-    logEvent(ev.type);
 }

@@ -16,7 +16,7 @@ var defaultLocation = {lat: 46.947248, lng: 7.451586}; //Bern
 //used to delay click to allow doubleclick
 var click_timeout;
 var click_timeoutTimer = 200; //ms
-
+/*
 var updateIntervals = { //ms
     off: -0,
     batman: 60000,
@@ -27,6 +27,7 @@ var updateIntervals = { //ms
 };
 var updateIntervalTimer = updateIntervals.ironman;
 var updateInterval;
+*/
 
 /**
  * callback when the map script has been successfully loaded
@@ -182,7 +183,7 @@ function addTouristMarker(pos) {
         map: map
     });
 }
-
+/*
 function sendUpdateInterval(interval) {
     if(showLogs) console.log('sending interval: ' + interval);
     var data = null;
@@ -214,7 +215,8 @@ function sendUpdateInterval(interval) {
         sendMapData(data);
     }
 }
-
+*/
+/*
 function setUpdateInterval(interval){
     if(showLogs) console.log('update interval: ' + interval);
     switch(interval){
@@ -254,6 +256,7 @@ function setUpdateInterval(interval){
         }, updateIntervalTimer);
     }
 }
+*/
 /**
  * gets the tourist's geo location
  */

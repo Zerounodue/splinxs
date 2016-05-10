@@ -80,7 +80,7 @@ function initGuideButtons() {
         if (showLogs) console.log('closing connection');
         closeConnection();
     });
-
+    /*
     //---map controls to set update interval of tourist---
     $("#btn_updateIntervalOff").click(function (e) {
         if (showLogs) console.log('update interval off button clicked');
@@ -111,7 +111,7 @@ function initGuideButtons() {
         if (showLogs) console.log('update interval flash button clicked');
         sendUpdateInterval(updateIntervals.flash);
     });
-
+    */
 
     $("#btn_startAudio").click(function (e) {
         if (showLogs) console.log('guide: start audio button clicked');

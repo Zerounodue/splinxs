@@ -296,11 +296,13 @@ function mapMessage(mapMessage) {
             }
         }
     }
+    /*
     else if(mapMessage.updateInterval > -1){
         var interval = mapMessage.updateInterval;
         if (showLogs) console.log('tourist: update interval: ' + interval);
         setUpdateInterval(interval);
     }
+    */
 }
 /*
 function connectToGuides(){

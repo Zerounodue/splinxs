@@ -58,6 +58,7 @@ $(document).ready(function () {
     });
     $("#videoSettings").on('click', function(e){
         if(showLogs) console.log('videoSettings  button clicked');
+        $('.navbar-collapse').collapse('hide');
         $("#hammerSettings").show(animDur);
     });
 

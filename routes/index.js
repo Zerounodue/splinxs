@@ -184,5 +184,9 @@ router.post('/index', function (req, res, next) {
 
 
 
+router.get('/hammerJSExample', function(req, res) {
+    res.render('hammerJSExample');
+});
+
 
 module.exports = router;

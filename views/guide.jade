@@ -75,7 +75,7 @@ block content
           .panel.panel-primary
             .panel-heading
               span.glyphicon.glyphicon-comment
-              |  __Chat 
+              |  #{texts.GENERAL.CHAT}
               span#spn_isTyping.text-center
               .btn-group.pull-right
                 button#btn_minimiseChat.btn.btn-default.btn-xs(type='button')
@@ -93,9 +93,9 @@ block content
               ul#chat.chat
             .panel-footer
               .input-group
-                input#inp_chat.form-control.input-sm(type='text', placeholder='#{texts.GENERAL.TYPE_MESSAGE}')
+                input#inp_chat.form-control.input-sm(type='text', placeholder='#{texts.G.TYPE_MESSAGE}')
                 span.input-group-btn
-                  button#btn_chat.btn.btn-warning.btn-sm #{texts.GENERAL.Send}
+                  button#btn_chat.btn.btn-warning.btn-sm #{texts.GENERAL.SEND}
           // </div>
       #modalDialog.modalDialog(hidden)
         // <div id="confirmDiv">
@@ -108,7 +108,7 @@ block content
     
 block append foot
     div(id="smallChat", class="smallChat", hidden)
-        img#smallChatImg.smallChatImg(src='resources/images/smallChat.png', alt='chat')
+        img#smallChatImg.smallChatImg(src='resources/images/smallChat.png', alt='#{texts.GENERAL.CHAT}')
         span#smallChatText.smallChatText #{texts.GENERAL.CHAT}
         img.smallChatUp(src='resources/images/arrowUp.png', alt='up')
 

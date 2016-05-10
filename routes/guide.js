@@ -83,13 +83,7 @@ router.post('/register', function(req, res) {
 });
 
 router.get('/logout', function(req, res) {
-    req.logout();
-    req.session.destroy(function (err) {
-        if (err) {
-            console.log("logout error: " + err);
-            return next(err);
-        }
-    });
+    func.logout(res);
     res.redirect('/');
 });
 

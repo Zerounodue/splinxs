@@ -15,10 +15,14 @@ var func  = require('../public/resources/js/functions.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    //TODO is this good?
-    if(func.isGuide(req) && func.isLoggedIn(req)){
-        func.renderGuide(res);
-        return;
+    if(func.isGuide(req)){
+        if(func.isLoggedIn(req)){
+            func.renderGuide(res);
+            return;
+        }else{
+            func.logout(res);
+            //Do NOT add return statement here!!
+        }
     }
     res.render('index');
 });

@@ -145,3 +145,16 @@ this.renderTouristLocation = function(res){
     var texts = res.req.i18n_texts;
     res.render('touristLocation', {title: texts.T_LOCATION});
 };
+
+this.logout = function(res){
+    var req = res.req;
+    req.logout();
+    if(req.session){
+        req.session.destroy(function (err) {
+            if (err) {
+                console.log("logout error: " + err);
+                return next(err);
+            }
+        });
+    }
+};

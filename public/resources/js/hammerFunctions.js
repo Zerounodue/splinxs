@@ -10,6 +10,7 @@ var reqAnimationFrame = (function () {
 })();
 
 var showLogs=true;
+var animDur=400;
 
 var log;
 var el;
@@ -50,15 +51,62 @@ $(document).ready(function () {
         if(ev.isFinal) {
             START_X= START_X+ev.deltaX;
             START_Y= START_Y+ev.deltaY;
-
-
             //resetElement();
             checkPos();
         }
 
-
-
     });
+    $("#videoSettings").on('click', function(e){
+        if(showLogs) console.log('videoSettings  button clicked');
+        $("#hammerSettings").show(animDur);
+    });
+
+
+    $("#btn_hammerClose").on('click', function(e){
+        if(showLogs) console.log('hammer close button clicked');
+
+        $("#hammerSettings").hide(animDur);
+    });
+    $("#img_loadClose").on('click', function(e){
+        if(showLogs) console.log('hammer close button clicked');
+
+        $("#hammerSettings").hide(animDur);
+    });
+
+
+
+    $("#opacityRange").on("input change", function() {
+
+
+        var alpha = $(this).val()/100;
+        console.log(alpha);
+        /*
+        $("#hammerdrag").css('background-color', 'rgba(255,255,255,' + alpha + ')');​
+        */
+
+        $( "#hammerdrag" ).fadeTo( "fast" , alpha);
+
+        //$("#hammerdrag").css("background-color", hex2rgba("#ABCDEF", 0.6));
+        //$("#hammerdrag").opacity ($("#opacityRange").val()/100);
+    });
+
+    $("#sizeRange").on("input change", function() {
+        size=$("#sizeRange").val()*5 +10;
+        console.log(size);
+        if( size > $(hammerContainer).width() || size > $(hammerContainer).height()){
+            if($(hammerContainer).width()<$(hammerContainer).height()){
+                size = $(hammerContainer).width();
+            }
+            else{
+                size= $(hammerContainer).height();
+            }
+            console.log("???");
+        }
+        checkPos();
+        $("#hammerdrag").width( size);
+        $("#hammerdrag").height(size );
+    });
+
 });
 $( window ).resize(checkPos);
 
@@ -68,8 +116,9 @@ function checkPos () {
     var changes = false;
     if(position.top < $(hammerContainer).position().top){START_Y=0; changes=true;}
     if(position.left < $(hammerContainer).position().left){START_X=0;changes=true;}
-    if(position.left+el.offsetWidth > $(hammerContainer).width()){START_X=$(hammerContainer).width()-el.offsetWidth;changes=true;}
-    if(position.top +el.offsetHeight > $(hammerContainer).height()){START_Y=$(hammerContainer).height()-el.offsetHeight;changes=true;}
+    if(position.left+el.offsetWidth > $(hammerContainer).width() +$(hammerContainer).position().left){START_X=$(hammerContainer).width()-el.offsetWidth;changes=true;}
+    if(position.top +el.offsetHeight > $(hammerContainer).height()+ $(hammerContainer).position().top){START_Y=$(hammerContainer).height()-el.offsetHeight;changes=true;}
+    if(showLogs)console.log("hey"+(position.top +el.offsetHeight));
 
     if (changes){
         el.className = 'animate';
@@ -118,6 +167,22 @@ function onPan(ev) {
         y: START_Y + ev.deltaY
 
     };
-
     requestElementUpdate();
+}
+
+
+var defaultLocation = {lat: 0, lng: 0};
+function initMap(){
+    if(showLogs) console.log('init map');
+    map = new google.maps.Map(document.getElementById('hammerContainer'), {
+        center: defaultLocation,
+        zoom: 3,
+        zoomControl: true,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        rotateControl: true,
+        fullscreenControl: false
+    });
+
 }

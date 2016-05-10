@@ -69,6 +69,7 @@ function checkPos () {
     if(position.top +el.offsetHeight > $(window).height()){START_Y=$(window).height()-el.offsetHeight;changes=true;}
 
     if (changes){
+        el.className = 'animate';
         transform = {
             //translate: { x: START_X, y: START_Y },
             translate: { x: START_X, y: START_Y}

@@ -16,7 +16,7 @@ function initTouristUI(){
     if(showLogs) console.log('tourist: init gui');
     loadBox = $("#loadBox");
     content = $("#content");
-    
+    setConfirmUnload(true);
     initTouristButtons();
     initChat();
 }
@@ -126,6 +126,12 @@ function initTouristButtons(){
         });
 
     }
+}
 
+function setConfirmUnload(on) {
+    window.onbeforeunload = (on) ? unloadMessage : null;
+}
 
+function unloadMessage() {
+    return "__Are you sure you want to leave this page?";
 }

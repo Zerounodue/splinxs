@@ -4,6 +4,7 @@
     },
     "GENERAL": {
         "AUDIO": "Audio",
+        "BACK": "Back",
         "CANCEL": "Cancel",
         "CHAT": "Chat",
         "GUIDE": "Guide",

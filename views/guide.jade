@@ -32,18 +32,18 @@ block append stylesheets
 
 block append navbarli
     li
-        a(href="/logout") #{texts.MENU.LOGOUT}
+        a(href="/logout" id="a_logout") #{texts.MENU.LOGOUT}
     li.dropdown
         a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
             | #{texts.MENU.SETTINGS}
             span.caret
         ul.dropdown-menu
             li
-                a(href="/guideLanguages") #{texts.MENU.CHANGE_LANGUAGES}
+                a(href="/guideLanguages" id="a_guideLanguages") #{texts.MENU.CHANGE_LANGUAGES}
             li
-                a(href="/guideAreas") #{texts.MENU.CHANGE_AREAS}
+                a(href="/guideAreas" id="a_guideAreas") #{texts.MENU.CHANGE_AREAS}
             li
-                a(href="/guidePassword") #{texts.MENU.CHANGE_PASSWORD}
+                a(href="/guidePassword" id="a_guidePassword") #{texts.MENU.CHANGE_PASSWORD}
 
 block content
     main#content

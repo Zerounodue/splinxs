@@ -4,6 +4,7 @@
     },
     "GENERAL": {
         "AUDIO": "Audio",
+        "BACK": "Indietro",
         "CANCEL": "Annulla",
         "CHAT": "Chat",
         "GUIDE": "Guide",

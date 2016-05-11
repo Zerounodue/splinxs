@@ -6,6 +6,7 @@
 var modalDialog;
 var modalContent;
 var mapControls;
+var showLogs=true;
 
 /**
  * initialises ui variables for guide
@@ -16,6 +17,30 @@ function initGuideUI(){
     modalDialog = $("#modalDialog");
     modalContent = $("#modalContent");
     mapControls = $("#mapControls");
+
+    //set the confirmUnload to false, if the guide clicks on this links he knows he will leave the page
+    $("#a_logout").click(function (e) {
+        if(showLogs) console.log('logout a clicked');
+        setConfirmUnload(false);
+    });
+    $("#a_guideLanguages").click(function (e) {
+        if(showLogs) console.log('guideLanguages a clicked');
+        setConfirmUnload(false);
+
+    });
+    $("#a_guideAreas").click(function (e) {
+        if(showLogs) console.log('guideAreas a clicked');
+        setConfirmUnload(false);
+
+    });
+    $("#a_guidePassword").click(function (e) {
+        if(showLogs) console.log('guidePassword a clicked');
+        setConfirmUnload(false);
+
+    });
+
+
+    setConfirmUnload(true);
 
     initGuideButtons();
     initChat();
@@ -131,4 +156,13 @@ function initGuideButtons() {
         connection.renegotiate();
     });
     
+}
+
+
+function setConfirmUnload(on) {
+    window.onbeforeunload = (on) ? unloadMessage : null;
+}
+
+function unloadMessage() {
+    return "__Are you sure you want to leave this page?";
 }

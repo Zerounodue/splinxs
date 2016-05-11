@@ -15,6 +15,9 @@ block content
         // close the popup and stop trying getting position
         .row
             .col-sm-12
+                a.back(href="/touristLanguages")
+                    img.backArrow(src='resources/images/icons/backArrow.png', alt='back icon', id="img_infoBack")
+                    | __back
                 img.x(src='resources/images/icons/x.png', alt='close icon', id="img_loadClose")
         .row
             .col-sm-12
@@ -43,6 +46,9 @@ block content
     infoPopup.loadingPopup(id="infoPopup", hidden)
         .row
             .col-sm-12
+                a.back(href="/touristLanguages")
+                    img.backArrow(src='resources/images/icons/backArrow.png', alt='back icon', id="img_infoBack")
+                    | __back
                 img.x(src='resources/images/icons/x.png', alt='close icon', id="img_infoClose")
         .row
             .col-sm-12

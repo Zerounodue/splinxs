@@ -26,10 +26,11 @@ var defaultLocation = {lat: 0, lng: 0};
 //circles loaded from db
 var existingCircles = null;
 
-var areaForm;
+//var areaForm;
 
 var animDur = 400;
 var infoPopup;
+var backArrow;
 
 
 
@@ -44,7 +45,8 @@ $(document).ready(function () {
 
     }
     infoPopup = $("#infoPopup");
-    areaForm = $("#frm_areas");
+    //areaForm = $("#frm_areas");
+    backArrow =$("#backArrow");
 
     $("#btn_knownAreasContinue").click(function (e) {
         if(showLogs) console.log('knownAreasContinue button clicked');
@@ -292,6 +294,10 @@ function loadExistingCircles(){
         if(showLogs) console.log('no existing circles');
     }else{
         if(existingCircles.length > 0){
+            //guide comes from guide site, he can go back
+            //show back button
+            backArrow.show();
+
             if(showLogs) console.log('number of existing circles: ' + existingCircles.length);
             //set properties for each circle
             $.each(existingCircles, function (index, value) {

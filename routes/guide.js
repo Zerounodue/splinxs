@@ -216,7 +216,7 @@ router.get('/guideAreas', function(req, res) {
         return;
     }
 
-    func.renderGuideAreas(res);
+    //func.renderGuideAreas(res);
 });
 
 router.post('/guideAreas', function(req, res) {

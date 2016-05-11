@@ -32,6 +32,77 @@ var animDur = 400;
 var infoPopup;
 
 
+
+
+$(document).ready(function () {
+    if (showLogs) console.log('guide areas document ready');
+    if (!Modernizr.datalistelem) {
+        $("#sb_places").hide();
+        //remove the class that makes the element move when there is no place for the sb and the controls
+        $("#mapControls").removeClass('controls-move');
+        $("#mapInfos").removeClass('info-move');
+
+    }
+    infoPopup = $("#infoPopup");
+    areaForm = $("#frm_areas");
+
+    $("#btn_knownAreasContinue").click(function (e) {
+        if(showLogs) console.log('knownAreasContinue button clicked');
+        var n = getNumberOfCircles();
+        if(n > 0){
+            saveCircles();
+        }else{
+            //TODO something useful
+            alert('__No areas selected...');
+        }
+
+    });
+
+
+    $("#mapControlRemoveCircles").click(function () {
+        if(showLogs) console.log('mapControlRemoveCircles clicked');
+        drawingManager.setDrawingMode(null);
+        drawingManager.removeCircle = true;
+    });
+    $("#img_infoClose").click(function () {
+        if(showLogs) console.log('img_infoClose clicked');
+        infoPopup.hide(animDur);
+    });
+    $("#infoBottom").click(function () {
+        if(showLogs) console.log('infoBottom clicked');
+        infoPopup.hide(animDur);
+    });
+
+    $('.control').click(function() {
+        //console.log($(this));
+        $('.control').removeClass('selected-control');
+        $(this).addClass('selected-control');
+    });
+
+    $("#mapControlPan").click(function () {
+        if(showLogs) console.log('mapControlPan clicked');
+        drawingManager.setDrawingMode(drawingModes.pan);
+        drawingManager.removeCircle = false;
+    });
+
+    $("#mapControlAddCircles").click(function () {
+        if(showLogs) console.log('mapControlAddCircles clicked');
+        drawingManager.setDrawingMode(google.maps.drawing.OverlayType.CIRCLE);
+        drawingManager.removeCircle = false;
+    });
+
+    $("#mapInfoOpener").click(function () {
+        if(showLogs) console.log('mapInfoOpener clicked');
+        drawingManager.setDrawingMode(drawingModes.pan);
+        drawingManager.removeCircle = false;
+        infoPopup.show(animDur);
+    });
+
+});
+
+
+
+
 /**
  * callback when the map script has been successfully loaded
  */
@@ -191,75 +262,6 @@ function resizeMap() {
 }
 */
 
-$(document).ready(function () {
-    if (showLogs) console.log('guide areas document ready');
-    if (!Modernizr.datalistelem) {
-        $("#sb_places").hide();
-        //remove the class that makes the element move when there is no place for the sb and the controls
-        $("#mapControls").removeClass('controls-move');
-        $("#mapInfos").removeClass('info-move');
-    
-    }
-    infoPopup = $("#infoPopup");
-    areaForm = $("#frm_areas");
-    
-    $("#btn_knownAreasContinue").click(function (e) {
-        if(showLogs) console.log('knownAreasContinue button clicked');
-        var n = getNumberOfCircles();
-        if(n > 0){
-            saveCircles();
-        }else{
-            //TODO something useful
-            alert('__No areas selected...');
-        }
-
-    });
-
-
-
-
-
-
-    $("#mapControlRemoveCircles").click(function () {
-        if(showLogs) console.log('mapControlRemoveCircles clicked');
-        drawingManager.setDrawingMode(null);
-        drawingManager.removeCircle = true;
-    });
-    $("#img_infoClose").click(function () {
-        if(showLogs) console.log('img_infoClose clicked');
-        infoPopup.hide(animDur);
-    });
-    $("#infoBottom").click(function () {
-        if(showLogs) console.log('infoBottom clicked');
-        infoPopup.hide(animDur);
-    });
-
-    $('.control').click(function() {
-        //console.log($(this));
-        $('.control').removeClass('selected-control');
-        $(this).addClass('selected-control');
-    });
-
-    $("#mapControlPan").click(function () {
-        if(showLogs) console.log('mapControlPan clicked');
-        drawingManager.setDrawingMode(drawingModes.pan);
-        drawingManager.removeCircle = false;
-    });
-
-    $("#mapControlAddCircles").click(function () {
-        if(showLogs) console.log('mapControlAddCircles clicked');
-        drawingManager.setDrawingMode(google.maps.drawing.OverlayType.CIRCLE);
-        drawingManager.removeCircle = false;
-    });
-
-    $("#mapInfoOpener").click(function () {
-        if(showLogs) console.log('mapInfoOpener clicked');
-        drawingManager.setDrawingMode(drawingModes.pan);
-        drawingManager.removeCircle = false;
-        infoPopup.show(animDur);
-    });
-
-});
 /**
  * gets all the circles set by the user or null
  * @returns {Array|circles} the array of circles or null

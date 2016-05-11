@@ -188,6 +188,25 @@ function addSavedLanguages(){
 function submitLanguages(){
     //sort languages by code
     languages.sort(compareLanguages);
+
+    var langs = JSON.stringify(languages);
+
+    // Create the form object
+    var languagesForm = document.createElement("form");
+    languagesForm.setAttribute("method", "post");
+    languagesForm.setAttribute("action", "/guideLanguages");
+    var hiddenField = document.createElement("input");
+    hiddenField.setAttribute("name", "languages");
+    hiddenField.setAttribute("value", langs);
+    // append the newly created control to the form
+    languagesForm.appendChild(hiddenField);
+    document.body.appendChild(languagesForm); // inject the form object into the body section
+    languagesForm.submit();
+
+    //old code whit firefox problem
+    /*
+    //sort languages by code
+    languages.sort(compareLanguages);
     //saveToLocalStorage(localStorageKey, languages);
     var langs = JSON.stringify(languages);
     
@@ -197,6 +216,10 @@ function submitLanguages(){
           .attr('value', langs)
           .appendTo('#frm_languages');
     langForm.submit();
+    */
+
+
+
     
 }
 
@@ -205,6 +228,7 @@ function tryaddLanguage(input){
     if(code != undefined){
         addLanguage(code, input);
     }
+
 }
 
 

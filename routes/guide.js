@@ -129,7 +129,6 @@ router.post('/guideLanguages', function(req, res) {
         func.redirectHome(res);
         return;
     }
-
     var langs = JSON.parse(req.body.languages);
     var validLangs = true;
     //check if code is ISO-6391, in case there are evil users...
@@ -139,7 +138,6 @@ router.post('/guideLanguages', function(req, res) {
             break;
         }
     }
-
     if(validLangs){
         //save to db
         Guide.update({ username: req.session.username }, { $set: { languages: langs } },  function (err, raw){
@@ -161,7 +159,11 @@ router.post('/guideLanguages', function(req, res) {
         });
         if(func.isLoggedIn(req)){
             //send to guide site
-            func.renderGuide(res);
+            //TODO chech this :
+            // instead to renderGuide i redirect to '/' this is in my opinion better because the url changes
+            // if you do renderGuide() the URL remains /guideLanguages --> if the user reload the page then he will be redirected in /guideLanguages   !!BAD!!
+            res.redirect('/');
+            //func.renderGuide(res);
             return;
         }else{
             req.session.hasLanguages = true;
@@ -183,6 +185,7 @@ router.post('/guideLanguages', function(req, res) {
 });
 
 router.get('/guideAreas', function(req, res) {
+    
     //needs to be a guide
     if(!func.hasSession(req) || !func.isGuide(req)){
         func.redirectHome(res);
@@ -212,6 +215,8 @@ router.get('/guideAreas', function(req, res) {
         func.renderGuideAreas(res);
         return;
     }
+
+    func.renderGuideAreas(res);
 });
 
 router.post('/guideAreas', function(req, res) {
@@ -277,6 +282,7 @@ router.post('/guideAreas', function(req, res) {
                 //TODO remove console.log
                 console.log("not logged in but has languages  --> redirect home so it can login --> all OK");
                 //send home that guide can login
+                res.render('index', {title: "__Login", registrationOK: "TRUE"});
                 func.redirectHome(res);
             }
         }

@@ -86,7 +86,11 @@
         
     },
     "T_LANGUAGES":{
-        "T_LANGUAGES": "Lingue del turista"
+        "T_LANGUAGES": "Lingue del turista",
+        "SEND": "Invia le lingue",
+        "SKILL": "Seleziona il livello",
+        "SPOKEN_LANGUAGES": "Lingue parlate",
+        "LANGUAGES_INTRO": "Selezione le lingue che parli e il relativo livello di conoscenza"
     },
     "T_LOCATION":{
         "GETTING_GPS": "Ricerco la posizione, prego attendere....",
@@ -102,13 +106,6 @@
         "AUTO_GPS": "Usa il GPS",
         "PERMISSION_DENIED": "permesso negato, aggiungi la tua posizione manualmente",
         "OTHER_ERROR": "C'è stato un errore"
-    },
-    "T_SETTINGS":{
-        "SEND": "Invia le lingue",
-        "SKILL": "Seleziona il livello",
-        "SPOKEN_LANGUAGES": "Lingue parlate",
-        "LANGUAGES_INTRO": "Selezione le lingue che parli e il relativo livello di conoscenza"
     }
-    
 
 }

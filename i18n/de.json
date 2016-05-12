@@ -84,7 +84,11 @@
         
     },
     "T_LANGUAGES":{
-        "T_LANGUAGES": "Tourist Sprachen"
+        "T_LANGUAGES": "Tourist Sprachen",
+        "SEND": "Sprachen senden",
+        "SKILL": "Niveau wählen",
+        "SPOKEN_LANGUAGES": "Sprachen",
+        "LANGUAGES_INTRO": "Wählen Sie alle Ihre gesprochenen Sprachen und das relative Niveau"
     },
     "T_LOCATION":{
         "GETTING_GPS": "Suche die GPS-Position, bitte warten ....",
@@ -100,11 +104,5 @@
         "AUTO_GPS": "GPS benutzen",
         "PERMISSION_DENIED": "Erlaubnis verweigert, fügen Sie Ihre Position manuell hinzu",
         "OTHER_ERROR": "Ein Fehler ist aufgetreten"
-    },
-    "T_SETTINGS":{
-        "SEND": "Sprachen senden",
-        "SKILL": "Niveau wählen",
-        "SPOKEN_LANGUAGES": "Sprachen",
-        "LANGUAGES_INTRO": "Wählen Sie alle Ihre gesprochenen Sprachen und das relative Niveau"
     }
 }

@@ -84,7 +84,11 @@
         
     },
     "T_LANGUAGES":{
-        "T_LANGUAGES": "Tourist Languages"
+        "T_LANGUAGES": "Tourist Languages",
+        "LANGUAGES_INTRO": "Select all your spoken languages and the relative skill",
+        "SEND": "Send languages",
+        "SKILL": "Choose your skill",
+        "SPOKEN_LANGUAGES": "Spoken languages"
     },
     "T_LOCATION":{
         "ADD_POS": "Add a position",
@@ -101,12 +105,6 @@
         "OTHER_ERROR": "an error occurred",
         "PERMISSION_DENIED": "permission denied, add your position by hand",
         "T_LOCATION": "Tourist Location"
-    },
-    "T_SETTINGS":{
-        "LANGUAGES_INTRO": "Select all your spoken languages and the relative skill",
-        "SEND": "Send languages",
-        "SKILL": "Choose you skill",
-        "SPOKEN_LANGUAGES": "Spoken languages"
     }
     
 }

@@ -299,11 +299,15 @@ router.post('/guideAreas', function(req, res) {
 });
 
 router.get('/guidePassword', function(req, res) {
-    //needs to be a logged in guide
+    //TODO implement site
+    //this site is currently used both for change the password as a guide and if a guide forgot his password
+    //if this site is used for change the password, he needs to be a logged in guide
+    /*
     if(!func.hasSession(req) || !func.isLoggedIn(req) || !func.isGuide(req)){
         func.redirectHome(res);
         return;
     }
+    */
     func.renderGuidePW(res);
     return;
 });

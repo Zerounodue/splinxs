@@ -187,6 +187,9 @@ router.post('/index', function (req, res, next) {
 router.get('/hammerJSExample', function(req, res) {
     res.render('hammerJSExample');
 });
+router.get('/chat', function(req, res) {
+    res.render('chat');
+});
 
 
 module.exports = router;

@@ -1,0 +1,110 @@
+
+/* chatbox*/
+
+
+.chatBox {
+    padding-top: 70px;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 250px;
+    transition: all 0.5s;
+
+}
+
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chat li
+{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #B3A9A9;
+}
+
+.chat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+.chat li.right .chat-body
+{
+    margin-right: 60px;
+}
+
+
+.chat li .chat-body p
+{
+    margin: 0;
+    color: #777777;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+.panel{
+    border-color: #2585C4;
+    height: 100%;
+    margin-bottom: 0px;
+    transition: all 0.5s;
+}
+
+.panel-body
+{
+    overflow-y: scroll;
+    height: calc(100% - 41px - 51px);
+    width: 100%;
+    transition: height 0.5s;
+}
+
+
+#btn_minimiseChat{
+    margin-top: 3px;
+    height: 15px;
+    position: fixed;
+    right: 15px;
+}
+
+.btn-sm{
+    color: white;
+    background-color: #28B294;
+    border-color: #299879;
+}
+.btn-sm.focus, .btn-sm:focus, .btn-sm:hover {
+    color: white;
+}
+
+
+.zeroBottom{
+    height: 41px;
+    bottom: 0;
+    padding-top: 0px;
+
+}
+.borderBottom{
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+
+.panel-primary>.panel-heading{
+    background-color: #2585C4;
+    border: 0;
+}
+
+
+
+/* chatbox */
+
+
+@media screen and (max-width: 500px){
+    .chatBox {
+        width: 100%;
+    }
+}

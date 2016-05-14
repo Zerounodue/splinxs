@@ -7,8 +7,11 @@
 //variables
 var chatBox;
 var chat;
-var smallChat;
-var chatIsMinimised;
+//var smallChat;
+var headingPanel;
+var primaryPanel;
+var chatIsMinimised=false;
+//var minimized = false;
 var isTypingSpan;
 var smallChatColors = {
     no_message: "#2585C4",
@@ -25,7 +28,9 @@ var audioDiv;
 function initUI(){
     if (showLogs) console.log('init gui');
     chat = $("#chat");
-    smallChat = $("#smallChat");
+    headingPanel = $("#headingPanel");
+    primaryPanel = $("#primaryPanel");
+    //smallChat = $("#smallChat");
     chatBox = $("#chatBox");
     isTypingSpan = $("#spn_isTyping");
     mapDiv = $("#map");
@@ -44,6 +49,8 @@ function showChat() {
 function hideChat() {
     chatBox.hide();
 }
+
+//TODO remove these two functions
 /**
  * shows the small chat
  */
@@ -112,7 +119,7 @@ function appendMessageToChat(message) {
     chat.append(message);
     scrollToBottomOfChat(chat);
 }
-/**
+/**changeToSmallChat
  * scrolls to the bottom of the chat if it is not minimised
  */
 function scrollToBottomOfChat() {
@@ -121,37 +128,39 @@ function scrollToBottomOfChat() {
         chat.parent().animate({scrollTop: chat.height()});
         //change minimised chat image to indicate new message
     } else {
-        setSmallChatNewMessageColor(smallChat);
+        setSmallChatNewMessageColor();
     }
 }
 /**
  * hides the "normal" chat and displays the small chat
  */
 function changeToSmallChat() {
-    chatBox.fadeOut();
-    smallChat.fadeIn();
+    //chatBox.fadeOut();
+    //smallChat.fadeIn();
     chatIsMinimised = true;
 }
 /**
  * hides the small chat and displays the "normal" chaat
  */
 function changeToChat() {
-    chatBox.fadeIn();
-    smallChat.fadeOut();
+    //chatBox.fadeIn();
+    //smallChat.fadeOut();
     chatIsMinimised = false;
-    setSmallChatNoMessageColor(smallChat);
+    setSmallChatNoMessageColor();
 }
 /**
  * sets the color of the small chat to "new_message"
  */
 function setSmallChatNewMessageColor() {
-    smallChat.css("background-color", smallChatColors.new_message);
+    headingPanel.css("background-color", smallChatColors.new_message);
+    primaryPanel.css("border-color", smallChatColors.new_message);
 }
 /**
  * sets the color of the small chat to "no_message"
  */
 function setSmallChatNoMessageColor() {
-    smallChat.css("background-color", smallChatColors.no_message);
+    headingPanel.css("background-color", smallChatColors.no_message);
+    primaryPanel.css("border-color", smallChatColors.no_message);
 }
 /**
  * adds the name of the peer who is typing + " is typing..." to the chat
@@ -159,7 +168,7 @@ function setSmallChatNoMessageColor() {
  */
 function peerIsTyping(peername) {
     console.log(peername + " is typing");
-    isTypingSpan.text(peername + " is typing...");
+    //isTypingSpan.text(peername + " is typing...");
 }
 /**
  * removes the "[peername] is typing..." from the chat
@@ -309,7 +318,35 @@ function initChat(){
         if(showLogs) console.log('chat input lost focus');
         meIsTyping();
     });
-    
+
+
+    $("#btn_minimiseChat").click(function (e) {
+        if(showLogs) console.log('btn_minimiseChat button clicked');
+
+        if(!chatIsMinimised){
+            $("#chatBox").addClass("zeroBottom");
+            $("#chatBox").addClass("borderBottom");
+            $(".panel").addClass("borderBottom");
+
+            //$("#footerPanel").addClass("hidden");
+            //$("#footerPanel").hide("Blind",500);
+            $("#btn_minimiseChat").attr("src", "resources/images/icons/arrowUp.png");
+            //$("#chat").addClass("hidden");
+            changeToSmallChat();
+        }else{
+            $("#chatBox").removeClass("zeroBottom");
+            $("#chatBox").removeClass("borderBottom");
+            $(".panel").removeClass("borderBottom");
+
+            //$("#footerPanel").show("Blind", 500);
+            //$("#footerPanel").removeClass("hidden");
+            $("#btn_minimiseChat").attr("src", "resources/images/icons/arrowDown.png");
+            changeToChat();
+        }
+
+
+    });
+    /*
     $("#btn_minimiseChat").click(function (e) {
         if(showLogs) console.log('minimise chat');
         changeToSmallChat();
@@ -319,4 +356,5 @@ function initChat(){
         if(showLogs) console.log('maximising chat');
         changeToChat();
     });
+    */
 }

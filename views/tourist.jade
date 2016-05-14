@@ -19,7 +19,7 @@ block append scripts
     script.
       $(document).ready(function () {
             username = "!{name}";
-            initSplinxS();
+            initSplinxs();
             initUI();
             initTouristUI();
             initTouristConnection();
@@ -28,6 +28,7 @@ block append scripts
 block append stylesheets
     //TODO remove when it works...
     link(rel='stylesheet', href='resources/css/styleOld.css')
+    link(rel='stylesheet', href='resources/css/chat.css')
 
 block content
     main#content
@@ -45,34 +46,34 @@ block content
         button#btn_muteVideo(type='button') mute video
         button#btn_unmuteVideo(type='button') unmute video
         #myVideo
-      div(id="map" hidden)
-      #chatBox.container(hidden='')
-        .row
-          // <div class="col-md-5">
-          .panel.panel-primary
-            .panel-heading
-              span.glyphicon.glyphicon-comment
-              |  Chat 
-              span#spn_isTyping.text-center
-              .btn-group.pull-right
-                button#btn_minimiseChat.btn.btn-default.btn-xs(type='button')
-                  span.glyphicon.glyphicon-chevron-down
-                ul.dropdown-menu.slidedown
-                  li
-                    a(href='#')
-                      span.glyphicon.glyphicon-refresh
-                      | Refresh
-                  li
-                    a(href='#')
-                      span.glyphicon.glyphicon-ok-sign
-                      | Available
-            .panel-body
-              ul#chat.chat
-            .panel-footer
-              .input-group
-                input#inp_chat.form-control.input-sm(type='text', placeholder='Type your message here...')
-                span.input-group-btn
-                  button#btn_chat.btn.btn-warning.btn-sm Send
+        div(id="map" hidden)
+        .chatBox(id="chatBox")
+          .panel.panel-primary(id="primaryPanel")
+              .panel-heading(id="headingPanel")
+                  span.glyphicon.glyphicon-comment
+                  |  #{texts.GENERAL.CHAT}
+                  span#spn_isTyping.text-center
+                  .btn-group.pull-right
+                      img(src='resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")
+                      //
+                          button#btn_minimiseChat.btn.btn-default.btn-xs(type='button')
+                            span.glyphicon.glyphicon-chevron-down
+                          ul.dropdown-menu.slidedown
+                            li
+                              a(href='#')
+                                span.glyphicon.glyphicon-refresh
+                                | __Refresh
+                            li
+                              a(href='#')
+                                span.glyphicon.glyphicon-ok-sign
+                                | __Available
+              .panel-body(id="bodyPanel")
+                  ul#chat.chat
+              .panel-footer(id="footerPanel")
+                  .input-group
+                      input#inp_chat.form-control.input-sm(type='text', placeholder='#{texts.G.TYPE_MESSAGE}')
+                      span.input-group-btn
+                          button#btn_chat.btn.btn-sm #{texts.GENERAL.SEND}
           // </div>
       audio#audioPlayer
     #loadBox.load(hidden='')
@@ -82,6 +83,7 @@ block content
     script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing,places&callback=initMap')
     
 block append foot
+//
     div(id="smallChat", class="smallChat", hidden)
         img#smallChatImg.smallChatImg(src='resources/images/smallChat.png', alt='chat')
         span#smallChatText.smallChatText Chat

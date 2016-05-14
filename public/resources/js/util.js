@@ -16,7 +16,7 @@ var typingTimeout = 2000;
  * initialises the used variables
  * !needs to be called in document.ready()!
  */
-function initSplinxS() {
+function initSplinxs() {
     audioPlayer = $("#audioPlayer").get(0);
 
     sounds = {

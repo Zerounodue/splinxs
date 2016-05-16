@@ -59,6 +59,13 @@ block content
         button#btn_stopVideo(type='button') __stop video
         #videoContainer
       br
+      span __state: 
+      span(id="spn_state") __available
+      br
+      button(id='btn_available', type="button") __set available
+      br
+      button(id='btn_unavailable', type="button") __set unavailable
+      br
       div(id="mapControls", hidden)
       // not needed anymore
         span __map update interval

@@ -39,6 +39,17 @@ function initGuideUI(){
 
     });
 
+    $("#btn_available").click(function (e) {
+        if(showLogs) console.log('btn available clicked');
+        guideSocketSendState(guideStates.available);
+        $("#spn_state").text("__available");
+    });
+
+    $("#btn_unavailable").click(function (e) {
+        if(showLogs) console.log('btn unavailable clicked');
+        guideSocketSendState(guideStates.unavailable);
+        $("#spn_state").text("__unavailable");
+    });
 
     setConfirmUnload(true);
 

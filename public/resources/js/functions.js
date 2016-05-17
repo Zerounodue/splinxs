@@ -151,7 +151,7 @@ this.redirectTourist = function(res){
 
 this.renderTouristSite = function(res){
     var texts = res.req.i18n_texts;
-    var name = res.req.username;
+    var name = res.req.session.username;
     res.render('tourist', {title: texts.GENERAL.TOURIST, name: name});
 };
 

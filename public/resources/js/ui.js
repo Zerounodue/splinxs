@@ -73,7 +73,7 @@ function appendMyMessageToChat(message) {
     var m =
             '<li class="right clearfix">'
             + '<span class="chat-img pull-right">'
-            + '<img src="resources/images/me.png" alt="My Avatar" class="img-circle">'
+            + '<img src="../resources/images/me.png" alt="My Avatar" class="img-circle">'
             + '</span>'
             + '<div class="chat-body clearfix">'
             + '<div class="header">'
@@ -98,7 +98,7 @@ function appendPeerMessageToChat(message, peername) {
     var m =
             '<li class="left clearfix">'
             + '<span class="chat-img pull-left">'
-            + '<img src="resources/images/peer.png" alt="Peer Avatar" class="img-circle">'
+            + '<img src="../resources/images/peer.png" alt="Peer Avatar" class="img-circle">'
             + '</span>'
             + '<div class="chat-body clearfix">'
             + '<div class="header">'
@@ -330,7 +330,7 @@ function initChat(){
 
             //$("#footerPanel").addClass("hidden");
             //$("#footerPanel").hide("Blind",500);
-            $("#btn_minimiseChat").attr("src", "resources/images/icons/arrowUp.png");
+            $("#btn_minimiseChat").attr("src", "../resources/images/icons/arrowUp.png");
             //$("#chat").addClass("hidden");
             changeToSmallChat();
         }else{
@@ -340,7 +340,7 @@ function initChat(){
 
             //$("#footerPanel").show("Blind", 500);
             //$("#footerPanel").removeClass("hidden");
-            $("#btn_minimiseChat").attr("src", "resources/images/icons/arrowDown.png");
+            $("#btn_minimiseChat").attr("src", "../resources/images/icons/arrowDown.png");
             changeToChat();
         }
 

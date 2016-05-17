@@ -88,7 +88,7 @@ router.get('/tourist', function(req, res) {
 });
 
 router.post('/tourist', function(req, res) {
-    if(!func.hasSession(req) || func.isGuide(req) || !func.touristHasLanguages(req) || !func.touristHasUsername()){
+    if(!func.hasSession(req) || func.isGuide(req) || !func.touristHasLanguages(req) || !func.touristHasUsername(req)){
         func.redirectHome(res);
         return;
     }

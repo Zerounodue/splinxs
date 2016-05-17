@@ -8,6 +8,10 @@ this.redirectHome = function(res){
     res.redirect('/');
 };
 
+this.redirectGuide = function(res){
+    res.redirect('/guide');
+};
+
 this.renderGuide = function(res){
     var texts = res.req.i18n_texts;
     var name = res.req.session.username;
@@ -107,6 +111,16 @@ this.touristHasLocation = function(req){
     return has;
 };
 
+this.touristHasUsername = function(req){
+    var has = false;
+    if(req.session && !req.session.guide){
+        if(req.session.username){
+            has = true;
+        }
+    }
+    return has;
+};
+
 //TODO delete?
 /*
 this.hasSetLanguages = function(req){
@@ -131,8 +145,13 @@ this.createTouristUsername = function(){
     return Date.now();
 };
 
-this.renderTouristSite = function(res, name){
+this.redirectTourist = function(res){
+    res.redirect('/tourist');
+};
+
+this.renderTouristSite = function(res){
     var texts = res.req.i18n_texts;
+    var name = res.req.username;
     res.render('tourist', {title: texts.GENERAL.TOURIST, name: name});
 };
 

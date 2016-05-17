@@ -3,11 +3,6 @@ var router = express.Router();
 
 var GuideLanguage = require('../models/guideLanguage');
 
-
-//only for guide!?
-//var passport = require('passport');
-//var Account = require('../models/account');
-
 //https://github.com/meikidd/iso-639-1
 var ISO6391 = require('iso-639-1');
 
@@ -37,25 +32,6 @@ router.get('/touristLanguages', function(req, res) {
         req.session.username = func.createTouristUsername();
         func.renderTouristLanguages(res, langs.codes.sort());
     });
-    
-    
-    /*
-    //TODO querry is maybe unsable or not 100% correct?
-    GuideLanguage.findOne(function (err, languages) {
-        if (err) return handleError(err);
-        console.log('languages codes; ', languages.codes); // Space Ghost is a talk show host.
-
-
-        req.session.username = func.createTouristUsername();
-
-        func.renderTouristLanguages(res, languages.codes);
-        console.log('2');
-    });
-    */
-    
-    
-    
-    
 
 });
 
@@ -106,51 +82,13 @@ router.get('/touristLocation', function(req, res) {
     return;
 });
 
-/*
-//moved code to post(/tourist)
-router.post('/touristLocation', function(req, res) {
-    if(!func.hasSession(req) || func.isGuide(req) || !func.touristHasLanguages(req)){
-        func.redirectHome(res);
-        return;
-    }
-    if (!req.body || !req.body.position){
-        redirectHome(res);
-        return;
-    }
-    
-    var pos = JSON.parse(req.body.position);
-    //TODO test if works, else use commented line
-    //var validLocation = pos.lat != null && pos.lng != null && func.isNumeric(pos.lat) && func.isNumeric(pos.lng);
-    var validLocation = func.isNumeric(pos.lat) && func.isNumeric(pos.lng);
-
-    if(validLocation){
-        req.session.lat = pos.lat;
-        req.session.lng = pos.lng;
-        
-        //did not set languages
-        if(!func.touristHasLanguages(req)){
-            func.redirectHome(res);
-            return;
-        }
-        
-        //tourist site
-        func.renderTouristSite(res, req.session.username);
-        return;
-    }else{
-        func.redirectHome(res);
-        return;
-    }
-   
-});
-*/
-
 //not allowed to go here with a get request
 router.get('/tourist', function(req, res) {
     func.redirectHome(res);
 });
 
 router.post('/tourist', function(req, res) {
-    if(!func.hasSession(req) || func.isGuide(req) || !func.touristHasLanguages(req)){
+    if(!func.hasSession(req) || func.isGuide(req) || !func.touristHasLanguages(req) || !func.touristHasUsername()){
         func.redirectHome(res);
         return;
     }
@@ -160,8 +98,6 @@ router.post('/tourist', function(req, res) {
     }
     
     var pos = JSON.parse(req.body.position);
-    //TODO test if works, else use commented line
-    //var validLocation = pos.lat != null && pos.lng != null && func.isNumeric(pos.lat) && func.isNumeric(pos.lng);
     var validLocation = func.isNumeric(pos.lat) && func.isNumeric(pos.lng);
 
     if(validLocation){
@@ -175,7 +111,7 @@ router.post('/tourist', function(req, res) {
         }
         
         //tourist site
-        func.renderTouristSite(res, req.session.username);
+        func.renderTouristSite(res);
         return;
     }else{
         func.redirectHome(res);

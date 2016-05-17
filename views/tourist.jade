@@ -32,19 +32,19 @@ block append stylesheets
 
 block content
     main#content
-      button#btn_joinConnection(type='button') join connection
-      button#btn_closeConnection(type='button', hidden='') close connection
+      button#btn_joinConnection(type='button') __join connection
+      button#btn_closeConnection(type='button', hidden='') __close connection
       br
       #audio(hidden='')
-        button#btn_startAudio(type='button') start audio
-        button#btn_stopAudio(type='button') stop audio
+        button#btn_startAudio(type='button') __start audio
+        button#btn_stopAudio(type='button') __stop audio
         #audioDiv
       br
       #video.video(hidden='')
-        button#btn_shareVideo(type='button') start video
-        button#btn_stopVideo(type='button') stop video
-        button#btn_muteVideo(type='button') mute video
-        button#btn_unmuteVideo(type='button') unmute video
+        button#btn_shareVideo(type='button') __start video
+        button#btn_stopVideo(type='button') __stop video
+        button#btn_muteVideo(type='button') __mute video
+        button#btn_unmuteVideo(type='button') __unmute video
         #myVideo
         div(id="map" hidden)
         .chatBox(id="chatBox")

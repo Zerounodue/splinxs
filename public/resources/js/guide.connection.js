@@ -259,7 +259,7 @@ function mapMessage(mapMessage) {
         var tourist = mapMessage.tourist;
         if (showLogs) console.log('guide: map geo');
         if (tourist.pos) {
-            var pos = message.map.tourist.pos;
+            var pos = tourist.pos;
             if(pos.lat && pos.lng){
                 if (showLogs) console.log('guide: map location, lat: ' + pos.lat + " lng: " + pos.lng);
                 setTouristLocation(pos);
@@ -333,8 +333,8 @@ function ongoingConnectionClosed(){
 
 function initGuideSocket(){
     if(showLogs) console.log('guide: init guideSocket');
-    //guideSocket = io.connect('https://localhost/guide');
     guideSocket = io.connect('https://splinxs.ti.bfh.ch/guide');
+    //guideSocket = io.connect('https://localhost/guide');
     
     initEvents();
 }

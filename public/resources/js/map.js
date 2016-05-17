@@ -10,8 +10,11 @@ var geocoder;
 var markers = [];
 var markerCount = 0;
 var userMarker = null;
+var touristPos = {lat: 0, lng: 0};
+var touristOrient = 0;
 
-var defaultLocation = {lat: 46.947248, lng: 7.451586}; //Bern
+//var defaultLocation = {lat: 46.947248, lng: 7.451586}; //Bern
+var defaultLocation = {lat: 0, lng: 0};
 
 //used to delay click to allow doubleclick
 var click_timeout;
@@ -36,7 +39,7 @@ function initMap() {
     if(showLogs) console.log('init map');
     map = new google.maps.Map(document.getElementById('map'), {
         center: defaultLocation,
-        zoom: 10,
+        zoom: 3,
         zoomControl: true,
         mapTypeControl: false,
         scaleControl: true,
@@ -162,7 +165,7 @@ function setTouristLocation(pos){
  * @param {int} orient orientataion
  */
 function setTouristOrientation(orient) {
-    if(showLogs) console.log('tourist orientation: '+ orient);
+    if(showLogs) console.log('tourist orientation: ' + orient);
     userMarker.setMap(null);
     userMarker.icon.rotation = orient;
     userMarker.setMap(map);
@@ -259,7 +262,30 @@ function setUpdateInterval(interval){
 */
 /**
  * gets the tourist's geo location
+ * and sends it to the guide
  */
+function getGEOLocation() {
+    // Try HTML5 geolocation.
+    
+    if (navigator.geolocation) {
+        watchID = navigator.geolocation.watchPosition(function (position) {
+            touristPos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            //stop watching (updating and trying to get the position) when the position is found
+            navigator.geolocation.clearWatch(watchID);
+            sendTouristLocationOrientation();
+            //map.setCenter(pos);
+        }, function () {
+            if(showLogs) console.warn('The Geolocation service failed');
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        if(showLogs) console.warn('Your browser does not support geolocation');
+    }
+}
+/*
 function getGEOLocation() {
     // Try HTML5 geolocation.
     var pos = {lat: null, lng: null};
@@ -281,36 +307,32 @@ function getGEOLocation() {
     
     return pos;
 }
+*/
 /**
  * gets the tourist's orientation
  */
 function getOrientation(){
-    var orientation = null;
     //TODO implement
-    orientation = new Date().getSeconds() * 6;
-    
-    return orientation;
+    touristOrient = new Date().getSeconds() * 6;
 }
 /**
  * sends the tourist's location and orientation
  */
 function sendTouristLocationOrientation(){
     if(showLogs) console.log('sending tourist location orientation');
-    var pos = getGEOLocation();
-    var orientation = getOrientation();
-    var data = {tourist: null};
-    
-    if(pos.lat != null && pos.lng != null){
-        data.tourist = {pos : pos};
+    //var pos = getGEOLocation();
+
+    var data = {tourist: { pos: null, orientation: null }};
+    if(touristPos.lat != null && touristPos.lng != null){
+        data.tourist.pos = touristPos;
         //set position on tourist map
-        setTouristLocation(pos);
+        setTouristLocation(touristPos);
     }
-    if(orientation > -1){
-        data.tourist = {orientation : orientation};
+    if(touristOrient > -1){
+        data.tourist.orientation = touristOrient;
         //set orientation on tourist map
-        setTouristOrientation(orientation);
+        setTouristOrientation(touristOrient);
     }
-    
     if(data.tourist != null){
         sendMapData(data);
     }else{
@@ -318,10 +340,10 @@ function sendTouristLocationOrientation(){
     }
 }
 
-
-
-
-
+function updateTouristLocationOrientation(){
+    getOrientation();
+    getGEOLocation();
+}
 
 //TODO do... and in .connection.js as well
 function checkValidLocation(){

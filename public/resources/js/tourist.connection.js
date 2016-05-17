@@ -358,6 +358,9 @@ function establishConnectionWithGuide() {
     hideLoadBox();
     showGUI();
     showTouristUI();
+    resizeMap();
+    //get current location and send to guide
+    updateTouristLocationOrientation();
 }
 /**
  * if the guide refused the connection or a timeout occured, try the next channel (guide)

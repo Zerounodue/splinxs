@@ -17,7 +17,8 @@ var func  = require('../public/resources/js/functions.js');
 router.get('/', function(req, res, next) {
     if(func.isGuide(req)){
         if(func.isLoggedIn(req)){
-            func.renderGuide(res);
+            //func.renderGuide(res);
+            func.redirectGuide(res);
             return;
         }else{
             func.logout(res);
@@ -89,7 +90,8 @@ router.get('/guideSocket', function(req, res) {
 router.get('/index', function(req, res) {
     //TODO is this good?
     if(func.isGuide(req) && func.isLoggedIn(req)){
-        func.renderGuide(res);
+        //func.renderGuide(res);
+        func.redirectGuide(res);
         return;
     }
     res.render('index');
@@ -154,7 +156,8 @@ router.post('/index', function (req, res, next) {
             //guide completed registration
             if (hasLanguages && hasAreas) {;
                 req.session.loggedIn = true;
-                func.renderGuide(res);
+                //func.renderGuide(res);
+                func.redirectGuide(res);
                 return;
             //guide needs to add areas
             } else if(hasLanguages) {
@@ -174,9 +177,7 @@ router.post('/index', function (req, res, next) {
                 func.renderGuideLangs(res);
                 return;
             }
-            
-            
-            
+
         }
         
     })(req, res, next);

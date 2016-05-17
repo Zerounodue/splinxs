@@ -4,17 +4,17 @@
 extends layout
 
 block append scripts
-    script(src='resources/js/rmc3@3.3.4.js')
+    script(src='../resources/js/rmc3@3.3.4.js')
     // socket.io for signaling
     script(src='/socket.io/socket.io.js')
-    script(src='resources/js/connection.js')
-    script(src='resources/js/guide.connection.js')
-    script(src='resources/js/util.js')
-    script(src='resources/js/ui.js')
-    script(src='resources/js/guide.ui.js')
-    script(src='resources/js/DetectRTC.js')
-    script(src='resources/js/map.js')
-    script(src='resources/js/guide.map.js')
+    script(src='../resources/js/connection.js')
+    script(src='../resources/js/guide.connection.js')
+    script(src='../resources/js/util.js')
+    script(src='../resources/js/ui.js')
+    script(src='../resources/js/guide.ui.js')
+    script(src='../resources/js/DetectRTC.js')
+    script(src='../resources/js/map.js')
+    script(src='../resources/js/guide.map.js')
     script.
       $(document).ready(function () {
             username = "!{name}";
@@ -28,8 +28,8 @@ block append scripts
 
 block append stylesheets
     //TODO remove when it works...
-    link(rel='stylesheet', href='resources/css/styleOld.css')
-    link(rel='stylesheet', href='resources/css/chat.css')
+    link(rel='stylesheet', href='../resources/css/styleOld.css')
+    link(rel='stylesheet', href='../resources/css/chat.css')
 
 block append navbarli
     li
@@ -85,7 +85,7 @@ block content
               |  #{texts.GENERAL.CHAT}
               span#spn_isTyping.text-center
 
-                img(src='resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")
+                img(src='../resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")
                 //
                     button#btn_minimiseChat.btn.btn-default.btn-xs(type='button')
                       span.glyphicon.glyphicon-chevron-down

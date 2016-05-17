@@ -222,15 +222,11 @@ router.get('/guideAreas', function(req, res) {
 router.post('/guideAreas', function(req, res) {
     //needs to be a guide
     if(!func.hasSession(req) || !func.isGuide(req)){
-        //TODO remove console.log
-        console.log("no session or is no guide --> redirect home");
         func.redirectHome(res);
         return;
     }
     //no post params
     if (!req.body || !req.body.areas){
-        //TODO remove console.log
-        console.log("no post paramenter --> redirect home");
         func.redirectHome(res);
         return;
     }    
@@ -257,45 +253,35 @@ router.post('/guideAreas', function(req, res) {
         //save to db
         Guide.update({ username: req.session.username }, { $set: { areas: areas } },  function (err, raw){
             if(err){
-                //TODO remove console.log
-                console.log("error in guide.update --> errors");
                 //TODO might need to do something more?
                 return handleError(err);
             }
         });
         
         if(func.isLoggedIn(req)){
-            //TODO remove console.log
-            console.log("isLoggedIn --> redirect guide");
             //send to guide site
-            func.renderGuide(res);
+            //func.renderGuide(res);
+            func.redirectGuide(res);
             return;
         }else{
             req.session.hasAreas = true;
             if(!func.hasLanguages(req)){
-                //TODO remove console.log
-                console.log("not logged in & has no languages --> redirect guideLanguage");
                 //send to choose area
                 func.renderGuideLanguages(res, req.session.username);
                 return;
             }else{
-                //TODO remove console.log
-                console.log("not logged in but has languages  --> redirect home so it can login --> all OK");
                 //send home that guide can login
                 res.render('index', {title: "__Login", registrationOK: "TRUE"});
                 func.redirectHome(res);
+                return;
             }
         }
     }else{
-        //TODO remove console.log
-        console.log("impossible! no areas  --> redirect home");
         //not possible
         func.redirectHome(res);
         return;
     }
-    
-    
-    
+
 });
 
 router.get('/guidePassword', function(req, res) {
@@ -313,7 +299,7 @@ router.get('/guidePassword', function(req, res) {
 });
 
 router.post('/guidePassword', function(req, res) {
-    //needs to be a logged in  guide
+    //needs to be a logged in guide
     if(!func.hasSession(req) || !func.isLoggedIn(req) || !func.isGuide(req)){
         func.redirectHome(res);
         return;
@@ -328,7 +314,7 @@ router.post('/guidePassword', function(req, res) {
 });
 
 router.get('/guide', function(req, res) {
-    //needs to be a logged in  guide
+    //needs to be a logged in guide
     if(!func.hasSession(req) || !func.isLoggedIn(req) || !func.isGuide(req)){
         func.redirectHome(res);
         return;

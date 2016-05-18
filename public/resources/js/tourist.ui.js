@@ -8,6 +8,8 @@
 var loadBox;
 var content;
 
+var audioMuted = false;
+var videoMuted = false;
 /**
  * initialises ui variables for tourist
  * !needs to be called in document.ready()!
@@ -126,6 +128,72 @@ function initTouristButtons(){
         });
 
     }
+
+
+    $("#btn_mute_audio").click(function (e) {
+        if (showLogs) console.log('guide: mute audio button clicked '+ audioMuted);
+        if(!audioMuted){
+            //mute audio
+            audioMuted=true;
+            $('#btn_mute_audio').addClass('lightColor');
+            $('#btn_mute_audio').attr('src','resources/images/icons/microphoneOff.png');
+            //TODO mute
+        }
+        else{
+            //unmute audio
+            audioMuted=false;
+            $('#btn_mute_audio').removeClass('lightColor');
+            $('#btn_mute_audio').attr('src','resources/images/icons/microphoneOn.png');
+            //TODO unmute
+        }
+    });
+
+    $("#btn_mute_video").click(function (e) {
+        if (showLogs) console.log('guide: mute video button clicked '+ videoMuted);
+        if(!videoMuted){
+            //mute video
+            videoMuted =true;
+            $('#btn_mute_video').addClass('lightColor');
+            $('#btn_mute_video').attr('src','resources/images/icons/videoOff.png');
+
+            connection.attachStreams.forEach(function (stream) {
+                if (stream.isVideo) {
+                    if (showLogs)
+                        console.log('muting video stream');
+                    stream.mute();
+                }
+            });
+
+        }
+        else{
+            //unmute video
+            videoMuted=false;
+            $('#btn_mute_video').removeClass('lightColor');
+            $('#btn_mute_video').attr('src','resources/images/icons/videoOn.png');
+
+            connection.attachStreams.forEach(function (stream) {
+                if (stream.isVideo) {
+                    if (showLogs)
+                        console.log('unmuting video stream');
+                    stream.unmute();
+                }
+            });
+        }
+    });
+
+
+    $("#touristControlsBtn").on('click', function(e){
+        if(showLogs) console.log('guideControlsBtn  button clicked');
+        $('.navbar-collapse').collapse('hide');
+        $("#touristControls").show(animDur);
+    });
+
+
+    $("#btn_touristClose").on('click', function(e){
+        if(showLogs) console.log('guide close button clicked');
+
+        $("#touristControls").hide(animDur);
+    });
 }
 
 function setConfirmUnload(on) {

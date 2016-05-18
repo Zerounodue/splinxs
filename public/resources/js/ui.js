@@ -181,6 +181,7 @@ function peerStoppedTyping() {
  * displays all gui elements available for the current connection
  */
 function showGUI(){
+    
     if(supportsOnlyWebsocket()){
         showWebsocketOnlyGUI();
     }else{
@@ -208,6 +209,8 @@ function showWebsocketOnlyGUI(){
     showMap();
     //TODO hide mic, video, etc.
     $("#btn_closeConnection").show();
+
+
 }
 /**
  * will display the elements necessary for a connection with no media
@@ -219,6 +222,7 @@ function showNoMediaGUI(){
     //TODO hide mic, video, etc.
     //TODO peer might have media available
     $("#btn_closeConnection").show();
+
 }
 /**
  * will display all gui elements for a Webrtc conection
@@ -231,6 +235,7 @@ function showAudioVideoGUI(){
     showVideo();
     showAudio();
     $("#btn_closeConnection").show();
+
 }
 /**
  * will display only audio gui elements for a Webrtc conection
@@ -242,6 +247,7 @@ function showAudioOnlyGUI(){
     //TODO show audio...
     showAudio();
     $("#btn_closeConnection").show();
+
 }
 /**
  * will display onyl video gui elements for a Webrtc conection
@@ -253,6 +259,7 @@ function showVideoOnlyGUI(){
     //TODO show video...
     showVideo();
     $("#btn_closeConnection").show();
+
 }
 /**
  * shows the map

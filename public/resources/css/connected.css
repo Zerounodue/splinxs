@@ -1,0 +1,76 @@
+.animate {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+}
+
+#hammerContainer {
+    height: 100%;
+    width: 100%;
+
+}
+#hammerVideo{
+      position: fixed;
+      z-index: 10;
+      background: black;
+      width: 200px;
+      height: 200px;
+}
+
+
+.videoIcon{
+    float: right;
+    height: 100%;
+    cursor: pointer;
+
+}
+.audioIcon{
+    float: left;
+    height: 100%;
+    cursor: pointer;
+}
+
+.audioVideoControls{
+    position: fixed;
+    z-index: 1;
+    bottom: 10px;
+    left: calc(50%  - 250px);
+    width: 150px;
+    height: 55px;
+}
+.lightColor{
+    opacity: 0.7;
+}
+
+.img-circle {
+    height: 40px;
+}
+#content{
+    height: 100%;
+    width: 100%;
+}
+
+
+
+
+.controlsPage{
+    position: fixed;
+    z-index: 110;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.9);
+    padding: 20px;
+}
+
+#myVideo{
+    height: 100%;
+    width: 100%;
+}
+#videoContainer{
+    height: 100%;
+    width: 100%;
+}
+video{
+    height: 100%;
+    width: 100%;
+}

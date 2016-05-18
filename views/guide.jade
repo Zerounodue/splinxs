@@ -1,6 +1,6 @@
-//- 
+//-
     ...
-     
+
 extends layout
 
 block append scripts
@@ -15,6 +15,8 @@ block append scripts
     script(src='../resources/js/DetectRTC.js')
     script(src='../resources/js/map.js')
     script(src='../resources/js/guide.map.js')
+    script(src='../resources/js/hammerV2.0.8.js')
+    script(src='../resources/js/hammerFunctions.js')
     script.
       $(document).ready(function () {
             username = "!{name}";
@@ -28,10 +30,13 @@ block append scripts
 
 block append stylesheets
     //TODO remove when it works...
-    link(rel='stylesheet', href='../resources/css/styleOld.css')
+    //link(rel='stylesheet', href='../resources/css/styleOld.css')
+    link(rel='stylesheet', href='../resources/css/connected.css')
     link(rel='stylesheet', href='../resources/css/chat.css')
 
 block append navbarli
+    li
+        a#guideControlsBtn __controls
     li
         a(href="/logout" id="a_logout") #{texts.MENU.LOGOUT}
     li.dropdown
@@ -45,47 +50,79 @@ block append navbarli
                 a(href="/guideAreas" id="a_guideAreas") #{texts.MENU.CHANGE_AREAS}
             li
                 a(href="/guidePassword" id="a_guidePassword") #{texts.MENU.CHANGE_PASSWORD}
+            li
+                a(href) __set available
 
 block content
-    main#content
-      button#btn_closeConnection(type='button', hidden) __close connection
-      br
-      #audio(hidden='')
-        button#btn_startAudio(type='button') __start audio
-        button#btn_stopAudio(type='button') __stop audio
-        #audioDiv
-      br
-      #video.video(hidden='')
-        button#btn_stopVideo(type='button') __stop video
-        #videoContainer
-      br
-      span __state: 
-      span(id="spn_state") __available
-      br
-      button(id='btn_available', type="button") __set available
-      br
-      button(id='btn_unavailable', type="button") __set unavailable
-      br
-      div(id="mapControls", hidden)
-      // not needed anymore
-        span __map update interval
-        br
-        button#btn_updateIntervalOff(type='button') off
-        button#btn_updateIntervalBatman(type='button') batman
-        button#btn_updateIntervalSpiderman(type='button') spiderman
-        button#btn_updateIntervalIronman(type='button') ironman
-        button#btn_updateIntervalSuperman(type='button') superman
-        button#btn_updateIntervalFlash(type='button') flash
-      div(id="map", hidden)
+    #guideControls.controlsPage(hidden)
+        .row
+            .col-sm-12
+                img.x(src='resources/images/icons/x.png', alt='close icon', id="btn_guideClose")
+        .row
+            .col-sm-12
+                h2(style='text-align: center;') __Controls
 
-      .chatBox(id="chatBox")
-          .panel.panel-primary(id="primaryPanel")
+        button#btn_closeConnection(type='button', hidden) __close connection
+        br
+        #audio(hidden='')
+            button#btn_startAudio(type='button') __start audio
+            button#btn_stopAudio(type='button') __stop audio
+            #audioDiv
+        br
+        #video.video(hidden='')
+            button#btn_stopVideo(type='button') __stop video
+            //#videoContainer
+        br
+        span __state:
+        span(id="spn_state") __available
+        br
+        button(id='btn_available', type="button") __set available
+        br
+        button(id='btn_unavailable', type="button") __set unavailable
+        br
+
+    //
+        main#content
+          button#btn_closeConnection(type='button', hidden) __close connection
+          br
+          #audio(hidden='')
+            button#btn_startAudio(type='button') __start audio
+            button#btn_stopAudio(type='button') __stop audio
+            #audioDiv
+          br
+          #video.video(hidden='')
+            button#btn_stopVideo(type='button') __stop video
+            #videoContainer
+          br
+          span __state:
+          span(id="spn_state") __available
+          br
+          button(id='btn_available', type="button") __set available
+          br
+          button(id='btn_unavailable', type="button") __set unavailable
+          br
+          div(id="mapControls", hidden)
+
+          div(id="map", hidden)
+
+    .chatBox(id="chatBox" hidden)
+        .panel.panel-primary(id="primaryPanel")
             .panel-heading(id="headingPanel")
+                span
+                    .chatLeft
+                        img.chatLeftIcon(src='resources/images/icons/chatWhite.png', alt='chat')
+
+                        span#spn_isTyping.text-center.message
+                        //#{texts.GENERAL.CHAT}
+
+
+                        img.chatRightIcon(src='resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")
+            //
               span.glyphicon.glyphicon-comment
               |  #{texts.GENERAL.CHAT}
               span#spn_isTyping.text-center
 
-                img(src='../resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")
+                img(src='resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")
                 //
                     button#btn_minimiseChat.btn.btn-default.btn-xs(type='button')
                       span.glyphicon.glyphicon-chevron-down
@@ -99,24 +136,37 @@ block content
                           span.glyphicon.glyphicon-ok-sign
                           | __Available
             .panel-body(id="bodyPanel")
-              ul#chat.chat
+                ul#chat.chat
             .panel-footer(id="footerPanel")
-              .input-group
-                input#inp_chat.form-control.input-sm(type='text', placeholder='#{texts.G.TYPE_MESSAGE}')
-                span.input-group-btn
-                  button#btn_chat.btn.btn-sm #{texts.GENERAL.SEND}
-          // </div>
-      #modalDialog.modalDialog(hidden)
-        // <div id="confirmDiv">
+                .input-group
+                    input#inp_chat.form-control.input-sm(type='text', placeholder='#{texts.G.TYPE_MESSAGE}')
+                    span.input-group-btn
+                        button#btn_chat.btn.btn-sm #{texts.GENERAL.SEND}
+        // </div>
+
+    // <div id="confirmDiv">
+    #modalDialog.modalDialog(hidden)
         p#modalContent
         button#modalNo #{texts.GENERAL.NO}
         button#modalYes #{texts.GENERAL.YES}
-        // </div>
-      audio#audioPlayer
-      script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing,places&callback=initMap')
+
+
+    // </div>
+    audio#audioPlayer
+
+
+
+
+    #hammerVideo
+        #videoContainer
+    #hammerContainer
+        script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing,places&callback=initMap')
+    .audioVideoControls
+        img.videoIcon(src='resources/images/icons/videoOn.png', alt='video' id="btn_mute_video")
+        img.audioIcon(src='resources/images/icons/microphoneOn.png', alt='audio' id="btn_mute_audio")
 
 //
-block append foot
+block foot
     //
         div(id="smallChat", class="smallChat", hidden)
             img#smallChatImg.smallChatImg(src='resources/images/smallChat.png', alt='#{texts.GENERAL.CHAT}')

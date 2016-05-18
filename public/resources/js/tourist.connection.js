@@ -133,6 +133,7 @@ function initTouristWebRTCEvents(){
                 //TODO make nicer code
                 var video = $("#myVideo");
                 video.append(event.mediaElement);
+
                 //connection.videosContainer.append(event.mediaElement);
             }else if(event.stream.isAudio){
                 if (showLogs) console.log('tourist: local audio stream started');
@@ -432,8 +433,8 @@ function checkPreviousConnectionInterrupted(){
 
 function initTouristSocket(){
     if(showLogs) console.log('tourist: init touristSocket');
-   touristSocket = io.connect('https://splinxs.ti.bfh.ch/tourist');
-   //touristSocket = io.connect('https://localhost/tourist');
+   //touristSocket = io.connect('https://splinxs.ti.bfh.ch/tourist');
+   touristSocket = io.connect('https://localhost/tourist');
     
     initEvents();
 }

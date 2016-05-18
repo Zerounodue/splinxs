@@ -25,7 +25,6 @@ var ticking = false;
 var transform;
 
 var mc;
-var hammerDraggable= "#hammerVideo"
 
 transform = {
     //translate: { x: START_X, y: START_Y },
@@ -35,7 +34,7 @@ transform = {
 
 $(document).ready(function () {
     log = document.querySelector("#log");
-    el = document.querySelector(hammerDraggable);
+    el = document.querySelector("#hammerdrag");
     //the hammerJS element must be insite this DOM element.
     //the hammerJS element can't be dragged outside this element
     hammerContainer = document.querySelector("#hammerContainer");
@@ -83,18 +82,18 @@ $(document).ready(function () {
         var alpha = $(this).val()/100;
         console.log(alpha);
         /*
-        $("hammerDraggable").css('background-color', 'rgba(255,255,255,' + alpha + ')');​
+        $("#hammerdrag").css('background-color', 'rgba(255,255,255,' + alpha + ')');​
         */
 
-        $(hammerDraggable ).fadeTo( "fast" , alpha);
+        $( "#hammerdrag" ).fadeTo( "fast" , alpha);
 
-        //$("hammerDraggable").css("background-color", hex2rgba("#ABCDEF", 0.6));
-        //$("hammerDraggable").opacity ($("#opacityRange").val()/100);
+        //$("#hammerdrag").css("background-color", hex2rgba("#ABCDEF", 0.6));
+        //$("#hammerdrag").opacity ($("#opacityRange").val()/100);
     });
 
     $("#sizeRange").on("input change", function() {
         size=$("#sizeRange").val()*5 +10;
-
+        console.log(size);
         if( size > $(hammerContainer).width() || size > $(hammerContainer).height()){
             if($(hammerContainer).width()<$(hammerContainer).height()){
                 size = $(hammerContainer).width();
@@ -102,25 +101,25 @@ $(document).ready(function () {
             else{
                 size= $(hammerContainer).height();
             }
-
+            console.log("???");
         }
         checkPos();
-        $(hammerDraggable).width( size);
-        $(hammerDraggable).height(size );
+        $("#hammerdrag").width( size);
+        $("#hammerdrag").height(size );
     });
 
 });
 $( window ).resize(checkPos);
 
 function checkPos () {
-    var position = $(hammerDraggable).position();
-    //if(showLogs)console.log('element X: ' + position.left + ", elemnt Y: " + position.top );
+    var position = $('#hammerdrag').position();
+    if(showLogs)console.log('element X: ' + position.left + ", elemnt Y: " + position.top );
     var changes = false;
     if(position.top < $(hammerContainer).position().top){START_Y=0; changes=true;}
     if(position.left < $(hammerContainer).position().left){START_X=0;changes=true;}
     if(position.left+el.offsetWidth > $(hammerContainer).width() +$(hammerContainer).position().left){START_X=$(hammerContainer).width()-el.offsetWidth;changes=true;}
     if(position.top +el.offsetHeight > $(hammerContainer).height()+ $(hammerContainer).position().top){START_Y=$(hammerContainer).height()-el.offsetHeight;changes=true;}
-    //if(showLogs)console.log("hey"+(position.top +el.offsetHeight));
+    if(showLogs)console.log("hey"+(position.top +el.offsetHeight));
 
     if (changes){
         el.className = 'animate';
@@ -141,7 +140,7 @@ function updateElementTransform() {
     ];
 
     value = value.join(" ");
-    //el.textContent = value;
+    el.textContent = value;
     el.style.webkitTransform = value;
     el.style.mozTransform = value;
     el.style.transform = value;
@@ -160,7 +159,7 @@ function requestElementUpdate() {
 
 
 function onPan(ev) {
-    //if(showLogs) console.log(ev.deltaX);
+    if(showLogs) console.log(ev.deltaX);
     el.className = '';
     transform.translate = {
 
@@ -171,6 +170,7 @@ function onPan(ev) {
     };
     requestElementUpdate();
 }
+
 
 
 var defaultLocation = {lat: 0, lng: 0};
@@ -188,3 +188,4 @@ function initMap(){
     });
 
 }
+ 

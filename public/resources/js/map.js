@@ -37,10 +37,13 @@ var updateInterval;
  */
 function initMap() {
     if(showLogs) console.log('init map');
-    map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('hammerContainer'), {
         center: defaultLocation,
         zoom: 3,
         zoomControl: true,
+        zoomControlOptions : {
+            position    : google.maps.ControlPosition.LEFT_BOTTOM,
+        },
         mapTypeControl: false,
         scaleControl: true,
         streetViewControl: false,

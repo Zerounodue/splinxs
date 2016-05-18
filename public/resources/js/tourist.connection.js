@@ -7,6 +7,8 @@
 //variables
 showLogs = true;
 
+var c2P = false; //connected to peer
+
 var channel;
 
 //var connection = new RTCMultiConnection();
@@ -18,7 +20,8 @@ var touristRequests = {
 
 var touristResponses = {
     response: "response",
-    accepted: 1
+    accepted: 1,
+    guideClosedConnection: 2
 };
 
 var saveConnInterval;
@@ -179,7 +182,6 @@ function initTouristWebRTCEvents(){
         //setSocketCustomEvent();
         //connection;
         
-        //debugger;
         //TODO call guide
         //establishConnectionWithGuide();
         
@@ -232,7 +234,6 @@ function setSocketCustomEvent(){
             return;
         }
         */
-        
         onMessage(message.customMessage);
     });
 }
@@ -262,6 +263,11 @@ function onMessage(message) {
         peername = message.username;
 
         establishConnectionWithGuide();
+        return;
+    }
+    //tourist closed the connection
+    if (message.closeConnection) {
+        connectionClosed();
         return;
     }
     messageArrived(message);
@@ -349,17 +355,20 @@ function establishConnectionWithGuide() {
     //clearTimeout(conEstabTimeout);
     //conEstabTimeout = null;
     
+    c2P = true;
 
+    //TODO verify if this works
+    if(!supportsOnlyWebsocket()){
+        connection.join(connection.channel);
+    }
 
-    //TODO check if also possible in websocket case
-    connection.join(connection.channel);
-    
     //connection established, save in case connection is interrupted
     storeConnection();
     
     hideLoadBox();
     showGUI();
     showTouristUI();
+    //map is gray when it is not resized
     resizeMap();
     //get current location and send to guide
     updateTouristLocationOrientation();
@@ -434,8 +443,8 @@ function checkPreviousConnectionInterrupted(){
 
 function initTouristSocket(){
     if(showLogs) console.log('tourist: init touristSocket');
-   touristSocket = io.connect('https://splinxs.ti.bfh.ch/tourist');
-   //touristSocket = io.connect('https://localhost/tourist');
+    touristSocket = io.connect('https://splinxs.ti.bfh.ch/tourist');
+    //touristSocket = io.connect('https://localhost/tourist');
     
     initEvents();
 }
@@ -471,6 +480,10 @@ function initEvents(){
                 addWebsocketEvent();
                 setSocketCustomEvent();
                 initConnectionWithGuide();
+            }else if(res == touristResponses.guideClosedConnection){
+                if(showLogs) console.log('tourist: touristSocket guide closed connection request');
+                alert('__Guide left connection in a mean way...');
+                connectionClosed();
             }
         }
     });
@@ -488,4 +501,17 @@ function touristSocketSendMessage(topic, msg){
 
 function addWebsocketEvent(){
     websocket.emit("addEvent", {event: connection.socketCustomEvent});
+}
+
+function closeConnection(){
+    if (showLogs) console.log('tourist: closing connection');
+    sendCloseConnection();
+    connectionClosed();
+}
+
+function connectionClosed(){
+    if (showLogs) console.log('tourist: connection closed by guide');
+    //TODO do nicer
+    setConfirmUnload(false);
+    window.location = "/";
 }

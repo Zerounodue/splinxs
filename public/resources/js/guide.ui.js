@@ -24,22 +24,19 @@ function initGuideUI(){
     //set the confirmUnload to false, if the guide clicks on this links he knows he will leave the page
     $("#a_logout").click(function (e) {
         if(showLogs) console.log('logout a clicked');
-        setConfirmUnload(false);
+        setConfirmUnload(c2P);
     });
     $("#a_guideLanguages").click(function (e) {
         if(showLogs) console.log('guideLanguages a clicked');
-        setConfirmUnload(false);
-
+        setConfirmUnload(c2P);
     });
     $("#a_guideAreas").click(function (e) {
         if(showLogs) console.log('guideAreas a clicked');
-        setConfirmUnload(false);
-
+        setConfirmUnload(c2P);
     });
     $("#a_guidePassword").click(function (e) {
         if(showLogs) console.log('guidePassword a clicked');
-        setConfirmUnload(false);
-
+        setConfirmUnload(c2P);
     });
 
     $("#btn_available").click(function (e) {
@@ -129,6 +126,7 @@ function initGuideButtons() {
         stopVideo();
     });
 
+    //closes the tourist's connection, the guide stays connected
     $("#btn_closeConnection").click(function (e) {
         if (showLogs) console.log('closing connection');
         closeConnection();
@@ -191,14 +189,14 @@ function initGuideButtons() {
             //mute audio
             audioMuted=true;
             $('#btn_mute_audio').addClass('lightColor');
-            $('#btn_mute_audio').attr('src','resources/images/icons/microphoneOff.png');
+            $('#btn_mute_audio').attr('src','../resources/images/icons/microphoneOff.png');
             //TODO mute
         }
         else{
             //unmute audio
             audioMuted=false;
             $('#btn_mute_audio').removeClass('lightColor');
-            $('#btn_mute_audio').attr('src','resources/images/icons/microphoneOn.png');
+            $('#btn_mute_audio').attr('src','../resources/images/icons/microphoneOn.png');
             //TODO unmute
         }
     });
@@ -209,14 +207,14 @@ function initGuideButtons() {
             //start video
             videoMuted =true;
             $('#btn_mute_video').addClass('lightColor');
-            $('#btn_mute_video').attr('src','resources/images/icons/videoOff.png');
+            $('#btn_mute_video').attr('src','../resources/images/icons/videoOff.png');
 
         }
         else{
             //stop video
             videoMuted=false;
             $('#btn_mute_video').removeClass('lightColor');
-            $('#btn_mute_video').attr('src','resources/images/icons/videoOn.png');
+            $('#btn_mute_video').attr('src','../resources/images/icons/videoOn.png');
         }
     });
 }

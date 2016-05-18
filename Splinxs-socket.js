@@ -18,7 +18,8 @@ module.exports = exports = function(io) {
         request: "request",
         help: 1,
         cancel: 2,
-        tooLate: 3
+        tooLate: 3,
+        touristClosedConnection: 4 
     };
     
     var guideResponses = {
@@ -33,7 +34,8 @@ module.exports = exports = function(io) {
     
     var touristResponses = {
         response: "response",
-        accepted: 1
+        accepted: 1,
+        guideClosedConnection: 2
     };
 
     var guideSocket = io.of('/guide');
@@ -108,6 +110,16 @@ module.exports = exports = function(io) {
                     splinxsList.removeTourist(item.tourist);
                     sendAcceptedMessageTourist(item.tourist, item.guide);
                     setGuideState(item.guide, guideStates.unavailable);
+                    //save guide in tourist socket
+                    for(var t in touristSocket.sockets){
+                        var s = touristSocket.sockets[t];
+                        if(s.username == item.tourist){
+                            s.guide = item.guide;
+                            break;
+                        }
+                    }
+                    //save tourist in guide socket
+                    socket.tourist = item.tourist;
                 }
                 splinxsList.removeGuide(socket.username);
             }
@@ -117,6 +129,10 @@ module.exports = exports = function(io) {
         socket.on('disconnect', function () {
             if(showLogs) console.log('Splinxs-socket: guide disconnect: ' + socket.username);
             setGuideState(socket.username, guideStates.unavailable);
+            //send message to tourist that guide is offline
+            if(socket.tourist){
+                sendGuideClosedConnectionRequest(socket.tourist);
+            }
         });
 
     });
@@ -131,6 +147,9 @@ module.exports = exports = function(io) {
     */
     function sendTooLateRequest(g){
         sendMessageGuide(g, {request: guideRequests.tooLate});
+    }
+    function sendTouristClosedConnectionRequest(g){
+        sendMessageGuide(g, {request: guideRequests.touristClosedConnection});
     }
     /**
      * sends a message to a guide
@@ -191,10 +210,21 @@ module.exports = exports = function(io) {
             }
         });
         
+        socket.on('disconnect', function () {
+            if(showLogs) console.log('Splinxs-socket: tourist disconnect: ' + socket.username);
+            //send message to guide that tourist is offline
+            if(socket.guide){
+                sendTouristClosedConnectionRequest(socket.guide);
+            }
+        });
+        
     });
     
     function sendAcceptedMessageTourist(t, g){
         sendMessageTourist(t, {response: touristResponses.accepted, guide: g});
+    }
+    function sendGuideClosedConnectionRequest(t){
+        sendMessageTourist(t, {response: touristResponses.guideClosedConnection});
     }
     /**
      * sends a message to a tourist

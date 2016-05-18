@@ -7,6 +7,8 @@
 //variables
 showLogs = true;
 
+var c2P = false; //connected to peer
+
 //var connection = new RTCMultiConnection();
 
 var guideSocket;
@@ -18,7 +20,8 @@ var guideStates = {
 var guideRequests = {
     help: 1,
     cancel: 2,
-    tooLate: 3
+    tooLate: 3,
+    touristClosedConnection: 4 
 };
 
 var guideResponses = {
@@ -37,7 +40,10 @@ function initGuideConnection(){
     if(showLogs) console.log('init guide connection');    
     channel = username;
 
-    initGuideWebRTC();
+    //TODO check if this works
+    if(!supportsOnlyWebsocket()){
+        initGuideWebRTC();
+    }
     
     initGuideSocket();
 }
@@ -246,10 +252,16 @@ function onMessage(message) {
         ongoingConnectionInterval = setInterval(function () {
             informServerOngoingConnection();
         }, ongoingConnectionIntervalTimer);
-
+        //connection with tourist started
+        c2P = true;
+        
         return;
     }
-    
+    //tourist closed the connection
+    if(message.closeConnection){
+        connectionClosed();
+        return;
+    }
     messageArrived(message);
 }
 /**
@@ -360,6 +372,8 @@ function initEvents(){
             var req = msg.request;
             if(req == guideRequests.help){
                 if(showLogs) console.log('guide: guideSocket help request');
+                //if guide is already c2P, don't show prompt to help
+                if(c2P) return;
                 showTouristRequestsGuidePrompt();
                 //hide prompt after timeout (tourist will try to connect to new guide)
                 //=> I mustn't see the prompt anymore
@@ -375,6 +389,11 @@ function initEvents(){
             }else if(req == guideRequests.tooLate){
                 if(showLogs) console.log('guide: guideSocket tooLate request');
                 alert('__you are too late, another guide helped the tourist');
+            }else if(req == guideRequests.touristClosedConnection){
+                if(!c2P) return; //connection should already be closed
+                if(showLogs) console.log('guide: guideSocket tourist closed connection request');
+                alert('__Tourist left connection in a mean way...');
+                connectionClosed();
             }
         }
 
@@ -392,4 +411,21 @@ function guideSocketSendState(s){
 function guideSocketSendMessage(topic, msg){
     if(showLogs) console.log('guide: guideSocket send on: ' + topic + ', message: ' + msg);
     guideSocket.emit(topic, msg);
+}
+
+function connectionClosed() {
+    if (showLogs) console.log('guide: connection closed by tourist');
+    c2P = false;
+    //TODO hide c2P GUI
+    hideChat();
+    emptyChat();
+    
+    //check again what the guide's browser is capable of
+    detectRTCcapabilities();
+}
+
+function closeConnection(){
+    if (showLogs) console.log('guide: closing tourist connection');
+    sendCloseConnection();
+    connectionClosed();
 }

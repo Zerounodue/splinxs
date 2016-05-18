@@ -63,6 +63,9 @@ function showSmallChat() {
 function hideSmallChat() {
     smallChat.hide();
 }
+function emptyChat(){
+    chat.empty();
+}
 /**
  * Creates a new chat list item and
  * Appends a message sent by me to the chat
@@ -169,6 +172,7 @@ function setSmallChatNoMessageColor() {
 function peerIsTyping(peername) {
     console.log(peername + " is typing");
     //isTypingSpan.text(peername + " is typing...");
+    isTypingSpan.text("...");
 }
 /**
  * removes the "[peername] is typing..." from the chat
@@ -303,6 +307,8 @@ function hideVideo(){
 function initChat(){
     if(showLogs) console.log("init chat");
     $("#btn_chat").click(function () {
+        //cannot send to peer if not connected
+        if(!c2P) return;
         if(showLogs) console.log('send chat clicked');
         var chatInput = $("#inp_chat");
         var message = chatInput.val();
@@ -311,6 +317,8 @@ function initChat(){
     });
 
     $("#inp_chat").keypress(function (e) {
+        //cannot send to peer if not connected
+        if(!c2P) return;
         //send message when enter key is pressed
         if (e.which == 13) {
             if(showLogs) console.log('enter on chat input');
@@ -322,6 +330,8 @@ function initChat(){
     });
 
     $("#inp_chat").keyup(function (e) {
+        //cannot send to peer if not connected
+        if(!c2P) return;
         if(showLogs) console.log('chat input lost focus');
         meIsTyping();
     });

@@ -78,7 +78,7 @@ function detectRTCcapabilities(){
  * @param {String} message message to send to the peer
  * @param {boolean} appendChat true if message should be appended to the chat
  */
-function sendMessageToPeer(message, appendChat) {
+function sendMessageToPeer(message, appendChat) {    
     if ($.trim(message).length > 0) {
         if (connectionState.DataChannel == connectionStates.DataChannel.SCTP) {
             sendMessageSCTP(message);
@@ -166,7 +166,16 @@ function sendTouristRevokesRequest(){
     });
 }
 
+function sendCloseConnection(){
+    if(showLogs) console.log('sending: close connection');
+    sendMessageWebsocket({
+        closeConnection: true
+    });
+}
+
 function sendMapData(data){
+    //cannot send to peer if not connected
+    if(!c2P) return;
     if(showLogs) console.log('sending: mapdata');
     sendMessageToPeer({map: data}, false);
 }
@@ -220,14 +229,16 @@ function supportsAudioVideo(){
 /**
  * closes the current connection
  */
+/*
 function closeConnection() {
     connection.close();
-    /*
+    
     connection.attachStreams.forEach(function (stream) {
         stream.stop();
     });
-    */
+    
 }
+*/
 /**
  * closes all media streams
  * !does not affect sctp/websocket text chat!

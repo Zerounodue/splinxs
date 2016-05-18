@@ -57,7 +57,7 @@ function initTouristButtons(){
     });
 
     $("#btn_closeConnection").click(function (e) {
-        if(showLogs) console.log('closing connection');
+        if(showLogs) console.log('btn close connection clicked');
         closeConnection();
     });
 
@@ -74,7 +74,6 @@ function initTouristButtons(){
 
         /*
          connection.attachStreams.forEach(function (stream) {
-         debugger;
          stream.mute();
          .mute({
          isAudio: true,

@@ -57,7 +57,7 @@ block content
     #guideControls.controlsPage(hidden)
         .row
             .col-sm-12
-                img.x(src='resources/images/icons/x.png', alt='close icon', id="btn_guideClose")
+                img.x(src='../resources/images/icons/x.png', alt='close icon', id="btn_guideClose")
         .row
             .col-sm-12
                 h2(style='text-align: center;') __Controls
@@ -110,13 +110,13 @@ block content
             .panel-heading(id="headingPanel")
                 span
                     .chatLeft
-                        img.chatLeftIcon(src='resources/images/icons/chatWhite.png', alt='chat')
+                        img.chatLeftIcon(src='../resources/images/icons/chatWhite.png', alt='chat')
 
                         span#spn_isTyping.text-center.message
                         //#{texts.GENERAL.CHAT}
 
 
-                        img.chatRightIcon(src='resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")
+                        img.chatRightIcon(src='../resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")
             //
               span.glyphicon.glyphicon-comment
               |  #{texts.GENERAL.CHAT}
@@ -157,13 +157,13 @@ block content
 
 
 
-    #hammerVideo
+    #hammerVideo(hidden)
         #videoContainer
     #hammerContainer
         script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing,places&callback=initMap')
     .audioVideoControls
-        img.videoIcon(src='resources/images/icons/videoOn.png', alt='video' id="btn_mute_video")
-        img.audioIcon(src='resources/images/icons/microphoneOn.png', alt='audio' id="btn_mute_audio")
+        img.videoIcon(src='../resources/images/icons/videoOn.png', alt='video' id="btn_mute_video")
+        img.audioIcon(src='../resources/images/icons/microphoneOn.png', alt='audio' id="btn_mute_audio")
 
 //
 block foot

@@ -127,10 +127,12 @@ function initGuideWebRTCEvents(){
             if(event.stream.isVideo){
                 if (showLogs) console.log('guide: remote video stream started');
                 connection.videosContainer.append(event.mediaElement);
+                $("#hammerVideo").show();
             }else if(event.stream.isAudio){
                 if (showLogs) console.log('guide: remote audio stream started');
                 var audio = $("#audioDiv");
                 audio.append(event.mediaElement);
+
                 
                 /*
                 event.mediaElement.play();
@@ -333,8 +335,8 @@ function ongoingConnectionClosed(){
 
 function initGuideSocket(){
     if(showLogs) console.log('guide: init guideSocket');
-    guideSocket = io.connect('https://splinxs.ti.bfh.ch/guide');
-    //guideSocket = io.connect('https://localhost/guide');
+    //guideSocket = io.connect('https://splinxs.ti.bfh.ch/guide');
+    guideSocket = io.connect('https://localhost/guide');
     
     initEvents();
 }

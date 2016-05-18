@@ -10,6 +10,7 @@
     height: 100%;
     width: 250px;
     transition: all 0.5s;
+    z-index: 100;
 
 }
 
@@ -61,16 +62,23 @@
     height: calc(100% - 41px - 51px);
     width: 100%;
     transition: height 0.5s;
+
+
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+
 }
 
-
+/*
 #btn_minimiseChat{
     margin-top: 3px;
     height: 15px;
     position: fixed;
     right: 15px;
 }
-
+*/
 .btn-sm{
     color: white;
     background-color: #28B294;
@@ -96,11 +104,34 @@
 .panel-primary>.panel-heading{
     background-color: #2585C4;
     border: 0;
+
+}
+.panel-heading{
+    padding: 0px;
+}
+.chatLeftIcon{
+    height: 41px;
+    padding: 10px;
+    padding-right: 5px;
+
+}
+
+
+.chatLeft{
+    height: 41px;
+    width: auto;
+}
+.chatRightIcon{
+    position: absolute;
+    right: 0;
+    height: 41px;
+    padding: 12px;
+    z-index: 10000000000;
+
 }
 
 
 
-/* chatbox */
 
 
 @media screen and (max-width: 500px){
@@ -108,3 +139,4 @@
         width: 100%;
     }
 }
+

@@ -13,6 +13,10 @@ var userMarker = null;
 var touristPos = {lat: 0, lng: 0};
 var touristOrient = 0;
 
+var greenMarker;
+var blueMarke;
+
+
 //var defaultLocation = {lat: 46.947248, lng: 7.451586}; //Bern
 var defaultLocation = {lat: 0, lng: 0};
 
@@ -53,6 +57,21 @@ function initMap() {
     
     addMapListeners();
     addTouristMarker(defaultLocation);
+    //create teh marker icons
+    greenMarker = {
+        url: '/resources/images/icons/greenMarker.png',
+        size: new google.maps.Size(46, 64),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(11, 32),
+        scaledSize: new google.maps.Size(23, 32)
+    };
+    blueMarker = {
+        url: '/resources/images/icons/blueMarker.png',
+        size: new google.maps.Size(46, 64),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(11, 32),
+        scaledSize: new google.maps.Size(23, 32)
+    };
 }
 /**
  * triggers the resize event
@@ -97,7 +116,8 @@ function addTouristsMarker(id, position){
         map: map,
         //title: 'Hello World!',
         id: id,
-        icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+        icon: blueMarke
+        //icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
     });
     
     addMarker(marker);
@@ -110,12 +130,16 @@ function addTouristsMarker(id, position){
  */
 function addGuidesMarker(id, position){
     if(showLogs) console.log('add guide marker');
+
+
     var marker = new google.maps.Marker({
         position: position,
         map: map,
         //title: 'Hello World!',
         id: id,
-        icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
+        icon: greenMarker
+        //icon: '/resources/images/icons/greenMarker.png'
+        //icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
     });
     
     addMarker(marker);

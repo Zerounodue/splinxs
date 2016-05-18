@@ -9,6 +9,9 @@ var showLogs = true;
 var map;
 var marker;
 
+//the icon
+var blueMarker;
+
 var permissionDenied="#{false}";
 var animDur = 400;
 
@@ -39,6 +42,14 @@ function initMap(){
         rotateControl: true,
         fullscreenControl: false
     });
+
+    blueMarker = {
+        url: '/resources/images/icons/blueMarker.png',
+        size: new google.maps.Size(46, 64),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(11, 32),
+        scaledSize: new google.maps.Size(23, 32)
+    };
     
     addMapListeners();
     //addMarker(defaultLocation);
@@ -74,7 +85,7 @@ function addMarker(position) {
     marker = new google.maps.Marker({
         position: position,
         map: map,
-        icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+        icon: blueMarker
     });
     /* not needed
     marker.addListener('click', function (event) {

@@ -14,7 +14,7 @@ var touristPos = {lat: 0, lng: 0};
 var touristOrient = 0;
 
 var greenMarker;
-var blueMarke;
+var blueMarker;
 
 
 //var defaultLocation = {lat: 46.947248, lng: 7.451586}; //Bern

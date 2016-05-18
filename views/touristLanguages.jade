@@ -13,6 +13,10 @@ block append scripts
 
 
 block content
+    a.back(id="backArrow" href="/")
+        img.backArrow(src='resources/images/icons/backArrow.png', alt='back icon')
+        | #{texts.GENERAL.BACK}
+    br
     center
         h2 #{texts.T_LANGUAGES.SPOKEN_LANGUAGES}
         p #{texts.T_LANGUAGES.LANGUAGES_INTRO}

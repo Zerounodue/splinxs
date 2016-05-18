@@ -54,7 +54,9 @@
         "HOME": "Home",
         "LANGUAGES": "Lingue",
         "LOGOUT": "Scollegarsi",
-        "WHAT_IS_SPLINXS": "Cosa è Splinxs"
+        "WHAT_IS_SPLINXS": "Cosa è Splinxs",
+        "SETTINGS": "Impostazioni"
+
     },
     "LANGUAGES": {
         "ENGLISH": "English",

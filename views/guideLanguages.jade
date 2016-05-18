@@ -11,6 +11,10 @@ block append scripts
     script(src='resources/js/modernizr-custom.min.js')
 
 block content
+    a.back(id="backArrow" href="/")
+        img.backArrow(src='resources/images/icons/backArrow.png', alt='back icon')
+        | #{texts.GENERAL.BACK}
+    br
     center
         h2 #{texts.G_LANGUAGES.TITLE}
         .centerForm

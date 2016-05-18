@@ -11,12 +11,11 @@ block append scripts
     script(src='resources/js/modernizr-custom.min.js')
 
 block content
-    a.back(id="backArrow" href="/")
-        img.backArrow(src='resources/images/icons/backArrow.png', alt='back icon')
-        | #{texts.GENERAL.BACK}
-    br
     center
-        h2 #{texts.G_LANGUAGES.TITLE}
+        a.back(id="backArrow" href="/")
+            img.backArrow(src='resources/images/icons/backArrow.png', alt='back icon')
+            #backText #{texts.GENERAL.BACK}
+        h2(style="display: inline;") #{texts.G_LANGUAGES.TITLE}
         .centerForm
             //form(id="frm_languages" method="post" action="/guideLanguages")
             //- var nativeNames = langs.getAllNativeNames()

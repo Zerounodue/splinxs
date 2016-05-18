@@ -392,7 +392,7 @@ footer {
 
 
 .backArrow{
-    float: left;
+    position: relative;
     width:20px;
     height:20px;
     margin-right: 10px;
@@ -401,13 +401,13 @@ footer {
 
 
 .back{
+    display: flex;
+    position: relative;
     font-weight: bold;
     color:#676A6C;
     cursor: pointer;
-    margin-top: 10px;
-    margin-left: 10px;
-    float: left;
-
+    top: 10px;
+    left: 10px;
 }
 
 .back:hover{
@@ -415,3 +415,9 @@ footer {
     color:#676A6C;
 }
 
+
+@media(max-width:500px){
+    #backText{
+        display: none;
+    }
+}

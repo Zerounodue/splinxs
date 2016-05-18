@@ -4,7 +4,7 @@ center
     .loginRegisterForm
       h1 #{texts.LOGIN.LOGIN}
       //p.lead __Say something worthwhile here.
-      br
+      p.lead #{texts.LOGIN.LOGIN_MESSAGE}
       if loginError == "ERROR_MESSAGE"
         .alert.alert-green(role="alert")
           |#{texts.LOGIN.ERROR_MESSAGE}

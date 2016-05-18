@@ -76,6 +76,7 @@
         "ERROR_MESSAGE": "Nome utente oder Passowrd errati",
         "FORGOT": "Password dimenticata?",
         "LOGIN": "Login",
+        "LOGIN_MESSAGE":"Login per aiutare turisti disperati",
         "PASSWORD": "Password",
         "SIGN_UP": "Registrati ora!",
         "USERNAME": "Username"

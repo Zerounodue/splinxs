@@ -172,19 +172,3 @@ function onPan(ev) {
     requestElementUpdate();
 }
 
-
-var defaultLocation = {lat: 0, lng: 0};
-function initMap(){
-    if(showLogs) console.log('init map');
-    map = new google.maps.Map(document.getElementById('hammerContainer'), {
-        center: defaultLocation,
-        zoom: 3,
-        zoomControl: true,
-        mapTypeControl: false,
-        scaleControl: false,
-        streetViewControl: false,
-        rotateControl: true,
-        fullscreenControl: false
-    });
-
-}

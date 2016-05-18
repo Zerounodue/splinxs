@@ -199,7 +199,7 @@ function showGUI(){
                     showAudioOnlyGUI();
                 } else if(supportsVideoOnly()){
                     showVideoOnlyGUI();
-                }
+                }//TODO else?? show waring?
             }
         }
     }

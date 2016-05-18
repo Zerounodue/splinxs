@@ -3,12 +3,12 @@ center
   .container
     .loginRegisterForm
       h1 #{texts.LOGIN.LOGIN}
-      p.lead __Say something worthwhile here.
+      //p.lead __Say something worthwhile here.
       br
-      if loginError
-        br
-        h2 #{loginError}
-        br
+      if loginError == "ERROR_MESSAGE"
+        .alert.alert-green(role="alert")
+          |#{texts.LOGIN.ERROR_MESSAGE}
+
       form.form-signin(role='form', action="/index",method="post", style='max-width: 300px;')
 
         input.form-control.inputTop(maxlength="40" type='text', name="username", placeholder='#{texts.LOGIN.USERNAME}', required, autofocus, value='#{username ? username : ""}')
@@ -20,7 +20,8 @@ center
             a#btn-close-login.btn.btn-white.btn-login #{texts.GENERAL.CANCEL}
         .row
           .col-xs-6
-            a(href="/guidePassword") __Forgot possword?
+            a(href="/guidePassword") #{texts.LOGIN.FORGOT}
           .col-xs-6
-            a#a-register __Sign up now!
+            a#a-register #{texts.LOGIN.SIGN_UP}
             //a(href="/register") __Sign up now!
+

@@ -71,15 +71,22 @@
 
     },
     "LOGIN": {
+        "ERROR_MESSAGE": "Nome utente oder Passowrd errati",
+        "FORGOT": "Password dimenticata?",
         "LOGIN": "Login",
         "PASSWORD": "Password",
+        "SIGN_UP": "Registrati ora!",
         "USERNAME": "Username"
     },
     "REGISTER": {
+        "BACK": "Torna al login",
         "EMAIL": "Email",
+        "ERROR_MESSAGE": "Nome utente già in uso",
+        "FORGOT": "Password dimenticata?",
         "PASSWORD": "Password",
         "R_PASSWORD": "Ripeti password",
         "REGISTER": "Registarti",
+        "SIGN_UP_MESSAGE": "Registrati e divanta una guida Splinxs",
         "USERNAME": "Username"
     },
     "T":{

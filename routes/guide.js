@@ -56,7 +56,7 @@ router.post('/register', function(req, res) {
         if (err) {
             if(err.name == "UserExistsError"){
                 //TODO title not needed?
-                res.render('index', {title: "__Register", registerError: "__username already taken", email: email});
+                res.render('index', {title: "__Register", registerError: "ERROR_MESSAGE", email: email});
                 //TODO remove commented old version line if the above line works
                 //res.render('register', {title: "__Register", error: "__username already taken", email: email});
                 return;

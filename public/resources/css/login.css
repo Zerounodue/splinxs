@@ -30,3 +30,11 @@
     height: 38px;
     font-size: 15px;
 }
+.alert-green{
+    font-weight: bold;
+    max-width: 300px;
+    color: white;
+    background-color: rgba(40, 178, 148, 0.6);
+    border-color: #28B294;
+
+}

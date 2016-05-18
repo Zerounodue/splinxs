@@ -69,15 +69,22 @@
         "SPLINXS_SUBTITLE": "The real time tourist guide"
     },
     "LOGIN": {
+        "ERROR_MESSAGE": "Wrong username or passowrd",
+        "FORGOT": "Forgot password?",
         "LOGIN": "Login",
         "PASSWORD": "Password",
+        "SIGN_UP": "Sign up now!",
         "USERNAME": "Username"
     },
     "REGISTER": {
+        "BACK": "Back to login",
         "EMAIL": "Email",
+        "ERROR_MESSAGE": "Username already taken",
+        "FORGOT": "Forgot password?",
         "PASSWORD": "Password",
         "R_PASSWORD": "Repeat password",
         "REGISTER": "Register",
+        "SIGN_UP_MESSAGE": "Sign up and become a Splinxs guide",
         "USERNAME": "Username"
     },
     "T":{

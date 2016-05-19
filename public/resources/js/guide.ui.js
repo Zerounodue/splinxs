@@ -11,6 +11,7 @@ var showLogs=true;
 var audioMuted = false;
 var videoMuted = false;
 
+
 /**
  * initialises ui variables for guide
  * !needs to be called in document.ready()!
@@ -41,14 +42,12 @@ function initGuideUI(){
 
     $("#btn_available").click(function (e) {
         if(showLogs) console.log('btn available clicked');
-        guideSocketSendState(guideStates.available);
-        $("#spn_state").text("__available");
+        setAvailable();
     });
 
     $("#btn_unavailable").click(function (e) {
         if(showLogs) console.log('btn unavailable clicked');
-        guideSocketSendState(guideStates.unavailable);
-        $("#spn_state").text("__unavailable");
+        setUnavailable();
     });
 
     setConfirmUnload(true);
@@ -69,6 +68,15 @@ function initGuideUI(){
 
         $("#guideControls").hide(animDur);
     });
+}
+
+function setAvailable(){
+    guideSocketSendState(guideStates.available);
+    $("#spn_state").text("__available");
+}
+function setUnavailable(){
+    guideSocketSendState(guideStates.unavailable);
+    $("#spn_state").text("__unavailable");
 }
 
 function showGuideUI(){

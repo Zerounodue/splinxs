@@ -131,7 +131,7 @@ function hideAndScroll(isLogin){
 }
 
 
-
+/*
 //check if browser supports all features
 DetectRTC.load(function () {
     if (DetectRTC.hasMicrophone) {
@@ -169,13 +169,14 @@ DetectRTC.load(function () {
     }
 
 });
+
 function showError() {
     var startSection = $("#startSection");
     var errorSection = $("#errorSection");
     startSection.hide();
     errorSection.show();
 }
-
+ */
 
 
 var animating = false;

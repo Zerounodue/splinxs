@@ -26,11 +26,13 @@ block append scripts
                 window.location="/logout";
                 return;
             }
+            /* //does not seem to work
             if (!DetectRTC.hasMicrophone) {
                 alert("#{texts.ERROR.NO_MICROPHONE}");
                 window.location="/logout";
                 return;
             }
+            */
             //TODO check microphone
             initSplinxs();
             //isGuide=true

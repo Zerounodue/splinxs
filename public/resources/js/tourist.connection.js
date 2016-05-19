@@ -67,22 +67,20 @@ function initTouristWebRTC(){
     } else if (typeof MediaStream !== 'undefined') {
         connection.attachStreams.push(new MediaStream());
     } else {
-        console.warn('Neither Chrome nor Firefox. This may NOT work.');
+        //console.warn('Neither Chrome nor Firefox. This might NOT work.');
     }
     
-    //TODO only add media that is supported by the browser
+    //TODO check if this works
     connection.session = {
         data: true
-        ,audio: true
-        ,video: true
+        ,audio: DetectRTC.hasMicrophone
+        ,video: DetectRTC.hasWebcam
     };
-
+    
     connection.sdpConstraints.mandatory = {
         OfferToReceiveAudio: true,
-        OfferToReceiveVideo: false
+        OfferToReceiveVideo: DetectRTC.hasWebcam
     };
-
-    //connection.videosContainer = $("#videoContainer");
     
     initTouristWebRTCEvents();
 }

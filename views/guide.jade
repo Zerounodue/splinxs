@@ -24,16 +24,26 @@ block append scripts
       $(document).ready(function () {
             username = "!{name}";
             if(!(DetectRTC.browser.isChrome || DetectRTC.browser.isFirefox || DetectRTC.browser.isOpera)){
-                alert("__Only Chrome, Firefox and Oprea are supported!");
+                alert("#{texts.ERROR.CRAPPY_BROWSER_GUIDE}");
                 window.location="/logout";
                 return;
             }
+<<<<<<< HEAD
 
             detectRTCcapabilities();
 
 
 
 
+=======
+            /* //does not seem to work
+            if (!DetectRTC.hasMicrophone) {
+                alert("#{texts.ERROR.NO_MICROPHONE}");
+                window.location="/logout";
+                return;
+            }
+            */
+>>>>>>> origin/master
             //TODO check microphone
             initSplinxs();
             //isGuide=true

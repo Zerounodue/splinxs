@@ -1,6 +1,8 @@
 {
     "ERROR": {
-        
+        "CRAPPY_BROWSER": "Dein Browser unterstützt nicht alle Funktionen die Splinxs bietet. Bitte verwende entweder Chrome, Firefox oder Opera.",
+        "CRAPPY_BROWSER_GUIDE": "Dein Browser kann als Splinxs Guide nicht verwendet werden. Du musst entweder Chrome, Firefox oder Opera verwenden.",
+        "NO_MICROPHONE": "Du brauchst ein Mikrophon um als Splinx Guide zu arbeiten."
     },
     "GENERAL": {
         "AUDIO": "Audio",
@@ -29,27 +31,32 @@
         "SEARCH": "Suche einen Ort...",
         "OK":"Ok",
         "SEND_AREAS": "Sende Gebiete",
-        "DESCRIPTION": "Fügen Sie Kreise hinzu um die Regionen zu markieren, die Sie gut kennen. Nur Touristen, die in diesen Regionen sind, werden mit Ihnen Verbunden. Sie können das Zentrum und den Radius der erstellten Kreise ändern oder löschen.",
-        "PAN_DESCRIPTION": "Ziehen Sie die Karte um den Ausschnitt zu ändern",
-        "ADD_DESCRIPTION": "Klicken Sie auf die Karte um ein Gebiet zu zeichnen",
-        "REMOVE_DESCRIPTION": "Klicken Sie auf ein Gebiet um es zu löschen"
+        "DESCRIPTION": "Füge Kreise hinzu um die Regionen zu markieren, die du gut kennen. Nur Touristen, die in diesen Regionen sind, werden mit dir Verbunden. Du kannst das Zentrum und den Radius der erstellten Kreise ändern oder löschen.",
+        "PAN_DESCRIPTION": "Ziehe die Karte um den Ausschnitt zu ändern",
+        "ADD_DESCRIPTION": "Klicke auf die Karte um ein Gebiet zu zeichnen",
+        "REMOVE_DESCRIPTION": "Klicke auf ein Gebiet um es zu löschen"
     },
     "G_LANGUAGES":{
         "TITLE": "Guide Sprachen",
         "SEARCH": "Eingeben um zu suchen",
         "SEND": "Sprachen senden",
-        "LANGUAGES_INTRO": "Bitte wählen Sie Ihre Sprachen",
-        "OPTIONS": "Wählen Sie eine Option"
+        "LANGUAGES_INTRO": "Bitte wähle deine Sprachen",
+        "OPTIONS": "Wähle eine Option"
     },
     "G_PASSWORD":{
         "G_PASSWORD": "Guide Passwort"
     },
     "MENU": {
         "ABOUT_US": "Über uns",
+        "ABOUT_US_ELIA": "___TRANSLATE",
+        "ABOUT_US_INTRODUCTION": "Wir sind beide Studenten der Berner Fachhochschule in Biel.",
+        "ABOUT_US_PHIL": "___TRANSLATE",
         "CHANGE_AREAS": "Gebiete ändern",
         "CHANGE_LANGUAGES": "Sprachen ändern",
         "CHANGE_PASSWORD": "Passwort ändern",
         "CONTACT": "Kontakt",
+        "CONTACT_DESCRIPTION": "___TRANSLATE",
+        "CONTACT_MAIL": "info.splinxs@gmail.com",
         "HOME": "Home",
         "LANGUAGES": "Sprachen",
         "LOGOUT": "Ausloggen",
@@ -62,30 +69,34 @@
         "ITALIAN": "Italiano"
     },
     "INDEX": {
-        "DESCRIPTION_GUIDE": "Sie kennen einige Gebiete sehr gut und wollen jemandem helfen der dort ist? Registrieren Sie sich jetzt um zu helfen.",
-        "DESCRIPTION_TOURIST": "Sie sind an einem fremden Ort und brauchen Hilfe? Keine Sorge, ein Guide wird Ihnen helfen. Dank Kamera, Mikrophon GPS und Chat kann der Guide sehen was Sie sehen und Sie sicher an Ihr Ziel bringen.",
+        "AUDIO_DESCRIPTION": "Mit Echtzeit Audio können Guide und Tourist miteinander sprechen.",
+        "CHAT_DESCRIPTION": "Mit Echtzeit Chat können Guide und Tourist miteinander Nachrichten austauschen.",
+        "DESCRIPTION_GUIDE": "Du kennst einige Gebiete sehr gut und willst jemandem helfen der dort ist? Registriere dich jetzt um zu helfen.",
+        "DESCRIPTION_TOURIST": "Du bist an einem fremden Ort und brauchst Hilfe? Keine Sorge, ein Guide wird dir helfen. Dank Kamera, Mikrophon GPS und Chat kann der Guide sehen was du siehst und dich sicher an dein Ziel bringen.",
         "I_AM_GUIDE": "Ich bin ein Guide",
         "I_AM_TOURIST": "Ich bin ein Tourist",
-        "SPLINXS_SUBTITLE": "The real time tourist guide"
+        "LOCATION_DESCRIPTION": "Mit Echtzeit Positionsdiensten weiss der Guide wo sich der Tourist gerade befindet.",
+        "SPLINXS_SUBTITLE": "The real time tourist guide",
+        "VIDEO_DESCRIPTION": "Mit Echtzeit Video kann der Guide sehen, was der Tourist sieht."
     },
     "LOGIN": {
         "ERROR_MESSAGE": "Benutzername oder Passowrd falsch",
-        "FORGOT": "Password vergessen?",
+        "FORGOT": "Passwort vergessen?",
         "LOGIN": "Login",
-        "LOGIN_MESSAGE":"Login um verzweifelte Touristen zu helfen",
+        "LOGIN_MESSAGE": "Login um verzweifelten Touristen zu helfen",
         "PASSWORD": "Passwort",
         "SIGN_UP": "Jetzt registrieren!",
         "USERNAME": "Benutzername"
     },
     "REGISTER": {
-        "BACK": "Zurück zur Login",
+        "BACK": "Zurück zum Login",
         "E-MAIL": "E-Mail",
-        "ERROR_MESSAGE": "Username schon besetzt",
-        "FORGOT": "Password vergessen?",
+        "ERROR_MESSAGE": "Benutzername bereits verwendet",
+        "FORGOT": "Passwort vergessen?",
         "PASSWORT": "Passwort",
         "R_PASSWORD": "Passwort wiederholen",
         "REGISTER": "Registrieren",
-        "SIGN_UP_MESSAGE": "Registriere dich und werde eine Splinxs guide",
+        "SIGN_UP_MESSAGE": "Registriere dich um ein Splinx Guide zu werden",
         "USERNAME": "Benutzername"
     },
     "T":{
@@ -96,21 +107,21 @@
         "SEND": "Sprachen senden",
         "SKILL": "Niveau wählen",
         "SPOKEN_LANGUAGES": "Sprachen",
-        "LANGUAGES_INTRO": "Wählen Sie alle Ihre gesprochenen Sprachen und das relative Niveau"
+        "LANGUAGES_INTRO": "Wählen alle Sprachen die du sprechen kannst und das relative Niveau"
     },
     "T_LOCATION":{
         "GETTING_GPS": "Suche die GPS-Position, bitte warten ....",
-        "ADD_POS_MAN": "Sie können Ihre Position auch manuell hinzufügen",
+        "ADD_POS_MAN": "Du kannst deine Position auch manuell hinzufügen",
         "CLOSE": "Schliessen",
         "OK": "Ok",
-        "IMP_GET_GPS": "Es ist nicht möglich ihren aktuellen Standort zu ermittlen",
+        "IMP_GET_GPS": "Es ist nicht möglich deinen aktuellen Standort zu ermittlen",
         "ADD_POS": "Position hinzufügen",
-        "CLICK_MAP": "Klicken Sie auf die Karte um ihre aktuelle Position hinzuzufügen",
-        "GUIDE_WILL_HELP": "Ein Guide, der diese Region kennt, wird Ihnen helfen",
+        "CLICK_MAP": "Klicke auf die Karte um deine aktuelle Position hinzuzufügen",
+        "GUIDE_WILL_HELP": "Ein Guide, der diese Region kennt, wird dir helfen",
         "INFO": "Info",
         "CONTINUE": "Weiter",
         "AUTO_GPS": "GPS benutzen",
-        "PERMISSION_DENIED": "Erlaubnis verweigert, fügen Sie Ihre Position manuell hinzu",
+        "PERMISSION_DENIED": "Erlaubnis verweigert, füge deine Position manuell hinzu",
         "OTHER_ERROR": "Ein Fehler ist aufgetreten"
     }
 }

@@ -1,6 +1,8 @@
 {
     "ERROR": {
-        
+        "CRAPPY_BROWSER": "___TRANSLATE",
+        "CRAPPY_BROWSER_GUIDE": "___TRANSLATE",
+        "NO_MICROPHONE": "___TRANSLATE"
     },
     "GENERAL": {
         "AUDIO": "Audio",
@@ -47,10 +49,15 @@
     },
     "MENU": {
         "ABOUT_US": "Chi siamo",
+        "ABOUT_US_ELIA": "___TRANSLATE",
+        "ABOUT_US_INTRODUCTION": "___TRANSLATE",
+        "ABOUT_US_PHIL": "___TRANSLATE",
         "CHANGE_AREAS": "Alterare aree",
         "CHANGE_LANGUAGES": "Alterare lingue",
         "CHANGE_PASSWORD": "Alterare password",
         "CONTACT": "Contatto",
+        "CONTACT_DESCRIPTION": "___TRANSLATE",
+        "CONTACT_MAIL": "info.splinxs@gmail.com",
         "HOME": "Home",
         "LANGUAGES": "Lingue",
         "LOGOUT": "Scollegarsi",
@@ -64,13 +71,15 @@
         "ITALIAN": "Italiano"
     },
     "INDEX": {
-        "DESCRIPTION_GUIDE": "you know some places very well and want to help someone who is there? Sign up and start helping people right now.",
-        "DESCRIPTION_TOURIST": "you are somewhere unfamiliar and need help? Don't worry, a guide will help you. Thanks to camera, microphone, GPS and chat the guide will see what you see, speak with you and guide you to your destination.",
+        "AUDIO_DESCRIPTION": "___TRANSLATE",
+        "CHAT_DESCRIPTION": "___TRANSLATE",
+        "DESCRIPTION_GUIDE": "___TRANSLATE",
+        "DESCRIPTION_TOURIST": "___TRANSLATE",
         "I_AM_GUIDE": "Sono una guida",
         "I_AM_TOURIST": "Sono un turista",
-
-        "SPLINXS_SUBTITLE": "The real time tourist guide"
-
+        "LOCATION_DESCRIPTION": "___TRANSLATE",
+        "SPLINXS_SUBTITLE": "The real time tourist guide",
+        "VIDEO_DESCRIPTION": "___TRANSLATE"
     },
     "LOGIN": {
         "ERROR_MESSAGE": "Nome utente oder Passowrd errati",

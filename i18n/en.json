@@ -1,6 +1,8 @@
 {
     "ERROR": {
-        
+        "CRAPPY_BROWSER": "Your browser does not support all the functionalities that Splinxs offers. Please use either Chrome, Firefox or Opera.",
+        "CRAPPY_BROWSER_GUIDE": "Your browser can't be used as a Splinxs guide. You must use either Chrome, Firefox or Opera.",
+        "NO_MICROPHONE": "You need a microphone in order to work as a Splinxs guide."
     },
     "GENERAL": {
         "AUDIO": "Audio",
@@ -46,10 +48,15 @@
     },
     "MENU": {
         "ABOUT_US": "About us",
+        "ABOUT_US_ELIA": "Can speak Italian!",
+        "ABOUT_US_INTRODUCTION": "We are both students at the Bern University of Applied Sciences in Biel",
+        "ABOUT_US_PHIL": "Can't speak Italian...",
         "CHANGE_AREAS": "Change areas",
         "CHANGE_LANGUAGES": "Change languages",
         "CHANGE_PASSWORD": "Change password",
         "CONTACT": "Contact",
+        "CONTACT_DESCRIPTION": "For more information please send us an email",
+        "CONTACT_MAIL": "info.splinxs@gmail.com",
         "HOME": "Home",
         "LANGUAGES": "Languages",
         "LOGOUT": "Logout",
@@ -62,11 +69,15 @@
         "ITALIAN": "Italiano"
     },
     "INDEX": {
-        "DESCRIPTION_GUIDE": "you know some places very well and want to help someone who is there? Sign up and start helping people right now.",
-        "DESCRIPTION_TOURIST": "you are somewhere unfamiliar and need help? Don't worry, a guide will help you. Thanks to camera, microphone, GPS and chat the guide will see what you see, speak with you and guide you to your destination.",
+        "AUDIO_DESCRIPTION": "With real time audio the guide and tourist can talk together.",
+        "CHAT_DESCRIPTION": "With real time chat guide and tourist can exchange messages.",
+        "DESCRIPTION_GUIDE": "You know some places very well and want to help someone who is there? Sign up and start helping people right now.",
+        "DESCRIPTION_TOURIST": "You are somewhere unfamiliar and need help? Don't worry, a guide will help you. Thanks to camera, microphone, GPS and chat the guide will see what you see, speak with you and guide you to your destination.",
         "I_AM_GUIDE": "I am a guide",
         "I_AM_TOURIST": "I am a tourist",
-        "SPLINXS_SUBTITLE": "The real time tourist guide"
+        "LOCATION_DESCRIPTION": "With real time location services the guide can know where the tourist currently is.",
+        "SPLINXS_SUBTITLE": "The real time tourist guide",
+        "VIDEO_DESCRIPTION": "With real time video the guide is able to see what the tourist sees."
     },
     "LOGIN": {
         "ERROR_MESSAGE": "Wrong username or passowrd",

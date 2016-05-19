@@ -22,12 +22,14 @@ block append scripts
       $(document).ready(function () {
             username = "!{name}";
             if(!(DetectRTC.browser.isChrome || DetectRTC.browser.isFirefox || DetectRTC.browser.isOpera)){
-                alert("__Only Chrome, Firefox and Oprea are supported!");
+                alert("#{texts.ERROR.CRAPPY_BROWSER_GUIDE}");
                 window.location="/logout";
                 return;
             }
             if (!DetectRTC.hasMicrophone) {
-                alert("__You have no microphone");
+                alert("#{texts.ERROR.NO_MICROPHONE}");
+                window.location="/logout";
+                return;
             }
             //TODO check microphone
             initSplinxs();

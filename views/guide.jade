@@ -28,22 +28,19 @@ block append scripts
                 window.location="/logout";
                 return;
             }
-<<<<<<< HEAD
+
 
             detectRTCcapabilities();
 
-
-
-
-=======
-            /* //does not seem to work
+            //does not seem to work
+            // it works, when it does not work, it causes also other trubles
             if (!DetectRTC.hasMicrophone) {
                 alert("#{texts.ERROR.NO_MICROPHONE}");
-                window.location="/logout";
-                return;
+               //window.location="/logout";
+                //return;
             }
-            */
->>>>>>> origin/master
+
+
             //TODO check microphone
             initSplinxs();
             //isGuide=true

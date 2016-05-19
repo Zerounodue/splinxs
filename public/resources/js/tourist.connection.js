@@ -48,11 +48,11 @@ function initTouristConnection(){
     //params needed to send data over websocket
     
     
-    if(!supportsOnlyWebsocket()){
+    //if(!supportsOnlyWebsocket()){
         initTouristWebRTC();
-    }
+    //}
     
-    connection.videosContainer = $("#videoContainer");
+    //connection.videosContainer = $("#videoContainer");
     
     initTouristSocket();
 }
@@ -81,8 +81,8 @@ function initTouristWebRTC(){
         OfferToReceiveAudio: true,
         OfferToReceiveVideo: false
     };
-    
-    connection.videosContainer = $("#videoContainer");
+
+    //connection.videosContainer = $("#videoContainer");
     
     initTouristWebRTCEvents();
 }
@@ -117,7 +117,7 @@ function initTouristWebRTCEvents(){
             if(event.stream.isVideo){
                 if (showLogs) console.log('tourist: local video stream started');
                 //TODO make nicer code
-                var video = $("#myVideo");
+                var video = $("#videoContainer");
                 video.append(event.mediaElement);
                 $("#hammerVideo").show();
 
@@ -138,9 +138,10 @@ function initTouristWebRTCEvents(){
         }else if(event.stream.type == "remote"){
             if (showLogs) console.log('tourist: remote stream started');
             if(event.stream.isAudio){
-                if (showLogs) console.log('tourist: remote audio stream started');
+                if (showLogs) console.warn('tourist: remote audio stream started');
                 var audio = $("#audioDiv");
                 audio.append(event.mediaElement);
+                debugger;
                 /*
                 event.mediaElement.play();
                 setTimeout(function () {

@@ -7,12 +7,13 @@ block append scripts
     script(src='../resources/js/rmc3@3.3.5.js')
     // socket.io for signaling
     script(src='/socket.io/socket.io.js')
+    script(src='../resources/js/DetectRTC.js')
     script(src='../resources/js/connection.js')
     script(src='../resources/js/guide.connection.js')
     script(src='../resources/js/util.js')
     script(src='../resources/js/ui.js')
     script(src='../resources/js/guide.ui.js')
-    script(src='../resources/js/DetectRTC.js')
+
     script(src='../resources/js/map.js')
     script(src='../resources/js/guide.map.js')
     script(src='../resources/js/hammerV2.0.8.js')
@@ -20,6 +21,15 @@ block append scripts
     script.
       $(document).ready(function () {
             username = "!{name}";
+            if(!(DetectRTC.browser.isChrome || DetectRTC.browser.isFirefox || DetectRTC.browser.isOpera)){
+                alert("__Only Chrome, Firefox and Oprea are supported!");
+                window.location="/logout";
+                return;
+            }
+            if (!DetectRTC.hasMicrophone) {
+                alert("__You have no microphone");
+            }
+            //TODO check microphone
             initSplinxs();
             //isGuide=true
             initUI(true);

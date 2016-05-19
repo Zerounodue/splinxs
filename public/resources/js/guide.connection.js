@@ -39,11 +39,13 @@ function initGuideConnection(){
     channel = username;
 
     //TODO check if this works
-    if(!supportsOnlyWebsocket()){
+
+    //if(!supportsOnlyWebsocket()){
+
         initGuideWebRTC();
-    }
-    connection.channel = channel;
-    connection.socketCustomEvent = connection.channel;
+    //}
+    //connection.channel = channel;
+    //connection.socketCustomEvent = connection.channel;
     initGuideSocket();
 }
 
@@ -77,11 +79,13 @@ function initGuideWebRTC(){
         OfferToReceiveAudio: true,
         OfferToReceiveVideo: true
     };
-    //TODO not when no webRTC available
-    connection.open(connection.channel);
+    //not when no webRTC available
+    if(DetectRTC.browser.isChrome || DetectRTC.browser.isFirefox || DetectRTC.browser.isOpera){
+        connection.open(connection.channel);
+    }
 
-    connection.videosContainer = $("#videoContainer");
-    
+    //connection.videosContainer = $("#videoContainer");
+
     initGuideWebRTCEvents();
 }
 
@@ -127,12 +131,17 @@ function initGuideWebRTCEvents(){
             if (showLogs) console.log('guide: remote stream started');
             if(event.stream.isVideo){
                 if (showLogs) console.log('guide: remote video stream started');
-                connection.videosContainer.append(event.mediaElement);
+                event.mediaElement.controls=false;
+                event.mediaElement.autoplay=true;
+
+                //connection.videosContainer.append(event.mediaElement);
+                var video = $("#videoContainer");
                 $("#hammerVideo").show();
             }else if(event.stream.isAudio){
-                if (showLogs) console.log('guide: remote audio stream started');
+                if (showLogs) console.warn('guide: remote audio stream started');
                 var audio = $("#audioDiv");
                 audio.append(event.mediaElement);
+                debugger;
 
                 
                 /*
@@ -223,6 +232,7 @@ function onMessage(message) {
         }, ongoingConnectionIntervalTimer);
         //connection with tourist started
         c2P = true;
+        setUnavailable();
         
         return;
     }

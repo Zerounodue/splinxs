@@ -21,12 +21,16 @@ var mapDiv;
 var videoDiv;
 var audioDiv;
 
+var myAvatarIcon;
+var peerAvatarIcon;
+
 /**
  * initialises ui variables
  * !needs to be called in document.ready()!
  */
-function initUI(){
+function initUI(isGuide){
     if (showLogs) console.log('init gui');
+
     chat = $("#chat");
     headingPanel = $("#headingPanel");
     primaryPanel = $("#primaryPanel");
@@ -36,6 +40,14 @@ function initUI(){
     mapDiv = $("#map");
     videoDiv = $("#video");
     audioDiv = $("#audio");
+    if(isGuide){
+        myAvatarIcon = "../resources/images/guide.png";
+        peerAvatarIcon = "../resources/images/tourist.png";
+    }
+    else{
+        myAvatarIcon = "../resources/images/tourist.png";
+        peerAvatarIcon = "../resources/images/guide.png";
+    }
 }
 /**
  * shows the chat box
@@ -76,7 +88,7 @@ function appendMyMessageToChat(message) {
     var m =
             '<li class="right clearfix">'
             + '<span class="chat-img pull-right">'
-            + '<img src="../resources/images/me.png" alt="My Avatar" class="img-circle">'
+            + '<img src="' + myAvatarIcon + '" alt="My Avatar" class="img-circle">'
             + '</span>'
             + '<div class="chat-body clearfix">'
             + '<div class="header">'
@@ -101,7 +113,7 @@ function appendPeerMessageToChat(message, peername) {
     var m =
             '<li class="left clearfix">'
             + '<span class="chat-img pull-left">'
-            + '<img src="../resources/images/peer.png" alt="Peer Avatar" class="img-circle">'
+            + '<img src="' + peerAvatarIcon + '" alt="Peer Avatar" class="img-circle">'
             + '</span>'
             + '<div class="chat-body clearfix">'
             + '<div class="header">'

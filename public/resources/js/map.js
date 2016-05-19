@@ -116,7 +116,7 @@ function addTouristsMarker(id, position){
         map: map,
         //title: 'Hello World!',
         id: id,
-        icon: blueMarke
+        icon: blueMarker
         //icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
     });
     

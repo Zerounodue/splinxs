@@ -116,6 +116,7 @@ var routes = require('./routes/index');
 var tourist = require('./routes/tourist');
 var guide = require('./routes/guide');
 
+
 // use HTTPS(true) in case you are behind a load balancer (e.g. Heroku) 
 //app.use(enforce.HTTPS());
 
@@ -198,6 +199,7 @@ db.once("open", function (callback) {
 app.use('/', routes);
 app.use('/', tourist);
 app.use('/', guide);
+
 //app.use('/users', users);
 
 
@@ -212,6 +214,7 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
+//TODO comment this section for production mode
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);

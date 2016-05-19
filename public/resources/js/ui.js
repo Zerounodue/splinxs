@@ -197,9 +197,10 @@ function peerStoppedTyping() {
  * displays all gui elements available for the current connection
  */
 function showGUI(){
-    
+
     if(supportsOnlyWebsocket()){
         showWebsocketOnlyGUI();
+
     }else{
         if(noMediaSupported()){
             showNoMediaGUI();
@@ -212,6 +213,9 @@ function showGUI(){
                 } else if(supportsVideoOnly()){
                     showVideoOnlyGUI();
                 }//TODO else?? show waring?
+                else{
+                    console.warn("nothing supported");
+                }
             }
         }
     }

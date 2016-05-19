@@ -5,21 +5,30 @@
  */
 
 //variables
+
+//div containing the chat
 var chatBox;
+//TODO no idea??
 var chat;
-//var smallChat;
+//chat elements
 var headingPanel;
 var primaryPanel;
-var chatIsMinimised=false;
-//var minimized = false;
 var isTypingSpan;
+
+var chatIsMinimised=false;
+
+
 var smallChatColors = {
     no_message: "#2585C4",
     new_message: "#28B294"
 };
+//div contining the map size: 100%
 var mapDiv;
+//black div that will contain the video dom element
 var videoDiv;
-var audioDiv;
+//audio and video contols (buttons) that are shown or hidden depending of if the feauture is supported
+var videoControlsDiv;
+var audioControlsDiv;
 
 var myAvatarIcon;
 var peerAvatarIcon;
@@ -30,16 +39,17 @@ var peerAvatarIcon;
  */
 function initUI(isGuide){
     if (showLogs) console.log('init gui');
-
+    //TODO makes this sense? doese chat exist?
     chat = $("#chat");
     headingPanel = $("#headingPanel");
     primaryPanel = $("#primaryPanel");
     //smallChat = $("#smallChat");
     chatBox = $("#chatBox");
     isTypingSpan = $("#spn_isTyping");
-    mapDiv = $("#map");
-    videoDiv = $("#video");
-    audioDiv = $("#audio");
+    mapDiv = $("#hammerContainer");
+    videoDiv=$("#hammerVideo");
+    videoControlsDiv = $("#videoControlsBox");
+    audioControlsDiv = $("#audioControlsBox");
     if(isGuide){
         myAvatarIcon = "../resources/images/guide.png";
         peerAvatarIcon = "../resources/images/tourist.png";
@@ -196,7 +206,7 @@ function peerStoppedTyping() {
 /**
  * displays all gui elements available for the current connection
  */
-function showGUI(){
+function showChatMapGUI(){
 
     if(supportsOnlyWebsocket()){
         showWebsocketOnlyGUI();
@@ -252,8 +262,8 @@ function showAudioVideoGUI(){
     showChat();
     showMap();
     //TODO show audio, video, etc.
-    showVideo();
-    showAudio();
+    showVideoControls();
+    showAudioControls();
     $("#btn_closeConnection").show();
 
 }
@@ -265,7 +275,7 @@ function showAudioOnlyGUI(){
     showChat();
     showMap();
     //TODO show audio...
-    showAudio();
+    showAudioControls();
     $("#btn_closeConnection").show();
 
 }
@@ -276,8 +286,7 @@ function showVideoOnlyGUI(){
     if(showLogs) console.log('show video only gui');
     showChat();
     showMap();
-    //TODO show video...
-    showVideo();
+    showVideoControls();
     $("#btn_closeConnection").show();
 
 }
@@ -298,26 +307,39 @@ function hideMap(){
 /**
  * shows the audio controls
  */
-function showAudio(){
-    audioDiv.show();
+function showAudioControls(){
+    audioControlsDiv.show();
 }
 /**
  * hides the audio controls
  */
-function hideAudio(){
-    audioDiv.hide();
+function hideAudioControls(){
+    audioControlsDiv.hide();
 }
 /**
  * shows the video controls
  */
-function showVideo(){
-    videoDiv.show();
+function showVideoControls(){
+    videoControlsDiv.show();
 }
 /**
  * hides the video controls
  */
+function hideVideoControls(){
+    videoControlsDiv.hide();
+}
+
+/**
+ * hides the video div
+ */
 function hideVideo(){
     videoDiv.hide();
+}
+/**
+ * shows the video div
+ */
+function showVideo(){
+    videoDiv.show();
 }
 
 function initChat(){

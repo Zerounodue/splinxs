@@ -131,17 +131,20 @@ function initGuideWebRTCEvents(){
             if (showLogs) console.log('guide: remote stream started');
             if(event.stream.isVideo){
                 if (showLogs) console.log('guide: remote video stream started');
+                //TODO do other things?
                 event.mediaElement.controls=false;
                 event.mediaElement.autoplay=true;
 
                 //connection.videosContainer.append(event.mediaElement);
+
                 var video = $("#videoContainer");
-                $("#hammerVideo").show();
+                video.append(event.mediaElement);
+                showVideo();
             }else if(event.stream.isAudio){
-                if (showLogs) console.warn('guide: remote audio stream started');
+                if (showLogs) console.log('guide: remote audio stream started');
                 var audio = $("#audioDiv");
                 audio.append(event.mediaElement);
-                debugger;
+
 
                 
                 /*
@@ -224,7 +227,7 @@ function onMessage(message) {
         
         peername = message.username;
         sendUsername(username);
-        showGUI();
+        showChatMapGUI();
         informServerOngoingConnection();
         //set param on db that guide is connected to tourist
         ongoingConnectionInterval = setInterval(function () {
@@ -326,8 +329,8 @@ function ongoingConnectionClosed(){
 
 function initGuideSocket(){
     if(showLogs) console.log('guide: init guideSocket');
-    guideSocket = io.connect('https://splinxs.ti.bfh.ch/guide');
-    //guideSocket = io.connect('https://localhost/guide');
+    //guideSocket = io.connect('https://splinxs.ti.bfh.ch/guide');
+    guideSocket = io.connect('https://localhost/guide');
     
     initEvents();
 }
@@ -398,6 +401,9 @@ function connectionClosed() {
     //TODO hide c2P GUI
     hideChat();
     emptyChat();
+    hideMap();
+    hideVideo();
+
     
     //check again what the guide's browser is capable of
     detectRTCcapabilities();

@@ -116,10 +116,14 @@ function initTouristWebRTCEvents(){
             if (showLogs) console.log('tourist: local stream started');
             if(event.stream.isVideo){
                 if (showLogs) console.log('tourist: local video stream started');
+                //TODO do other things?
+                event.mediaElement.controls=false;
+                event.mediaElement.autoplay=true;
+
                 //TODO make nicer code
                 var video = $("#videoContainer");
                 video.append(event.mediaElement);
-                $("#hammerVideo").show();
+                showVideo();
 
                 //connection.videosContainer.append(event.mediaElement);
             }else if(event.stream.isAudio){
@@ -138,7 +142,7 @@ function initTouristWebRTCEvents(){
         }else if(event.stream.type == "remote"){
             if (showLogs) console.log('tourist: remote stream started');
             if(event.stream.isAudio){
-                if (showLogs) console.warn('tourist: remote audio stream started');
+                if (showLogs) console.log('tourist: remote audio stream started');
                 var audio = $("#audioDiv");
                 audio.append(event.mediaElement);
                 debugger;
@@ -295,7 +299,7 @@ function establishConnectionWithGuide() {
     storeConnection();
     
     hideLoadBox();
-    showGUI();
+    showChatMapGUI();
     showTouristUI();
     //map is gray when it is not resized
     resizeMap();
@@ -350,8 +354,8 @@ function checkPreviousConnectionInterrupted(){
 
 function initTouristSocket(){
     if(showLogs) console.log('tourist: init touristSocket');
-    touristSocket = io.connect('https://splinxs.ti.bfh.ch/tourist');
-    //touristSocket = io.connect('https://localhost/tourist');
+    //touristSocket = io.connect('https://splinxs.ti.bfh.ch/tourist');
+    touristSocket = io.connect('https://localhost/tourist');
     
     initEvents();
 }

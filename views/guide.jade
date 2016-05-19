@@ -4,10 +4,12 @@
 extends layout
 
 block append scripts
+
     script(src='../resources/js/rmc3@3.3.5.js')
     // socket.io for signaling
     script(src='/socket.io/socket.io.js')
     script(src='../resources/js/DetectRTC.js')
+
     script(src='../resources/js/connection.js')
     script(src='../resources/js/guide.connection.js')
     script(src='../resources/js/util.js')
@@ -26,16 +28,22 @@ block append scripts
                 window.location="/logout";
                 return;
             }
-            if (!DetectRTC.hasMicrophone) {
-                alert("__You have no microphone");
-            }
+
+            detectRTCcapabilities();
+
+
+
+
             //TODO check microphone
             initSplinxs();
             //isGuide=true
             initUI(true);
             initGuideUI();
-            showGUI();
-            showGuideUI();
+            //don't show gui! show it only if clients connect
+            //showChatMapGUI();
+
+            //TODO check this
+            //showGuideUI();
             initGuideConnection();
       });
 
@@ -44,6 +52,11 @@ block append stylesheets
     //link(rel='stylesheet', href='../resources/css/styleOld.css')
     link(rel='stylesheet', href='../resources/css/connected.css')
     link(rel='stylesheet', href='../resources/css/chat.css')
+
+//the guide has no link to home clicking on the splinxs brand
+block navbar-brand
+    a(class='navbar-brand')
+        img(style='height:100%', src='../resources/images/splinxs.png')
 
 block append navbarli
     li
@@ -75,12 +88,12 @@ block content
 
         button#btn_closeConnection(type='button', hidden) __close connection
         br
-        #audio(hidden='')
+        #audioControlsBox(hidden='')
             button#btn_startAudio(type='button') __start audio
             button#btn_stopAudio(type='button') __stop audio
             #audioDiv
         br
-        #video.video(hidden='')
+        #videoControlsBox.video(hidden='')
             button#btn_stopVideo(type='button') __stop video
             //#videoContainer
         br
@@ -170,7 +183,7 @@ block content
 
     #hammerVideo(hidden)
         #videoContainer
-    #hammerContainer
+    #hammerContainer(hidden)
         script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing,places&callback=initMap')
     .audioVideoControls
         img.videoIcon(src='../resources/images/icons/videoOn.png', alt='video' id="btn_mute_video")

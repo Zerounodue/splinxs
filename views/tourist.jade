@@ -23,6 +23,9 @@ block append scripts
       $(document).ready(function () {
             username = "!{name}";
             detectRTCcapabilities();
+            if (!DetectRTC.hasMicrophone) {
+                alert("__You have no microphone");
+            }
             initSplinxs();
             //isGuide=false
             initUI(false);
@@ -75,12 +78,12 @@ block content
             button#btn_joinConnection(type='button') __join connection
             button#btn_closeConnection(type='button', hidden='') __close connection
             br
-            #audio(hidden='')
+            #audioControlsBox(hidden='')
                 button#btn_startAudio(type='button') __start audio
                 button#btn_stopAudio(type='button') __stop audio
                 #audioDiv
             br
-            #video.video(hidden='')
+            #videoControlsBox.video(hidden='')
                 button#btn_shareVideo(type='button') __start video
                 button#btn_stopVideo(type='button') __stop video
                 //button#btn_muteVideo(type='button') __mute video

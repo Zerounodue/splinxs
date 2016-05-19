@@ -23,6 +23,7 @@ var connectionStates = {
         AudioVideo: "AudioVideo"
     }
 };
+
 var websocket;
 //timeout for connection request variable
 var conEstabTimeout = null; 
@@ -49,6 +50,7 @@ var connection;
  * checks the browser's capabilities and sets the connection state accordingly
  */
 function detectRTCcapabilities(){
+    
     if (!DetectRTC.browser.isChrome && !DetectRTC.browser.isFirefox && !DetectRTC.browser.isOpera) {
         if (showLogs) console.log('not chrome, firefox or opera, webrtc is not supported...');
         connectionState.DataChannel = connectionStates.DataChannel.Websocket;
@@ -57,11 +59,17 @@ function detectRTCcapabilities(){
         connectionState.DataChannel = connectionStates.DataChannel.SCTP;
         if(DetectRTC.hasMicrophone && DetectRTC.hasWebcam){
             connectionState.Media = connectionStates.Media.AudioVideo;
+            if (showLogs){console.warn("All ok");}
         }else{
+            //debugger;
             if(DetectRTC.hasMicrophone){
                 connectionState.Media = connectionStates.Media.Audio;
             }else if(DetectRTC.hasWebcam){
                 connectionState.Media = connectionStates.Media.Video;
+            }
+            else{
+                if (showLogs){console.warn("DetectRTC failed or no Microphone & Webcam installed");}
+                connectionState.Media = connectionStates.Media.None;
             }
         }
     }

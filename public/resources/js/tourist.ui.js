@@ -53,6 +53,7 @@ function initTouristButtons(){
 
     $("#btn_stopVideo").click(function (e) {
         if(showLogs) console.log('stop video clicked');
+        //TODO mute video
         stopVideo();
     });
 

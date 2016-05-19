@@ -79,6 +79,7 @@ function setUnavailable(){
     $("#spn_state").text("__unavailable");
 }
 
+//TODO remove this unused function
 function showGuideUI(){
     if(showLogs) console.log('guide: show gui');
     mapControls.show();
@@ -131,6 +132,7 @@ function initGuideButtons() {
 
     $("#btn_stopVideo").click(function (e) {
         if (showLogs) console.log('stop video clicked');
+        //TODO mute video
         stopVideo();
     });
 

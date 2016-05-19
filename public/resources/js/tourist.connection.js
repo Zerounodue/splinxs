@@ -29,52 +29,39 @@ var saveConnIntervalTimer = 60000;
 var localStorageConnectionName = "connection";
 var localStoragePreviousConnectionTimeout = 20 * 60 * 1000;//20 min in milliseconds
 
+var findGuideTimeout;
+var findGuideTimeoutTimer = 60000;
+
 var touristSocket;
 
 function initTouristConnection(){
-
     if(showLogs) console.log('init tourist connection');
 
     showLoadBox();
-    //TODO add timeout
     
-    /*
-    setTimeout(function () {
+    findGuideTimeout = setTimeout(function () {
         hideLoadBox();
         alert('__sorry, no guide found...');
-    }, 60000);
-    */
-    //username = "tourist1";
+        connectionClosed();
+    }, findGuideTimeoutTimer);
 
-    //channel = "myGuideChannel1";
+    //params needed to send data over websocket
     
-    //channel = "guide1";
     
-    initTouristWebRTC();
+    if(!supportsOnlyWebsocket()){
+        initTouristWebRTC();
+    }
     
-    //initTouristSocket();
+    connection.videosContainer = $("#videoContainer");
+    
+    initTouristSocket();
 }
 
 function initTouristWebRTC(){
-    //helps to start the signalling server...
-    //touristSocket.disconnect();
-    
+    if (showLogs) console.log('tourist: set session constraints');
     connection = new RTCMultiConnection();
     connection.socketURL = '/';
 
-    if (showLogs) console.log('tourist: set session constraints');
-
-    //channel = channels[channelCounter];
-
-    //connection.channel = channel;
-
-    //connection.socketCustomEvent = channels[channelCounter];
-
-    //connection.socketCustomEvent = connection.channel;
-
-    //connection.socketURL = '/';
-
-    
     if (typeof webkitMediaStream !== 'undefined') {
         connection.attachStreams.push(new webkitMediaStream());
     } else if (typeof MediaStream !== 'undefined') {
@@ -83,7 +70,6 @@ function initTouristWebRTC(){
         console.warn('Neither Chrome nor Firefox. This may NOT work.');
     }
     
-
     //TODO only add media that is supported by the browser
     connection.session = {
         data: true
@@ -99,8 +85,6 @@ function initTouristWebRTC(){
     connection.videosContainer = $("#videoContainer");
     
     initTouristWebRTCEvents();
-    
-    initTouristSocket();
 }
 
 function initTouristWebRTCEvents(){
@@ -110,7 +94,6 @@ function initTouristWebRTCEvents(){
         if (connection.alreadyOpened)
             return;
         connection.alreadyOpened = true;
-
     };
 
     connection.onmessage = function (message) {
@@ -212,28 +195,6 @@ function setSocketCustomEvent(){
             connectionState.DataChannel = connectionStates.DataChannel.Websocket;
             return;
         }
-        /*
-        //guide declines connection
-        if(message.customMessage.guideDeclinesRequest){
-            if (showLogs) console.log('tourist: guide declined request :(');
-            changeToNextChannel();
-            return;
-        }
-        */
-        /*
-        //guide accepts connection
-        if(message.customMessage.guideAcceptsRequest) {
-            if (showLogs) console.log('tourist: guide accepted request :)');
-            clearTimeout(conEstabTimeout);
-            conEstabTimeout = null;
-            //send message to peer if I do not support sctp
-            if (supportsOnlyWebsocket()) {
-                sendUseWebsocketConnection();
-            }
-            sendUsername(username);
-            return;
-        }
-        */
         onMessage(message.customMessage);
     });
 }
@@ -304,23 +265,7 @@ function mapMessage(mapMessage) {
             }
         }
     }
-    /*
-    else if(mapMessage.updateInterval > -1){
-        var interval = mapMessage.updateInterval;
-        if (showLogs) console.log('tourist: update interval: ' + interval);
-        setUpdateInterval(interval);
-    }
-    */
 }
-/*
-function connectToGuides(){
-    //showLoadBox();
-    //check if connection with previous guide was interrupted, sets first guide to call
-    //checkPreviousConnectionInterrupted();
-    
-    initConnectionWithGuide();
-}
-*/
 /**
  * sends the guide a request for communication
  */
@@ -332,29 +277,12 @@ function initConnectionWithGuide() {
         sendUseWebsocketConnection();
     }
     sendUsername(username);
-    
-    //setSessionConstraints();
-    
-    //setSocketCustomEvent();
-    
-    /*
-    //request connection with current channel (guide)
-    sendTouristRequestsGuide();
-    //will continue in message.customMessage.guideTouristRequestReply or timeout
-    
-    conEstabTimeout = setTimeout(function () {
-        if(showLogs) console.log('tourist: connect to guide timeout');
-        changeToNextChannel();
-    }, conEstabTimer);
-    */
 }
 
 function establishConnectionWithGuide() {
     if (showLogs) console.log('establishing connection with guide');
-    
-    //clearTimeout(conEstabTimeout);
-    //conEstabTimeout = null;
-    
+
+    clearTimeout(findGuideTimeout);
     c2P = true;
 
     //TODO verify if this works
@@ -373,28 +301,6 @@ function establishConnectionWithGuide() {
     //get current location and send to guide
     updateTouristLocationOrientation();
 }
-/**
- * if the guide refused the connection or a timeout occured, try the next channel (guide)
- */
-/*
-function changeToNextChannel(){
-    if(showLogs) console.log('tourist: changing to next channel');
-    clearTimeout(conEstabTimeout);
-    conEstabTimeout = null;
-    channelCounter++;
-    
-    if(channelCounter >= channels.length){
-        if(showLogs) console.log('tourist: tried all channels without success :\'(');
-        hideLoadBox();
-        //TODO do something...
-        return;
-    }
-    //channel = channels[channelCounter];
-    setSessionConstraints();
-    setSocketCustomEvent();  
-    initConnectionWithGuide();
-}
-*/
 /**
  * stores channel name and current minute to localstorage every 60 seconds (if supported)
  */
@@ -434,7 +340,7 @@ function checkPreviousConnectionInterrupted(){
             /* //TODO redo
             if(diff < localStoragePreviousConnectionTimeout){
                 if(showLogs) console.log('tourist: previous connection was interrupted, guide: ' + c);
-                channels.splice(0, 0, c);
+                //channels.splice(0, 0, c);
             }
             */
         }

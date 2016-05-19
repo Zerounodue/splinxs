@@ -40,25 +40,18 @@ DetectRTC.load(function () {
     detectRTCcapabilities();
 });
 
-var connection;// = new RTCMultiConnection();
-//connection.socketURL = '/';
-//only for testing
-//rtcMultiConnection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
+var connection;
 
 /**
  * checks the browser's capabilities and sets the connection state accordingly
  */
 function detectRTCcapabilities(){
-    if (DetectRTC.isSctpDataChannelsSupported) {
-        connectionState.DataChannel = connectionStates.DataChannel.SCTP;
-    } else {
-        connectionState.DataChannel = connectionStates.DataChannel.Websocket;
-    }
     if (!DetectRTC.browser.isChrome && !DetectRTC.browser.isFirefox && !DetectRTC.browser.isOpera) {
         if (showLogs) console.log('not chrome, firefox or opera, webrtc is not supported...');
         connectionState.DataChannel = connectionStates.DataChannel.Websocket;
         connectionState.Media = connectionStates.Media.None;
     }else if(DetectRTC.browser.isChrome || DetectRTC.browser.isFirefox || DetectRTC.browser.isOpera){
+        connectionState.DataChannel = connectionStates.DataChannel.SCTP;
         if(DetectRTC.hasMicrophone && DetectRTC.hasWebcam){
             connectionState.Media = connectionStates.Media.AudioVideo;
         }else{

@@ -9,8 +9,6 @@ showLogs = true;
 
 var c2P = false; //connected to peer
 
-//var connection = new RTCMultiConnection();
-
 var guideSocket;
 var guideStates = {
     state: "state",
@@ -44,7 +42,8 @@ function initGuideConnection(){
     if(!supportsOnlyWebsocket()){
         initGuideWebRTC();
     }
-    
+    connection.channel = channel;
+    connection.socketCustomEvent = connection.channel;
     initGuideSocket();
 }
 
@@ -52,11 +51,9 @@ function initGuideWebRTC(){
     if(showLogs) console.log("guide: init guide WebRTC");
     connection = new RTCMultiConnection();
     connection.socketURL = '/';
-
-
     connection.channel = channel;
-
     connection.socketCustomEvent = connection.channel;
+    
     /*
     if (typeof webkitMediaStream !== 'undefined') {
         connection.attachStreams.push(new webkitMediaStream());
@@ -93,10 +90,8 @@ function initGuideWebRTCEvents(){
     connection.onopen = function (event) {
         if (showLogs) console.log('guide: connection opened in channel: ' + connection.channel);
 
-        if (connection.alreadyOpened)
-            return;
+        if (connection.alreadyOpened) return;
         connection.alreadyOpened = true;
-
     };
 
 
@@ -187,32 +182,6 @@ function initGuideWebRTCEvents(){
                 connectionState.DataChannel = connectionStates.DataChannel.Websocket;
                 return;
             }
-            /*
-            //a tourist requests to communicate with me
-            if(message.customMessage.touristRequestsGuide){
-                if (showLogs) console.log('guide: tourist asked for help');
-
-                //show prompt if I want to help the tourist
-                showTouristRequestsGuidePrompt();
-                //hide prompt after timeout (tourist will try to connect to new guide)
-                //=> I mustn't see the prompt anymore
-                conEstabTimeout = setTimeout(function () {
-                    if(showLogs) console.log('tourist: tourist request timeout');
-                    hideTouristRequestGuidePrompt();
-                }, conEstabTimer);
-
-                return;
-
-            }
-            */
-            /*
-            //tourist revoked the connection request (or timeout)
-            if(message.customMessage.touristRevokesRequest){
-                if (showLogs) console.log('guide: tourist revoked request');
-                hideTouristRequestGuidePrompt();
-                return;
-            }
-            */
             onMessage(message.customMessage);
         });
     });

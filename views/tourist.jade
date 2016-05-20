@@ -22,15 +22,17 @@ block append scripts
     script.
       $(document).ready(function () {
             username = "!{name}";
-            detectRTCcapabilities();
-            if (!DetectRTC.hasMicrophone) {
-                alert("__You have no microphone");
-            }
-            initSplinxs();
-            //isGuide=false
-            initUI(false);
-            initTouristUI();
-            initTouristConnection();
+            DetectRTC.load(function () {
+                detectRTCcapabilities();
+                if (!DetectRTC.hasMicrophone) {
+                    alert("__You have no microphone");
+                }
+                initSplinxs();
+                //false because he is not a guide
+                initUI(false);
+                initTouristUI();
+                initTouristConnection();
+            });
 
       });
 

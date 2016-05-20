@@ -23,35 +23,35 @@ block append scripts
     script.
       $(document).ready(function () {
             username = "!{name}";
-            if(!(DetectRTC.browser.isChrome || DetectRTC.browser.isFirefox || DetectRTC.browser.isOpera)){
-                alert("#{texts.ERROR.CRAPPY_BROWSER_GUIDE}");
-                window.location="/logout";
-                return;
-            }
 
+            //var DetectRTC = require('detectrtc');
+            DetectRTC.load(function () {
+                if (!(DetectRTC.browser.isChrome || DetectRTC.browser.isFirefox || DetectRTC.browser.isOpera)) {
+                    alert("#{texts.ERROR.CRAPPY_BROWSER_GUIDE}");
+                    window.location = "/logout";
+                    return;
+                }
+                //console.warn(DetectRTC.hasMicrophone);
+                detectRTCcapabilities();
+                //does not seem to work
+                // it works, when it does not work, it causes also other trubles
+                if (!DetectRTC.hasMicrophone) {
+                    alert("#{texts.ERROR.NO_MICROPHONE}");
+                    //window.location="/logout";
+                    //return;
+                }
 
-            detectRTCcapabilities();
+                initSplinxs();
+                //true because he is  a guide
+                initUI(true);
+                initGuideUI();
+                //don't show gui! show it only if clients connect
+                //showChatMapGUI();
+                //TODO check this
+                //showGuideUI();
+                initGuideConnection();
+            });
 
-            //does not seem to work
-            // it works, when it does not work, it causes also other trubles
-            if (!DetectRTC.hasMicrophone) {
-                alert("#{texts.ERROR.NO_MICROPHONE}");
-               //window.location="/logout";
-                //return;
-            }
-
-
-            //TODO check microphone
-            initSplinxs();
-            //isGuide=true
-            initUI(true);
-            initGuideUI();
-            //don't show gui! show it only if clients connect
-            //showChatMapGUI();
-
-            //TODO check this
-            //showGuideUI();
-            initGuideConnection();
       });
 
 block append stylesheets

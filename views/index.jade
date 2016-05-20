@@ -21,16 +21,16 @@ block navbar-brand
         img(style='height:100%', src='resources/images/splinxs.png')
 block append navbarli
     //TODO remove index2
-    li
+    li.liClose
         a(href="/index2") __prototypes
     //TODO do onClick in js file? is it worth it?
-    li
+    li.liClose
         a(onclick="scrollTo('#body')") #{texts.MENU.HOME}
-    li
+    li.liClose
         a(onclick="scrollTo('#splinxsSlide')") #{texts.MENU.WHAT_IS_SPLINXS}
-    li
+    li.liClose
         a(onclick="scrollTo('#aboutSlide')") #{texts.MENU.ABOUT_US}
-    li
+    li.liClose
         a(onclick="scrollTo('#contactSlide')") #{texts.MENU.CONTACT}
 
 

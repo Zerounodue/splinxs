@@ -22,7 +22,10 @@
         "YES": "Yes"
     },
     "G":{
-        "TYPE_MESSAGE": "Type message..."
+        "AVAILABLE": "Available",
+        "CLOSE_CONNECTION": "Close connection",
+        "TYPE_MESSAGE": "Type message...",
+        "UNAVAILABLE": "Unavailable"
     },
     "G_AREAS":{
         "ADD": "Add",
@@ -101,7 +104,7 @@
         "USERNAME": "Username"
     },
     "T":{
-        
+        "CLOSE_CONNECTION": "Close connection"
     },
     "T_LANGUAGES":{
         "T_LANGUAGES": "Tourist Languages",

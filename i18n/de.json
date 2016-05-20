@@ -22,7 +22,10 @@
         "YES": "Ja"
     },
     "G":{
-        "TYPE_MESSAGE": "Nachricht eingeben..."
+        "AVAILABLE": "Verfügbar",
+        "CLOSE_CONNECTION": "Verbindung beenden",
+        "TYPE_MESSAGE": "Nachricht eingeben...",
+        "UNAVAILABLE": "Abwesend"
     },
     "G_AREAS":{
         "G_AREAS": "Guide Gebiete",
@@ -101,7 +104,7 @@
         "USERNAME": "Benutzername"
     },
     "T":{
-        
+        "CLOSE_CONNECTION": "Verbindung beenden"
     },
     "T_LANGUAGES":{
         "T_LANGUAGES": "Tourist Sprachen",

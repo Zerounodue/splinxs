@@ -22,7 +22,10 @@
         "YES": "Si"
     },
     "G":{
-        "TYPE_MESSAGE": "Inserisci messaggio..."
+        "AVAILABLE": "___TRANSLATE",
+        "CLOSE_CONNECTION": "___TRANSLATE",
+        "TYPE_MESSAGE": "Inserisci messaggio...",
+        "UNAVAILABLE": "___TRANSLATE"
     },
     "G_AREAS":{
         "G_AREAS": "Aree della guide",
@@ -103,7 +106,7 @@
         "USERNAME": "Username"
     },
     "T":{
-        
+        "CLOSE_CONNECTION": "___TRANSLATE"
     },
     "T_LANGUAGES":{
         "T_LANGUAGES": "Lingue del turista",

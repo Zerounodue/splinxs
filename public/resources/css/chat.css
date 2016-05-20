@@ -138,5 +138,30 @@
     .chatBox {
         width: 100%;
     }
+
+    .panel-footer{
+        height: 40px;
+        padding: 5px;
+    }
+    .panel-body{
+        height: calc(100% - 30px - 40px);
+    }
+    .panel-primary>.panel-heading{
+        height: 30px;
+    }
+    .chatLeftIcon{
+        height: 30px;
+        padding: 5px;
+    }
+    .chatRightIcon{
+        height: 30px;
+        padding: 7px;
+    }
+    .chatLeft{
+        height: 30px;
+    }
+    .zeroBottom{
+        height: 30px;
+    }
 }
 

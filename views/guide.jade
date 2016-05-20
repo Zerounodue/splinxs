@@ -93,23 +93,24 @@ block content
             .col-sm-12
                 h2(style='text-align: center;') __Controls
 
-        button#btn_closeConnection(type='button', hidden) __close connection
+        button#btn_closeConnection(type='button', hidden) #{texts.G.CLOSE_CONNECTION}
         br
         #audioControlsBox(hidden='')
-            button#btn_startAudio(type='button') __start audio
-            button#btn_stopAudio(type='button') __stop audio
+            //button#btn_startAudio(type='button') __start audio
+            //button#btn_stopAudio(type='button') __stop audio
             #audioDiv
         br
         #videoControlsBox.video(hidden='')
-            button#btn_stopVideo(type='button') __stop video
+            //button#btn_stopVideo(type='button') __stop video
             //#videoContainer
         br
+        //TODO not needed, single button will be enough
         span __state:
         span(id="spn_state") __available
         br
-        button(id='btn_available', type="button") __set available
+        button(id='btn_available', type="button") #{texts.G.AVAILABLE}
         br
-        button(id='btn_unavailable', type="button") __set unavailable
+        button(id='btn_unavailable', type="button") #{texts.G.UNAVAILABLE}
         br
 
     //
@@ -181,20 +182,16 @@ block content
         button#modalNo #{texts.GENERAL.NO}
         button#modalYes #{texts.GENERAL.YES}
 
-
     // </div>
     audio#audioPlayer
-
-
-
 
     #hammerVideo(hidden)
         #videoContainer
     #hammerContainer(hidden)
         script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing,places&callback=initMap')
     .audioVideoControls
-        img.videoIcon(src='../resources/images/icons/videoOn.png', alt='video' id="btn_mute_video")
-        img.audioIcon(src='../resources/images/icons/microphoneOn.png', alt='audio' id="btn_mute_audio")
+        img.videoIcon(src='../resources/images/icons/videoOn.png', alt='video' id="ico_video", hidden)
+        img.audioIcon(src='../resources/images/icons/microphoneOn.png', alt='audio' id="ico_audio", hidden)
 
 //
 block foot

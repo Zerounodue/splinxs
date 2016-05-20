@@ -6,7 +6,10 @@
 var modalDialog;
 var modalContent;
 var mapControls;
-var showLogs=true;
+var ico_audio;
+var ico_video;
+
+//var showLogs=true;
 
 var audioMuted = false;
 var videoMuted = false;
@@ -21,6 +24,8 @@ function initGuideUI(){
     modalDialog = $("#modalDialog");
     modalContent = $("#modalContent");
     mapControls = $("#mapControls");
+    ico_audio = $("#ico_audio");
+    ico_video = $("#ico_video");
 
     //set the confirmUnload to false, if the guide clicks on this links he knows he will leave the page
     $("#a_logout").click(function (e) {
@@ -59,24 +64,43 @@ function initGuideUI(){
     $("#guideControlsBtn").on('click', function(e){
         if(showLogs) console.log('guideControlsBtn  button clicked');
         $('.navbar-collapse').collapse('hide');
-        $("#guideControls").show(animDur);
+        showGuideControls();
     });
 
 
     $("#btn_guideClose").on('click', function(e){
         if(showLogs) console.log('guide close button clicked');
-
-        $("#guideControls").hide(animDur);
+        hideGuideControls();
     });
 }
 
 function setAvailable(){
     guideSocketSendState(guideStates.available);
     $("#spn_state").text("__available");
+    hideGuideControls();
 }
 function setUnavailable(){
     guideSocketSendState(guideStates.unavailable);
     $("#spn_state").text("__unavailable");
+    hideGuideControls();
+}
+
+function showAudioVideoIcons(){
+    $("#ico_audio").show();
+    $("#ico_video").show();
+}
+
+function hideAudioVideoIcons(){
+    $("#ico_audio").hide();
+    $("#ico_video").hide();
+}
+
+function hideGuideControls(){
+    $("#guideControls").hide(animDur);
+}
+
+function showGuideControls(){
+    $("#guideControls").show(animDur);
 }
 
 //TODO remove this unused function
@@ -173,7 +197,7 @@ function initGuideButtons() {
         sendUpdateInterval(updateIntervals.flash);
     });
     */
-
+   /*
     $("#btn_startAudio").click(function (e) {
         if (showLogs) console.log('guide: start audio button clicked');
         //connection.dontCaptureUserMedia = false;
@@ -183,7 +207,8 @@ function initGuideButtons() {
             //,oneway: true
         });
     });
-
+    */
+   /*
     $("#btn_stopAudio").click(function (e) {
         if (showLogs) console.log('guide: stop audio button clicked');
         connection.attachStreams.forEach(function (stream) {
@@ -191,41 +216,40 @@ function initGuideButtons() {
         });
         connection.renegotiate();
     });
+    */
 
-
-    $("#btn_mute_audio").click(function (e) {
-        if (showLogs) console.log('guide: mute audio button clicked '+ audioMuted);
-        if(!audioMuted){
-            //mute audio
-            audioMuted=true;
-            $('#btn_mute_audio').addClass('lightColor');
-            $('#btn_mute_audio').attr('src','../resources/images/icons/microphoneOff.png');
-            //TODO mute
+    $("#ico_audio").click(function (e) {
+        if (showLogs) console.log('guide: audio icon clicked, will mute: ' + !videoMuted);
+        if(audioMuted){
+            //unmute audio
+            ico_audio.removeClass('lightColor');
+            ico_audio.attr('src','../resources/images/icons/microphoneOn.png');
+            unmuteAudio();
         }
         else{
-            //unmute audio
-            audioMuted=false;
-            $('#btn_mute_audio').removeClass('lightColor');
-            $('#btn_mute_audio').attr('src','../resources/images/icons/microphoneOn.png');
-            //TODO unmute
+            //mute audio
+            ico_audio.addClass('lightColor');
+            ico_audio.attr('src','../resources/images/icons/microphoneOff.png');
+            muteAudio();
         }
+        audioMuted = !audioMuted;
     });
 
-    $("#btn_mute_video").click(function (e) {
-        if (showLogs) console.log('guide: mute video button clicked '+ videoMuted);
-        if(!videoMuted){
+    $("#ico_video").click(function (e) {
+        if (showLogs) console.log('guide: video icon clicked, will mute: ' + !videoMuted);
+        if(videoMuted){
             //start video
-            videoMuted =true;
-            $('#btn_mute_video').addClass('lightColor');
-            $('#btn_mute_video').attr('src','../resources/images/icons/videoOff.png');
-
+            ico_video.addClass('lightColor');
+            ico_video.attr('src','../resources/images/icons/videoOff.png');
+            unmuteVideo();
         }
         else{
             //stop video
-            videoMuted=false;
-            $('#btn_mute_video').removeClass('lightColor');
-            $('#btn_mute_video').attr('src','../resources/images/icons/videoOn.png');
+            ico_video.removeClass('lightColor');
+            ico_video.attr('src','../resources/images/icons/videoOn.png');
+            muteVideo();
         }
+        videoMuted = !videoMuted;
     });
 }
 
@@ -236,4 +260,56 @@ function setConfirmUnload(on) {
 
 function unloadMessage() {
     return "__Are you sure you want to leave this page?";
+}
+
+function muteAudio(){
+    connection.attachStreams.forEach(function (stream) {
+        if (stream.type == "local") {
+            if (stream.isAudio) {
+                if (showLogs) console.log('guide: muting audio stream');
+                stream.mute();
+            }
+        }
+    });
+}
+
+function unmuteAudio(){
+    connection.attachStreams.forEach(function (stream) {
+        if (stream.type == "local") {
+            if (stream.isAudio) {
+                if (showLogs) console.log('guide: unmuting audio stream');
+                stream.unmute();
+            }
+        }
+    });
+}
+
+function muteVideo() {
+    //TODO send to tourist a request to mute video?
+    /* not working now, because of comment above
+    connection.attachStreams.forEach(function (stream) {
+        if (stream.type == "remote") {
+            if (stream.isVideo) {
+                if (showLogs) console.log('guide: muting video stream');
+                stream.mute();
+            }
+        }
+    });
+    */
+   //hideVideo();
+}
+
+function unmuteVideo(){
+    //TODO send to tourist a request to mute video?
+    /* not working now, because of comment above
+    connection.attachStreams.forEach(function (stream) {
+        if (stream.type == "remote") {
+            if (stream.isVideo) {
+                if (showLogs) console.log('guide: unmuting video stream');
+                stream.unmute();
+            }
+        }
+    });
+    */
+   //showVideo();
 }

@@ -41,7 +41,7 @@ function initTouristConnection(){
     
     findGuideTimeout = setTimeout(function () {
         hideLoadBox();
-        alert('__sorry, no guide found...');
+        alert('__sorry, no matching guide could be found...');
         connectionClosed();
     }, findGuideTimeoutTimer);
 
@@ -70,16 +70,18 @@ function initTouristWebRTC(){
         //console.warn('Neither Chrome nor Firefox. This might NOT work.');
     }
     
+    connection.dontCaptureUserMedia = true;
+    
     //TODO check if this works
     connection.session = {
         data: true
-        ,audio: DetectRTC.hasMicrophone
-        ,video: DetectRTC.hasWebcam
+        ,audio: true//DetectRTC.hasMicrophone
+        ,video: true//DetectRTC.hasWebcam
     };
     
     connection.sdpConstraints.mandatory = {
         OfferToReceiveAudio: true,
-        OfferToReceiveVideo: DetectRTC.hasWebcam
+        OfferToReceiveVideo: true//DetectRTC.hasWebcam
     };
     
     initTouristWebRTCEvents();
@@ -89,8 +91,7 @@ function initTouristWebRTCEvents(){
     connection.onopen = function (event) {
         if (showLogs) console.log('tourist: connection opened');
 
-        if (connection.alreadyOpened)
-            return;
+        if (connection.alreadyOpened) return;
         connection.alreadyOpened = true;
     };
 
@@ -107,11 +108,23 @@ function initTouristWebRTCEvents(){
         if (showLogs) console.log('tourist: stream started');
 
         if (!event.stream.getAudioTracks().length && !event.stream.getVideoTracks().length) {
+            if(showLogs) console.warn('0 streams...');
             return;
         }
-
+        
         if(event.stream.type == "local"){
             if (showLogs) console.log('tourist: local stream started');
+            
+            //TODO do other things?
+            event.mediaElement.controls = false;
+            event.mediaElement.autoplay = true;
+
+            //TODO make nicer code
+            var video = $("#videoContainer");
+            video.append(event.mediaElement);
+            showVideo();
+
+            /*
             if(event.stream.isVideo){
                 if (showLogs) console.log('tourist: local video stream started');
                 //TODO do other things?
@@ -122,41 +135,45 @@ function initTouristWebRTCEvents(){
                 var video = $("#videoContainer");
                 video.append(event.mediaElement);
                 showVideo();
-
+                
+                //TODO make in ui script
+                video.show();
+                $("#hammerVideo").show();
+                
                 //connection.videosContainer.append(event.mediaElement);
             }else if(event.stream.isAudio){
                 if (showLogs) console.log('tourist: local audio stream started');
-                //connection.videosContainer.append(event.mediaElement);
-                /*
-                event.mediaElement.play();
-                setTimeout(function () {
-                    event.mediaElement.play();
-                }, 2000);
-                */
-                //var video = $("#myVideo");
-                //video.append(event.mediaElement);
-
+                //might never happen...
             }
+            */
         }else if(event.stream.type == "remote"){
             if (showLogs) console.log('tourist: remote stream started');
             if(event.stream.isAudio){
                 if (showLogs) console.log('tourist: remote audio stream started');
                 var audio = $("#audioDiv");
                 audio.append(event.mediaElement);
-                debugger;
-                /*
+                //TODO check if this actually does something
                 event.mediaElement.play();
                 setTimeout(function () {
                     event.mediaElement.play();
                 }, 2000);
-                */
-
+                
             }
-            //connection.videosContainer.append(event.mediaElement);
+            
+            connection.dontCaptureUserMedia = false;
+            start();
         }
 
     };
+    
+    connection.onmute = function (event) {
+        event.mediaElement.pause();
+    };
 
+    connection.onunmute = function (event) {
+        event.mediaElement.play();
+    };
+    
     /**
      * fires when the signalling websocket was connected successfully
      * this socket will be used as a fall back if SCTP is not available
@@ -423,4 +440,44 @@ function connectionClosed(){
     //TODO do nicer
     setConfirmUnload(false);
     window.location = "/";
+}
+
+function start(){
+    connection.dontCaptureUserMedia = false;
+    
+    if (connection.attachStreams.length) {
+        connection.getAllParticipants().forEach(function (p) {
+            connection.attachStreams.forEach(function (stream) {
+                connection.peers[p].peer.removeStream(stream);
+            });
+        });
+        connection.attachStreams = [];
+    }
+
+    connection.addStream({
+        audio: true,
+        video: true
+        //,oneway: true
+    });
+
+}
+
+function stop(){
+    if (connection.attachStreams.length) {
+        connection.getAllParticipants().forEach(function (p) {
+            connection.attachStreams.forEach(function (stream) {
+                connection.peers[p].peer.removeStream(stream);
+            });
+        });
+
+        connection.attachStreams.forEach(function (stream) {
+            stream.stop();
+        });
+
+        connection.attachStreams = [];
+    }
+
+    connection.renegotiate();
+    
+    
 }

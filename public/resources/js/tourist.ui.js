@@ -7,6 +7,8 @@
 //variables
 var loadBox;
 var content;
+var ico_audio;
+var ico_video;
 
 var audioMuted = false;
 var videoMuted = false;
@@ -18,6 +20,8 @@ function initTouristUI(){
     if(showLogs) console.log('tourist: init gui');
     loadBox = $("#loadBox");
     content = $("#content");
+    ico_audio = $("#ico_audio");
+    ico_video = $("#ico_video");
     setConfirmUnload(true);
     initTouristButtons();
     initChat();
@@ -25,7 +29,7 @@ function initTouristUI(){
 
 function showTouristUI(){
     if(showLogs) console.log('tourist: show gui');
-    $("btn_joinConnection").hide();
+    showAudioVideoIcons();
 }
 
 function showLoadBox(){
@@ -38,147 +42,54 @@ function hideLoadBox(){
     content.show();
 }
 
-function initTouristButtons(){
-    /*
-     $("#btn_joinConnection").click(function () {
-     if(showLogs) console.log('tourist: join connection button clicked');
-     connectToGuides();
-     });
-     */
-    
-    $("#btn_shareVideo").click(function (e) {
-        if(showLogs) console.log('share video clicked');
-        startVideo();
-    });
+function showAudioVideoIcons(){
+    $("#ico_audio").show();
+    $("#ico_video").show();
+}
 
-    $("#btn_stopVideo").click(function (e) {
-        if(showLogs) console.log('stop video clicked');
-        //TODO mute video
-        stopVideo();
-    });
+function hideAudioVideoIcons(){
+    $("#ico_audio").hide();
+    $("#ico_video").hide();
+}
+
+function initTouristButtons(){
+    if(showLogs) console.log('tourist: init tourist buttons');
 
     $("#btn_closeConnection").click(function (e) {
         if(showLogs) console.log('btn close connection clicked');
         closeConnection();
     });
 
-    $("#btn_muteVideo").click(function (e) {
-        if(showLogs) console.log('mude video button clicked');
-
-        connection.attachStreams.forEach(function (stream) {
-            if (stream.isVideo) {
-                if (showLogs)
-                    console.log('muting video stream');
-                stream.mute();
-            }
-        });
-
-        /*
-         connection.attachStreams.forEach(function (stream) {
-         stream.mute();
-         .mute({
-         isAudio: true,
-         remote: true
-         });
-         });
-         */
-
-    });
-
-    $("#btn_unmuteVideo").click(function (e) {
-        if(showLogs) console.log('unmuting video');
-
-        connection.attachStreams.forEach(function (stream) {
-            if (stream.isVideo) {
-                if (showLogs)
-                    console.log('unmuting video stream');
-                stream.unmute();
-            }
-        });
-
-    });
-
-    $("#btn_startAudio").click(function (e) {
-        if (showLogs) console.log('tourist: start audio button clicked');
-
-        connection.addStream({
-            audio: true
-            //video: true
-            //,oneway: true
-        });
-
-
-    });
-
-    $("#btn_stopAudio").click(function (e) {
-        if (showLogs) console.log('tourist: stop audio button clicked');
-        connection.attachStreams.forEach(function (stream) {
-            stream.stop();
-        });
-
-        connection.renegotiate();
-    });
-
-    function startVideo() {
-
-        connection.addStream({
-            audio: true,
-            video: true
-            //,oneway: true
-        });
-
-    }
-
-
-    $("#btn_mute_audio").click(function (e) {
-        if (showLogs) console.log('guide: mute audio button clicked '+ audioMuted);
-        if(!audioMuted){
-            //mute audio
-            audioMuted=true;
-            $('#btn_mute_audio').addClass('lightColor');
-            $('#btn_mute_audio').attr('src','resources/images/icons/microphoneOff.png');
-            //TODO mute
-        }
-        else{
+    $("#ico_audio").click(function (e) {
+        if (showLogs) console.log('tourist: audio icon clicked, will mute: ' + !audioMuted);
+        if(audioMuted){
             //unmute audio
-            audioMuted=false;
-            $('#btn_mute_audio').removeClass('lightColor');
-            $('#btn_mute_audio').attr('src','resources/images/icons/microphoneOn.png');
-            //TODO unmute
+            ico_audio.removeClass('lightColor');
+            ico_audio.attr('src','resources/images/icons/microphoneOn.png');
+            unmuteAudio();
+        }else{
+            //mute audio
+            ico_audio.addClass('lightColor');
+            ico_audio.attr('src','resources/images/icons/microphoneOff.png');
+            muteAudio();
         }
+        audioMuted = !audioMuted;
     });
 
-    $("#btn_mute_video").click(function (e) {
-        if (showLogs) console.log('guide: mute video button clicked '+ videoMuted);
-        if(!videoMuted){
-            //mute video
-            videoMuted =true;
-            $('#btn_mute_video').addClass('lightColor');
-            $('#btn_mute_video').attr('src','resources/images/icons/videoOff.png');
-
-            connection.attachStreams.forEach(function (stream) {
-                if (stream.isVideo) {
-                    if (showLogs)
-                        console.log('muting video stream');
-                    stream.mute();
-                }
-            });
-
-        }
-        else{
+    $("#ico_video").click(function (e) {
+        if (showLogs) console.log('tourist: video icon clicked, will mute: ' + !videoMuted);
+        if(videoMuted){
             //unmute video
-            videoMuted=false;
-            $('#btn_mute_video').removeClass('lightColor');
-            $('#btn_mute_video').attr('src','resources/images/icons/videoOn.png');
-
-            connection.attachStreams.forEach(function (stream) {
-                if (stream.isVideo) {
-                    if (showLogs)
-                        console.log('unmuting video stream');
-                    stream.unmute();
-                }
-            });
+            ico_video.removeClass('lightColor');
+            ico_video.attr('src','resources/images/icons/videoOn.png');
+            unmuteVideo();
+        }else{
+            //mute video
+            ico_video.addClass('lightColor');
+            ico_video.attr('src','resources/images/icons/videoOff.png');
+            muteVideo();
         }
+        videoMuted = !videoMuted;
     });
 
 
@@ -193,6 +104,50 @@ function initTouristButtons(){
         if(showLogs) console.log('guide close button clicked');
 
         $("#touristControls").hide(animDur);
+    });
+}
+
+function muteAudio(){
+    connection.attachStreams.forEach(function (stream) {
+        if (stream.type == "local") {
+            if (stream.isAudio) {
+                if (showLogs) console.log('tourist: muting audio stream');
+                stream.mute();
+            }
+        }
+    });
+}
+
+function unmuteAudio(){
+    connection.attachStreams.forEach(function (stream) {
+        if (stream.type == "local") {
+            if (stream.isAudio) {
+                if (showLogs) console.log('tourist: unmuting audio stream');
+                stream.unmute();
+            }
+        }
+    });
+}
+
+function muteVideo() {
+    connection.attachStreams.forEach(function (stream) {
+        if (stream.type == "local") {
+            if (stream.isVideo) {
+                if (showLogs) console.log('tourist: muting video stream');
+                stream.mute();
+            }
+        }
+    });
+}
+
+function unmuteVideo(){
+    connection.attachStreams.forEach(function (stream) {
+        if (stream.type == "local") {
+            if (stream.isVideo) {
+                if (showLogs) console.log('tourist: unmuting video stream');
+                stream.unmute();
+            }
+        }
     });
 }
 

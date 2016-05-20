@@ -33,7 +33,6 @@ var ongoingConnectionIntervalTimer = 60 * 1000; //60 seconds
 //guide channel
 var channel;
 
-
 function initGuideConnection(){
     if(showLogs) console.log('init guide connection');    
     channel = username;
@@ -68,18 +67,19 @@ function initGuideWebRTC(){
     }
     */
 
-    //connection.dontCaptureUserMedia = true;
+    connection.dontCaptureUserMedia = true;
 
     connection.session = {
         data: true
         ,audio: true
+        //,video: true
     };
 
     connection.sdpConstraints.mandatory = {
         OfferToReceiveAudio: true,
         OfferToReceiveVideo: true
     };
-    //not when no webRTC available
+    //only when webRTC available
     if(DetectRTC.browser.isChrome || DetectRTC.browser.isFirefox || DetectRTC.browser.isOpera){
         connection.open(connection.channel);
     }
@@ -96,6 +96,8 @@ function initGuideWebRTCEvents(){
 
         if (connection.alreadyOpened) return;
         connection.alreadyOpened = true;
+        startAudioStream();
+        showAudioVideoIcons();
     };
 
 
@@ -157,20 +159,43 @@ function initGuideWebRTCEvents(){
         }
 
     };
-    /*
+    
+    connection.onmute = function (event) {
+        //to set a picture instead of the last printscreen
+        //e.mediaElement.setAttribute('poster', 'photo.jpg');
+        event.mediaElement.pause();
+    };
+
+    connection.onunmute = function (event) {
+        //to remove picture set in onmute
+        //e.mediaElement.removeAttribute('poster');
+        event.mediaElement.play();
+    };
+    
+    
     connection.onstreamended = function (event) {
-        console.log('stream ended');
-        $("#videoContainer").empty();
+        if(showLogs) console.log('guide: stream ended');
+        
+        if(event.stream.type == "remote"){
+            //TODO better do with hammer thingy?
+            $("#videoContainer").empty();
+            //$("#videoContainer").hide();
 
-        event.mediaElement.remove();
+            stopStream();
+        }
+        
+        //$("#videoContainer").empty();
 
+        //event.mediaElement.remove();
 
+        /*
         connection.attachStreams.forEach(function (stream) {
             stream.stop();
         });
-
-    }
-    */
+        */
+        
+    };
+    
 
     /**
      * fires when the signalling websocket was connected successfully
@@ -398,19 +423,64 @@ function guideSocketSendMessage(topic, msg){
 function connectionClosed() {
     if (showLogs) console.log('guide: connection closed by tourist');
     c2P = false;
-    //TODO hide c2P GUI
+    //TODO put all in function in guide ui
     hideChat();
     emptyChat();
     hideMap();
     hideVideo();
-
+    hideAudioVideoIcons();
+    
+    stopStream();
+    connection.alreadyOpened = false;
     
     //check again what the guide's browser is capable of
     detectRTCcapabilities();
+    //to help remember to set state to available
+    showGuideControls();
 }
 
 function closeConnection(){
     if (showLogs) console.log('guide: closing tourist connection');
     sendCloseConnection();
     connectionClosed();
+}
+
+function startAudioStream(){
+    connection.dontCaptureUserMedia = false;
+    if (connection.attachStreams.length) {
+        connection.getAllParticipants().forEach(function (p) {
+            connection.attachStreams.forEach(function (stream) {
+                connection.peers[p].peer.removeStream(stream);
+            });
+        });
+        connection.attachStreams = [];
+    }
+
+    connection.addStream({
+        audio: true
+    });
+}
+
+function stopStream(){
+    /*
+    if (connection.attachStreams.length) {
+        connection.getAllParticipants().forEach(function (p) {
+            connection.attachStreams.forEach(function (stream) {
+                connection.peers[p].peer.removeStream(stream);
+            });
+        });
+
+        connection.attachStreams.forEach(function (stream) {
+            stream.stop();
+        });
+
+        connection.attachStreams = [];
+        
+        if (c2P) {
+            //connection.renegotiate();
+        }
+    }
+    */
+   
+    connection.dontCaptureUserMedia = true;
 }

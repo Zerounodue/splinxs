@@ -53,7 +53,7 @@ block content
         #load3.loadDot
     //
         main#content
-          button#btn_joinConnection(type='button') __join connection
+          //button#btn_joinConnection(type='button') __join connection
           button#btn_closeConnection(type='button', hidden='') __close connection
           br
           #audio(hidden='')
@@ -77,17 +77,17 @@ block content
                 .col-sm-12
                     h2(style='text-align: center;') __Controls
 
-            button#btn_joinConnection(type='button') __join connection
-            button#btn_closeConnection(type='button', hidden='') __close connection
+            //button#btn_joinConnection(type='button') __join connection
+            button#btn_closeConnection(type='button', hidden='') #{texts.T.CLOSE_CONNECTION}
             br
             #audioControlsBox(hidden='')
-                button#btn_startAudio(type='button') __start audio
-                button#btn_stopAudio(type='button') __stop audio
+                //button#btn_startAudio(type='button') __start audio
+                //button#btn_stopAudio(type='button') __stop audio
                 #audioDiv
             br
             #videoControlsBox.video(hidden='')
-                button#btn_shareVideo(type='button') __start video
-                button#btn_stopVideo(type='button') __stop video
+                //button#btn_shareVideo(type='button') __start video
+                //button#btn_stopVideo(type='button') __stop video
                 //button#btn_muteVideo(type='button') __mute video
                 //button#btn_unmuteVideo(type='button') __unmute video
                 //#myVideo
@@ -136,8 +136,8 @@ block content
         #hammerContainer
             script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing,places&callback=initMap')
         .audioVideoControls
-            img.videoIcon(src='resources/images/icons/videoOn.png', alt='video' id="btn_mute_video")
-            img.audioIcon(src='resources/images/icons/microphoneOn.png', alt='audio' id="btn_mute_audio")
+            img.videoIcon(src='resources/images/icons/videoOn.png', alt='video' id="ico_video", hidden)
+            img.audioIcon(src='resources/images/icons/microphoneOn.png', alt='audio' id="ico_audio", hidden)
 block foot
 //
     div(id="smallChat", class="smallChat", hidden)

@@ -54,17 +54,19 @@ router.post('/register', function(req, res) {
 
     Guide.register(new Guide({ username : req.body.username, email: req.body.email }), req.body.password, function(err, guide) {
         if (err) {
+            //username already exists
             if(err.name == "UserExistsError"){
                 //TODO title not needed?
-                res.render('index', {title: "__Register", registerError: "ERROR_MESSAGE", email: email});
+                res.render('index', {title: "__Register", registerError: "USERNAME_TAKEN", email: email});
                 //TODO remove commented old version line if the above line works
                 //res.render('register', {title: "__Register", error: "__username already taken", email: email});
                 return;
             }
-            //TODO remove console.log
-            console.log("Error: " + err.name);
-            console.log("Message: " + err.message);
-            console.log("other error in guide.register  --> redirect home");
+            //duplicate key -> email
+            if(err.code == 11000){
+                res.render('index', {title: "__Register", registerError: "EMAIL_TAKEN", username: name});
+                return;
+            }
             func.redirectHome(res);
             return;
         }

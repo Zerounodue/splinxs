@@ -95,13 +95,14 @@
     "REGISTER": {
         "BACK": "Zurück zum Login",
         "E-MAIL": "E-Mail",
-        "ERROR_MESSAGE": "Benutzername bereits verwendet",
+        "EMAIL_TAKEN": "Email bereits verwendet",
         "FORGOT": "Passwort vergessen?",
         "PASSWORT": "Passwort",
         "R_PASSWORD": "Passwort wiederholen",
         "REGISTER": "Registrieren",
         "SIGN_UP_MESSAGE": "Registriere dich um ein Splinx Guide zu werden",
-        "USERNAME": "Benutzername"
+        "USERNAME": "Benutzername",
+        "USERNAME_TAKEN": "Benutzername bereits verwendet"
     },
     "T":{
         "CLOSE_CONNECTION": "Verbindung beenden"

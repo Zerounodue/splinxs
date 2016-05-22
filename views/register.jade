@@ -5,12 +5,15 @@ center
       h1 #{texts.REGISTER.REGISTER}
       p.lead #{texts.REGISTER.SIGN_UP_MESSAGE}
 
-      if registerError == "ERROR_MESSAGE"
+      if registerError == "USERNAME_TAKEN"
         .alert.alert-green(role="alert")
-          | #{texts.REGISTER.ERROR_MESSAGE}
+          | #{texts.REGISTER.USERNAME_TAKEN}
+      else if registerError == "EMAIL_TAKEN"
+        .alert.alert-green(role="alert")
+          | #{texts.REGISTER.EMAIL_TAKEN}
       form(role='form', action="/register",method="post", style='max-width: 300px;')
         .form-group
-          input.form-control(maxlength="40" type='text', name="username", placeholder='#{texts.REGISTER.USERNAME}', required, autofocus)
+          input.form-control(maxlength="40" type='text', name="username", placeholder='#{texts.REGISTER.USERNAME}', value='#{username ? username : ""}', required, autofocus)
         #firstPasswordGroup.form-group
           input.form-control(maxlength="40" type='password', id="password", name="password", placeholder='#{texts.REGISTER.PASSWORD}', required)
         #secondPasswordGroup.form-group

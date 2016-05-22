@@ -95,13 +95,14 @@
     "REGISTER": {
         "BACK": "Back to login",
         "EMAIL": "Email",
-        "ERROR_MESSAGE": "Username already taken",
+        "EMAIL_TAKEN": "Email already taken",
         "FORGOT": "Forgot password?",
         "PASSWORD": "Password",
         "R_PASSWORD": "Repeat password",
         "REGISTER": "Register",
         "SIGN_UP_MESSAGE": "Sign up and become a Splinxs guide",
-        "USERNAME": "Username"
+        "USERNAME": "Username",
+        "USERNAME_TAKEN": "Username already taken"
     },
     "T":{
         "CLOSE_CONNECTION": "Close connection"

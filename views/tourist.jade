@@ -99,8 +99,12 @@ block content
                         .chatLeft
                             img.chatLeftIcon(src='resources/images/icons/chatWhite.png', alt='chat')
 
-                            span#spn_isTyping.text-center.message
+                            //span#spn_isTyping.text-center.message
                             //#{texts.GENERAL.CHAT}
+                            .spinnerChat(hidden)
+                                .bounceChat1
+                                .bounceChat2
+                                .bounceChat3
 
 
                             img.chatRightIcon(src='resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")

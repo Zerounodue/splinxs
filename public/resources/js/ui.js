@@ -33,6 +33,8 @@ var audioControlsDiv;
 var myAvatarIcon;
 var peerAvatarIcon;
 
+var spinner;
+
 /**
  * initialises ui variables
  * !needs to be called in document.ready()!
@@ -50,6 +52,7 @@ function initUI(isGuide){
     videoDiv=$("#hammerVideo");
     videoControlsDiv = $("#videoControlsBox");
     audioControlsDiv = $("#audioControlsBox");
+    spinner = $('.spinnerChat');
     if(isGuide){
         myAvatarIcon = "../resources/images/guide.png";
         peerAvatarIcon = "../resources/images/tourist.png";
@@ -64,6 +67,7 @@ function initUI(isGuide){
  */
 function showChat() {
     chatBox.show();
+    spinner.css('display', 'none');
 }
 /**
  * hides the chat box
@@ -194,14 +198,16 @@ function setSmallChatNoMessageColor() {
 function peerIsTyping(peername) {
     console.log(peername + " is typing");
     //isTypingSpan.text(peername + " is typing...");
-    isTypingSpan.text("...");
+    spinner.css('display', 'inline');
+    //isTypingSpan.text("...");
 }
 /**
  * removes the "[peername] is typing..." from the chat
  */
 function peerStoppedTyping() {
     console.log("stopped typing");
-    isTypingSpan.text("");
+    //isTypingSpan.text("");
+    spinner.css('display', 'none');
 }
 /**
  * displays all gui elements available for the current connection
@@ -236,6 +242,7 @@ function showChatMapGUI(){
 function showWebsocketOnlyGUI(){
     if(showLogs) console.log('show websocket only gui');
     showChat();
+
     showMap();
     //TODO hide mic, video, etc.
     $("#btn_closeConnection").show();
@@ -248,6 +255,7 @@ function showWebsocketOnlyGUI(){
 function showNoMediaGUI(){
     if(showLogs) console.log('show no media gui');
     showChat();
+
     showMap();
     //TODO hide mic, video, etc.
     //TODO peer might have media available
@@ -260,6 +268,7 @@ function showNoMediaGUI(){
 function showAudioVideoGUI(){
     if(showLogs) console.log('show audio and video gui');
     showChat();
+
     showMap();
     //TODO show audio, video, etc.
     showVideoControls();
@@ -273,6 +282,7 @@ function showAudioVideoGUI(){
 function showAudioOnlyGUI(){
     if(showLogs) console.log('show audio only gui');
     showChat();
+
     showMap();
     //TODO show audio...
     showAudioControls();
@@ -285,6 +295,7 @@ function showAudioOnlyGUI(){
 function showVideoOnlyGUI(){
     if(showLogs) console.log('show video only gui');
     showChat();
+    peerStoppedTyping()
     showMap();
     showVideoControls();
     $("#btn_closeConnection").show();

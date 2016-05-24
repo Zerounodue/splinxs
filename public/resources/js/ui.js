@@ -54,12 +54,12 @@ function initUI(isGuide){
     audioControlsDiv = $("#audioControlsBox");
     spinner = $('.spinnerChat');
     if(isGuide){
-        myAvatarIcon = "../resources/images/guide.png";
-        peerAvatarIcon = "../resources/images/tourist.png";
+        myAvatarIcon = "resources/images/guide.png";
+        peerAvatarIcon = "resources/images/tourist.png";
     }
     else{
-        myAvatarIcon = "../resources/images/tourist.png";
-        peerAvatarIcon = "../resources/images/guide.png";
+        myAvatarIcon = "resources/images/tourist.png";
+        peerAvatarIcon = "resources/images/guide.png";
     }
 }
 /**
@@ -396,7 +396,7 @@ function initChat(){
 
             //$("#footerPanel").addClass("hidden");
             //$("#footerPanel").hide("Blind",500);
-            $("#btn_minimiseChat").attr("src", "../resources/images/icons/arrowUp.png");
+            $("#btn_minimiseChat").attr("src", "resources/images/icons/arrowUp.png");
             //$("#chat").addClass("hidden");
             changeToSmallChat();
         }else{
@@ -406,7 +406,7 @@ function initChat(){
 
             //$("#footerPanel").show("Blind", 500);
             //$("#footerPanel").removeClass("hidden");
-            $("#btn_minimiseChat").attr("src", "../resources/images/icons/arrowDown.png");
+            $("#btn_minimiseChat").attr("src", "resources/images/icons/arrowDown.png");
             changeToChat();
         }
 

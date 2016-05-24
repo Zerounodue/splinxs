@@ -5,21 +5,21 @@ extends layout
 
 block append scripts
 
-    script(src='../resources/js/rmc3@3.3.5.js')
+    script(src='resources/js/rmc3@3.3.5.js')
     // socket.io for signaling
     script(src='/socket.io/socket.io.js')
-    script(src='../resources/js/DetectRTC.js')
+    script(src='resources/js/DetectRTC.js')
 
-    script(src='../resources/js/connection.js')
-    script(src='../resources/js/guide.connection.js')
-    script(src='../resources/js/util.js')
-    script(src='../resources/js/ui.js')
-    script(src='../resources/js/guide.ui.js')
+    script(src='resources/js/connection.js')
+    script(src='resources/js/guide.connection.js')
+    script(src='resources/js/util.js')
+    script(src='resources/js/ui.js')
+    script(src='resources/js/guide.ui.js')
 
-    script(src='../resources/js/map.js')
-    script(src='../resources/js/guide.map.js')
-    script(src='../resources/js/hammerV2.0.8.js')
-    script(src='../resources/js/hammerFunctions.js')
+    script(src='resources/js/map.js')
+    script(src='resources/js/guide.map.js')
+    script(src='resources/js/hammerV2.0.8.js')
+    script(src='resources/js/hammerFunctions.js')
     script.
       $(document).ready(function () {
             username = "!{name}";
@@ -56,14 +56,14 @@ block append scripts
 
 block append stylesheets
     //TODO remove when it works...
-    //link(rel='stylesheet', href='../resources/css/styleOld.css')
-    link(rel='stylesheet', href='../resources/css/connected.css')
-    link(rel='stylesheet', href='../resources/css/chat.css')
+    //link(rel='stylesheet', href='resources/css/styleOld.css')
+    link(rel='stylesheet', href='resources/css/connected.css')
+    link(rel='stylesheet', href='resources/css/chat.css')
 
 //the guide has no link to home clicking on the splinxs brand
 block navbar-brand
     a(class='navbar-brand')
-        img(style='height:100%', src='../resources/images/splinxs.png')
+        img(style='height:100%', src='resources/images/splinxs.png')
 
 block append navbarli
     li
@@ -88,7 +88,7 @@ block content
     #guideControls.controlsPage(hidden)
         .row
             .col-sm-12
-                img.x(src='../resources/images/icons/x.png', alt='close icon', id="btn_guideClose")
+                img.x(src='resources/images/icons/x.png', alt='close icon', id="btn_guideClose")
         .row
             .col-sm-12
                 h2(style='text-align: center;') __Controls
@@ -142,7 +142,7 @@ block content
             .panel-heading(id="headingPanel")
                 span
                     .chatLeft
-                        img.chatLeftIcon(src='../resources/images/icons/chatWhite.png', alt='chat')
+                        img.chatLeftIcon(src='resources/images/icons/chatWhite.png', alt='chat')
 
                         //span#spn_isTyping.text-center.message
                         .spinnerChat(hidden)
@@ -152,7 +152,7 @@ block content
                         //#{texts.GENERAL.CHAT}
 
 
-                        img.chatRightIcon(src='../resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")
+                        img.chatRightIcon(src='resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")
             //
               span.glyphicon.glyphicon-comment
               |  #{texts.GENERAL.CHAT}
@@ -194,8 +194,8 @@ block content
     #hammerContainer(hidden)
         script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing,places&callback=initMap')
     .audioVideoControls
-        img.videoIcon(src='../resources/images/icons/videoOn.png', alt='video' id="ico_video", hidden)
-        img.audioIcon(src='../resources/images/icons/microphoneOn.png', alt='audio' id="ico_audio", hidden)
+        img.videoIcon(src='resources/images/icons/videoOn.png', alt='video' id="ico_video", hidden)
+        img.audioIcon(src='resources/images/icons/microphoneOn.png', alt='audio' id="ico_audio", hidden)
 
 //
 block foot

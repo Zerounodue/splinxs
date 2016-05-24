@@ -20,10 +20,10 @@ function initSplinxs() {
     audioPlayer = $("#audioPlayer").get(0);
 
     sounds = {
-        call_ring: "../resources/sounds/call/den_den_mushi_1.mp3",
-        call_answer: "../resources/sounds/call/den_den_mushi_gacha_1.mp3",
+        call_ring: "resources/sounds/call/den_den_mushi_1.mp3",
+        call_answer: "resources/sounds/call/den_den_mushi_gacha_1.mp3",
         call_dial: "",
-        message_arrival: "../resources/sounds/message/arrival.mp3"
+        message_arrival: "resources/sounds/message/arrival.mp3"
     };
     
     vibrations = {

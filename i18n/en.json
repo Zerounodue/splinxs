@@ -73,15 +73,15 @@
         "ITALIAN": "Italiano"
     },
     "INDEX": {
-        "AUDIO_DESCRIPTION": "With realime audio the guide and tourist can talk together.",
-        "CHAT_DESCRIPTION": "With realtime chat guide and tourist can exchange messages.",
+        "AUDIO_DESCRIPTION": "Realtime audio enables tourist and guide to talk together. The tourist can explain the situation to the guide which can help achieving the tourist’s goal.",
+        "CHAT_DESCRIPTION": "Realtime chat enables tourist and guide to share messages. In some situations text messages might be the fastest and most convenient way to communicate.",
         "DESCRIPTION_GUIDE": "You know some places very well and want to help someone who is there? Sign up and start helping people right now.",
         "DESCRIPTION_TOURIST": "You are somewhere unfamiliar and need help? Don't worry, a guide will help you. Thanks to camera, microphone, GPS and chat the guide will see what you see, speak with you and guide you to your destination.",
         "I_AM_GUIDE": "I am a guide",
         "I_AM_TOURIST": "I am a tourist",
-        "LOCATION_DESCRIPTION": "With realtime location services the guide can know where the tourist currently is.",
+        "LOCATION_DESCRIPTION": "Realtime location services enables the guide to know the tourist’s location. Both tourist and guide have the possibility mark places on a map to highlight a location.",
         "SPLINXS_SUBTITLE": "The Realtime Tourist Guidance",
-        "VIDEO_DESCRIPTION": "With realtime video the guide is able to see what the tourist sees."
+        "VIDEO_DESCRIPTION": "Realtime video enables the guide to see what the tourist sees. The tourist’s mobile device’s camera becomes the eyes of the guide. Now the guide can make sense of the tourist’s environment."
     },
     "LOGIN": {
         "ERROR_MESSAGE": "Wrong username or passowrd",

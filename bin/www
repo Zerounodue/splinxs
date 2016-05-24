@@ -11,25 +11,25 @@ var app = require('../app');
 var httpApp = require('../httpApp');
 var debug = require('debug')('test:server');
 var https = require('https');
-//var http = require('http');
+var http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '443');
-//var httpPort = normalizePort('80');
+var httpPort = normalizePort('80');
 
 app.set('port', port);
-//httpApp.set('port', httpPort);
+httpApp.set('port', httpPort);
 
 
 /**
  * Create HTTP server.
  */
-//http.createServer(httpApp).listen(httpApp.get('port'), function() {
-//    console.log('Express server listening on port ' + httpApp.get('port') + ' and redirecting everithing on port 443');
-//});
+http.createServer(httpApp).listen(httpApp.get('port'), function() {
+    console.log('Express server listening on port ' + httpApp.get('port') + ' and redirecting everithing on port 443');
+});
 
 /**
  * Create HTTPS server.
@@ -45,8 +45,8 @@ var server = https.createServer({
 	key: fs.readFileSync('./selfCert/key.pem'),
 	cert: fs.readFileSync('./selfCert/cert.pem')
 }, app);
-
 */
+
 
 
 
@@ -58,7 +58,7 @@ var server = https.createServer({
  * Socket.io
  */
 
-var io = app.io
+var io = app.io;
 io.attach(server);
 
 

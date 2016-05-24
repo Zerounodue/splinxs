@@ -11,7 +11,7 @@
         "CHAT": "Chat",
         "GUIDE": "Guide",
         "NO": "No",
-        "ORIENTATION": "Orinetamento",
+        "LOCATION": "Posizione",
         "SEND": "Inviare",
         "SPLINXS": "Splinxs",
         "SUBMIT": "Invia",
@@ -39,7 +39,6 @@
         "PAN_DESCRIPTION": "Clicca sulla mappa per muoverti",
         "ADD_DESCRIPTION": "Clicca sulla mappa per disegnare un area",
         "REMOVE_DESCRIPTION": "Clicca su un area per rimuoverla"
-
     },
     "G_LANGUAGES":{
         "TITLE": "Lingue della guide",
@@ -67,7 +66,6 @@
         "LOGOUT": "Scollegarsi",
         "WHAT_IS_SPLINXS": "Cosa è Splinxs",
         "SETTINGS": "Impostazioni"
-
     },
     "LANGUAGES": {
         "ENGLISH": "English",

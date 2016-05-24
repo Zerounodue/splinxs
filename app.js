@@ -108,10 +108,11 @@ app.io.use(function(socket, next) {
     sessionMiddleware(socket.request, socket.request.res, next);
 });
 
-//app.use(session(sessionOptions));
 
 app.use(sessionMiddleware);
 
+
+//routes
 var routes = require('./routes/index');
 var tourist = require('./routes/tourist');
 var guide = require('./routes/guide');
@@ -144,7 +145,7 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-//this is new: doese i need that????
+//this is new: does i need that????
 //app.use(express.static(__dirname + '/public'));
 //app.use(express.static(__dirname + '/public/tourist'));
 //app.use(express.static(__dirname + '/public/guide'));
@@ -159,8 +160,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public/tourist')));
-app.use(express.static(path.join(__dirname, 'public/guide')));
 
 
 /*

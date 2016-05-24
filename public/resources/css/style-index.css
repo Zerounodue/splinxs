@@ -55,10 +55,19 @@ background-color: white;
 	}
 }
 
-
-.splinxsDescription{
-
+/*small devices, to see the whole registation form */
+@media(max-height:450px){
+	.registerTitle{
+		margin-top: 5px;
+		margin-bottom: 2px;
+	}
+	.form-group{
+		margin-bottom: 5px;
+	}
 }
+
+
+
 
 a{
 	cursor: pointer;

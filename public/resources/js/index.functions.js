@@ -66,7 +66,7 @@ $(document).ready(function () {
         if(showLogs) console.log('regiser link clicked');
         loginPopup.hide(0);
         registerPopup.show(0);
-        if($(window).height()<470){
+        if($(window).height()<335){
             //TODO i18n
             alert("You might need a bigger screen");
         }

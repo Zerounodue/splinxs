@@ -38,3 +38,16 @@
     border-color: #28B294;
 
 }
+.s{
+    height: 50px;
+    width: auto;
+    margin-top: 20px;
+}
+.loginTitle{
+    margin-top: 10px;
+}
+@media(max-height:400px){
+    .s{
+        display: none;
+    }
+}

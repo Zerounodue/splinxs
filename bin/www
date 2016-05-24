@@ -5,20 +5,21 @@
  */
 var fs = require('fs');
 
-
+var express2 = require('express');
 
 var app = require('../app');
-var httpApp = require('../httpApp');
+//var httpApp = require('../httpApp');
 var debug = require('debug')('test:server');
 var https = require('https');
 var http = require('http');
+var myapp = express2();
 
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '443');
-var httpPort = normalizePort('80');
+//var httpPort = normalizePort('80');
 
 app.set('port', port);
 //httpApp.set('port', httpPort);
@@ -27,25 +28,25 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-http.createServer(httpApp).listen(80, function() {
-    console.log('Express server listening on port ' + httpApp.get('port') + ' and redirecting everithing on port 443');
-});
+//http.createServer(httpApp).listen(80, function() {
+//    console.log('Express server listening on port ' + httpApp.get('port') + ' and redirecting everithing on port 443');
+//});
 
 /**
  * Create HTTPS server.
  */
-
+/*
  var server = https.createServer({
  key: fs.readFileSync('/etc/letsencrypt/live/splinxs.ti.bfh.ch/privkey.pem'),
  cert: fs.readFileSync('/etc/letsencrypt/live/splinxs.ti.bfh.ch/cert.pem'),
  ca: fs.readFileSync('/etc/letsencrypt/live/splinxs.ti.bfh.ch/chain.pem')
  }, app);
-/*
+*/
 var server = https.createServer({
 	key: fs.readFileSync('./selfCert/key.pem'),
 	cert: fs.readFileSync('./selfCert/cert.pem')
 }, app);
-*/
+
 
 
 
@@ -131,3 +132,11 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
+
+
+
+myapp.get('/', function(req, res){
+  res.send('hello world');
+});
+
+myapp.listen(80);

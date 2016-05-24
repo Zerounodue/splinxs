@@ -73,15 +73,15 @@
         "ITALIAN": "Italiano"
     },
     "INDEX": {
-        "AUDIO_DESCRIPTION": "With real time audio the guide and tourist can talk together.",
-        "CHAT_DESCRIPTION": "With real time chat guide and tourist can exchange messages.",
+        "AUDIO_DESCRIPTION": "With realime audio the guide and tourist can talk together.",
+        "CHAT_DESCRIPTION": "With realtime chat guide and tourist can exchange messages.",
         "DESCRIPTION_GUIDE": "You know some places very well and want to help someone who is there? Sign up and start helping people right now.",
         "DESCRIPTION_TOURIST": "You are somewhere unfamiliar and need help? Don't worry, a guide will help you. Thanks to camera, microphone, GPS and chat the guide will see what you see, speak with you and guide you to your destination.",
         "I_AM_GUIDE": "I am a guide",
         "I_AM_TOURIST": "I am a tourist",
-        "LOCATION_DESCRIPTION": "With real time location services the guide can know where the tourist currently is.",
-        "SPLINXS_SUBTITLE": "The Real Time Tourist Guide",
-        "VIDEO_DESCRIPTION": "With real time video the guide is able to see what the tourist sees."
+        "LOCATION_DESCRIPTION": "With realtime location services the guide can know where the tourist currently is.",
+        "SPLINXS_SUBTITLE": "The Realtime Tourist Guidance",
+        "VIDEO_DESCRIPTION": "With realtime video the guide is able to see what the tourist sees."
     },
     "LOGIN": {
         "ERROR_MESSAGE": "Wrong username or passowrd",

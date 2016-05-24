@@ -219,7 +219,7 @@ function initGuideButtons() {
     */
 
     $("#ico_audio").click(function (e) {
-        if (showLogs) console.log('guide: audio icon clicked, will mute: ' + !videoMuted);
+        if (showLogs) console.log('guide: audio icon clicked, will mute: ' + !audioMuted);
         if(audioMuted){
             //unmute audio
             ico_audio.removeClass('lightColor');
@@ -265,10 +265,17 @@ function unloadMessage() {
 function muteAudio(){
     connection.attachStreams.forEach(function (stream) {
         if (stream.type == "local") {
+            if (stream.id == audioStream) {
+                if (showLogs) console.log('guide: muting audio stream');
+                stream.mute();
+            }
+            
+            /*
             if (stream.isAudio) {
                 if (showLogs) console.log('guide: muting audio stream');
                 stream.mute();
             }
+            */
         }
     });
 }
@@ -276,10 +283,16 @@ function muteAudio(){
 function unmuteAudio(){
     connection.attachStreams.forEach(function (stream) {
         if (stream.type == "local") {
+            if (stream.id == audioStream) {
+                if (showLogs) console.log('guide: unmuting audio stream');
+                stream.unmute();
+            }
+            /*
             if (stream.isAudio) {
                 if (showLogs) console.log('guide: unmuting audio stream');
                 stream.unmute();
             }
+            */
         }
     });
 }

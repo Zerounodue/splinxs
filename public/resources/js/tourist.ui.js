@@ -110,10 +110,16 @@ function initTouristButtons(){
 function muteAudio(){
     connection.attachStreams.forEach(function (stream) {
         if (stream.type == "local") {
+            if (stream.id == audioStream) {
+                if (showLogs) console.log('tourist: muting audio stream');
+                stream.mute();
+            }
+            /*
             if (stream.isAudio) {
                 if (showLogs) console.log('tourist: muting audio stream');
                 stream.mute();
             }
+            */
         }
     });
 }
@@ -121,10 +127,16 @@ function muteAudio(){
 function unmuteAudio(){
     connection.attachStreams.forEach(function (stream) {
         if (stream.type == "local") {
+            if (stream.id == audioStream) {
+                if (showLogs) console.log('tourist: unmuting audio stream');
+                stream.unmute();
+            }
+            /*
             if (stream.isAudio) {
                 if (showLogs) console.log('tourist: unmuting audio stream');
                 stream.unmute();
             }
+            */
         }
     });
 }

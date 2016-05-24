@@ -32,6 +32,8 @@ var ongoingConnectionIntervalTimer = 60 * 1000; //60 seconds
 
 //guide channel
 var channel;
+var audioStream = null;
+var peerAudioStream = null;
 
 function initGuideConnection(){
     if(showLogs) console.log('init guide connection');    
@@ -55,7 +57,7 @@ function initGuideWebRTC(){
     connection.channel = channel;
     connection.socketCustomEvent = connection.channel;
     
-    /*
+    
     if (typeof webkitMediaStream !== 'undefined') {
         connection.attachStreams.push(new webkitMediaStream());
     }
@@ -65,7 +67,7 @@ function initGuideWebRTC(){
     else {
         console.error('Neither Chrome nor Firefox. This demo may NOT work.');
     }
-    */
+    
 
     connection.dontCaptureUserMedia = true;
 
@@ -77,7 +79,7 @@ function initGuideWebRTC(){
 
     connection.sdpConstraints.mandatory = {
         OfferToReceiveAudio: true,
-        OfferToReceiveVideo: true
+        OfferToReceiveVideo: false
     };
     //only when webRTC available
     if(DetectRTC.browser.isChrome || DetectRTC.browser.isFirefox || DetectRTC.browser.isOpera){
@@ -118,6 +120,12 @@ function initGuideWebRTCEvents(){
 
         if(event.stream.type == "local"){
             if (showLogs) console.log('guide: local stream started');
+            
+            if(audioStream == null){
+                if (showLogs) console.log('guide: local audio stream started');
+                audioStream = event.stream.id;
+            }
+            /*
             if(event.stream.isAudio){
                 if (showLogs) console.log('guide: local audio stream started');
                 /*
@@ -127,10 +135,30 @@ function initGuideWebRTCEvents(){
                     event.mediaElement.play();
                 }, 2000);
                 */
+               /*
             }
+            */
 
         }else if(event.stream.type == "remote"){
             if (showLogs) console.log('guide: remote stream started');
+            
+            if(peerAudioStream == null){
+                peerAudioStream = event.stream.id;
+                if (showLogs) console.log('guide: remote audio stream started');
+                var audio = $("#audioDiv");
+                audio.append(event.mediaElement);
+            }else{
+                if (showLogs) console.log('guide: remote video stream started');
+                //TODO do other things?
+                event.mediaElement.controls=false;
+                event.mediaElement.autoplay=true;
+
+                var video = $("#videoContainer");
+                video.append(event.mediaElement);
+                showVideo();
+            }
+            
+            /*
             if(event.stream.isVideo){
                 if (showLogs) console.log('guide: remote video stream started');
                 //TODO do other things?
@@ -149,13 +177,14 @@ function initGuideWebRTCEvents(){
 
 
                 
-                /*
+                
                 event.mediaElement.play();
                 setTimeout(function () {
                     event.mediaElement.play();
                 }, 2000);
-                */
+                
             }
+            */
         }
 
     };

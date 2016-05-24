@@ -34,6 +34,8 @@ var findGuideTimeoutTimer = 60000;
 
 var touristSocket;
 
+var audioStream = null;
+
 function initTouristConnection(){
     if(showLogs) console.log('init tourist connection');
 
@@ -76,12 +78,12 @@ function initTouristWebRTC(){
     connection.session = {
         data: true
         ,audio: true//DetectRTC.hasMicrophone
-        ,video: true//DetectRTC.hasWebcam
+        //,video: true//DetectRTC.hasWebcam
     };
     
     connection.sdpConstraints.mandatory = {
         OfferToReceiveAudio: true,
-        OfferToReceiveVideo: true//DetectRTC.hasWebcam
+        OfferToReceiveVideo: false//DetectRTC.hasWebcam
     };
     
     initTouristWebRTCEvents();
@@ -115,14 +117,20 @@ function initTouristWebRTCEvents(){
         if(event.stream.type == "local"){
             if (showLogs) console.log('tourist: local stream started');
             
-            //TODO do other things?
-            event.mediaElement.controls = false;
-            event.mediaElement.autoplay = true;
+            if(audioStream == null){
+                audioStream = event.stream.id;
+            }else{
+                //TODO do other things?
+                event.mediaElement.controls = false;
+                event.mediaElement.autoplay = true;
 
-            //TODO make nicer code
-            var video = $("#videoContainer");
-            video.append(event.mediaElement);
-            showVideo();
+                //TODO make nicer code
+                var video = $("#videoContainer");
+                video.append(event.mediaElement);
+                showVideo();
+            }
+            
+            
 
             /*
             if(event.stream.isVideo){
@@ -148,6 +156,7 @@ function initTouristWebRTCEvents(){
             */
         }else if(event.stream.type == "remote"){
             if (showLogs) console.log('tourist: remote stream started');
+            /*
             if(event.stream.isAudio){
                 if (showLogs) console.log('tourist: remote audio stream started');
                 var audio = $("#audioDiv");
@@ -157,11 +166,21 @@ function initTouristWebRTCEvents(){
                 setTimeout(function () {
                     event.mediaElement.play();
                 }, 2000);
-                
             }
+            */
             
-            connection.dontCaptureUserMedia = false;
-            start();
+            if (showLogs) console.log('tourist: remote audio stream started');
+            var audio = $("#audioDiv");
+            audio.append(event.mediaElement);
+            //TODO check if this actually does something
+            /*
+            event.mediaElement.play();
+            setTimeout(function () {
+                event.mediaElement.play();
+            }, 2000);
+            */
+            //connection.dontCaptureUserMedia = false;
+            startAudioStream();
         }
 
     };
@@ -369,8 +388,8 @@ function checkPreviousConnectionInterrupted(){
 
 function initTouristSocket(){
     if(showLogs) console.log('tourist: init touristSocket');
-    touristSocket = io.connect('https://splinxs.ti.bfh.ch/tourist');
-    //touristSocket = io.connect('https://localhost/tourist');
+    //touristSocket = io.connect('https://splinxs.ti.bfh.ch/tourist');
+    touristSocket = io.connect('https://localhost/tourist');
     
     initEvents();
 }
@@ -442,7 +461,23 @@ function connectionClosed(){
     window.location = "/";
 }
 
-function start(){
+function startAudioStream(){
+    connection.dontCaptureUserMedia = false;
+    if (connection.attachStreams.length) {
+        connection.getAllParticipants().forEach(function (p) {
+            connection.attachStreams.forEach(function (stream) {
+                connection.peers[p].peer.removeStream(stream);
+            });
+        });
+        connection.attachStreams = [];
+    }
+
+    connection.addStream({
+        audio: true
+    });
+}
+
+function startVideoStream(){
     connection.dontCaptureUserMedia = false;
     
     if (connection.attachStreams.length) {
@@ -462,7 +497,7 @@ function start(){
 
 }
 
-function stop(){
+function stopVideoStream(){
     if (connection.attachStreams.length) {
         connection.getAllParticipants().forEach(function (p) {
             connection.attachStreams.forEach(function (stream) {

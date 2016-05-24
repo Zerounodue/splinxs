@@ -427,6 +427,7 @@ function connectionClosed() {
     hideChat();
     emptyChat();
     hideMap();
+    deleteAllMarkers();
     hideVideo();
     hideAudioVideoIcons();
     

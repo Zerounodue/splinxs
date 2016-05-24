@@ -5,14 +5,12 @@
  */
 var fs = require('fs');
 
-var express2 = require('express');
 
 var app = require('../app');
 //var httpApp = require('../httpApp');
 var debug = require('debug')('test:server');
 var https = require('https');
-var http = require('http');
-var myapp = express2();
+//var http = require('http');
 
 /**
  * Get port from environment and store in Express.
@@ -28,9 +26,11 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-//http.createServer(httpApp).listen(80, function() {
-//    console.log('Express server listening on port ' + httpApp.get('port') + ' and redirecting everithing on port 443');
-//});
+/*
+http.createServer(httpApp).listen(httpApp.get('port'), function() {
+    console.log('Express server listening on port ' + httpApp.get('port') + ' and redirecting everithing on port 443');
+});
+*/
 
 /**
  * Create HTTPS server.
@@ -93,7 +93,7 @@ function normalizePort(val) {
 }
 
 /**
- * Event listener for HTTP server "error" event.
+ * Event listener for HTTP(S) server "error" event.
  */
 
 function onError(error) {
@@ -121,7 +121,7 @@ function onError(error) {
 }
 
 /**
- * Event listener for HTTP server "listening" event.
+ * Event listener for HTTP(S) server "listening" event.
  */
 
 function onListening() {
@@ -132,11 +132,3 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-
-
-
-myapp.get('/', function(req, res){
-  res.send('hello world');
-});
-
-myapp.listen(80);

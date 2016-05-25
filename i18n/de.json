@@ -24,8 +24,12 @@
 	"G": {
 		"AVAILABLE": "Verfügbar",
 		"CLOSE_CONNECTION": "Verbindung beenden",
+		"STATUS": "Status ändern",
 		"TYPE_MESSAGE": "Nachricht eingeben...",
-		"UNAVAILABLE": "Abwesend"
+		"UNAVAILABLE": "Abwesend",
+		"ONLINE": "G.ONLINE",
+		"MESSAGE_H5": "G.MESSAGE_H5",
+		"CHANGE_STATUS": "G.CHANGE_STATUS"
 	},
 	"G_AREAS": {
 		"G_AREAS": "Guide Gebiete",

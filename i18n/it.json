@@ -24,8 +24,14 @@
 	"G": {
 		"AVAILABLE": "Disponibile",
 		"CLOSE_CONNECTION": "Chiudi connessione",
+		"STATUS": "Cambia stato",
 		"TYPE_MESSAGE": "Inserisci messaggio...",
-		"UNAVAILABLE": "Occupato"
+		"UNAVAILABLE": "Occupato",
+		"ONLINE": "G.ONLINE",
+		"MESSAGE_H5": "G.MESSAGE_H5",
+		"CHANGE_STATUS": "G.CHANGE_STATUS",
+		"ATTENTION": "G.ATTENTION",
+		"T_HELP_MESSAGE": "G.T_HELP_MESSAGE"
 	},
 	"G_AREAS": {
 		"G_AREAS": "Aree della guide",
@@ -108,7 +114,10 @@
 		"USERNAME_TAKEN": "Nome utente già in uso"
 	},
 	"T": {
-		"CLOSE_CONNECTION": "Chiudi connessione"
+		"CLOSE_CONNECTION": "Chiudi connessione",
+		"NO_MICROPHONE": "T.NO_MICROPHONE",
+		"LOADING_H2": "T.LOADING_H2",
+		"LOADING_P": "T.LOADING_P"
 	},
 	"T_LANGUAGES": {
 		"T_LANGUAGES": "Lingue del turista",

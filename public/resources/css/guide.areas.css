@@ -28,11 +28,22 @@ html, body {
 
 
 .front{
+    /*
+    margin-left: calc(100vw / 2 - 550px / 2);
+    margin-right: calc(100vw / 2 - 550px / 2);
+
+
     padding-left: 80px;
     right: 40px;
+    */
     position: fixed;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
     bottom: 14px;
     width: 100%;
+    max-width: 600px;
     z-index: 1;
 }
 .center-button{
@@ -100,6 +111,15 @@ html, body {
         margin-top: 50px
     }
 }
+@media (max-width: 600px) {
+    .front{
+        margin-right:  45px;
+        padding-left:  90px;
+    }
+}
+
+
+
 
 
 .infoButton{

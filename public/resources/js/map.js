@@ -17,6 +17,7 @@ var greenMarker;
 var blueMarker;
 
 
+
 /*user position marker */
 var symbolLeft = {
     path: 'M10.5,0L10.5,22.4L0,30L10.5,0',
@@ -460,6 +461,7 @@ function sendTouristLocationOrientation(){
 function updateTouristLocationOrientation(){
     getOrientation();
     getGEOLocation();
+    centerAndResize();
 }
 
 //TODO do... and in .connection.js as well

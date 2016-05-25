@@ -45,27 +45,25 @@ block content
                 .desc-container
                     img.icon-desc(src='resources/images/icons/remove.png', draggable='false' )
                     p.img-text #{__('G_AREAS.REMOVE_DESCRIPTION')}
-    .top-controls
-        .row
-            .col-sm-12
+
                 //(id="top-controls")
-                .controls.controls-move(id="mapControls"  data-toggle='buttons-radio')
-                    .control.selected-control(id="mapControlPan")
-                        img.icon(src='resources/images/icons/pan.png', draggable='false')
-                        .p.description #{__('G_AREAS.PAN')}
+    .controls.controls-move(id="mapControls"  data-toggle='buttons-radio')
+        .control.selected-control(id="mapControlPan")
+            img.icon(src='resources/images/icons/pan.png', draggable='false')
+            .p.description #{__('G_AREAS.PAN')}
 
 
-                    .separator
-                    .control(id="mapControlAddCircles")
-                        img.icon(src='resources/images/icons/add.png', draggable='false' )
-                        .p.description #{__('G_AREAS.ADD')}
-                    .separator
-                    .control(id="mapControlRemoveCircles")
-                        img.icon(src='resources/images/icons/remove.png', draggable='false' )
-                        .p.description #{__('G_AREAS.REMOVE')}
-                .infoButton.info-move(id="mapInfos")
-                    .control(id="mapInfoOpener")
-                        img.icon(src='resources/images/icons/infoMap.png', draggable='false' )
+        .separator
+        .control(id="mapControlAddCircles")
+            img.icon(src='resources/images/icons/add.png', draggable='false' )
+            .p.description #{__('G_AREAS.ADD')}
+        .separator
+        .control(id="mapControlRemoveCircles")
+            img.icon(src='resources/images/icons/remove.png', draggable='false' )
+            .p.description #{__('G_AREAS.REMOVE')}
+    .infoButton.info-move(id="mapInfos")
+        .control(id="mapInfoOpener")
+            img.icon(src='resources/images/icons/infoMap.png', draggable='false' )
 
     .container.front
         .row

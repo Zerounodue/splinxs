@@ -12,6 +12,20 @@ var debug = require('debug')('test:server');
 var https = require('https');
 //var http = require('http');
 
+
+
+
+// set up plain http server
+//var http = express.createServer();
+
+var http = require('http');
+http.createServer(function (req, res) {
+  res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+  res.end();
+}).listen(80);
+
+
+
 /**
  * Get port from environment and store in Express.
  */

@@ -338,34 +338,36 @@ footer {
 /*modal dialog*/
 .modalDialog {
     position: fixed;
-    font-family: Arial, Helvetica, sans-serif;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(0,0,0,0.8);
+    background: rgba(255, 255, 255, 0.9);
     z-index: 99999;
     -webkit-transition: opacity 400ms ease-in;
     -moz-transition: opacity 400ms ease-in;
     transition: opacity 400ms ease-in;
 }
 
+
+
+
+.helpForm{
+    background-color: #f5f5f5;
+    border-radius: 15px;
+    max-width: 700px;
+    padding-top: 5px;
+    padding-bottom: 20px;
+    margin-top: 60px;
+    border: 2px;
+    border-style: solid;
+    border-color: #F2F2F2;
+}
+/*modal dialog*/
+
 .confirmContent {
     text-align: center;
 }
-
-.modalDialog > div {
-    width: 400px;
-    position: relative;
-    margin: 10% auto;
-    padding: 5px 20px 13px 20px;
-    border-radius: 10px;
-    background: #fff;
-    background: -moz-linear-gradient(#fff, #999);
-    background: -webkit-linear-gradient(#fff, #999);
-    background: -o-linear-gradient(#fff, #999);
-}
-/*modal dialog*/
 
 /* map */
 /*do not use #map, this will apply on all maps!!!!! use class */
@@ -397,6 +399,7 @@ footer {
     border: 0px;
     border-bottom: 3px solid #d8d8d8;
     border-radius: 5px;
+    box-shadow: 0px 0px 4px #d8d8d8;
 }
 
 .btn-green:hover {
@@ -404,6 +407,14 @@ footer {
     border-bottom: 3px solid #1e4d4d;
 	color: white;
 }
+
+
+.btn-status{
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0px 0px 4px #d8d8d8;
+}
+
 /*button*/
 .btn-green:focus,
 .btn-green:active,
@@ -461,3 +472,47 @@ footer {
         display: none;
     }
 }
+
+
+/* location icon */
+.leftIcon{
+    padding: 0;
+    padding-left: 10px;
+    position: fixed;
+    bottom: 100px;
+    width: 38px;
+    left: 0;
+    z-index: 1;
+}
+
+.rightIcon{
+    padding: 0;
+    padding-right: 10px;
+    position: fixed;
+    bottom: 90px;
+    width: 38px;
+    right: 0;
+    z-index: 1;
+}
+
+.get-gps{
+    float: right;
+    height: 28px;
+    width: 28px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+    border-radius: 2px;
+
+}
+
+.gps-image{
+    cursor: pointer;
+    padding: 4px;
+    height: inherit;
+    width: inherit;
+    opacity: 0.75;
+}
+.gps-image:hover{
+    opacity: 1;
+}
+/* location icon */

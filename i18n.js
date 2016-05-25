@@ -11,7 +11,9 @@ i18n.configure({
     // sets a custom cookie name to parse locale settings from  - defaults to NULL
     cookie: 'lang',
     //very important or hirarchy in json file doesn't work
-    objectNotation: true
+    objectNotation: true,
+    // query parameter to switch locale (ie. /home?lang=ch) - defaults to NULL
+    queryParameter: 'lang',
 });
 
 

@@ -59,7 +59,6 @@ function detectRTCcapabilities(){
         connectionState.DataChannel = connectionStates.DataChannel.SCTP;
         if(DetectRTC.hasMicrophone && DetectRTC.hasWebcam){
             connectionState.Media = connectionStates.Media.AudioVideo;
-            if (showLogs){console.warn("All ok");}
         }else{
             //debugger;
             if(DetectRTC.hasMicrophone){

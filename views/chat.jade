@@ -13,7 +13,7 @@ block content
         .panel.panel-primary
             .panel-heading
                 span.glyphicon.glyphicon-comment
-                |  #{texts.GENERAL.CHAT}
+                |  #{__('.GENERAL.CHAT')}
                 span#spn_isTyping.text-center
                 .btn-group.pull-right
                     button#btn_minimiseChat.btn.btn-default.btn-xs(type='button')
@@ -31,7 +31,7 @@ block content
                 ul#chat.chat
             .panel-footer(id="footerPanel")
                 .input-group
-                    input#inp_chat.form-control.input-sm(type='text', placeholder='#{texts.G.TYPE_MESSAGE}')
+                    input#inp_chat.form-control.input-sm(type='text', placeholder="#{__('.G.TYPE_MESSAGE')}")
                     span.input-group-btn
-                        button#btn_chat.btn.btn-warning.btn-sm #{texts.GENERAL.SEND}
+                        button#btn_chat.btn.btn-warning.btn-sm #{__('.GENERAL.SEND')}
 block foot

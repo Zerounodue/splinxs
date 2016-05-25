@@ -7,9 +7,9 @@ block append scripts
     script(src='resources/js/tourist.location.js')
 block content
     script.
-        var permissionError = '#{texts.T_LOCATION.PERMISSION_DENIED}';
-        var otherError = '#{texts.T_LOCATION.OTHER_ERROR}';
-        var tryAgainMessage = '#{texts.T_LOCATION.AUTO_GPS}';
+        var permissionError = "#{__('T_LOCATION.PERMISSION_DENIED')}";
+        var otherError = "#{__('T_LOCATION.OTHER_ERROR')}";
+        var tryAgainMessage = "#{__('T_LOCATION.AUTO_GPS')}";
     loadPopup.loadingPopup(id="loadPopup")
 
         // close the popup and stop trying getting position
@@ -17,19 +17,19 @@ block content
             .col-sm-12
                 a.back(href="/touristLanguages")
                     img.backArrow(src='resources/images/icons/backArrow.png', alt='back icon')
-                    | #{texts.GENERAL.BACK}
+                    | #{__('GENERAL.BACK')}
                 img.x(src='resources/images/icons/x.png', alt='close icon', id="img_loadClose")
         .row
             .col-sm-12
                 h2(style='text-align: center;')
-                    | #{texts.T_LOCATION.GETTING_GPS}
+                    | #{__('T_LOCATION.GETTING_GPS')}
                 .spinner
                     .bounce1
                     .bounce2
-                    .bounce3
+                    .bounce3    
                 div(style='text-align: center;')
-                    p #{texts.T_LOCATION.ADD_POS_MAN}
-                    a.btn.btn-default.btn-green.btn-map(id="btn_loadClose") #{texts.T_LOCATION.CLOSE}
+                    p #{__('T_LOCATION.ADD_POS_MAN')}
+                    a.btn.btn-default.btn-green.btn-map(id="btn_loadClose") #{__('T_LOCATION.CLOSE')}
     declinedPopup.loadingPopup(id="declinedPopup", hidden)
         .row
             .col-sm-12
@@ -38,11 +38,11 @@ block content
             .col-sm-12
 
                 div(style='text-align: center;')
-                    h2 #{texts.T_LOCATION.IMP_GET_GPS}
+                    h2 #{__('T_LOCATION.IMP_GET_GPS')}
                     //the div errorMessage will be filled from the JS file depending on the error
 
                     div#errorMessage
-                    a.btn.btn-default.btn-green.btn-map(id="btn_declinedClose") #{texts.T_LOCATION.OK}
+                    a.btn.btn-default.btn-green.btn-map(id="btn_declinedClose") #{__('T_LOCATION.OK')}
     infoPopup.loadingPopup(id="infoPopup", hidden)
         .row
             .col-sm-12
@@ -53,9 +53,9 @@ block content
         .row
             .col-sm-12
                 div(style='text-align: center;')
-                    h2 #{texts.T_LOCATION.ADD_POS}
-                    p #{texts.T_LOCATION.CLICK_MAP}, #{texts.T_LOCATION.GUIDE_WILL_HELP}
-                    a.btn.btn-default.btn-green.btn-map(id="btn_infoOk") #{texts.T_LOCATION.OK}
+                    h2 #{__('T_LOCATION.ADD_POS')}
+                    p #{__('T_LOCATION.CLICK_MAP')}, #{__('T_LOCATION.GUIDE_WILL_HELP')}
+                    a.btn.btn-default.btn-green.btn-map(id="btn_infoOk") #{__('T_LOCATION.OK')}
                     //the div tryAgain will be filled from the JS if permission is not denied
                     div#tryAgain
 
@@ -70,9 +70,9 @@ block content
         //img(src='resources/images/icons/orientation_small.png', alt='location', id="img_location")
         .row
             .col-sm-6.text-center
-                a.btn.btn-default.btn-white.btn-map-bottom(id="btn_info") #{texts.T_LOCATION.INFO}
+                a.btn.btn-default.btn-white.btn-map-bottom(id="btn_info") #{__('T_LOCATION.INFO')}
             .col-sm-6.text-center
-                a.btn.btn-default.btn-green.btn-map-bottom(id="btn_submit") #{texts.T_LOCATION.CONTINUE}
+                a.btn.btn-default.btn-green.btn-map-bottom(id="btn_submit") #{__('T_LOCATION.CONTINUE')}
     #map.touristMap
     script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&callback=initMap' async defer)
 block foot

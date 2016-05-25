@@ -3,26 +3,26 @@ center
   .container
     .loginRegisterForm
       img.s(src='resources/images/splinxsLogoS.png', alt='s')
-      h1.loginTitle #{texts.LOGIN.LOGIN}
+      h1.loginTitle #{__('LOGIN.LOGIN')}
       //p.lead __Say something worthwhile here.
-      p.lead #{texts.LOGIN.LOGIN_MESSAGE}
+      p.lead #{__('LOGIN.LOGIN_MESSAGE')}
       if loginError == "ERROR_MESSAGE"
         .alert.alert-green(role="alert")
-          |#{texts.LOGIN.ERROR_MESSAGE}
+          |#{__('LOGIN.ERROR_MESSAGE')}
 
       form.form-signin(role='form', action="/index",method="post", style='max-width: 300px;')
 
-        input.form-control.inputTop(maxlength="40" type='text', name="username", placeholder='#{texts.LOGIN.USERNAME}', required, autofocus, value='#{username ? username : ""}')
-        input.form-control.inputBottom(maxlength="40" type='password', name="password", placeholder='#{texts.LOGIN.PASSWORD}', required)
+        input.form-control.inputTop(maxlength="40" type='text', name="username", placeholder="#{__('LOGIN.USERNAME')}", required, autofocus, value='#{username ? username : ""}')
+        input.form-control.inputBottom(maxlength="40" type='password', name="password", placeholder="#{__('LOGIN.PASSWORD')}", required)
         .row.row-login
           .col-xs-6
-            button.btn.btn-green.btn-login(type='submit') #{texts.LOGIN.LOGIN}
+            button.btn.btn-green.btn-login(type='submit') #{__('LOGIN.LOGIN')}
           .col-xs-6
-            a#btn-close-login.btn.btn-white.btn-login #{texts.GENERAL.CANCEL}
+            a#btn-close-login.btn.btn-white.btn-login #{__('GENERAL.CANCEL')}
         .row
           .col-xs-6
-            a(href="/guidePassword") #{texts.LOGIN.FORGOT}
+            a(href="/guidePassword") #{__('LOGIN.FORGOT')}
           .col-xs-6
-            a#a-register #{texts.LOGIN.SIGN_UP}
+            a#a-register #{__('LOGIN.SIGN_UP')}
             //a(href="/register") __Sign up now!
 

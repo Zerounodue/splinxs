@@ -44,15 +44,15 @@ html
               block navbarli
               li.dropdown
                 a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                  | #{texts.MENU.LANGUAGES}
+                  | #{__('MENU.LANGUAGES')}
                   span.caret
                 ul.dropdown-menu
                   li
-                    a(href='?clang=en' ) #{texts.LANGUAGES.ENGLISH}
+                    a(onclick="document.cookie = 'lang=en'" href="" ) #{__('LANGUAGES.ENGLISH')}
                   li
-                    a(href='?clang=de') #{texts.LANGUAGES.GERMAN}
+                    a(onclick="document.cookie = 'lang=de'" href="") #{__('LANGUAGES.GERMAN')}
                   li
-                    a(href='?clang=it') #{texts.LANGUAGES.ITALIAN}
+                    a(onclick="document.cookie = 'lang=it'" href="") #{__('LANGUAGES.ITALIAN')}
     block content
     block foot
       #footer

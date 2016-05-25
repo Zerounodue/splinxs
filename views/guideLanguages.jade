@@ -14,22 +14,22 @@ block content
     center
         a.back(id="backArrow" href="/")
             img.backArrow(src='resources/images/icons/backArrow.png', alt='back icon')
-            #backText #{texts.GENERAL.BACK}
-        h2(style="display: inline;") #{texts.G_LANGUAGES.TITLE}
+            #backText #{__('GENERAL.BACK')}
+        h2(style="display: inline;") #{__('G_LANGUAGES.TITLE')}
         .centerForm
             //form(id="frm_languages" method="post" action="/guideLanguages")
             //- var nativeNames = langs.getAllNativeNames()
             - var codes = langs.getAllCodes()
             script.
               languages = !{JSON.stringify(savedLangs)};
-            p #{texts.G_LANGUAGES.LANGUAGES_INTRO}
+            p #{__('G_LANGUAGES.LANGUAGES_INTRO')}
 
             .row
                 .col-sm-12
-                    input.form-control.datalist(id="inp_languages" type="text" list="languages" placeholder="#{texts.G_LANGUAGES.SEARCH}")
+                    input.form-control.datalist(id="inp_languages" type="text" list="languages" placeholder="#{__('G_LANGUAGES.SEARCH')}")
                     datalist.datalist(id='languages')
                         select.form-control(id="sel_languages")
-                            option(value='', disabled='', selected='') #{texts.G_LANGUAGES.OPTIONS}
+                            option(value='', disabled='', selected='') #{__('G_LANGUAGES.OPTIONS')}
                             each code, index in codes
                                 option(code='' + code + '' value='' + langs.getNativeName(code) + '') #{langs.getNativeName(code)}
             .row
@@ -39,4 +39,4 @@ block content
                     //if user is logged in => guides
             .row
                 .col-sm-12
-                    button.btn.btn-primary.btn-send(id='btn_sendLanguages') #{texts.G_LANGUAGES.SEND}
+                    button.btn.btn-primary.btn-send(id='btn_sendLanguages') #{__('G_LANGUAGES.SEND')}

@@ -78,7 +78,7 @@ block content
                     h2(style='text-align: center;') __Controls
 
             //button#btn_joinConnection(type='button') __join connection
-            button#btn_closeConnection(type='button', hidden='') #{texts.T.CLOSE_CONNECTION}
+            button#btn_closeConnection(type='button', hidden='') #{__('T.CLOSE_CONNECTION')}
             br
             #audioControlsBox(hidden='')
                 //button#btn_startAudio(type='button') __start audio
@@ -100,7 +100,7 @@ block content
                             img.chatLeftIcon(src='resources/images/icons/chatWhite.png', alt='chat')
 
                             //span#spn_isTyping.text-center.message
-                            //#{texts.GENERAL.CHAT}
+                            //#{__('GENERAL.CHAT')}
                             .spinnerChat(hidden)
                                 .bounceChat1
                                 .bounceChat2
@@ -110,7 +110,7 @@ block content
                             img.chatRightIcon(src='resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")
                 //
                   span.glyphicon.glyphicon-comment
-                  |  #{texts.GENERAL.CHAT}
+                  |  #{__('GENERAL.CHAT')}
                   span#spn_isTyping.text-center
 
                     img(src='resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")
@@ -130,9 +130,9 @@ block content
                     ul#chat.chat
                 .panel-footer(id="footerPanel")
                     .input-group
-                        input#inp_chat.form-control.input-sm(type='text', placeholder='#{texts.G.TYPE_MESSAGE}')
+                        input#inp_chat.form-control.input-sm(type='text', placeholder="#{__('G.TYPE_MESSAGE')}")
                         span.input-group-btn
-                            button#btn_chat.btn.btn-sm #{texts.GENERAL.SEND}
+                            button#btn_chat.btn.btn-sm #{__('GENERAL.SEND')}
           // </div>
         audio#audioPlayer
         #hammerVideo(hidden)

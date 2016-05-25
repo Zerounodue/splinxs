@@ -2,7 +2,7 @@
  * Created by Zerododici on 19.04.16.
  */
 var ISO6391 = require('iso-639-1');
-var i18n = require("i18n-express");
+//var i18n = require("i18n-express");
 
 this.redirectHome = function(res){
     res.redirect('/');
@@ -15,24 +15,24 @@ this.redirectGuide = function(res){
 this.renderGuide = function(res){
     var texts = res.req.i18n_texts;
     var name = res.req.session.username;
-    res.render('guide', {title: texts.GENERAL.GUIDE, name: name});
+    res.render('guide', {title: res.__('GENERAL.GUIDE'), name: name});
 };
 
 this.renderGuideLangs = function(res, sLangs){
     var texts = res.req.i18n_texts;
     if(typeof sLangs === 'undefined' || sLangs === null) sLangs = [];
-    res.render('guideLanguages', {title: texts.G_LANGUAGES.TITLE, langs: ISO6391, savedLangs: sLangs});
+    res.render('guideLanguages', {title: res.__('G_LANGUAGES.TITLE'), langs: ISO6391, savedLangs: sLangs});
 };
 
 this.renderGuideAreas = function(res, sAreas){
     var texts = res.req.i18n_texts;
     if(typeof sAreas === 'undefined' || sAreas === null) sAreas = [];
-    res.render('guideAreas', {title: texts.G_AREAS.G_AREAS, savedAreas: sAreas});
+    res.render('guideAreas', {title: res.__('G_AREAS.G_AREAS'), savedAreas: sAreas});
 };
 
 this.renderGuidePW = function(res){
     var texts = res.req.i18n_texts;
-    res.render('guidePassword', {title: texts.G_PASSWORD.G_PASSWORD});
+    res.render('guidePassword', {title: res.__('G_PASSWORD.G_PASSWORD')});
 };
 
 this.usableString = function(s){
@@ -152,17 +152,17 @@ this.redirectTourist = function(res){
 this.renderTouristSite = function(res){
     var texts = res.req.i18n_texts;
     var name = res.req.session.username;
-    res.render('tourist', {title: texts.GENERAL.TOURIST, name: name});
+    res.render('tourist', {title: res.__('GENERAL.TOURIST'), name: name});
 };
 
 this.renderTouristLanguages = function(res, codes){
     var texts = res.req.i18n_texts;
-    res.render('touristLanguages', {title: texts.T_LANGUAGES, langs: ISO6391, codes:codes});
+    res.render('touristLanguages', {title: res.__('T_LANGUAGES.T_LANGUAGES'), langs: ISO6391, codes:codes});
 };
 
 this.renderTouristLocation = function(res){
     var texts = res.req.i18n_texts;
-    res.render('touristLocation', {title: texts.T_LOCATION});
+    res.render('touristLocation', {title: res.__('T_LOCATION.T_LOCATION')});
 };
 
 this.logout = function(res){

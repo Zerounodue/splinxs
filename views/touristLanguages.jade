@@ -16,9 +16,9 @@ block content
     center
         a.back(id="backArrow" href="/")
             img.backArrow(src='resources/images/icons/backArrow.png', alt='back icon')
-            #backText #{texts.GENERAL.BACK}
-        h2(style="display: inline;") #{texts.T_LANGUAGES.SPOKEN_LANGUAGES}
-        p #{texts.T_LANGUAGES.LANGUAGES_INTRO}
+            #backText #{__('GENERAL.BACK')}
+        h2(style="display: inline;") #{__('T_LANGUAGES.SPOKEN_LANGUAGES')}
+        p #{__('T_LANGUAGES.LANGUAGES_INTRO')}
 
         .centerForm
 
@@ -45,7 +45,7 @@ block content
 
                     .row(id="div_" + code + "",style="display: none;"   )
                         .col-xs-6.skillText
-                            |#{texts.T_LANGUAGES.SKILL}:
+                            |#{__('T_LANGUAGES.SKILL')}:
                         .col-xs-6
                             div.div-radio(  data-toggle='buttons')
 
@@ -87,4 +87,4 @@ block content
             br
             br
             //if user is logged in => guide
-            button.btn.btn-primary.btn-send(id='btn_sendLanguages') #{texts.T_LANGUAGES.SEND}
+            button.btn.btn-primary.btn-send(id='btn_sendLanguages') #{__('T_LANGUAGES.SEND')}

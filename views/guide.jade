@@ -27,7 +27,7 @@ block append scripts
             //var DetectRTC = require('detectrtc');
             DetectRTC.load(function () {
                 if (!(DetectRTC.browser.isChrome || DetectRTC.browser.isFirefox || DetectRTC.browser.isOpera)) {
-                    alert("#{texts.ERROR.CRAPPY_BROWSER_GUIDE}");
+                    alert("#{__('ERROR.CRAPPY_BROWSER_GUIDE')}");
                     window.location = "/logout";
                     return;
                 }
@@ -36,7 +36,7 @@ block append scripts
                 //does not seem to work
                 // it works, when it does not work, it causes also other trubles
                 if (!DetectRTC.hasMicrophone) {
-                    alert("#{texts.ERROR.NO_MICROPHONE}");
+                    alert("#{__('ERROR.NO_MICROPHONE')}");
                     //window.location="/logout";
                     //return;
                 }
@@ -69,18 +69,18 @@ block append navbarli
     li
         a#guideControlsBtn __controls
     li
-        a(href="/logout" id="a_logout") #{texts.MENU.LOGOUT}
+        a(href="/logout" id="a_logout") #{__('MENU.LOGOUT')}
     li.dropdown
         a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-            | #{texts.MENU.SETTINGS}
+            | #{__('MENU.SETTINGS')}
             span.caret
         ul.dropdown-menu
             li
-                a(href="/guideLanguages" id="a_guideLanguages") #{texts.MENU.CHANGE_LANGUAGES}
+                a(href="/guideLanguages" id="a_guideLanguages") #{__('MENU.CHANGE_LANGUAGES')}
             li
-                a(href="/guideAreas" id="a_guideAreas") #{texts.MENU.CHANGE_AREAS}
+                a(href="/guideAreas" id="a_guideAreas") #{__('MENU.CHANGE_AREAS')}
             li
-                a(href="/guidePassword" id="a_guidePassword") #{texts.MENU.CHANGE_PASSWORD}
+                a(href="/guidePassword" id="a_guidePassword") #{__('MENU.CHANGE_PASSWORD')}
             li
                 a(href) __set available
 
@@ -93,7 +93,7 @@ block content
             .col-sm-12
                 h2(style='text-align: center;') __Controls
 
-        button#btn_closeConnection(type='button', hidden) #{texts.G.CLOSE_CONNECTION}
+        button#btn_closeConnection(type='button', hidden) #{__('G.CLOSE_CONNECTION')}
         br
         #audioControlsBox(hidden='')
             //button#btn_startAudio(type='button') __start audio
@@ -108,9 +108,9 @@ block content
         span __state:
         span(id="spn_state") __available
         br
-        button(id='btn_available', type="button") #{texts.G.AVAILABLE}
+        button(id='btn_available', type="button") #{__('G.AVAILABLE')}
         br
-        button(id='btn_unavailable', type="button") #{texts.G.UNAVAILABLE}
+        button(id='btn_unavailable', type="button") #{__('G.UNAVAILABLE')}
         br
 
     //
@@ -149,13 +149,13 @@ block content
                             .bounceChat1
                             .bounceChat2
                             .bounceChat3
-                        //#{texts.GENERAL.CHAT}
+                        //#{__('GENERAL.CHAT')}
 
 
                         img.chatRightIcon(src='resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")
             //
               span.glyphicon.glyphicon-comment
-              |  #{texts.GENERAL.CHAT}
+              |  #{__('GENERAL.CHAT')}
               span#spn_isTyping.text-center
 
                 img(src='resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")
@@ -175,16 +175,16 @@ block content
                 ul#chat.chat
             .panel-footer(id="footerPanel")
                 .input-group
-                    input#inp_chat.form-control.input-sm(type='text', placeholder='#{texts.G.TYPE_MESSAGE}')
+                    input#inp_chat.form-control.input-sm(type='text', placeholder="#{__('G.TYPE_MESSAGE')}")
                     span.input-group-btn
-                        button#btn_chat.btn.btn-sm #{texts.GENERAL.SEND}
+                        button#btn_chat.btn.btn-sm #{__('GENERAL.SEND')}
         // </div>
 
     // <div id="confirmDiv">
     #modalDialog.modalDialog(hidden)
         p#modalContent
-        button#modalNo #{texts.GENERAL.NO}
-        button#modalYes #{texts.GENERAL.YES}
+        button#modalNo #{__('GENERAL.NO')}
+        button#modalYes #{__('GENERAL.YES')}
 
     // </div>
     audio#audioPlayer
@@ -201,7 +201,7 @@ block content
 block foot
     //
         div(id="smallChat", class="smallChat", hidden)
-            img#smallChatImg.smallChatImg(src='resources/images/smallChat.png', alt='#{texts.GENERAL.CHAT}')
-            span#smallChatText.smallChatText #{texts.GENERAL.CHAT}
+            img#smallChatImg.smallChatImg(src='resources/images/smallChat.png', alt="#{__('GENERAL.CHAT')}")
+            span#smallChatText.smallChatText #{__('GENERAL.CHAT')}
             img.smallChatUp(src='resources/images/arrowUp.png', alt='up')
 

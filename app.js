@@ -1,8 +1,8 @@
 var express = require('express'),
 	session = require('express-session'), //session (required also for i18n)
-	geolang=require("geolang-express"), //i18n
-    socket_io = require('socket.io'),
-	i18n=require("i18n-express");//i18n
+    i18n = require('./i18n');
+    socket_io = require('socket.io')
+
 	//enforce = require('express-sslify'); //for redirect everything to ssh
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -20,6 +20,9 @@ var LocalStrategy = require('passport-local').Strategy;
 var app = express();
 var io = socket_io();
 app.io = io;
+
+
+
 
 
 
@@ -112,36 +115,16 @@ app.io.use(function(socket, next) {
 app.use(sessionMiddleware);
 
 
-//routes
-var routes = require('./routes/index');
-var tourist = require('./routes/tourist');
-var guide = require('./routes/guide');
 
 
 // use HTTPS(true) in case you are behind a load balancer (e.g. Heroku) 
 //app.use(enforce.HTTPS());
 
-//geolang
-app.use(geolang({
-  siteLangs: ["en","it","de"],
-  cookieLangName: 'ulang'
-}));
-//
-
-//i18N
-
-app.use(i18n({
-  translationsPath: path.join(__dirname, 'i18n'), // <--- use here. Specify translations files path. 
-  siteLangs: ["en","it","de"],
-  cookieLangName: 'ulang'
-}));
-
-//
 
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+
+
+
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -154,6 +137,25 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+
+
+
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+app.use(i18n);
+
+
+
+//routes
+var routes = require('./routes/index');
+var tourist = require('./routes/tourist');
+var guide = require('./routes/guide');
+
+
 
 //new for mongo db
 app.use(passport.initialize());
@@ -193,6 +195,7 @@ db.on("error", console.error.bind(console, "connection error"));
 db.once("open", function (callback) {
     console.log("Connection succeeded.");
 });
+
 
 
 app.use('/', routes);

@@ -25,7 +25,10 @@ block append scripts
             DetectRTC.load(function () {
                 detectRTCcapabilities();
                 if (!DetectRTC.hasMicrophone) {
-                    alert("__You have no microphone");
+                    alert("#{__('T.NO_MICROPHONE')}");
+
+
+
                 }
                 initSplinxs();
                 //false because he is not a guide
@@ -47,7 +50,9 @@ block append navbarli
 
 block content
     #loadBox.load(hidden='')
-        p __bla bla bla... Loading...
+        h2 #{__('T.LOADING_H2')}
+
+        p #{__('T.LOADING_P')}
         #load1.loadDot
         #load2.loadDot
         #load3.loadDot

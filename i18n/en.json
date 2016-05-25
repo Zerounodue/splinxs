@@ -108,7 +108,11 @@
         "USERNAME_TAKEN": "Username already taken"
     },
     "T":{
-        "CLOSE_CONNECTION": "Close connection"
+        "CLOSE_CONNECTION": "Close connection",
+        "NO_MICROPHONE": "You have no microphone",
+        "LOADING_H2": "Searching for guides",
+        "LOADING_P": "This might take a while..."
+
     },
     "T_LANGUAGES":{
         "T_LANGUAGES": "Tourist Languages",

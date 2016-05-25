@@ -217,8 +217,9 @@ footer {
 */
 /* chatbox */
 
-/*loading animation*/
 
+
+/*loading animation*/
 .load {
     width: 100%;
     height: 50%;
@@ -227,10 +228,10 @@ footer {
     opacity: 1;
 }
 .loadDot {
-    width: calc(100vw / 7);
-    height: calc(100vw / 7);
+    width: calc(100vw / 4);
+    height: calc(100vw / 12);
     float: left;
-    margin-left: calc(100vw / 7);
+    margin-left: calc( 100vw / 16);
 }
 
 #load-1::before{
@@ -238,62 +239,101 @@ footer {
 }
 #load1 {
     background: #2585C4;
-    animation: loadAnimation 3s linear infinite;
+    animation: loadAnimation1 3s linear infinite;
 }
 #load-2::before{
     content: "\200B";
 }
 #load2 {
-    animation: loadAnimation 3s linear infinite;
-    animation-delay: 1s;
+    animation: loadAnimation2 3s linear infinite;
     background: #31C6C7;
 }
 #load-3::before{
     content: "\200B";
 }
 #load3 {
-    animation: loadAnimation 3s linear infinite;
-    animation-delay: 2s;
+    animation: loadAnimation3 3s linear infinite;
     background: #28B294;
 }
 
-@keyframes loadAnimation {
-    0% {
-        opacity: 1;
-    }
-    35% {
-        opacity : 0.0;
-    }
-    100% {
-        opacity : 0.0;
-    }
+/* Chrome - Safari - Opera*/
+@-webkit-keyframes loadAnimation1 {
+    0% { opacity: 0; }
+    16% {opacity : 1;}
+    50% {opacity : 1;}
+    66% {opacity : 0;}
+    100% {opacity : 0;}
+}
+@-webkit-keyframes loadAnimation2 {
+    0% {opacity: 0;}
+    16% {opacity : 0;}
+    33% {opacity : 1;}
+    66% {opacity : 1;}
+    83% {opacity : 0;}
+    100% {opacity : 0;}
+}
+@-webkit-keyframes loadAnimation3 {
+    0% {opacity: 0;}
+    33% {opacity: 0;}
+    50% {opacity: 1;}
+    83% {opacity : 1;}
+    100% {opacity : 0;}
 }
 
-@-webkit-keyframes loadAnimation {
-    0% {
-        opacity: 1;
-    }
-    35% {
-        opacity : 0.0;
-    }
-    100% {
-        opacity : 0.0;
-    }
+
+/* Firefox */
+
+@-moz-keyframes loadAnimation1 {
+    0% { opacity: 0; }
+    16% {opacity : 1;}
+    50% {opacity : 1;}
+    66% {opacity : 0;}
+    100% {opacity : 0;}
+}
+@-moz-keyframes loadAnimation2 {
+    0% {opacity: 0;}
+    16% {opacity : 0;}
+    33% {opacity : 1;}
+    66% {opacity : 1;}
+    83% {opacity : 0;}
+    100% {opacity : 0;}
+}
+@-moz-keyframes loadAnimation3 {
+    0% {opacity: 0;}
+    33% {opacity: 0;}
+    50% {opacity: 1;}
+    83% {opacity : 1;}
+    100% {opacity : 0;}
 }
 
-@-moz-keyframes loadAnimation {
-    0% {
-        opacity: 1;
-    }
-    35% {
-        opacity : 0.0;
-    }
-    100% {
-        opacity : 0.0;
-    }
-}
+/* IE - Edge */
 
+@keyframes loadAnimation1 {
+    0% { opacity: 0; }
+    16% {opacity : 1;}
+    50% {opacity : 1;}
+    66% {opacity : 0;}
+    100% {opacity : 0;}
+}
+@keyframes loadAnimation2 {
+    0% {opacity: 0;}
+    16% {opacity : 0;}
+    33% {opacity : 1;}
+    66% {opacity : 1;}
+    83% {opacity : 0;}
+    100% {opacity : 0;}
+}
+@keyframes loadAnimation3 {
+    0% {opacity: 0;}
+    33% {opacity: 0;}
+    50% {opacity: 1;}
+    83% {opacity : 1;}
+    100% {opacity : 0;}
+}
 /*loading animation*/
+
+
+
 
 /*modal dialog*/
 .modalDialog {

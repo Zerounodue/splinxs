@@ -1,6 +1,6 @@
 var express = require('express'),
 	session = require('express-session'), //session (required also for i18n)
-    i18n = require('./i18n');
+    i18n = require('./i18n'); //mashpie i18n-node module https://github.com/mashpie/i18n-node/
     socket_io = require('socket.io')
 
 	//enforce = require('express-sslify'); //for redirect everything to ssh

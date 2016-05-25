@@ -369,7 +369,7 @@ footer {
 .btn-green:active,
 .btn-green:active:focus,
 .btn-green:active:hover{
-    background-color: #1e5b5b;;
+    background-color: #1e5b5b;
     border-bottom: 3px solid #1e4d4d;
 	color: white;
 }

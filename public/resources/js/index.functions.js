@@ -88,7 +88,8 @@ $(document).ready(function () {
     });
     $("#btn-ok-close").on('click', function(e){
         if(showLogs) console.log('ok btn clicked');
-        okPopup.hide(animDur);
+        okPopup.hide(0);
+        loginPopup.show(0);
     });
     $("#x-ok-img").on('click', function(e){
         if(showLogs) console.log('x btn clicked');

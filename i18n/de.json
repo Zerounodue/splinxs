@@ -94,13 +94,16 @@
     },
     "REGISTER": {
         "BACK": "Zurück zum Login",
+        "COMPLETE": "Registrierung erfolgreich",
         "E-MAIL": "E-Mail",
         "EMAIL_TAKEN": "Email bereits verwendet",
         "FORGOT": "Passwort vergessen?",
+        "H3MESSAGE": "Du bist jetzt eine offizielle Splinx Guide!",
         "PASSWORT": "Passwort",
         "R_PASSWORD": "Passwort wiederholen",
         "REGISTER": "Registrieren",
         "SIGN_UP_MESSAGE": "Registriere dich um ein Splinx Guide zu werden",
+        "THANKYOUMESSAGE": "Du kannst dich einlogge und sofot starten Touristen in der not zu helfen",
         "USERNAME": "Benutzername",
         "USERNAME_TAKEN": "Benutzername bereits verwendet"
     },

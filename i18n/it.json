@@ -94,13 +94,16 @@
     },
     "REGISTER": {
         "BACK": "Torna al login",
+        "COMPLETE": "Registrazione completata",
         "EMAIL": "Email",
         "EMAIL_TAKEN": "Email utente già in uso",
         "FORGOT": "Password dimenticata?",
+        "H3MESSAGE": "Ora sei una guida Splinxs ufficiale",
         "PASSWORD": "Password",
         "R_PASSWORD": "Ripeti password",
         "REGISTER": "Registarti",
         "SIGN_UP_MESSAGE": "Registrati e divanta una guida Splinxs",
+        "THANKYOUMESSAGE": "Adesso puoi effettuare il login e iniziare a aiutare turisti bisognosi",
         "USERNAME": "Username",
         "USERNAME_TAKEN": "Nome utente già in uso"
     },

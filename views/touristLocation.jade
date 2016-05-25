@@ -29,7 +29,7 @@ block content
                     .bounce3    
                 div(style='text-align: center;')
                     p #{__('T_LOCATION.ADD_POS_MAN')}
-                    a.btn.btn-default.btn-green.btn-map(id="btn_loadClose") #{__('T_LOCATION.CLOSE')}
+                    a.btn.btn-default.btn-blue.btn-map(id="btn_loadClose") #{__('T_LOCATION.CLOSE')}
     declinedPopup.loadingPopup(id="declinedPopup", hidden)
         .row
             .col-sm-12
@@ -42,7 +42,7 @@ block content
                     //the div errorMessage will be filled from the JS file depending on the error
 
                     div#errorMessage
-                    a.btn.btn-default.btn-green.btn-map(id="btn_declinedClose") #{__('T_LOCATION.OK')}
+                    a.btn.btn-default.btn-blue.btn-map(id="btn_declinedClose") #{__('T_LOCATION.OK')}
     infoPopup.loadingPopup(id="infoPopup", hidden)
         .row
             .col-sm-12
@@ -55,7 +55,7 @@ block content
                 div(style='text-align: center;')
                     h2 #{__('T_LOCATION.ADD_POS')}
                     p #{__('T_LOCATION.CLICK_MAP')}, #{__('T_LOCATION.GUIDE_WILL_HELP')}
-                    a.btn.btn-default.btn-green.btn-map(id="btn_infoOk") #{__('T_LOCATION.OK')}
+                    a.btn.btn-default.btn-blue.btn-map(id="btn_infoOk") #{__('T_LOCATION.OK')}
                     //the div tryAgain will be filled from the JS if permission is not denied
                     div#tryAgain
 
@@ -72,7 +72,7 @@ block content
             .col-sm-6.text-center
                 a.btn.btn-default.btn-white.btn-map-bottom(id="btn_info") #{__('T_LOCATION.INFO')}
             .col-sm-6.text-center
-                a.btn.btn-default.btn-green.btn-map-bottom(id="btn_submit") #{__('T_LOCATION.CONTINUE')}
+                a.btn.btn-default.btn-blue.btn-map-bottom(id="btn_submit") #{__('T_LOCATION.CONTINUE')}
     #map.touristMap
     script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&callback=initMap' async defer)
 block foot

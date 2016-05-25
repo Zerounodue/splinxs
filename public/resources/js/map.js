@@ -12,10 +12,30 @@ var markerCount = 0;
 var userMarker = null;
 var touristPos = {lat: 0, lng: 0};
 var touristOrient = 0;
-
+var touristPosMarker;
 var greenMarker;
 var blueMarker;
 
+
+/*user position marker */
+var symbolLeft = {
+    path: 'M10.5,0L10.5,22.4L0,30L10.5,0',
+    strokeColor: '#2485c4',
+    fillColor: '#2485c4',
+    fillOpacity: 1,
+    scale:1,
+    rotation:0
+};
+var symbolRight = {
+    path: 'M10.5,0L10.5,22.4L21,30L10.5,0',
+    strokeColor: '#175278',
+    fillColor: '#175278',
+    fillOpacity: 1,
+    scale:1,
+    rotation:0
+};
+var line;
+/*user position marker */
 
 //var defaultLocation = {lat: 46.947248, lng: 7.451586}; //Bern
 //Bundesplatz Bern
@@ -132,7 +152,6 @@ function addTouristsMarker(id, position){
 function addGuidesMarker(id, position){
     if(showLogs) console.log('add guide marker');
 
-
     var marker = new google.maps.Marker({
         position: position,
         map: map,
@@ -186,7 +205,29 @@ function removeMarker(id) {
  */
 function setTouristLocation(pos){
     if(showLogs) console.log('tourist location lat: ' + pos.lat + ' lng: ' + pos.lng);
-    userMarker.setPosition(pos);
+    touristPos=pos;
+    //line.path=[pos, pos];
+
+    //line.setMap(null);
+    //line.setMap(map);
+
+    //userMarker.setPosition(pos);
+    line.setMap(null);
+    line=null;
+    line = new google.maps.Polyline({
+        path: [pos, pos],
+        icons: [
+            {
+                icon: symbolLeft,
+                //offset: '0%'
+            }, {
+                icon: symbolRight,
+                //offset: '50%'
+            }
+        ],
+
+        map: map
+    });
 }
 /**
  * sets the orientataion of the tourist marker
@@ -194,9 +235,19 @@ function setTouristLocation(pos){
  */
 function setTouristOrientation(orient) {
     if(showLogs) console.log('tourist orientation: ' + orient);
-    userMarker.setMap(null);
-    userMarker.icon.rotation = orient;
-    userMarker.setMap(map);
+    //userMarker.setMap(null);
+    //touristPosMarker.rotation = 45;
+    symbolLeft.rotation=orient;
+    symbolRight.rotation=orient;
+
+
+    //line.setMap(null);
+    //line.setMap(map);
+    //line.icons=icons;
+    //line.map =map;
+    ////userMarker.icon= touristPosMarker;
+    //userMarker.icon.rotation=45;
+    //userMarker.setMap(map);
 }
 /**
  * adds the tourist's marker to the map
@@ -204,15 +255,46 @@ function setTouristOrientation(orient) {
  */
 function addTouristMarker(pos) {
     if(showLogs) console.log('add user marker');
-    userMarker = new google.maps.Marker({
-        position: pos,
-        icon: {
-            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
-            scale: 5,
-            rotation: 0
-        },
+    touristPos=pos;
+    /*
+    touristPosMarker = {
+        url: '/resources/images/icons/positionArrow.svg',
+        size: new google.maps.Size(42, 60),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(11, 15),
+        scaledSize: new google.maps.Size(21, 30),
+        rotation: 45
+
+    };
+    */
+    symbolLeft.origin= new google.maps.Point(0, 0);
+    symbolLeft.anchor= new google.maps.Point(11, 15);
+    symbolLeft.scaledSize= new google.maps.Size(21, 30);
+    symbolRight.origin= new google.maps.Point(0, 0);
+    symbolRight.anchor= new google.maps.Point(11, 15);
+    symbolRight.scaledSize= new google.maps.Size(21, 30);
+    // Create the polyline and add the symbols via the 'icons' property.
+     line = new google.maps.Polyline({
+        path: [pos, pos],
+        icons: [
+            {
+                icon: symbolLeft,
+                //offset: '0%'
+            }, {
+                icon: symbolRight,
+                //offset: '50%'
+            }
+        ],
+
         map: map
     });
+    /*
+    userMarker = new google.maps.Marker({
+        position: pos,
+        icons: symbolLeft,
+        map: map
+    });
+    */
 }
 /*
 function sendUpdateInterval(interval) {
@@ -304,8 +386,16 @@ function getGEOLocation() {
 
             sendTouristLocationOrientation();
             //map.setCenter(pos);
-        }, function () {
-            if(showLogs) console.warn('The Geolocation service failed');
+        }, function (error) { //error function
+            //user did not allow google maps
+            if(showLogs) console.log('The Geolocation service failed');
+            if (error.code == error.PERMISSION_DENIED){
+                if(showLogs) console.warn('Location: permission denied');
+            }
+            else{
+                if(showLogs) console.warn('Impossible get location');
+            }
+
         });
     } else {
         // Browser doesn't support Geolocation
@@ -399,5 +489,5 @@ function deleteAllMarkers() {
 
 function centerAndResize(){
     map.setCenter(touristPos);
-    map.setZoom(12);
+    map.setZoom(15);
 }

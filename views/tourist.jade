@@ -26,9 +26,6 @@ block append scripts
                 detectRTCcapabilities();
                 if (!DetectRTC.hasMicrophone) {
                     alert("#{__('T.NO_MICROPHONE')}");
-
-
-
                 }
                 initSplinxs();
                 //false because he is not a guide
@@ -147,6 +144,11 @@ block content
         .audioVideoControls
             img.videoIcon(src='resources/images/icons/videoOn.png', alt='video' id="ico_video", hidden)
             img.audioIcon(src='resources/images/icons/microphoneOn.png', alt='audio' id="ico_audio", hidden)
+        #locationIcon.container.leftIcon(hidden)
+            .row
+                .col-md-12(style="padding-left:0")
+                    a.get-gps(id="btn_gps_tourist")
+                        img.gps-image(src='resources/images/icons/gps.png', alt='gps', id="img_location")
 block foot
 //
     div(id="smallChat", class="smallChat", hidden)

@@ -3,8 +3,8 @@
     /*margin-bottom: 5px;*/
     padding-left: 5px;
     padding-right: 5px;
-    background-color: #28B294;
-    border-color: #2ba383;
+    background-color: #2585C4;
+    border-color: #2476b1;
     height:38px;
     padding-top:7px;
 
@@ -21,27 +21,30 @@
 .btn-checkbox-last{
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-    border-bottom: 3px solid #208b74;
+    border-bottom: 3px solid #2476b1;
     border-bottom-radius: 5px;
 }
 
 .btn-checkbox.hover,
-.btn-checkbox:hover,
+.btn-checkbox:hover{
+    background-color: #116494;
+    border-color: #115179;
+
+}
+
 .btn-checkbox.focus,
 .btn-checkbox:focus,
 .btn-checkbox:active,
 .btn-checkbox:active:focus,
-.btn-checkbox:active:hover,
 .btn-checkbox.active,
-.btn-checkbox.active:focus,
-.btn-checkbox.active:hover{
-    background-color: #22947b;
-    border-color: #22947b;
+.btn-checkbox.active:focus{
+    background-color: #115179;
+    border-color: #115179;
 
 }
 
 .btn-checkbox-last:hover{
-    border-bottom: 3px solid #208b74;
+    border-bottom: 3px solid #25669e;
     border-bottom-radius: 5px;
 }
 .col-xs-6{
@@ -61,9 +64,9 @@
     margin-bottom: 5px;
 }
 .btn-radio{
-    width: 33.3%;
-    background-color: #2cbebe;
-    border-color: #27aaaa;
+    width: 33.33%;
+    background-color: #1FA4C5;
+    border-color: #1e84a4;
 }
 
 .btn-radio.hover,
@@ -76,8 +79,8 @@
 .btn-radio.active,
 .btn-radio.active:focus,
 .btn-radio.active:hover{
-    background-color: #1e6d6d;
-    border-color: #1e6d6d;
+    background-color: #136579;
+    border-color: #104555;
 }
 
 
@@ -111,7 +114,9 @@
     width: 100%;
     height: 60px;
     font-size: 25px;
-    font-weight: 100;
-    border-bottom: 4px solid #2e6da4;
+    font-weight: 400;
     border-radius: 8px;
+    box-shadow: 0px 0px 20px #c7c7c7;
+    color: #2585C4;
 }
+

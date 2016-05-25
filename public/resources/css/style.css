@@ -384,6 +384,17 @@ footer {
 
 
 /*button*/
+
+.btn-blue{
+    font-weight: bold;
+    color: white;
+    background-color: #2585C4;
+    border: 0px;
+    border-bottom: 3px solid #25689d;
+    border-radius: 5px;
+    box-shadow: 0px 0px 4px #d8d8d8;
+}
+
 .btn-green{
 	font-weight: bold;
 	color: white;
@@ -391,6 +402,7 @@ footer {
 	border: 0px;
     border-bottom: 3px solid #208b74;
     border-radius: 5px;
+    box-shadow: 0px 0px 4px #d8d8d8;
 }
 .btn-white{
     font-weight: bold;
@@ -412,7 +424,7 @@ footer {
 .btn-status{
     width: 100%;
     max-width: 300px;
-    box-shadow: 0px 0px 4px #d8d8d8;
+
 }
 
 /*button*/
@@ -515,4 +527,5 @@ footer {
 .gps-image:hover{
     opacity: 1;
 }
+.md-scroll-mask { position: initial;}
 /* location icon */

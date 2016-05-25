@@ -105,6 +105,10 @@ function initTouristButtons(){
 
         $("#touristControls").hide(animDur);
     });
+
+    $("#btn_gps_tourist").on('click', function(e){
+        centerAndResize();
+    });
 }
 
 function muteAudio(){

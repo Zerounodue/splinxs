@@ -459,14 +459,12 @@ function connectionClosed() {
     deleteAllMarkers();
     hideVideo();
     hideAudioVideoIcons();
-    
+    showWaitingBox();
     stopStream();
     connection.alreadyOpened = false;
     
     //check again what the guide's browser is capable of
     detectRTCcapabilities();
-    //to help remember to set state to available
-    showGuideControls();
 }
 
 function closeConnection(){

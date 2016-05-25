@@ -8,6 +8,10 @@ var modalContent;
 var mapControls;
 var ico_audio;
 var ico_video;
+var waitingBox;
+
+
+
 
 //var showLogs=true;
 
@@ -26,34 +30,9 @@ function initGuideUI(){
     mapControls = $("#mapControls");
     ico_audio = $("#ico_audio");
     ico_video = $("#ico_video");
+    waitingBox = $("#waitingBox");
 
-    //set the confirmUnload to false, if the guide clicks on this links he knows he will leave the page
-    $("#a_logout").click(function (e) {
-        if(showLogs) console.log('logout a clicked');
-        setConfirmUnload(c2P);
-    });
-    $("#a_guideLanguages").click(function (e) {
-        if(showLogs) console.log('guideLanguages a clicked');
-        setConfirmUnload(c2P);
-    });
-    $("#a_guideAreas").click(function (e) {
-        if(showLogs) console.log('guideAreas a clicked');
-        setConfirmUnload(c2P);
-    });
-    $("#a_guidePassword").click(function (e) {
-        if(showLogs) console.log('guidePassword a clicked');
-        setConfirmUnload(c2P);
-    });
 
-    $("#btn_available").click(function (e) {
-        if(showLogs) console.log('btn available clicked');
-        setAvailable();
-    });
-
-    $("#btn_unavailable").click(function (e) {
-        if(showLogs) console.log('btn unavailable clicked');
-        setUnavailable();
-    });
 
     setConfirmUnload(true);
 
@@ -61,28 +40,26 @@ function initGuideUI(){
     initChat();
 
 
-    $("#guideControlsBtn").on('click', function(e){
-        if(showLogs) console.log('guideControlsBtn  button clicked');
-        $('.navbar-collapse').collapse('hide');
-        showGuideControls();
-    });
 
 
-    $("#btn_guideClose").on('click', function(e){
-        if(showLogs) console.log('guide close button clicked');
-        hideGuideControls();
-    });
 }
 
 function setAvailable(){
     guideSocketSendState(guideStates.available);
-    $("#spn_state").text("__available");
-    hideGuideControls();
+    $("#spn_stateU").hide();
+    $("#spn_stateA").show();
+
+    $("#btn_available").show();
+    $("#btn_unavailable").hide();
 }
 function setUnavailable(){
     guideSocketSendState(guideStates.unavailable);
-    $("#spn_state").text("__unavailable");
-    hideGuideControls();
+    $("#spn_stateA").hide();
+    $("#spn_stateU").show();
+
+    $("#btn_available").hide();
+    $("#btn_unavailable").show();
+
 }
 
 function showAudioVideoIcons(){
@@ -117,6 +94,14 @@ function showModalDialog(content) {
 function hideModalDialog(){
     modalDialog.hide();
 }
+function showWaitingBox(){
+    waitingBox.show();
+}
+
+function hideWaitingBox(){
+    waitingBox.hide();
+}
+
 
 function showTouristRequestsGuidePrompt(){
     console.log('torist in need of help!!!');
@@ -141,10 +126,13 @@ function initGuideButtons() {
 
     $("#modalYes").click(function () {
         if (showLogs) console.log('guide: modalYes button clicked');
+
         //send accepted to tourist
         guideAcceptsRequest();
         hideTouristRequestGuidePrompt();
+        hideWaitingBox();
         playSound(sounds.call_answer);
+
     });
 
     $("#modalNo").click(function () {
@@ -165,6 +153,53 @@ function initGuideButtons() {
         if (showLogs) console.log('closing connection');
         closeConnection();
     });
+
+
+    //set the confirmUnload to false, if the guide clicks on this links he knows he will leave the page
+    $("#a_logout").click(function (e) {
+        if(showLogs) console.log('logout a clicked');
+        setConfirmUnload(c2P);
+    });
+    $("#a_guideLanguages").click(function (e) {
+        if(showLogs) console.log('guideLanguages a clicked');
+        setConfirmUnload(c2P);
+    });
+    $("#a_guideAreas").click(function (e) {
+        if(showLogs) console.log('guideAreas a clicked');
+        setConfirmUnload(c2P);
+    });
+    $("#a_guidePassword").click(function (e) {
+        if(showLogs) console.log('guidePassword a clicked');
+        setConfirmUnload(c2P);
+    });
+
+    $("#btn_available").click(function (e) {
+        if(showLogs) console.log('btn available clicked');
+        setUnavailable();
+    });
+
+    $("#btn_unavailable").click(function (e) {
+        if(showLogs) console.log('btn unavailable clicked');
+        setAvailable();
+    });
+    $("#guideControlsBtn").on('click', function(e){
+        if(showLogs) console.log('guideControlsBtn  button clicked');
+        $('.navbar-collapse').collapse('hide');
+        showGuideControls();
+    });
+
+
+    $("#btn_guideClose").on('click', function(e){
+        if(showLogs) console.log('guide close button clicked');
+        hideGuideControls();
+    });
+
+    $("#btn_gps_guide").on('click', function(e){
+        centerAndResize();
+    });
+
+
+
     /*
     //---map controls to set update interval of tourist---
     $("#btn_updateIntervalOff").click(function (e) {

@@ -305,6 +305,7 @@ function showVideoOnlyGUI(){
  * shows the map
  */
 function showMap(){
+    $('#locationIcon').show();
     mapDiv.show();
     //map is not shown correctly, this will help
     resizeMap();
@@ -313,6 +314,7 @@ function showMap(){
  * hides the map
  */
 function hideMap(){
+    $('#locationIcon').hide();
     mapDiv.hide();
 }
 /**

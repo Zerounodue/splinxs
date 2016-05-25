@@ -106,12 +106,23 @@ block content
         br
         //TODO not needed, single button will be enough
         span __state:
-        span(id="spn_state") __available
+        //span(id="spn_state") __available
         br
-        button(id='btn_available', type="button") #{__('G.AVAILABLE')}
+        //button(id='btn_available', type="button") #{__('G.AVAILABLE')}
         br
-        button(id='btn_unavailable', type="button") #{__('G.UNAVAILABLE')}
+        //button(id='btn_unavailable', type="button") #{__('G.UNAVAILABLE')}
         br
+    #waitingBox
+        center
+            h1 #{__('G.ONLINE')}
+            h5 #{__('G.MESSAGE_H5')}
+            h3 #{__('G.STATUS')}
+                span(id="spn_stateA", style="color:#28B294") #{__('G.AVAILABLE')}
+                span(id="spn_stateU", style="color:red", hidden) #{__('G.UNAVAILABLE')}
+            .asdsa
+                button.btn.btn-green.btn-status(id='btn_available', type="button") #{__('G.CHANGE_STATUS')}
+                button.btn.btn-white.btn-status(id='btn_unavailable', type="button", style="display: none;") #{__('G.CHANGE_STATUS')}
+
 
     //
         main#content
@@ -182,9 +193,20 @@ block content
 
     // <div id="confirmDiv">
     #modalDialog.modalDialog(hidden)
-        p#modalContent
-        button#modalNo #{__('GENERAL.NO')}
-        button#modalYes #{__('GENERAL.YES')}
+        center(style="padding:10px")
+            .helpForm
+                h1 #{__('G.ATTENTION')}
+                p #{__('G.T_HELP_MESSAGE')}
+                .row(style="margin-top:20px")
+                    .col-md-6
+                        button#modalYes.btn.btn-green.btn-status(style="margin-bottom:10px;") #{__('GENERAL.YES')}
+                    .col-md-6
+                        button#modalNo.btn.btn-white.btn-status(style="margin-bottom:10px") #{__('GENERAL.NO')}
+
+
+
+
+
 
     // </div>
     audio#audioPlayer
@@ -196,6 +218,11 @@ block content
     .audioVideoControls
         img.videoIcon(src='resources/images/icons/videoOn.png', alt='video' id="ico_video", hidden)
         img.audioIcon(src='resources/images/icons/microphoneOn.png', alt='audio' id="ico_audio", hidden)
+    #locationIcon.container.leftIcon(hidden)
+        .row
+            .col-md-12(style="pagging-left:0")
+                a.get-gps(id="btn_gps_guide")
+                    img.gps-image(src='resources/images/icons/gps.png', alt='gps', id="img_location")
 
 //
 block foot
@@ -204,4 +231,6 @@ block foot
             img#smallChatImg.smallChatImg(src='resources/images/smallChat.png', alt="#{__('GENERAL.CHAT')}")
             span#smallChatText.smallChatText #{__('GENERAL.CHAT')}
             img.smallChatUp(src='resources/images/arrowUp.png', alt='up')
+
+
 

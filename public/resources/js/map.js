@@ -18,7 +18,8 @@ var blueMarker;
 
 
 //var defaultLocation = {lat: 46.947248, lng: 7.451586}; //Bern
-var defaultLocation = {lat: 0, lng: 0};
+//Bundesplatz Bern
+var defaultLocation = {lat: 46.947098, lng: 7.444146};
 
 //used to delay click to allow doubleclick
 var click_timeout;
@@ -300,8 +301,7 @@ function getGEOLocation() {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-            //stop watching (updating and trying to get the position) when the position is found
-            navigator.geolocation.clearWatch(watchID);
+
             sendTouristLocationOrientation();
             //map.setCenter(pos);
         }, function () {
@@ -395,4 +395,9 @@ function clearMarkers() {
 function deleteAllMarkers() {
     clearMarkers();
     markers = [];
+}
+
+function centerAndResize(){
+    map.setCenter(touristPos);
+    map.setZoom(12);
 }

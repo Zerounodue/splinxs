@@ -48,11 +48,11 @@ html
                   span.caret
                 ul.dropdown-menu
                   li
-                    a(onclick="document.cookie = 'lang=en'" href="" ) #{__('LANGUAGES.ENGLISH')}
+                    a(href="?lang=en") #{__('LANGUAGES.ENGLISH')}
                   li
-                    a(onclick="document.cookie = 'lang=de'" href="") #{__('LANGUAGES.GERMAN')}
+                    a(href="?lang=de") #{__('LANGUAGES.GERMAN')}
                   li
-                    a(onclick="document.cookie = 'lang=it'" href="") #{__('LANGUAGES.ITALIAN')}
+                    a(href="?lang=it") #{__('LANGUAGES.ITALIAN')}
     block content
     block foot
       #footer

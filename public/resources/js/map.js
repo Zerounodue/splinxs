@@ -384,6 +384,7 @@ function getGEOLocation() {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
+            touristOrient = position.coords.heading;
 
             sendTouristLocationOrientation();
             //map.setCenter(pos);

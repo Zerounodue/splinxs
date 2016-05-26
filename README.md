@@ -17,4 +17,4 @@ Students at Bern University of Applied Sciences
 License
 ----
 
-MIT
+GNU GPL V3

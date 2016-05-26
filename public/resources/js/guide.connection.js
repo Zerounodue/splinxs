@@ -82,8 +82,11 @@ function initGuideWebRTC(){
     connection.dontCaptureUserMedia = true;
 
     connection.session = {
-        data: true
-        ,audio: true
+        data: true,
+        audio: 'two-way'
+
+       // data: true
+        //,audio: true
         //,video: true
     };
 

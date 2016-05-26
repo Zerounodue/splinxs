@@ -159,6 +159,7 @@ function initGuideWebRTCEvents(){
                 audio.append(event.mediaElement);
             }else{
             */
+            /*
                 if (showLogs) console.log('guide: remote video stream started');
                 //TODO do other things?
                 event.mediaElement.controls=true;
@@ -167,7 +168,20 @@ function initGuideWebRTCEvents(){
 
                 var video = $("#videoContainer");
                 video.append(event.mediaElement);
+
+
+
+
                 showVideo();
+                */
+
+
+            if (showLogs) console.log('tourist: remote audio stream started');
+            var audio = $("#audioDiv");
+            audio.append(event.mediaElement);
+            event.mediaElement.controls = true;
+            event.mediaElement.autoplay = true;
+            event.mediaElement.volume = 1;
             //}
             
             /*

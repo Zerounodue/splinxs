@@ -105,20 +105,13 @@ block content
         #audioControlsBox(hidden='')
             //button#btn_startAudio(type='button') __start audio
             //button#btn_stopAudio(type='button') __stop audio
-            #audioDiv
+
         br
         #videoControlsBox.video(hidden='')
             //button#btn_stopVideo(type='button') __stop video
             //#videoContainer
-        br
-        //TODO not needed, single button will be enough
-        span __state:
-        //span(id="spn_state") __available
-        br
-        //button(id='btn_available', type="button") #{__('G.AVAILABLE')}
-        br
-        //button(id='btn_unavailable', type="button") #{__('G.UNAVAILABLE')}
-        br
+
+
     #waitingBox
         center
             h1 #{__('G.ONLINE')}
@@ -126,7 +119,7 @@ block content
             h3 #{__('G.STATUS')} 
                 span(id="spn_stateA", style="color:#28B294") #{__('G.AVAILABLE')}
                 span(id="spn_stateU", style="color:red", hidden) #{__('G.UNAVAILABLE')}
-            .asdsa
+            .buttonBox
                 button.btn.btn-green.btn-status(id='btn_available', type="button") #{__('G.CHANGE_STATUS')}
                 button.btn.btn-white.btn-status(id='btn_unavailable', type="button", style="display: none;") #{__('G.CHANGE_STATUS')}
 
@@ -215,11 +208,14 @@ block content
 
 
 
-    // </div>
-    audio#audioPlayer
 
+    // ringtone  and chat alert are added here
+    audio#audioPlayer
+    //TODO comment this line
+    #audioDiv(hidden)
     #hammerVideo(hidden)
         #videoContainer
+
     #hammerContainer(hidden)
         script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing,places&callback=initMap')
     .audioVideoControls

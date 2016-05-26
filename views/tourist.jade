@@ -91,7 +91,7 @@ block content
             #audioControlsBox(hidden='')
                 //button#btn_startAudio(type='button') __start audio
                 //button#btn_stopAudio(type='button') __stop audio
-                #audioDiv
+
             br
             #videoControlsBox.video(hidden='')
                 //button#btn_shareVideo(type='button') __start video
@@ -141,10 +141,13 @@ block content
                         input#inp_chat.form-control.input-sm(type='text', placeholder="#{__('G.TYPE_MESSAGE')}")
                         span.input-group-btn
                             button#btn_chat.btn.btn-sm #{__('GENERAL.SEND')}
-          // </div>
+
+        // that alerts are added here
         audio#audioPlayer
+        #audioDiv(hidden)
         #hammerVideo(hidden)
             #videoContainer
+
         #hammerContainer
             script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing,places&callback=initMap')
         .audioVideoControls

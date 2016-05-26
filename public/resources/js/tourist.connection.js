@@ -86,10 +86,11 @@ function initTouristWebRTC(){
     
     //TODO check if this works
     connection.session = {
-        data: true,
-        audio: 'two-way',
-        video: true,
-        oneway: true
+        data: true
+        ,audio: true
+        //audio: 'two-way',
+        ,video: true
+        //oneway: true
         //data: true
         //,audio: true//DetectRTC.hasMicrophone
         //,video: true//DetectRTC.hasWebcam
@@ -207,8 +208,8 @@ function initTouristWebRTCEvents(){
             }, 2000);
             */
             //connection.dontCaptureUserMedia = false;
-            startAudioStream();
-            //startVideoStream();
+            //startAudioStream();
+            startVideoStream();
         }
 
     };

@@ -82,12 +82,12 @@ function initGuideWebRTC(){
     connection.dontCaptureUserMedia = true;
 
     connection.session = {
-        data: true,
-        audio: 'two-way'
+        data: true
+        //audio: 'two-way'
 
        // data: true
-        //,audio: true
-        //,video: true
+        ,audio: true
+        ,video: true
     };
 
     connection.sdpConstraints.mandatory = {

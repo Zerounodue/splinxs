@@ -125,6 +125,7 @@ function addMapListeners() {
             if(showLogs) console.log('map click timeout ended');
             //calls function in guide/tourist.map.js
             addGuideTouristMarker(++markerCount, event.latLng);
+
             var data = {add: true, id: markerCount, pos: event.latLng};
             sendMapData({marker: data});
         }, click_timeoutTimer);
@@ -396,6 +397,10 @@ function getGEOLocation() {
             };
             if ((position.coords.heading != null) && (!isNaN(position.coords.heading))) {
                 touristOrient = position.coords.heading;
+                console.warn("OK"+touristOrient);
+            }
+            else{
+                console.warn("Noooo" +touristOrient);
             }
 
             sendTouristLocationOrientation();
@@ -514,8 +519,23 @@ window.addEventListener('deviceorientation', function(e) {
         'headingAccuracy: ' + e.webkitCompassAccuracy;
     alert(heading);
     */
+   
+    if ( e.webkitCompassHeading != null) {
+        //only for webkit browser (iOS)
+        touristOrient = e.webkitCompassHeading;
+    }
+    else{
+        
+        if(e.absolute === true && e.alpha !== null) {
+            touristOrient = compassHeading(e.alpha, e.beta, e.gamma);
 
-    touristOrient =  e.webkitCompassHeading;
+            if (showLogs)console.log('heading: ' + touristOrient);
+        }
+        else{
+            if (showLogs)console.warn('impossible get heading")');
+        }
+
+    }
     sendTouristLocationOrientation();
     setTouristOrientation(touristOrient);
 

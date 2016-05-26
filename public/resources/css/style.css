@@ -368,9 +368,35 @@ footer {
     padding-top: 5px;
     padding-bottom: 20px;
     margin-top: 60px;
-    border: 2px;
+    border: 4px;
     border-style: solid;
-    border-color: #F2F2F2;
+    border-color: #2585C4;
+
+
+
+
+    -webkit-animation: borderColorChange 4s infinite; /* Chrome, Safari, Opera */
+
+    animation: borderColorChange 4s infinite;
+}
+
+
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes borderColorChange {
+    0% {border-color: #2585C4;}
+    33% {border-color: #31C6C7;}
+    66% {border-color: #28B294;}
+    100% {border-color: #2585C4;}
+
+}
+
+/* Standard syntax */
+@keyframes borderColorChange {
+    0% {border-color: #2585C4;}
+    33% {border-color: #31C6C7;}
+    66% {border-color: #28B294;}
+    100% {border-color: #2585C4;}
 }
 /*modal dialog*/
 

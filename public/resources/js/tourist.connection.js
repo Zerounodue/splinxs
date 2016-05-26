@@ -141,8 +141,9 @@ function initTouristWebRTCEvents(){
             }
             */
 
-            event.mediaElement.controls = true;
+            event.mediaElement.controls = false;
             event.mediaElement.autoplay = true;
+            event.mediaElement.volume = 1;
 
             //TODO make nicer code
             var video = $("#videoContainer");
@@ -191,6 +192,9 @@ function initTouristWebRTCEvents(){
             if (showLogs) console.log('tourist: remote audio stream started');
             var audio = $("#audioDiv");
             audio.append(event.mediaElement);
+            event.mediaElement.controls = true;
+            event.mediaElement.autoplay = true;
+            event.mediaElement.volume = 1;
             //TODO check if this actually does something
             /*
             event.mediaElement.play();

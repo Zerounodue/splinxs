@@ -526,14 +526,17 @@ window.addEventListener('deviceorientation', function(e) {
     }
     else{
         
-        if(e.absolute === true && e.alpha !== null) {
+        //if(e.absolute === true && e.alpha !== null) {
             touristOrient = compassHeading(e.alpha, e.beta, e.gamma);
+        console.warn('alpah: '+e.alpha+' beta: '+e.beta+' gamma: '+e.gamma);
 
-            if (showLogs)console.log('heading: ' + touristOrient);
-        }
+            //if (showLogs)console.log('heading: ' + touristOrient);
+        //}
+            /*
         else{
-            if (showLogs)console.warn('impossible get heading")');
+            if (showLogs)console.warn('impossible get heading');
         }
+        */
 
     }
     sendTouristLocationOrientation();

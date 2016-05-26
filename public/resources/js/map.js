@@ -507,6 +507,6 @@ window.addEventListener('deviceorientation', function(e) {
 
     touristOrient =  e.webkitCompassHeading;
     sendTouristLocationOrientation();
-    setTouristOrientation();
+    setTouristOrientation(touristOrient);
 
 }, false);

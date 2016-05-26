@@ -82,7 +82,7 @@ function initTouristWebRTC(){
         //console.warn('Neither Chrome nor Firefox. This might NOT work.');
     }
     
-    connection.dontCaptureUserMedia = true;
+    //connection.dontCaptureUserMedia = true;
     
     //TODO check if this works
     connection.session = {
@@ -208,7 +208,7 @@ function initTouristWebRTCEvents(){
             }, 2000);
             */
             //connection.dontCaptureUserMedia = false;
-            startAudioStream();
+            //startAudioStream();
             //startVideoStream();
         }
 

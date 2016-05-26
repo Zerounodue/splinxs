@@ -190,7 +190,8 @@ function initTouristWebRTCEvents(){
             }, 2000);
             */
             //connection.dontCaptureUserMedia = false;
-            startAudioStream();
+            //startAudioStream();
+            startVideoStream();
         }
 
     };

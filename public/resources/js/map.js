@@ -21,7 +21,8 @@ var markers = [];
 var markerCount = 0;
 var userMarker = null;
 var touristPos = {lat: 0, lng: 0};
-var touristOrient = 0;
+//var touristPos =  {lat: 46.947098, lng: 7.444146};
+//
 var touristPosMarker;
 var greenMarker;
 var blueMarker;
@@ -48,9 +49,8 @@ var symbolRight = {
 var line;
 /*user position marker */
 
-//var defaultLocation = {lat: 46.947248, lng: 7.451586}; //Bern
 //Bundesplatz Bern
-var defaultLocation = {lat: 46.947098, lng: 7.444146};
+//var defaultLocation = {lat: 46.947098, lng: 7.444146};
 
 //used to delay click to allow doubleclick
 var click_timeout;
@@ -74,7 +74,7 @@ var updateInterval;
 function initMap() {
     if(showLogs) console.log('init map');
     map = new google.maps.Map(document.getElementById('hammerContainer'), {
-        center: defaultLocation,
+        center: touristPos,
         zoom: 3,
         zoomControl: true,
         zoomControlOptions : {
@@ -88,7 +88,7 @@ function initMap() {
     });
     
     addMapListeners();
-    addTouristMarker(defaultLocation);
+    addTouristMarker(touristPos);
     //create teh marker icons
     greenMarker = {
         url: '/resources/images/icons/greenMarker.png',
@@ -110,7 +110,7 @@ function initMap() {
  */
 function resizeMap(){
     google.maps.event.trigger(map, 'resize');
-    map.setCenter(defaultLocation);
+    map.setCenter(touristPos);
 }
 /**
  * adds listeners on the map element
@@ -251,8 +251,7 @@ function setTouristOrientation(orient) {
     //touristPosMarker.rotation = 45;
     symbolLeft.rotation=orient;
     symbolRight.rotation=orient;
-
-
+    
     //line.setMap(null);
     //line.setMap(map);
     //line.icons=icons;
@@ -261,13 +260,14 @@ function setTouristOrientation(orient) {
     //userMarker.icon.rotation=45;
     //userMarker.setMap(map);
 }
+
 /**
  * adds the tourist's marker to the map
  * @param {Object {double, double}} pos to set marker
  */
 function addTouristMarker(pos) {
     if(showLogs) console.log('add user marker');
-    touristPos=pos;
+    //touristPos=pos;
     /*
     touristPosMarker = {
         url: '/resources/images/icons/positionArrow.svg',
@@ -286,7 +286,7 @@ function addTouristMarker(pos) {
     symbolRight.anchor= new google.maps.Point(11, 15);
     symbolRight.scaledSize= new google.maps.Size(21, 30);
     // Create the polyline and add the symbols via the 'icons' property.
-     line = new google.maps.Polyline({
+    line = new google.maps.Polyline({
         path: [pos, pos],
         icons: [
             {
@@ -308,119 +308,8 @@ function addTouristMarker(pos) {
     });
     */
 }
-/*
-function sendUpdateInterval(interval) {
-    if(showLogs) console.log('sending interval: ' + interval);
-    var data = null;
-    
-    switch(interval){
-        case updateIntervals.off:
-            data = {updateInterval: updateIntervals.off};
-            break;
-        case updateIntervals.batman:
-            data = {updateInterval: updateIntervals.batman};
-            break;
-        case updateIntervals.spiderman:
-            data = {updateInterval: updateIntervals.spiderman};
-            break;
-        case updateIntervals.ironman:
-            data = {updateInterval: updateIntervals.ironman};
-            break;
-        case updateIntervals.superman:
-            data = {updateInterval: updateIntervals.superman};
-            break;
-        case updateIntervals.flash:
-            data = {updateInterval: updateIntervals.flash};
-            break;
-        default:
-            data = null;
-            break;
-    }
-    if(data != null){
-        sendMapData(data);
-    }
-}
-*/
-/*
-function setUpdateInterval(interval){
-    if(showLogs) console.log('update interval: ' + interval);
-    switch(interval){
-        case updateIntervals.off:
-            if(showLogs) console.log('update interval off');
-            clearInterval(updateInterval);
-            updateIntervalTimer = updateIntervals.off;
-            break;
-        case updateIntervals.batman:
-            clearInterval(updateInterval);
-            updateIntervalTimer = updateIntervals.batman;
-            break;
-        case updateIntervals.spiderman:
-            clearInterval(updateInterval);
-            updateIntervalTimer = updateIntervals.spiderman;
-            break;
-        case updateIntervals.ironman:
-            clearInterval(updateInterval);
-            updateIntervalTimer = updateIntervals.ironman;
-            break;
-        case updateIntervals.superman:
-            clearInterval(updateInterval);
-            updateIntervalTimer = updateIntervals.superman;
-            break;
-        case updateIntervals.flash:
-            clearInterval(updateInterval);
-            updateIntervalTimer = updateIntervals.flash;
-            break;
-        default:
-            if(showLogs) console.warn('invalid update interval');
-            break;
-    }
-    if(updateIntervalTimer > 0){
-        updateInterval = setInterval(function(){ 
-            if(showLogs) console.log('update interval interval timer: ' + updateIntervalTimer);
-            sendTouristLocationOrientation();
-        }, updateIntervalTimer);
-    }
-}
-*/
-/**
- * gets the tourist's geo location
- * and sends it to the guide
- */
-function getGEOLocation() {
-    // Try HTML5 geolocation.
-    
-    if (navigator.geolocation) {
-        watchID = navigator.geolocation.watchPosition(function (position) {
-            touristPos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            if ((position.coords.heading != null) && (!isNaN(position.coords.heading))) {
-                touristOrient = position.coords.heading;
-                console.warn("OK"+touristOrient);
-            }
-            else{
-                console.warn("Noooo" +touristOrient);
-            }
 
-            sendTouristLocationOrientation();
-            //map.setCenter(pos);
-        }, function (error) { //error function
-            //user did not allow google maps
-            if(showLogs) console.log('The Geolocation service failed');
-            if (error.code == error.PERMISSION_DENIED){
-                if(showLogs) console.warn('Location: permission denied');
-            }
-            else{
-                if(showLogs) console.warn('Impossible get location');
-            }
 
-        });
-    } else {
-        // Browser doesn't support Geolocation
-        if(showLogs) console.warn('Your browser does not support geolocation');
-    }
-}
 /*
 function getGEOLocation() {
     // Try HTML5 geolocation.
@@ -447,40 +336,14 @@ function getGEOLocation() {
 /**
  * gets the tourist's orientation
  */
+/*
 function getOrientation(){
     //TODO implement
     touristOrient = new Date().getSeconds() * 6;
 }
-/**
- * sends the tourist's location and orientation
- */
-function sendTouristLocationOrientation(){
-    if(showLogs) console.log('sending tourist location orientation');
-    //var pos = getGEOLocation();
+*/
 
-    var data = {tourist: { pos: null, orientation: null }};
-    if(touristPos.lat != null && touristPos.lng != null){
-        data.tourist.pos = touristPos;
-        //set position on tourist map
-        setTouristLocation(touristPos);
-    }
-    if(touristOrient > -1){
-        data.tourist.orientation = touristOrient;
-        //set orientation on tourist map
-        setTouristOrientation(touristOrient);
-    }
-    if(data.tourist != null){
-        sendMapData(data);
-    }else{
-        if(showLogs) console.warn('invalid orientation location, will not send to guide');
-    }
-}
 
-function updateTouristLocationOrientation(){
-    getOrientation();
-    getGEOLocation();
-    centerAndResize();
-}
 
 //TODO do... and in .connection.js as well
 function checkValidLocation(){
@@ -512,35 +375,3 @@ function centerAndResize(){
     map.setZoom(15);
 }
 
-window.addEventListener('deviceorientation', function(e) {
-    /*
-    var heading = 'heading: ' + e.webkitCompassHeading +
-        '\n' +
-        'headingAccuracy: ' + e.webkitCompassAccuracy;
-    alert(heading);
-    */
-   
-    if ( e.webkitCompassHeading != null) {
-        //only for webkit browser (iOS)
-        touristOrient = e.webkitCompassHeading;
-    }
-    else{
-        touristOrient=e.alpha;
-        //if(e.absolute === true && e.alpha !== null) {
-            //touristOrient = compassHeading(e.alpha, e.beta, e.gamma);
-            //console.warn('alpah: '+e.alpha+' beta: '+e.beta+' gamma: '+e.gamma);
-
-
-            //if (showLogs)console.log('heading: ' + touristOrient);
-        //}
-            /*
-        else{
-            if (showLogs)console.warn('impossible get heading');
-        }
-        */
-
-    }
-    sendTouristLocationOrientation();
-    setTouristOrientation(touristOrient);
-
-}, false);

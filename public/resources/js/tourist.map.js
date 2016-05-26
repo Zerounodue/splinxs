@@ -15,6 +15,8 @@
  */
 
 //variables
+var touristOrient = 0;
+var firstTime = true;
 
 /**
  * adds a new marker created by the tourist to the map and saves it in an array
@@ -24,6 +26,154 @@
 function addGuideTouristMarker(id, position){
     addTouristsMarker(id, position);
 }
+
+
+/**
+ * gets the tourist's geo location
+ * and sends it to the guide when it's updated
+ */
+function getGEOLocation() {
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+        watchID = navigator.geolocation.watchPosition(function (position) {
+            touristPos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            //not working
+            /*
+             if ((position.coords.heading != null) && (!isNaN(position.coords.heading))) {
+             touristOrient = position.coords.heading;
+             console.warn("OK"+touristOrient);
+             }
+             */
+            if(touristPos.lat != null && touristPos.lng != null) {
+                
+                setTouristLocation(touristPos);
+                sendTouristLocation();
+                //center only the first time
+                if(firstTime){
+                    centerAndResize();
+                    firstTime=false;
+                }
+            }
+            else{
+                if(showLogs) console.warn('Tourist: invalid  location, will not send to guide');
+            }
+            //map.setCenter(pos);
+        }, function (error) { //error function
+            //user did not allow google maps
+            if(showLogs) console.log('The Geolocation service failed');
+            if (error.code == error.PERMISSION_DENIED){
+                if(showLogs) console.warn('Location: permission denied');
+            }
+            else{
+                if(showLogs) console.warn('Impossible get location');
+            }
+
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        if(showLogs) console.warn('Your browser does not support geolocation');
+    }
+}
+
+
+
+
+
+
+
+/**
+ * sends the tourist's location a
+ */
+function sendTouristLocation(){
+    /*
+     if(touristPos.lat != null && touristPos.lng != null){
+     data.tourist.pos = touristPos;
+     //set position on tourist map
+     setTouristLocation(touristPos);
+     }
+     */
+    if(showLogs) console.log('sending tourist location ');
+    var data = {tourist: { pos: null, orientation: null }};
+
+    data.tourist.pos = touristPos;
+    sendMapData(data);
+    /*
+    if(data.tourist != null){
+        sendMapData(data);
+    }else{
+        if(showLogs) console.warn('Tourist: invalid  location, will not send to guide');
+    }
+    */
+}
+
+/**
+ * sends the tourist's orientation
+ */
+function sendTouristOrientation(touristOrient){
+    if(showLogs) console.log('sending tourist  orientation');
+
+    var data = data.tourist.orientation = touristOrient;
+    sendMapData(data);
+        //set orientation on tourist map
+        //setTouristOrientation(touristOrient);
+
+
+    /*
+    if(data.tourist != null){
+
+    }else{
+        if(showLogs) console.warn('Tourist: invalid  orientation, will not send to guide');
+    }
+    */
+}
+
+
+
+window.addEventListener('deviceorientation', function(e) {
+    /*
+     var heading = 'heading: ' + e.webkitCompassHeading +
+     '\n' +
+     'headingAccuracy: ' + e.webkitCompassAccuracy;
+     alert(heading);
+     */
+
+    if ( e.webkitCompassHeading != null) {
+        //only for webkit browser (iOS)
+        touristOrient = e.webkitCompassHeading;
+    }
+    else{
+        //android
+        if(e.alpha != null){
+            touristOrient=e.alpha;
+        }
+        else{
+            if (showLogs)console.log('tourist: impossible to get heading');
+            return;
+        }
+    }
+
+
+    if(touristOrient > -1){
+        sendTouristOrientation();
+        setTouristOrientation(touristOrient);
+    }
+    else{
+        if(showLogs) console.log('Tourist: invalid  orientation, will not send to guide');
+    }
+
+}, false);
+
+
+
+
+
+
+
+
+
 
 
 //TODO function header here

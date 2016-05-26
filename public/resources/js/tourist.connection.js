@@ -141,7 +141,7 @@ function initTouristWebRTCEvents(){
             }
             */
 
-            event.mediaElement.controls = false;
+            event.mediaElement.controls = true;
             event.mediaElement.autoplay = true;
 
             //TODO make nicer code

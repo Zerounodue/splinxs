@@ -118,7 +118,6 @@ function initTouristWebRTCEvents(){
 
     connection.onstream = function (event) {
         if (showLogs) console.log('tourist: stream started');
-
         if (!event.stream.getAudioTracks().length && !event.stream.getVideoTracks().length) {
             if(showLogs) console.warn('0 streams...');
             return;
@@ -191,7 +190,7 @@ function initTouristWebRTCEvents(){
             }, 2000);
             */
             //connection.dontCaptureUserMedia = false;
-            //startAudioStream();
+            startAudioStream();
         }
 
     };

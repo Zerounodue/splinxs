@@ -154,7 +154,7 @@ function initGuideWebRTCEvents(){
             
             if(peerAudioStream == null){
                 peerAudioStream = event.stream.id;
-                if (showLogs) console.log('guide: remote audio stream started');
+                if (showLogs) console.warn('guide: remote audio stream started');
                 var audio = $("#audioDiv");
                 audio.append(event.mediaElement);
             }else{

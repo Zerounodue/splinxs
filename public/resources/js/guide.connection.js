@@ -161,7 +161,7 @@ function initGuideWebRTCEvents(){
             */
                 if (showLogs) console.log('guide: remote video stream started');
                 //TODO do other things?
-                event.mediaElement.controls=false;
+                event.mediaElement.controls=true;
                 event.mediaElement.autoplay=true;
                 event.mediaElement.volume = 1;
 

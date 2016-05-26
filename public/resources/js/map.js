@@ -384,7 +384,9 @@ function getGEOLocation() {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-            touristOrient = position.coords.heading;
+            if ((position.coords.heading != null) && (!isNaN(position.coords.heading))) {
+                touristOrient = position.coords.heading;
+            }
 
             sendTouristLocationOrientation();
             //map.setCenter(pos);
@@ -494,3 +496,17 @@ function centerAndResize(){
     map.setCenter(touristPos);
     map.setZoom(15);
 }
+
+window.addEventListener('deviceorientation', function(e) {
+    /*
+    var heading = 'heading: ' + e.webkitCompassHeading +
+        '\n' +
+        'headingAccuracy: ' + e.webkitCompassAccuracy;
+    alert(heading);
+    */
+
+    touristOrient =  e.webkitCompassHeading;
+    sendTouristLocationOrientation();
+    setTouristOrientation();
+
+}, false);

@@ -125,7 +125,7 @@ function initTouristWebRTCEvents(){
         
         if(event.stream.type == "local"){
             if (showLogs) console.log('tourist: local stream started');
-            
+            /*
             if(audioStream == null){
                 audioStream = event.stream.id;
             }else{
@@ -139,6 +139,15 @@ function initTouristWebRTCEvents(){
                 video.append(event.mediaElement);
                 showVideo();
             }
+            */
+
+            event.mediaElement.controls = false;
+            event.mediaElement.autoplay = true;
+
+            //TODO make nicer code
+            var video = $("#videoContainer");
+            video.append(event.mediaElement);
+            showVideo();
             
             
 
@@ -490,7 +499,7 @@ function startAudioStream(){
 
 function startVideoStream(){
     connection.dontCaptureUserMedia = false;
-    
+
     if (connection.attachStreams.length) {
         connection.getAllParticipants().forEach(function (p) {
             connection.attachStreams.forEach(function (stream) {

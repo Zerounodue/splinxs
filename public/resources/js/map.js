@@ -525,10 +525,11 @@ window.addEventListener('deviceorientation', function(e) {
         touristOrient = e.webkitCompassHeading;
     }
     else{
-        
+        touristOrient=e.alpha;
         //if(e.absolute === true && e.alpha !== null) {
-            touristOrient = compassHeading(e.alpha, e.beta, e.gamma);
-        console.warn('alpah: '+e.alpha+' beta: '+e.beta+' gamma: '+e.gamma);
+            //touristOrient = compassHeading(e.alpha, e.beta, e.gamma);
+            //console.warn('alpah: '+e.alpha+' beta: '+e.beta+' gamma: '+e.gamma);
+
 
             //if (showLogs)console.log('heading: ' + touristOrient);
         //}

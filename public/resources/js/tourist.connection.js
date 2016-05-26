@@ -130,6 +130,7 @@ function initTouristWebRTCEvents(){
             if(audioStream == null){
                 audioStream = event.stream.id;
             }else{
+                
                 //TODO do other things?
                 event.mediaElement.controls = false;
                 event.mediaElement.autoplay = true;
@@ -348,7 +349,7 @@ function establishConnectionWithGuide() {
     //map is gray when it is not resized
     resizeMap();
     //get current location and send to guide
-    updateTouristLocationOrientation();
+    getGEOLocation();
 }
 /**
  * stores channel name and current minute to localstorage every 60 seconds (if supported)

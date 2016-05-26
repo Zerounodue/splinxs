@@ -87,12 +87,12 @@ function initGuideWebRTC(){
 
        // data: true
         ,audio: true
-        ,video: true
+        //,video: true
     };
 
     connection.sdpConstraints.mandatory = {
         OfferToReceiveAudio: true,
-        OfferToReceiveVideo: false
+        OfferToReceiveVideo: true
     };
     //only when webRTC available
     if(DetectRTC.browser.isChrome || DetectRTC.browser.isFirefox || DetectRTC.browser.isOpera){

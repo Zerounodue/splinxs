@@ -98,7 +98,7 @@ function initTouristWebRTC(){
     
     connection.sdpConstraints.mandatory = {
         OfferToReceiveAudio: true,
-        OfferToReceiveVideo: false//DetectRTC.hasWebcam
+        OfferToReceiveVideo: true//DetectRTC.hasWebcam
     };
     
     initTouristWebRTCEvents();

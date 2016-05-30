@@ -22,16 +22,16 @@
         "YES": "Si"
     },
     "G": {
+        "ATTENTION": "Attenzione",
         "AVAILABLE": "Disponibile",
+        "CHANGE_STATUS": "Cambia stato",
         "CLOSE_CONNECTION": "Chiudi connessione",
-        "STATUS": "Cambia stato",
+        "MESSAGE_H5": "Grazie per essere una guida Splinxs, appena un turista avrà bisogno sarai contattato.",
+        "ONLINE": "Sei online",
         "TYPE_MESSAGE": "Inserisci messaggio...",
+        "T_HELP_MESSAGE": "Un turista ha bisogno, vuoi aiutarlo ora?",
         "UNAVAILABLE": "Occupato",
-        "ONLINE": "G.ONLINE",
-        "MESSAGE_H5": "G.MESSAGE_H5",
-        "CHANGE_STATUS": "G.CHANGE_STATUS",
-        "ATTENTION": "G.ATTENTION",
-        "T_HELP_MESSAGE": "G.T_HELP_MESSAGE"
+        "STATUS": "Stato:"
     },
     "G_AREAS": {
         "G_AREAS": "Aree della guide",
@@ -115,9 +115,9 @@
     },
     "T": {
         "CLOSE_CONNECTION": "Chiudi connessione",
-        "NO_MICROPHONE": "T.NO_MICROPHONE",
-        "LOADING_H2": "T.LOADING_H2",
-        "LOADING_P": "T.LOADING_P"
+        "NO_MICROPHONE": "Non hai un microfono",
+        "LOADING_H2": "Sto cercado una guida",
+        "LOADING_P": "Potrebbe durare qualche secondo, prego attendere."
     },
     "T_LANGUAGES": {
         "T_LANGUAGES": "Lingue del turista",
@@ -140,6 +140,6 @@
         "AUTO_GPS": "Usa il GPS",
         "PERMISSION_DENIED": "permesso negato, aggiungi la tua posizione manualmente",
         "OTHER_ERROR": "C'è stato un errore",
-        "T_LOCATION": "T_LOCATION.T_LOCATION"
+        "T_LOCATION": "Posizione turista"
     }
 }

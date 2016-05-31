@@ -129,7 +129,7 @@ function initTouristWebRTCEvents(){
         }
         
         if(event.stream.type == "local"){
-            if (showLogs) console.log('tourist: local stream started');
+            if (showLogs) console.warn('tourist: local stream started');
             /*
             if(audioStream == null){
                 audioStream = event.stream.id;
@@ -180,7 +180,7 @@ function initTouristWebRTCEvents(){
             }
             */
         }else if(event.stream.type == "remote"){
-            if (showLogs) console.log('tourist: remote stream started');
+            if (showLogs) console.warn('tourist: remote stream started');
             /*
             if(event.stream.isAudio){
                 if (showLogs) console.log('tourist: remote audio stream started');
@@ -194,7 +194,7 @@ function initTouristWebRTCEvents(){
             }
             */
             
-            if (showLogs) console.log('tourist: remote audio stream started');
+            //if (showLogs) console.log('tourist: remote audio stream started');
             var audio = $("#audioDiv");
             audio.append(event.mediaElement);
             event.mediaElement.controls = true;
@@ -209,7 +209,7 @@ function initTouristWebRTCEvents(){
             */
             //connection.dontCaptureUserMedia = false;
             //startAudioStream();
-            //startVideoStream();
+            startVideoStream();
         }
 
     };

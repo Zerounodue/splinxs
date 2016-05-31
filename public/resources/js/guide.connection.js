@@ -153,7 +153,7 @@ function initGuideWebRTCEvents(){
             */
 
         }else if(event.stream.type == "remote"){
-            if (showLogs) console.log('guide: remote stream started');
+            //if (showLogs) console.log('guide: remote stream started');
             /*
             if(peerAudioStream == null){
                 peerAudioStream = event.stream.id;

@@ -137,7 +137,7 @@ function initTouristWebRTCEvents(){
 
 
                 //this code is only because the audio contains a video
-                event.mediaElement.controls = true;
+                event.mediaElement.controls = false;
                 event.mediaElement.autoplay = true;
                 event.mediaElement.volume = 1;
 

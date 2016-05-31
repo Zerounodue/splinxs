@@ -161,7 +161,7 @@ function initGuideWebRTCEvents(){
                  if (showLogs) console.warn('guide: remote audio stream started');
 
 
-                 event.mediaElement.controls = true;
+                 event.mediaElement.controls = false;
                  event.mediaElement.autoplay = true;
                  event.mediaElement.volume = 1;
                 // bug: peer recive video instread of audio, so it will be added on videoContainer

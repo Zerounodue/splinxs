@@ -130,30 +130,23 @@ function initTouristWebRTCEvents(){
         
         if(event.stream.type == "local"){
             if (showLogs) console.warn('tourist: local stream started');
-            /*
+
             if(audioStream == null){
                 audioStream = event.stream.id;
             }else{
-                
-                //TODO do other things?
-                event.mediaElement.controls = false;
+
+                event.mediaElement.controls = true;
                 event.mediaElement.autoplay = true;
+                event.mediaElement.volume = 1;
 
                 //TODO make nicer code
                 var video = $("#videoContainer");
                 video.append(event.mediaElement);
                 showVideo();
             }
-            */
 
-            event.mediaElement.controls = true;
-            event.mediaElement.autoplay = true;
-            event.mediaElement.volume = 1;
 
-            //TODO make nicer code
-            var video = $("#videoContainer");
-            video.append(event.mediaElement);
-            showVideo();
+
             
             
 

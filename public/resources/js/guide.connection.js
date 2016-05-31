@@ -79,7 +79,7 @@ function initGuideWebRTC(){
     }
     
 
-    //connection.dontCaptureUserMedia = true;
+    connection.dontCaptureUserMedia = true;
 
     connection.session = {
         data: true
@@ -179,7 +179,7 @@ function initGuideWebRTCEvents(){
                 */
 
 
-            if (showLogs) console.log('tourist: remote audio stream started');
+            if (showLogs) console.warn('guide: remote audio stream started');
             var audio = $("#audioDiv");
             audio.append(event.mediaElement);
             event.mediaElement.controls = true;

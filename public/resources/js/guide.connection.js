@@ -515,6 +515,7 @@ function connectionClosed() {
     showWaitingBox();
     stopStream();
     connection.alreadyOpened = false;
+    peerAudioStream = null;
     
     //check again what the guide's browser is capable of
     detectRTCcapabilities();

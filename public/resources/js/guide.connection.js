@@ -84,7 +84,6 @@ function initGuideWebRTC(){
     connection.session = {
         data: true
         //audio: 'two-way'
-
        // data: true
         ,audio: true
         //,video: true

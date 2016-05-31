@@ -43,7 +43,7 @@ var websocket;
 //timeout for connection request variable
 var conEstabTimeout = null; 
 //timeout for connection request
-var conEstabTimer = 10000; //milliseconds
+var conEstabTimer = 30000; //milliseconds
 
 var username;
 var peername;

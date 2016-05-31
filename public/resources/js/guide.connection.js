@@ -79,7 +79,7 @@ function initGuideWebRTC(){
     }
     
 
-    connection.dontCaptureUserMedia = true;
+    //connection.dontCaptureUserMedia = true;
 
     connection.session = {
         data: true

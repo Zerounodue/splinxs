@@ -153,15 +153,25 @@ function initGuideWebRTCEvents(){
 
         }else if(event.stream.type == "remote"){
             //if (showLogs) console.log('guide: remote stream started');
-            /*
+
             if(peerAudioStream == null){
                 peerAudioStream = event.stream.id;
+
+                 if (showLogs) console.warn('guide: remote audio stream started');
+                 var audio = $("#audioDiv");
+                 audio.append(event.mediaElement);
+                 event.mediaElement.controls = true;
+                 event.mediaElement.autoplay = true;
+                 event.mediaElement.volume = 1;
+
+                /*
                 if (showLogs) console.warn('guide: remote audio stream started');
                 var audio = $("#audioDiv");
                 audio.append(event.mediaElement);
+                */
             }else{
-            */
-            /*
+
+
                 if (showLogs) console.log('guide: remote video stream started');
                 //TODO do other things?
                 event.mediaElement.controls=true;
@@ -171,20 +181,12 @@ function initGuideWebRTCEvents(){
                 var video = $("#videoContainer");
                 video.append(event.mediaElement);
 
-
-
-
                 showVideo();
-                */
 
 
-            if (showLogs) console.warn('guide: remote audio stream started');
-            var audio = $("#audioDiv");
-            audio.append(event.mediaElement);
-            event.mediaElement.controls = true;
-            event.mediaElement.autoplay = true;
-            event.mediaElement.volume = 1;
-            //}
+
+
+            }
             
             /*
             if(event.stream.isVideo){

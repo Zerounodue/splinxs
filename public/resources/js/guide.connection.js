@@ -159,11 +159,16 @@ function initGuideWebRTCEvents(){
                 peerAudioStream = event.stream.id;
 
                  if (showLogs) console.warn('guide: remote audio stream started');
-                 var audio = $("#audioDiv");
-                 audio.append(event.mediaElement);
+
+
                  event.mediaElement.controls = true;
                  event.mediaElement.autoplay = true;
                  event.mediaElement.volume = 1;
+                // bug: peer recive video instread of audio, so it will be added on videoContainer
+                //var audio = $("#audioDiv");
+                //audio.append(event.mediaElement);
+                var video = $("#videoContainer");
+                video.append(event.mediaElement);
 
                 /*
                 if (showLogs) console.warn('guide: remote audio stream started');
@@ -171,6 +176,9 @@ function initGuideWebRTCEvents(){
                 audio.append(event.mediaElement);
                 */
             }else{
+                console.error('Video works, change code here');
+                return;
+
 
                 if (showLogs) console.warn('guide: remote video stream started');
                 //TODO do other things?
@@ -303,6 +311,18 @@ function onMessage(message) {
     if (message.stoppedTyping) {
         if (showLogs) console.log('guide: peer stopped typing');
         peerStoppedTyping();
+        return;
+}
+    if (message.videoState) {
+        if (showLogs) console.log('guide: peer videoState');
+        if(message.videoState == videoStates.hideVideo){
+            if (showLogs) console.log('guide: peer videoState = hideVideo');
+            hideVideo();
+        }
+        else if (message.videoState == videoStates.showVideo){
+            if (showLogs) console.log('guide: peer videoState = showVideo');
+            showVideo();
+        }
         return;
     }
     if (message.username) {

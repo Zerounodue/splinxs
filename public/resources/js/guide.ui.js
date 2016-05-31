@@ -26,7 +26,7 @@ var waitingBox;
 //var showLogs=true;
 
 var audioMuted = false;
-var videoMuted = false;
+var videoMuted = true;
 
 
 /**

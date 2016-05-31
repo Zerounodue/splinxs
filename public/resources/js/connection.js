@@ -33,8 +33,13 @@ var connectionStates = {
         AudioVideo: "AudioVideo"
     }
 };
-
+var videoStates = {
+    hideVideo:1,
+    showVideo:2
+}
 var websocket;
+
+
 //timeout for connection request variable
 var conEstabTimeout = null; 
 //timeout for connection request
@@ -270,4 +275,18 @@ function stopVideo() {
     });
     connection.renegotiate();
 
+}
+
+function sendHideVideo(){
+    if (showLogs) console.log('sending: only websocket hideVideo');
+    sendMessageWebsocket({
+        videoState: videoStates.hideVideo
+    });
+}
+
+function sendShowVideo(){
+    if (showLogs) console.log('sending: only websocket showVideo');
+    sendMessageWebsocket({
+        videoState: videoStates.showVideo
+    });
 }

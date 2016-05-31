@@ -21,7 +21,7 @@ var ico_audio;
 var ico_video;
 
 var audioMuted = false;
-var videoMuted = false;
+var videoMuted = true;
 /**
  * initialises ui variables for tourist
  * !needs to be called in document.ready()!
@@ -92,12 +92,14 @@ function initTouristButtons(){
             //unmute video
             ico_video.removeClass('lightColor');
             ico_video.attr('src','resources/images/icons/videoOn.png');
-            unmuteVideo();
+            showVideoStream();
+            //unmuteVideo();
         }else{
             //mute video
             ico_video.addClass('lightColor');
             ico_video.attr('src','resources/images/icons/videoOff.png');
-            muteVideo();
+            hideVideoStream();
+            //muteVideo();
         }
         videoMuted = !videoMuted;
     });
@@ -183,4 +185,14 @@ function setConfirmUnload(on) {
 
 function unloadMessage() {
     return "__Are you sure you want to leave this page?";
+}
+
+
+function hideVideoStream(){
+    hideVideo();
+    sendHideVideo();
+}
+function showVideoStream(){
+    showVideo();
+    sendShowVideo();
 }

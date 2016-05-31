@@ -134,7 +134,24 @@ function initTouristWebRTCEvents(){
             if(audioStream == null){
                 audioStream = event.stream.id;
                 if (showLogs) console.warn('tourist: local stream audio started');
+
+
+                //this code is only because the audio contains a video
+                event.mediaElement.controls = true;
+                event.mediaElement.autoplay = true;
+                event.mediaElement.volume = 1;
+
+                //TODO make nicer code
+                var video = $("#videoContainer");
+                video.append(event.mediaElement);
+
+
+
             }else{
+                console.error('Video works, change code here');
+                return;
+
+
                 if (showLogs) console.warn('tourist: local stream video started');
                 event.mediaElement.controls = true;
                 event.mediaElement.autoplay = true;

@@ -131,7 +131,7 @@ function initGuideWebRTCEvents(){
         }
 
         if(event.stream.type == "local"){
-            if (showLogs) console.log('guide: local stream started');
+            if (showLogs) console.warn('guide: local stream started');
             
             if(audioStream == null){
                 if (showLogs) console.log('guide: local audio stream started');
@@ -152,6 +152,7 @@ function initGuideWebRTCEvents(){
             */
 
         }else if(event.stream.type == "remote"){
+            if (showLogs) console.warn('guide: remote stream started');
             //if (showLogs) console.log('guide: remote stream started');
 
             if(peerAudioStream == null){
@@ -171,8 +172,7 @@ function initGuideWebRTCEvents(){
                 */
             }else{
 
-
-                if (showLogs) console.log('guide: remote video stream started');
+                if (showLogs) console.warn('guide: remote video stream started');
                 //TODO do other things?
                 event.mediaElement.controls=true;
                 event.mediaElement.autoplay=true;
@@ -187,7 +187,7 @@ function initGuideWebRTCEvents(){
 
 
             }
-            
+
             /*
             if(event.stream.isVideo){
                 if (showLogs) console.log('guide: remote video stream started');
@@ -215,6 +215,9 @@ function initGuideWebRTCEvents(){
                 
             }
             */
+        }
+        else{
+            if (showLogs) console.warn('guide: unknow stream started');
         }
 
     };

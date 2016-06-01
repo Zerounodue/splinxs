@@ -17,6 +17,8 @@
 //variables
 showLogs = true;
 
+firstTime = true;
+
 var c2P = false; //connected to peer
 
 var guideSocket;
@@ -362,6 +364,15 @@ function onMessage(message) {
         
         return;
     }
+    if (message.firstPosition) {
+        if (showLogs) console.log('guide: firstPos: ' + message.firstPosition);
+        touristPos = message.firstPosition;
+        centerAndResize();
+        return;
+    }
+
+
+
     //tourist closed the connection
     if(message.closeConnection){
         connectionClosed();
@@ -382,6 +393,10 @@ function mapMessage(mapMessage) {
             if(pos.lat && pos.lng){
                 if (showLogs) console.log('guide: map location, lat: ' + pos.lat + " lng: " + pos.lng);
                 setTouristLocation(pos);
+                if(firstTime){
+                    centerAndResize();
+                    firstTime=false;
+                }
             }else{
                 if(showLogs) console.warn('invalid location: ' + pos);
             }
@@ -402,7 +417,7 @@ function mapMessage(mapMessage) {
                 if(pos.lat && pos.lng){
                     addTouristsMarker(id, pos);
                 }else{
-                    if(showLogs) console.warn('invalid lcoation: ' + pos);
+                    if(showLogs) console.warn('invalid location: ' + pos);
                 }
             }else{
                 if(showLogs) console.warn('invalid marker id: ' + id + ' pos: ' + pos);
@@ -453,7 +468,7 @@ function ongoingConnectionClosed(){
 function initGuideSocket(){
     if(showLogs) console.log('guide: init guideSocket');
     //guideSocket = io.connect('https://splinxs.ti.bfh.ch/guide');
-    guideSocket = io.connect('https://localhost/guide');
+    //guideSocket = io.connect('https://localhost/guide');
     
     initEvents();
 }
@@ -534,6 +549,7 @@ function connectionClosed() {
     stopStream();
     connection.alreadyOpened = false;
     peerAudioStream = null;
+    touristPos = {lat: 0, lng: 0};
     
     //check again what the guide's browser is capable of
     detectRTCcapabilities();

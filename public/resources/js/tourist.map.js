@@ -95,7 +95,7 @@ function sendTouristLocation(){
      setTouristLocation(touristPos);
      }
      */
-    if(showLogs) console.log('sending tourist location ');
+    if(showLogs) console.warn('sending tourist location ');
     var data = {tourist: { pos: null, orientation: null }};
 
     data.tourist.pos = touristPos;

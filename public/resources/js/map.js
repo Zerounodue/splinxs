@@ -21,6 +21,8 @@ var markers = [];
 var markerCount = 0;
 var userMarker = null;
 var touristPos = {lat: 0, lng: 0};
+
+
 //var touristPos =  {lat: 46.947098, lng: 7.444146};
 //
 var touristPosMarker;
@@ -88,7 +90,7 @@ function initMap() {
     });
     
     addMapListeners();
-    addTouristMarker(touristPos);
+    addTouristMarker();
     //create teh marker icons
     greenMarker = {
         url: '/resources/images/icons/greenMarker.png',
@@ -224,8 +226,8 @@ function setTouristLocation(pos){
     //line.setMap(map);
 
     //userMarker.setPosition(pos);
-    line.setMap(null);
-    line=null;
+    if(line != null)line.setMap(null);
+
     line = new google.maps.Polyline({
         path: [pos, pos],
         icons: [
@@ -251,6 +253,23 @@ function setTouristOrientation(orient) {
     //touristPosMarker.rotation = 45;
     symbolLeft.rotation=orient;
     symbolRight.rotation=orient;
+    if(line == null){
+        line = new google.maps.Polyline({
+            path: [pos, pos],
+            icons: [
+                {
+                    icon: symbolLeft,
+                    //offset: '0%'
+                }, {
+                    icon: symbolRight,
+                    //offset: '50%'
+                }
+            ],
+
+            map: map
+        });
+
+    }
     
     //line.setMap(null);
     //line.setMap(map);
@@ -265,7 +284,7 @@ function setTouristOrientation(orient) {
  * adds the tourist's marker to the map
  * @param {Object {double, double}} pos to set marker
  */
-function addTouristMarker(pos) {
+function addTouristMarker() {
     if(showLogs) console.log('add user marker');
     //touristPos=pos;
     /*
@@ -287,7 +306,7 @@ function addTouristMarker(pos) {
     symbolRight.scaledSize= new google.maps.Size(21, 30);
     // Create the polyline and add the symbols via the 'icons' property.
     line = new google.maps.Polyline({
-        path: [pos, pos],
+        path: [touristPos, touristPos],
         icons: [
             {
                 icon: symbolLeft,
@@ -300,13 +319,13 @@ function addTouristMarker(pos) {
 
         map: map
     });
-    /*
-    userMarker = new google.maps.Marker({
-        position: pos,
-        icons: symbolLeft,
-        map: map
-    });
-    */
+    if(touristPos.lat == 0 && touristPos.lng == 0 ){
+        //remove the tourist position marker 
+        line.setMap(null);
+        line=null;
+    }
+
+
 }
 
 

@@ -48,6 +48,7 @@ var conEstabTimer = 30000; //milliseconds
 var username;
 var peername;
 
+
 /**
  * fires once the detect rtc script is ready
  */
@@ -146,6 +147,17 @@ function sendUsername(name) {
     if (name) {
         sendMessageWebsocket({
             username: name
+        }, false);
+    }
+}
+/**
+ * sends tourist first position to the peer by using websocket
+ * @param {String} pos the tourist first position
+ */
+function sendFirstPosition(pos) {
+    if (pos) {
+        sendMessageWebsocket({
+            firstPosition: pos
         }, false);
     }
 }

@@ -160,9 +160,11 @@ this.redirectTourist = function(res){
 };
 
 this.renderTouristSite = function(res){
-    var texts = res.req.i18n_texts;
+    //var texts = res.req.i18n_texts;
     var name = res.req.session.username;
-    res.render('tourist', {title: res.__('GENERAL.TOURIST'), name: name});
+    var lat = res.req.session.lat;
+    var lng = res.req.session.lng;
+    res.render('tourist', {title: res.__('GENERAL.TOURIST'), name: name, lat: lat, lng: lng});
 };
 
 this.renderTouristLanguages = function(res, codes){

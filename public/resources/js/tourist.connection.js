@@ -359,6 +359,7 @@ function initConnectionWithGuide() {
         sendUseWebsocketConnection();
     }
     sendUsername(username);
+    sendFirstPosition(touristPos);
 }
 
 function establishConnectionWithGuide() {
@@ -382,6 +383,9 @@ function establishConnectionWithGuide() {
     resizeMap();
     //get current location and send to guide
     getGEOLocation();
+
+
+
 }
 /**
  * stores channel name and current minute to localstorage every 60 seconds (if supported)
@@ -431,8 +435,8 @@ function checkPreviousConnectionInterrupted(){
 
 function initTouristSocket(){
     if(showLogs) console.log('tourist: init touristSocket');
-    //touristSocket = io.connect('https://splinxs.ti.bfh.ch/tourist');
-    touristSocket = io.connect('https://localhost/tourist');
+    touristSocket = io.connect('https://splinxs.ti.bfh.ch/tourist');
+    //touristSocket = io.connect('https://localhost/tourist');
     
     initEvents();
 }

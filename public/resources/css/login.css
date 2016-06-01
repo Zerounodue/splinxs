@@ -23,9 +23,8 @@
     padding-top: 5px;
     padding-bottom: 20px;
     margin-top: 40px;
-    border: 3px;
-    border-style: solid;
-    border-color: #F2F2F2;
+    border: 3px solid #eeeeee;
+
 }
 .inputTop{
     border-bottom-left-radius: 0;

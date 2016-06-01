@@ -317,11 +317,27 @@ function onMessage(message) {
         if (showLogs) console.log('guide: peer videoState');
         if(message.videoState == videoStates.hideVideo){
             if (showLogs) console.log('guide: peer videoState = hideVideo');
+            videoMuted = true;
+            //start video
+            ico_video.addClass('lightColor');
+            ico_video.attr('src','../resources/images/icons/videoOff.png');
+            muteVideo();
             hideVideo();
+            ico_video.hide(150);
+
+
+            
         }
         else if (message.videoState == videoStates.showVideo){
             if (showLogs) console.log('guide: peer videoState = showVideo');
+            videoMuted = false;
+            //stop video
+            ico_video.removeClass('lightColor');
+            ico_video.attr('src','../resources/images/icons/videoOn.png');
+            unmuteVideo();
             showVideo();
+            ico_video.show(150);
+
         }
         return;
     }
@@ -436,8 +452,8 @@ function ongoingConnectionClosed(){
 
 function initGuideSocket(){
     if(showLogs) console.log('guide: init guideSocket');
-    guideSocket = io.connect('https://splinxs.ti.bfh.ch/guide');
-    //guideSocket = io.connect('https://localhost/guide');
+    //guideSocket = io.connect('https://splinxs.ti.bfh.ch/guide');
+    guideSocket = io.connect('https://localhost/guide');
     
     initEvents();
 }

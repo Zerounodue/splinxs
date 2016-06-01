@@ -356,13 +356,13 @@ function hideVideoControls(){
  * hides the video div
  */
 function hideVideo(){
-    videoDiv.hide();
+    videoDiv.hide(150);
 }
 /**
  * shows the video div
  */
 function showVideo(){
-    videoDiv.show();
+    videoDiv.show(150);
 }
 
 function initChat(){

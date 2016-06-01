@@ -431,8 +431,8 @@ function checkPreviousConnectionInterrupted(){
 
 function initTouristSocket(){
     if(showLogs) console.log('tourist: init touristSocket');
-    touristSocket = io.connect('https://splinxs.ti.bfh.ch/tourist');
-    //touristSocket = io.connect('https://localhost/tourist');
+    //touristSocket = io.connect('https://splinxs.ti.bfh.ch/tourist');
+    touristSocket = io.connect('https://localhost/tourist');
     
     initEvents();
 }

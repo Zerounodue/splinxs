@@ -30,9 +30,6 @@ block navbar-brand
     a#navbar-brand-scroll.navbar-brand
         img(style='height:100%', src='resources/images/splinxs.png')
 block append navbarli
-    //TODO remove index2
-    li.liClose
-        a(href="/index2") __prototypes
     //TODO do onClick in js file? is it worth it?
     li.liClose
         a(onclick="scrollTo('#body')") #{__('MENU.HOME')}
@@ -60,10 +57,44 @@ block content
     registartionOKPopup.registartionOKPopup(hidden)
         include registrationOK.jade
 
-    loginPopup.loginPopup(hidden='')
+    loginPopup.loginPopup(hidden)
         include login.jade
-    registerPopup.registerPopup(hidden='')
+    registerPopup.registerPopup(hidden)
         include register.jade
+    #smallScreenDialog.modalDialog(hidden)
+        .row
+            .col-sm-12
+                img.x.alertDialogClose(src='resources/images/icons/x.png', alt='close icon')
+        center(style="padding:10px")
+            .alertForm
+                h1 #{__('G.ATTENTION')}
+                p #{__('G.SMALL_SCREEN_MESSAGE')}
+                .row(style="margin-top:20px")
+                    .col-md-12
+                        button.btn.btn-green.btn-status.alertDialogClose(style="margin-bottom:10px;") #{__('GENERAL.OK')}
+    #badBrowserDialog.modalDialog(hidden)
+        .row
+            .col-sm-12
+                img.x.alertDialogClose(src='resources/images/icons/x.png', alt='close icon')
+        center(style="padding:10px")
+            .alertForm
+                h1 #{__('G.ATTENTION')}
+                p #{__('G.BAD_BROWSER_MESSAGE')}
+                .row(style="margin-top:20px")
+                    .col-md-12
+                        button.btn.btn-green.btn-status.alertDialogClose(style="margin-bottom:10px;") #{__('GENERAL.OK')}
+    //This messag is shown when a guide try to login with a bad browser
+    #badBrowserLoginDialog.modalDialog(hidden)
+        .row
+            .col-sm-12
+                img.x.alertDialogClose(src='resources/images/icons/x.png', alt='close icon')
+        center(style="padding:10px")
+            .alertForm
+                h1 #{__('G.ATTENTION')}
+                p #{__('G.BAD_BROWSER_MESSAGE')}
+                .row(style="margin-top:20px")
+                    .col-md-12
+                        button.btn.btn-green.btn-status.alertDialogClose(style="margin-bottom:10px;") #{__('GENERAL.OK')}
     // --- SLIDES START
     #homeSlide.slide
         .container

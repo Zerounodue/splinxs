@@ -51,6 +51,10 @@ $(document).ready(function () {
         if(showLogs) console.log('info ok button clicked');
         loginPopup.show(animDur);
         disableScroll();
+        if($(window).height()<360){
+            //alert("You might need a bigger screen");
+            $("#smallScreenDialog").show();
+        }
     });
 
     //login page
@@ -62,14 +66,24 @@ $(document).ready(function () {
         if(showLogs) console.log('btn logine close clicked');
         hideAndScroll(true);
     });
+    $("#btn-submit-login").on('click', function(e){
+        if(showLogs) console.log('btn submit login clicked');
+        //submit only with a capable browser
+        if(Modernizr.geolocation && Modernizr.eventlistener && Modernizr.input && Modernizr.inputtypes && Modernizr.json && Modernizr.websockets && Modernizr.datalistelem && Modernizr.localstorage &&  Modernizr.getusermedia &&  Modernizr.datachannel &&  Modernizr.peerconnection){
+            $('#loginForm .submit').click();
+        }
+        else{
+            $('#badBrowserLoginDialog').show();
+        }
+        
+    });
+
+
     $("#a-register").on('click', function(e){
         if(showLogs) console.log('regiser link clicked');
         loginPopup.hide(0);
         registerPopup.show(0);
-        if($(window).height()<335){
-            //TODO i18n
-            alert("You might need a bigger screen");
-        }
+
     });
 
     //register page
@@ -95,6 +109,13 @@ $(document).ready(function () {
         if(showLogs) console.log('x btn clicked');
         okPopup.hide(animDur);
     });
+    $(".alertDialogClose").on('click', function(e){
+        $("#badBrowserDialog").hide(animDur);
+        $("#smallScreenDialog").hide(animDur);
+        $("#badBrowserLoginDialog").hide(animDur);
+    });
+
+
 
 
 
@@ -108,7 +129,8 @@ $(document).ready(function () {
         //TODO want to use this variable?
         goodBrowser=false;
         setTimeout(function(){
-            alert("__\nYour browser does not support the required features\nWe recommend to use Google Chrome");
+            $("#badBrowserDialog").show();
+            //alert("__\nYour browser does not support the required features\nWe recommend to use Google Chrome");
         }, 500);
     }
 
@@ -230,6 +252,5 @@ function validate() {
             //pw2.setCustomValidity("__Passwords do not match");
         }
     }
-
-
 }
+

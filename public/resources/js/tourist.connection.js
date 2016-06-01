@@ -53,8 +53,11 @@ function initTouristConnection(){
     
     findGuideTimeout = setTimeout(function () {
         hideLoadBox();
-        alert('__sorry, no matching guide could be found...');
-        connectionClosed();
+        //alert('__sorry, no matching guide could be found...');
+        $('#noMatchDialog').show();
+        //connectionClosed is performed when pressing on the ok button
+        //connectionClosed();
+
     }, findGuideTimeoutTimer);
 
     //params needed to send data over websocket
@@ -467,8 +470,10 @@ function initEvents(){
                 initConnectionWithGuide();
             }else if(res == touristResponses.guideClosedConnection){
                 if(showLogs) console.log('tourist: touristSocket guide closed connection request');
-                alert('__Guide left connection in a mean way...');
-                connectionClosed();
+                $('#leftDialog').show();
+                //alert('__Guide left connection in a mean way...');
+                //connectionClosed is performed when pressing on the ok button
+                //connectionClosed();
             }
         }
     });

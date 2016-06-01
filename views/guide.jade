@@ -202,6 +202,30 @@ block content
                         button#modalYes.btn.btn-green.btn-status(style="margin-bottom:10px;") #{__('GENERAL.YES')}
                     .col-md-6
                         button#modalNo.btn.btn-white.btn-status(style="margin-bottom:10px") #{__('GENERAL.NO')}
+    //message displyed when tourits left without closing connection
+    #leftDialog.modalDialog(hidden)
+        .row
+            .col-sm-12
+                img.x.leftDialogClose(src='resources/images/icons/x.png', alt='close icon')
+        center(style="padding:10px")
+            .alertForm
+                h1 #{__('G.ATTENTION')}
+                p #{__('G.T_LEFT_MESSAGE')}
+                .row(style="margin-top:20px")
+                    .col-md-12
+                        button.btn.btn-green.btn-status.leftDialogClose(style="margin-bottom:10px;") #{__('GENERAL.OK')}
+    //message displayed when guide accepts help but anoter guide alredy accepted
+    #toLateDialog.modalDialog(hidden)
+        .row
+            .col-sm-12
+                img.x.toLateDialogClose(src='resources/images/icons/x.png', alt='close icon')
+        center(style="padding:10px")
+            .alertForm
+                h1 #{__('G.ATTENTION')}
+                p #{__('G.TO_LATE_MESSAGE')}
+                .row(style="margin-top:20px")
+                    .col-md-12
+                        button.btn.btn-green.btn-status.toLateDialogClose(style="margin-bottom:10px;") #{__('GENERAL.OK')}
 
 
 

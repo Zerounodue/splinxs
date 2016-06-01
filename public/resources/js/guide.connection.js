@@ -477,15 +477,17 @@ function initEvents(){
                 return;
             }else if(req == guideRequests.tooLate){
                 if(showLogs) console.log('guide: guideSocket tooLate request');
-                alert('__you are too late, another guide helped the tourist');
+                $('#toLateDialog').show();
+                //alert('__you are too late, another guide helped the tourist');
             }else if(req == guideRequests.touristClosedConnection){
                 if(!c2P) return; //connection should already be closed
                 if(showLogs) console.log('guide: guideSocket tourist closed connection request');
-                alert('__Tourist left connection in a mean way...');
+
+                //alert('__Tourist left connection in a mean way...');
+                $('#leftDialog').show();
                 connectionClosed();
             }
         }
-
     });
 }
 

@@ -22,6 +22,8 @@ var ico_video;
 
 var audioMuted = false;
 var videoMuted = true;
+
+var animDur = 400;
 /**
  * initialises ui variables for tourist
  * !needs to be called in document.ready()!
@@ -120,6 +122,11 @@ function initTouristButtons(){
 
     $("#btn_gps_tourist").on('click', function(e){
         centerAndResize();
+    });
+
+    //Ok buttons of tourist alert
+    $(".t_redirectHome").on('click', function(e){
+        connectionClosed();
     });
 }
 

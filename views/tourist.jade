@@ -52,6 +52,29 @@ block append navbarli
         a#touristControlsBtn __controls
 
 block content
+    #leftDialog.modalDialog(hidden)
+        .row
+            .col-sm-12
+                img.x.t_redirectHome(src='resources/images/icons/x.png', alt='close icon')
+        center(style="padding:10px")
+            .alertForm
+                h1 #{__('T.ATTENTION')}
+                p #{__('T.T_LEFT_MESSAGE')}
+                .row(style="margin-top:20px")
+                    .col-md-12
+                        button.btn.btn-blue.btn-status.t_redirectHome(style="margin-bottom:10px;") #{__('GENERAL.OK')}
+    #noMatchDialog.modalDialog(hidden)
+        .row
+            .col-sm-12
+                img.x.t_redirectHome(src='resources/images/icons/x.png', alt='close icon')
+        center(style="padding:10px")
+            .alertForm
+                h1 #{__('T.SORRY')}
+                p #{__('T.NO_MATCH_MESSAGE')}
+                .row(style="margin-top:20px")
+                    .col-md-12
+                        button.btn.btn-blue.btn-status.t_redirectHome(style="margin-bottom:10px;") #{__('GENERAL.OK')}
+
     #loadBox.load(hidden='')
         h2 #{__('T.LOADING_H2')}
 

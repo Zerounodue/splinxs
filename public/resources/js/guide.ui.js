@@ -296,6 +296,18 @@ function initGuideButtons() {
         }
         videoMuted = !videoMuted;
     });
+
+
+    $(".leftDialogClose").click(function (e) {
+        $('#leftDialog').hide(animDur);
+        connectionClosed();
+    });
+    $(".toLateDialogClose").click(function (e) {
+        $('#toLateDialog').hide(animDur);
+    });
+
+
+
 }
 
 

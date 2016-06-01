@@ -57,16 +57,20 @@ $(document).ready(function () {
         if(languages.length > 0){
             submitLanguages();
         }else{
-            alert('__no languages selected');
+            //alert('__no languages selected');
+            $("#nothingSelected").show();
             //prevent form from being submitted
             return false;
         }
         
     });
+    $(".nothingSelectedClose").click(function () {
+        $("#nothingSelected").hide(animDur);
+    });
 
     if (!Modernizr.datalistelem) {
-        alert('This browser does not support HTML5 datalist element, please use the select');
-        $("#inp_languages").hide();
+        //alert('This browser does not support HTML5 datalist element, please use the select');
+        $("#inp_languages").hide(animDur);
     }
 
 });

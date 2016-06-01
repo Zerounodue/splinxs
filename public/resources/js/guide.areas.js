@@ -64,12 +64,15 @@ $(document).ready(function () {
         if(n > 0){
             saveCircles();
         }else{
-            //TODO something useful
-            alert('__No areas selected...');
+            //no areas are selected
+            $("#nothingSelected").show();
         }
 
     });
-
+    $(".nothingSelectedClose").click(function () {
+        $("#nothingSelected").hide(animDur);
+    });
+    
 
     $("#mapControlRemoveCircles").click(function () {
         if(showLogs) console.log('mapControlRemoveCircles clicked');

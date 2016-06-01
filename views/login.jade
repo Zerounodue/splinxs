@@ -20,13 +20,14 @@ center
         .alert.alert-green(role="alert")
           |#{__('LOGIN.ERROR_MESSAGE')}
 
-      form.form-signin(role='form', action="/index",method="post", style='max-width: 300px;')
+      form.form-signin(id="loginForm" role='form', action="/index",method="post", style='max-width: 300px;')
 
         input.form-control.inputTop(maxlength="40" type='text', name="username", placeholder="#{__('LOGIN.USERNAME')}", required, autofocus, value='#{username ? username : ""}')
         input.form-control.inputBottom(maxlength="40" type='password', name="password", placeholder="#{__('LOGIN.PASSWORD')}", required)
         .row.row-login
           .col-xs-6
-            button.btn.btn-green.btn-login(type='submit') #{__('LOGIN.LOGIN')}
+            a#btn-submit-login.btn.btn-green.btn-login #{__('LOGIN.LOGIN')}
+            button.submit(type="submit", hidden)
           .col-xs-6
             a#btn-close-login.btn.btn-white.btn-login #{__('GENERAL.CANCEL')}
         .row

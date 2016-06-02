@@ -18,6 +18,9 @@
 var touristOrient = 0;
 var firstTime = true;
 var data = {tourist: { pos: null, orientation: null }};
+var lastOrientation = 0;
+//
+var minOrinetationChange =2;
 /**
  * adds a new marker created by the tourist to the map and saves it in an array
  * @param {int} id id of marker
@@ -156,9 +159,11 @@ function initToutistOrientation(){
             }
         }
         if(touristOrient > -1){
-            setTouristOrientation(touristOrient);
-            sendTouristOrientation(touristOrient);
-
+            if( Math.abs(lastOrientation - touristOrient) > minOrinetationChange) {
+                setTouristOrientation(touristOrient);
+                sendTouristOrientation(touristOrient);
+                lastOrientation = touristOrient;
+            }
         }
         else{
             if(showLogs) console.log('Tourist: invalid  orientation, will not send to guide');

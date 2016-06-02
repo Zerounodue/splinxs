@@ -134,7 +134,7 @@ function sendTouristOrientation(touristOrient){
 
 function initToutistOrientation(){
     window.addEventListener('deviceorientation', function(e) {
-        if (showLogs)console.log('tourist: orientation changed');
+        //if (showLogs)console.log('tourist: orientation changed');
         /*
          var heading = 'heading: ' + e.webkitCompassHeading +
          '\n' +
@@ -156,8 +156,9 @@ function initToutistOrientation(){
             }
         }
         if(touristOrient > -1){
-            sendTouristOrientation();
             setTouristOrientation(touristOrient);
+            sendTouristOrientation(touristOrient);
+
         }
         else{
             if(showLogs) console.log('Tourist: invalid  orientation, will not send to guide');

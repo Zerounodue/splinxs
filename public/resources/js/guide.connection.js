@@ -113,7 +113,7 @@ function initGuideWebRTCEvents(){
         if (connection.alreadyOpened) return;
         connection.alreadyOpened = true;
         startAudioStream();
-        showAudioVideoIcons();
+        //showAudioVideoIcons();
     };
 
 
@@ -353,6 +353,7 @@ function onMessage(message) {
         peername = message.username;
         sendUsername(username);
         showChatMapGUI();
+        hideVideoControls();
         informServerOngoingConnection();
         //set param on db that guide is connected to tourist
         ongoingConnectionInterval = setInterval(function () {
@@ -467,8 +468,8 @@ function ongoingConnectionClosed(){
 
 function initGuideSocket(){
     if(showLogs) console.log('guide: init guideSocket');
-    guideSocket = io.connect('https://splinxs.ti.bfh.ch/guide');
-    //guideSocket = io.connect('https://localhost/guide');
+    //guideSocket = io.connect('https://splinxs.ti.bfh.ch/guide');
+    guideSocket = io.connect('https://localhost/guide');
     
     initEvents();
 }

@@ -60,8 +60,8 @@ function initUI(isGuide){
     isTypingSpan = $("#spn_isTyping");
     mapDiv = $("#hammerContainer");
     videoDiv=$("#hammerVideo");
-    videoControlsDiv = $("#videoControlsBox");
-    audioControlsDiv = $("#audioControlsBox");
+    videoControlsDiv = $("#ico_video");
+    audioControlsDiv = $("#ico_audio");
     spinner = $('.spinnerChat');
     if(isGuide){
         myAvatarIcon = "resources/images/guide.png";

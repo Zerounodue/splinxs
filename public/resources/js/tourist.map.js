@@ -17,7 +17,7 @@
 //variables
 var touristOrient = 0;
 var firstTime = true;
-
+var data = {tourist: { pos: null, orientation: null }};
 /**
  * adds a new marker created by the tourist to the map and saves it in an array
  * @param {int} id id of marker
@@ -96,8 +96,8 @@ function sendTouristLocation(){
      }
      */
     if(showLogs) console.warn('sending tourist location ');
-    var data = {tourist: { pos: null, orientation: null }};
 
+    //var data = {tourist: { pos: null, orientation: null }};
     data.tourist.pos = touristPos;
     sendMapData(data);
     /*
@@ -115,7 +115,8 @@ function sendTouristLocation(){
 function sendTouristOrientation(touristOrient){
     if(showLogs) console.log('sending tourist  orientation');
 
-    var data = data.tourist.orientation = touristOrient;
+    //var data = data.tourist.orientation = touristOrient;
+    data.tourist.orientation = touristOrient;
     sendMapData(data);
         //set orientation on tourist map
         //setTouristOrientation(touristOrient);
@@ -131,40 +132,40 @@ function sendTouristOrientation(touristOrient){
 }
 
 
-
-window.addEventListener('deviceorientation', function(e) {
-    /*
-     var heading = 'heading: ' + e.webkitCompassHeading +
-     '\n' +
-     'headingAccuracy: ' + e.webkitCompassAccuracy;
-     alert(heading);
-     */
-
-    if ( e.webkitCompassHeading != null) {
+function initToutistOrientation(){
+    window.addEventListener('deviceorientation', function(e) {
+        if (showLogs)console.log('tourist: orientation changed');
+        /*
+         var heading = 'heading: ' + e.webkitCompassHeading +
+         '\n' +
+         'headingAccuracy: ' + e.webkitCompassAccuracy;
+         alert(heading);
+         */
         //only for webkit browser (iOS)
-        touristOrient = e.webkitCompassHeading;
-    }
-    else{
-        //android
-        if(e.alpha != null){
-            touristOrient=e.alpha;
+        if ( e.webkitCompassHeading != null) {
+            touristOrient = e.webkitCompassHeading;
         }
         else{
-            if (showLogs)console.log('tourist: impossible to get heading');
-            return;
+            //android
+            if(e.alpha != null){
+                touristOrient=e.alpha;
+            }
+            else{
+                if (showLogs)console.log('tourist: impossible to get heading');
+                return;
+            }
         }
-    }
+        if(touristOrient > -1){
+            sendTouristOrientation();
+            setTouristOrientation(touristOrient);
+        }
+        else{
+            if(showLogs) console.log('Tourist: invalid  orientation, will not send to guide');
+        }
 
+    }, false);
+}
 
-    if(touristOrient > -1){
-        sendTouristOrientation();
-        setTouristOrientation(touristOrient);
-    }
-    else{
-        if(showLogs) console.log('Tourist: invalid  orientation, will not send to guide');
-    }
-
-}, false);
 
 
 

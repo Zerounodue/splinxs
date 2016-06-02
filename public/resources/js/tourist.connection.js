@@ -382,6 +382,7 @@ function establishConnectionWithGuide() {
     centerAndResize();
     //get current location and send to guide
     getGEOLocation();
+    initToutistOrientation();
 
 
 

@@ -227,9 +227,9 @@ function setTouristLocation(pos){
 
     //userMarker.setPosition(pos);
     if(line != null)line.setMap(null);
-
+    
     line = new google.maps.Polyline({
-        path: [pos, pos],
+        path: [touristPos, touristPos],
         icons: [
             {
                 icon: symbolLeft,
@@ -249,13 +249,14 @@ function setTouristLocation(pos){
  */
 function setTouristOrientation(orient) {
     if(showLogs) console.log('tourist orientation: ' + orient);
+
     //userMarker.setMap(null);
     //touristPosMarker.rotation = 45;
     symbolLeft.rotation=orient;
     symbolRight.rotation=orient;
     if(line == null){
         line = new google.maps.Polyline({
-            path: [pos, pos],
+            path: [touristPos, touristPos],
             icons: [
                 {
                     icon: symbolLeft,

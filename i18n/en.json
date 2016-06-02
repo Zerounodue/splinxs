@@ -91,7 +91,7 @@
 		"DESCRIPTION_TOURIST": "You are somewhere unfamiliar and need help? Don't worry, a guide will help you. Thanks to camera, microphone, GPS and chat the guide will see what you see, speak with you and guide you to your destination.",
 		"I_AM_GUIDE": "I am a guide",
 		"I_AM_TOURIST": "I am a tourist",
-		"LOCATION_DESCRIPTION": "Realtime location services enables the guide to know the tourist’s location. Both tourist and guide have the possibility mark places on a map to highlight a location.",
+		"LOCATION_DESCRIPTION": "Realtime location services enables the guide to know the tourist’s location. Both tourist and guide have the possibility to mark places on a map to highlight a location.",
 		"SPLINXS_SUBTITLE": "The Realtime Tourist Guidance",
 		"VIDEO_DESCRIPTION": "Realtime video enables the guide to see what the tourist sees. The tourist’s mobile device’s camera becomes the eyes of the guide. Now the guide can make sense of the tourist’s environment."
 	},

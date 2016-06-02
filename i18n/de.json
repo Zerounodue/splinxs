@@ -79,15 +79,15 @@
         "ITALIAN": "Italiano"
     },
     "INDEX": {
-        "AUDIO_DESCRIPTION": "Mit Echtzeit Audio können Guide und Tourist miteinander sprechen.",
-        "CHAT_DESCRIPTION": "Mit Echtzeit Chat können Guide und Tourist miteinander Nachrichten austauschen.",
+        "AUDIO_DESCRIPTION": "Mit Echtzeit Audio können Guide und Tourist miteinander sprechen. Der Tourist kann dem Guide die Situation erklären, damit der Tourist sein Ziel erreichen kann.",
+        "CHAT_DESCRIPTION": "Mit Echtzeit Chat können Guide und Tourist miteinander Nachrichten austauschen. Je nach Situation sind Textnachrichten der Effizienteste und bequemste Weg um zu kommunizieren.",
         "DESCRIPTION_GUIDE": "Du kennst einige Gebiete sehr gut und willst jemandem helfen der dort ist? Registriere dich jetzt um zu helfen.",
         "DESCRIPTION_TOURIST": "Du bist an einem fremden Ort und brauchst Hilfe? Keine Sorge, ein Guide wird dir helfen. Dank Kamera, Mikrophon GPS und Chat kann der Guide sehen was du siehst und dich sicher an dein Ziel bringen.",
         "I_AM_GUIDE": "Ich bin ein Guide",
         "I_AM_TOURIST": "Ich bin ein Tourist",
-        "LOCATION_DESCRIPTION": "Mit Echtzeit Positionsdiensten weiss der Guide wo sich der Tourist gerade befindet.",
+        "LOCATION_DESCRIPTION": "Mit Echtzeit Positionsdiensten weiss der Guide wo sich der Tourist gerade befindet. Tourist und Guide haben die Möglichkeit Markierungen zu seten, um bestimmte Orte hervorzuheben.",
         "SPLINXS_SUBTITLE": "The Realtime Tourist Guidance",
-        "VIDEO_DESCRIPTION": "Mit Echtzeit Video kann der Guide sehen, was der Tourist sieht."
+        "VIDEO_DESCRIPTION": "Mit Echtzeit Video kann der Guide sehen, was der Tourist sieht. Die Kamera des Mobilgerätes des Touristen wird zu den Augen des Guides. Nun kann sich der Guide in der Umgebund des Touristen zurecht finden."
     },
     "LOGIN": {
         "ERROR_MESSAGE": "Benutzername oder Passowrd falsch",

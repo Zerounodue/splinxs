@@ -19,8 +19,8 @@ var touristOrient = 0;
 var firstTime = true;
 var data = {tourist: { pos: null, orientation: null }};
 var lastOrientation = 0;
-//
-var minOrinetationChange =2;
+//orientation is send only if the difference is greater than minOrinetationChange
+var minOrinetationChange =10;
 /**
  * adds a new marker created by the tourist to the map and saves it in an array
  * @param {int} id id of marker

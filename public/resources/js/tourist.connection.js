@@ -379,8 +379,7 @@ function establishConnectionWithGuide() {
     hideLoadBox();
     showChatMapGUI();
     showTouristUI();
-    //map is gray when it is not resized
-    resizeMap();
+    centerAndResize();
     //get current location and send to guide
     getGEOLocation();
 

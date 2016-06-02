@@ -227,7 +227,7 @@ function setTouristLocation(pos){
 
     //userMarker.setPosition(pos);
     if(line != null)line.setMap(null);
-    
+
     line = new google.maps.Polyline({
         path: [touristPos, touristPos],
         icons: [
@@ -271,9 +271,11 @@ function setTouristOrientation(orient) {
         });
 
     }
-    
-    //line.setMap(null);
-    //line.setMap(map);
+
+    if(line != null) {
+        line.setMap(null);
+        line.setMap(map);
+    }
     //line.icons=icons;
     //line.map =map;
     ////userMarker.icon= touristPosMarker;

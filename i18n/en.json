@@ -1,156 +1,155 @@
 {
-	"ERROR": {
-		"CRAPPY_BROWSER": "Your browser does not support all the functionalities that Splinxs offers. Please use either Chrome, Firefox or Opera.",
-		"CRAPPY_BROWSER_GUIDE": "Your browser can't be used as a Splinxs guide. You must use either Chrome, Firefox or Opera.",
-		"NO_MICROPHONE": "You need a microphone in order to work as a Splinxs guide."
-	},
-	"GENERAL": {
-		"AUDIO": "Audio",
-		"BACK": "Back",
-		"CANCEL": "Cancel",
-		"CHAT": "Chat",
-		"GUIDE": "Guide",
-		"NO": "No",
-		"OK": "Ok",
-		"LOCATION": "Location",
-		"SEND": "Send",
-		"SPLINXS": "Splinxs",
-		"SUBMIT": "Submit",
-		"SURE_TO_LEAVE": "Do you really want to leave this website?",
-		"TOURIST": "Tourist",
-		"VIDEO": "Video",
-		"YES": "Yes"
-	},
-	"G": {
-		"ATTENTION": "Attention",
-		"AVAILABLE": "available",
-		"CHANGE_STATUS": "Change status",
-		"CLOSE_CONNECTION": "Close connection",
-		"MESSAGE_H5": "Thank you for being a guide, once a tourist needs your help, you will be notified.",
-		"ONLINE": "You are online",
-		"TYPE_MESSAGE": "Type message...",
-		"T_HELP_MESSAGE": "A tourist needs you, do you want to help?",
-		"UNAVAILABLE": "unavailable",
-		"STATUS": "Status:",
-		"NO_LANG_SELECTED": "G.NO_LANG_SELECTED",
-		"NO_AREA_SELECTED": "G.NO_AREA_SELECTED",
-		"SMALL_SCREEN_MESSAGE": "G.SMALL_SCREEN_MESSAGE",
-		"BAD_BROWSER_MESSAGE": "G.BAD_BROWSER_MESSAGE",
-		"T_LEFT_MESSAGE": "G.T_LEFT_MESSAGE",
-		"TO_LATE_MESSAGE": "G.TO_LATE_MESSAGE"
-	},
-	"G_AREAS": {
-		"ADD": "Add",
-		"ADD_DESCRIPTION": "Click on the map to draw an area",
-		"DESCRIPTION": "Add circles to mark the region that you know well. Only tourists that are in these regions will contact you.  You can change the center and radius of existing circles or delete them.",
-		"G_AREAS": "Guide Areas",
-		"OK": "Ok",
-		"PAN": "Pan",
-		"PAN_DESCRIPTION": "Drag on the map to move around ",
-		"REMOVE": "Remove",
-		"REMOVE_DESCRIPTION": "Click on an area to delete it",
-		"SEARCH": "Search for places...",
-		"SEND_AREAS": "Send areas"
-	},
-	"G_LANGUAGES": {
-		"LANGUAGES_INTRO": "Please choose all your spooken languages",
-		"OPTIONS": "Select your option",
-		"SEARCH": "Type to search",
-		"SEND": "Send languages",
-		"TITLE": "Guide Languages"
-	},
-	"G_PASSWORD": {
-		"G_PASSWORD": "Guide Password"
-	},
-	"MENU": {
-		"ABOUT_US": "About us",
-		"ABOUT_US_ELIA": "Can speak Italian!",
-		"ABOUT_US_INTRODUCTION": "We are both students at the Bern University of Applied Sciences in Biel",
-		"ABOUT_US_PHIL": "Can't speak Italian...",
-		"CHANGE_AREAS": "Change areas",
-		"CHANGE_LANGUAGES": "Change languages",
-		"CHANGE_PASSWORD": "Change password",
-		"CONTACT": "Contact",
-		"CONTACT_DESCRIPTION": "For more information please send us an email",
-		"CONTACT_MAIL": "info.splinxs@gmail.com",
-		"HOME": "Home",
-		"LANGUAGES": "Languages",
-		"LOGOUT": "Logout",
-		"WHAT_IS_SPLINXS": "What is Splinxs",
-		"SETTINGS": "Settings"
-	},
-	"LANGUAGES": {
-		"ENGLISH": "English",
-		"GERMAN": "Deutsch",
-		"ITALIAN": "Italiano"
-	},
-	"INDEX": {
-		"AUDIO_DESCRIPTION": "Realtime audio enables tourist and guide to talk together. The tourist can explain the situation to the guide which can help achieving the tourist’s goal.",
-		"CHAT_DESCRIPTION": "Realtime chat enables tourist and guide to share messages. In some situations text messages might be the fastest and most convenient way to communicate.",
-		"DESCRIPTION_GUIDE": "You know some places very well and want to help someone who is there? Sign up and start helping people right now.",
-		"DESCRIPTION_TOURIST": "You are somewhere unfamiliar and need help? Don't worry, a guide will help you. Thanks to camera, microphone, GPS and chat the guide will see what you see, speak with you and guide you to your destination.",
-		"I_AM_GUIDE": "I am a guide",
-		"I_AM_TOURIST": "I am a tourist",
-		"LOCATION_DESCRIPTION": "Realtime location services enables the guide to know the tourist’s location. Both tourist and guide have the possibility to mark places on a map to highlight a location.",
-		"SPLINXS_SUBTITLE": "The Realtime Tourist Guidance",
-		"VIDEO_DESCRIPTION": "Realtime video enables the guide to see what the tourist sees. The tourist’s mobile device’s camera becomes the eyes of the guide. Now the guide can make sense of the tourist’s environment."
-	},
-	"LOGIN": {
-		"ERROR_MESSAGE": "Wrong username or passowrd",
-		"FORGOT": "Forgot password?",
-		"LOGIN": "Login",
-		"LOGIN_MESSAGE": "Login to help desperate tourists",
-		"PASSWORD": "Password",
-		"SIGN_UP": "Sign up now!",
-		"USERNAME": "Username"
-	},
-	"REGISTER": {
-		"BACK": "Back to login",
-		"COMPLETE": "Registartion complete",
-		"EMAIL": "Email",
-		"EMAIL_TAKEN": "Email already taken",
-		"FORGOT": "Forgot password?",
-		"H3MESSAGE": "You are an offical Splinxs guide!",
-		"PASSWORD": "Password",
-		"R_PASSWORD": "Repeat password",
-		"REGISTER": "Register",
-		"SIGN_UP_MESSAGE": "Sign up and become a Splinxs guide",
-		"THANKYOUMESSAGE": "Now you can login and start helping tourists that need your help",
-		"USERNAME": "Username",
-		"USERNAME_TAKEN": "Username already taken"
-	},
-	"T": {
-		"CLOSE_CONNECTION": "Close connection",
-		"NO_MICROPHONE": "You have no microphone",
-		"LOADING_H2": "Searching for guides",
-		"LOADING_P": "This might take a while...",
-		"ATTENTION": "T.ATTENTION",
-		"NO_LANG_SELECTED": "T.NO_LANG_SELECTED",
-		"T_LEFT_MESSAGE": "T.T_LEFT_MESSAGE",
-		"SORRY": "T.SORRY",
-		"NO_MATCH_MESSAGE": "T.NO_MATCH_MESSAGE"
-	},
-	"T_LANGUAGES": {
-		"T_LANGUAGES": "Tourist Languages",
-		"LANGUAGES_INTRO": "Select all your spoken languages and the relative skill",
-		"SEND": "Send languages",
-		"SKILL": "Choose your skill",
-		"SPOKEN_LANGUAGES": "Spoken languages"
-	},
-	"T_LOCATION": {
-		"ADD_POS": "Add a position",
-		"ADD_POS_MAN": "you can add a position manually",
-		"AUTO_GPS": "Use GPS",
-		"CLICK_MAP": "click on the map to add your current position",
-		"CLOSE": "Close",
-		"CONTINUE": "Continue",
-		"GETTING_GPS": "Getting GPS position, please wait....",
-		"GUIDE_WILL_HELP": "a guide that knows this region will help you",
-		"IMP_GET_GPS": "Impossible to get the current location",
-		"INFO": "Info",
-		"OK": "Ok",
-		"OTHER_ERROR": "an error occurred",
-		"PERMISSION_DENIED": "permission denied, add your position by hand",
-		"T_LOCATION": "Tourist Location"
-	}
+    "ERROR": {
+        "CRAPPY_BROWSER": "Your browser does not support all the functionalities that Splinxs offers. Please use either Chrome, Firefox or Opera.",
+        "CRAPPY_BROWSER_GUIDE": "Your browser can't be used as a Splinxs guide. You must use either Chrome, Firefox or Opera.",
+        "NO_MICROPHONE": "You need a microphone in order to work as a Splinxs guide."
+    },
+    "GENERAL": {
+        "AUDIO": "Audio",
+        "BACK": "Back",
+        "CANCEL": "Cancel",
+        "CHAT": "Chat",
+        "GUIDE": "Guide",
+        "NO": "No",
+        "OK": "Ok",
+        "LOCATION": "Location",
+        "SEND": "Send",
+        "SPLINXS": "Splinxs",
+        "SUBMIT": "Submit",
+        "SURE_TO_LEAVE": "Do you really want to leave this website?",
+        "TOURIST": "Tourist",
+        "VIDEO": "Video",
+        "YES": "Yes"
+    },
+    "G": {
+        "ATTENTION": "Attention",
+        "AVAILABLE": "available",
+        "CHANGE_STATUS": "Change status",
+        "CLOSE_CONNECTION": "Close connection",
+        "MESSAGE_H5": "Thank you for being a guide, once a tourist needs your help, you will be notified.",
+        "ONLINE": "You are online",
+        "TYPE_MESSAGE": "Type message...",
+        "T_HELP_MESSAGE": "A tourist needs you, do you want to help?",
+        "UNAVAILABLE": "unavailable",
+        "STATUS": "Status:",
+        "NO_LANG_SELECTED": "You have to select at least one language.",
+        "NO_AREA_SELECTED": "You have to set at least one area.",
+        "SMALL_SCREEN_MESSAGE": "You might need a bigger screen to access all contents of this website.",
+        "T_LEFT_MESSAGE": "The tourist's connection was interrupted.",
+        "TO_LATE_MESSAGE": "The tourist already received help from another guide."
+    },
+    "G_AREAS": {
+        "ADD": "Add",
+        "ADD_DESCRIPTION": "Click on the map to draw an area",
+        "DESCRIPTION": "Add circles to mark the region that you know well. Only tourists that are in these regions will contact you.  You can change the center and radius of existing circles or delete them.",
+        "G_AREAS": "Guide Areas",
+        "OK": "Ok",
+        "PAN": "Pan",
+        "PAN_DESCRIPTION": "Drag on the map to move around ",
+        "REMOVE": "Remove",
+        "REMOVE_DESCRIPTION": "Click on an area to delete it",
+        "SEARCH": "Search for places...",
+        "SEND_AREAS": "Send areas"
+    },
+    "G_LANGUAGES": {
+        "LANGUAGES_INTRO": "Please choose all your spooken languages",
+        "OPTIONS": "Select your option",
+        "SEARCH": "Type to search",
+        "SEND": "Send languages",
+        "TITLE": "Guide Languages"
+    },
+    "G_PASSWORD": {
+        "G_PASSWORD": "Guide Password"
+    },
+    "MENU": {
+        "ABOUT_US": "About us",
+        "ABOUT_US_ELIA": "Can speak Italian!",
+        "ABOUT_US_INTRODUCTION": "We are both students at the Bern University of Applied Sciences in Biel",
+        "ABOUT_US_PHIL": "Can't speak Italian...",
+        "CHANGE_AREAS": "Change areas",
+        "CHANGE_LANGUAGES": "Change languages",
+        "CHANGE_PASSWORD": "Change password",
+        "CONTACT": "Contact",
+        "CONTACT_DESCRIPTION": "For more information please send us an email",
+        "CONTACT_MAIL": "info.splinxs@gmail.com",
+        "HOME": "Home",
+        "LANGUAGES": "Languages",
+        "LOGOUT": "Logout",
+        "WHAT_IS_SPLINXS": "What is Splinxs",
+        "SETTINGS": "Settings"
+    },
+    "LANGUAGES": {
+        "ENGLISH": "English",
+        "GERMAN": "Deutsch",
+        "ITALIAN": "Italiano"
+    },
+    "INDEX": {
+        "AUDIO_DESCRIPTION": "Realtime audio enables tourist and guide to talk together. The tourist can explain the situation to the guide which can help achieving the tourist’s goal.",
+        "CHAT_DESCRIPTION": "Realtime chat enables tourist and guide to share messages. In some situations text messages might be the fastest and most convenient way to communicate.",
+        "DESCRIPTION_GUIDE": "You know some places very well and want to help someone who is there? Sign up and start helping people right now.",
+        "DESCRIPTION_TOURIST": "You are somewhere unfamiliar and need help? Don't worry, a guide will help you. Thanks to camera, microphone, GPS and chat the guide will see what you see, speak with you and guide you to your destination.",
+        "I_AM_GUIDE": "I am a guide",
+        "I_AM_TOURIST": "I am a tourist",
+        "LOCATION_DESCRIPTION": "Realtime location services enables the guide to know the tourist’s location. Both tourist and guide have the possibility to mark places on a map to highlight a location.",
+        "SPLINXS_SUBTITLE": "The Realtime Tourist Guidance",
+        "VIDEO_DESCRIPTION": "Realtime video enables the guide to see what the tourist sees. The tourist’s mobile device’s camera becomes the eyes of the guide. Now the guide can make sense of the tourist’s environment."
+    },
+    "LOGIN": {
+        "ERROR_MESSAGE": "Wrong username or passowrd",
+        "FORGOT": "Forgot password?",
+        "LOGIN": "Login",
+        "LOGIN_MESSAGE": "Login to help desperate tourists",
+        "PASSWORD": "Password",
+        "SIGN_UP": "Sign up now!",
+        "USERNAME": "Username"
+    },
+    "REGISTER": {
+        "BACK": "Back to login",
+        "COMPLETE": "Registartion complete",
+        "EMAIL": "Email",
+        "EMAIL_TAKEN": "Email already taken",
+        "FORGOT": "Forgot password?",
+        "H3MESSAGE": "You are an offical Splinxs guide!",
+        "PASSWORD": "Password",
+        "R_PASSWORD": "Repeat password",
+        "REGISTER": "Register",
+        "SIGN_UP_MESSAGE": "Sign up and become a Splinxs guide",
+        "THANKYOUMESSAGE": "Now you can login and start helping tourists that need your help",
+        "USERNAME": "Username",
+        "USERNAME_TAKEN": "Username already taken"
+    },
+    "T": {
+        "CLOSE_CONNECTION": "Close connection",
+        "NO_MICROPHONE": "You have no microphone",
+        "LOADING_H2": "Searching for guides",
+        "LOADING_P": "This might take a while...",
+        "ATTENTION": "Attention",
+        "NO_LANG_SELECTED": "You have to select at least one language.",
+        "G_LEFT_MESSAGE": "The guide's connection was interrupted.",
+        "SORRY": "Sorry",
+        "NO_MATCH_MESSAGE": "No matching guide could be found."
+    },
+    "T_LANGUAGES": {
+        "T_LANGUAGES": "Tourist Languages",
+        "LANGUAGES_INTRO": "Select all your spoken languages and the relative skill",
+        "SEND": "Send languages",
+        "SKILL": "Choose your skill",
+        "SPOKEN_LANGUAGES": "Spoken languages"
+    },
+    "T_LOCATION": {
+        "ADD_POS": "Add a position",
+        "ADD_POS_MAN": "you can add a position manually",
+        "AUTO_GPS": "Use GPS",
+        "CLICK_MAP": "click on the map to add your current position",
+        "CLOSE": "Close",
+        "CONTINUE": "Continue",
+        "GETTING_GPS": "Getting GPS position, please wait....",
+        "GUIDE_WILL_HELP": "a guide that knows this region will help you",
+        "IMP_GET_GPS": "Impossible to get the current location",
+        "INFO": "Info",
+        "OK": "Ok",
+        "OTHER_ERROR": "an error occurred",
+        "PERMISSION_DENIED": "permission denied, add your position by hand",
+        "T_LOCATION": "Tourist Location"
+    }
 }

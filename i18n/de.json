@@ -22,7 +22,7 @@
         "YES": "Ja"
     },
     "G": {
-        "ATTENTION": "Achtung",
+        "ATTENTION": "Aufgepasst",
         "AVAILABLE": "Verfügbar",
         "CHANGE_STATUS": "Status ändern",
         "CLOSE_CONNECTION": "Verbindung beenden",
@@ -31,7 +31,12 @@
         "STATUS": "Status:",
         "T_HELP_MESSAGE": "Ein Tourist benötigt deine Hilfe, willst du helfen?",
         "TYPE_MESSAGE": "Nachricht eingeben...",
-        "UNAVAILABLE": "Nicht verfügbar"
+        "UNAVAILABLE": "Nicht verfügbar",
+        "NO_LANG_SELECTED": "Du musst mindestens eine Sprache auswählen.",
+        "NO_AREA_SELECTED": "Du musst mindestens ein Gebiet hinzufügen.",
+        "SMALL_SCREEN_MESSAGE": "Du brauchst möglicherweise einen grösseren Bildschirm um alle Teile der Webseite sehen zu können.",
+        "T_LEFT_MESSAGE": "Die Verbindung des Touristen wurde unterbrochen.",
+        "TO_LATE_MESSAGE": "Der Tourist hat bereits Hilfe von einem anderen Guide erhalten."
     },
     "G_AREAS": {
         "G_AREAS": "Guide Gebiete",
@@ -118,7 +123,12 @@
         "CLOSE_CONNECTION": "Verbindung schliessen",
         "NO_MICROPHONE": "Du hast kein Mikrophon",
         "LOADING_H2": "Suche nach Guides",
-        "LOADING_P": "Dies kann eine Weile dauern..."
+        "LOADING_P": "Dies kann eine Weile dauern...",
+        "ATTENTION": "Aufgepasst",
+        "NO_LANG_SELECTED": "Du musst mindestens eine Sprache auswählen.",
+        "G_LEFT_MESSAGE": "Die Verbindung des Guide wurde unterbrochen.",
+        "SORRY": "Entschuldigung",
+        "NO_MATCH_MESSAGE": "Kein passender Guide konnte gefunden werden."
     },
     "T_LANGUAGES": {
         "T_LANGUAGES": "Tourist Sprachen",

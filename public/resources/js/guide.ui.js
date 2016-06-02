@@ -41,10 +41,8 @@ function initGuideUI(){
     ico_audio = $("#ico_audio");
     ico_video = $("#ico_video");
     waitingBox = $("#waitingBox");
-
-
-
-    setConfirmUnload(true);
+    
+    //setConfirmUnload(true);
 
     initGuideButtons();
     initChat();
@@ -315,7 +313,7 @@ function initGuideButtons() {
 
 }
 
-
+/*
 function setConfirmUnload(on) {
     window.onbeforeunload = (on) ? unloadMessage : null;
 }
@@ -323,7 +321,7 @@ function setConfirmUnload(on) {
 function unloadMessage() {
     return "__Are you sure you want to leave this page?";
 }
-
+*/
 function muteAudio(){
     connection.attachStreams.forEach(function (stream) {
         if (stream.type == "local") {

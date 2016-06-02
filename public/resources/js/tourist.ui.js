@@ -34,14 +34,14 @@ function initTouristUI(){
     content = $("#content");
     ico_audio = $("#ico_audio");
     ico_video = $("#ico_video");
-    setConfirmUnload(true);
+    //setConfirmUnload(true);
     initTouristButtons();
     initChat();
 }
 
 function showTouristUI(){
     if(showLogs) console.log('tourist: show gui');
-    showAudioVideoIcons();
+    //showAudioVideoIcons();
 }
 
 function showLoadBox(){
@@ -185,7 +185,7 @@ function unmuteVideo(){
         }
     });
 }
-
+/*
 function setConfirmUnload(on) {
     window.onbeforeunload = (on) ? unloadMessage : null;
 }
@@ -193,7 +193,7 @@ function setConfirmUnload(on) {
 function unloadMessage() {
     return "__Are you sure you want to leave this page?";
 }
-
+*/
 
 function hideVideoStream(){
     hideVideo();

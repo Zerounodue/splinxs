@@ -103,7 +103,9 @@ function initTouristWebRTC(){
         OfferToReceiveAudio: true,
         OfferToReceiveVideo: true//DetectRTC.hasWebcam
     };
-    
+
+
+
     initTouristWebRTCEvents();
 }
 
@@ -113,6 +115,8 @@ function initTouristWebRTCEvents(){
 
         if (connection.alreadyOpened) return;
         connection.alreadyOpened = true;
+
+
     };
 
     connection.onmessage = function (message) {

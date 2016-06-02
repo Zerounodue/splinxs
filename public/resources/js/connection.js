@@ -291,14 +291,10 @@ function stopVideo() {
 
 function sendHideVideo(){
     if (showLogs) console.log('sending: only websocket hideVideo');
-    sendMessageWebsocket({
-        videoState: videoStates.hideVideo
-    });
+    sendMessageToPeer({videoState: videoStates.hideVideo}, false);
 }
 
 function sendShowVideo(){
     if (showLogs) console.log('sending: only websocket showVideo');
-    sendMessageWebsocket({
-        videoState: videoStates.showVideo
-    });
+    sendMessageToPeer({videoState: videoStates.showVideo}, false);
 }

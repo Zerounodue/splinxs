@@ -37,7 +37,8 @@
         "NO_AREA_SELECTED": "Du musst mindestens ein Gebiet hinzufügen.",
         "SMALL_SCREEN_MESSAGE": "Du brauchst möglicherweise einen grösseren Bildschirm um alle Teile der Webseite sehen zu können.",
         "T_LEFT_MESSAGE": "Die Verbindung des Touristen wurde unterbrochen.",
-        "TO_LATE_MESSAGE": "Der Tourist hat bereits Hilfe von einem anderen Guide erhalten."
+        "TO_LATE_MESSAGE": "Der Tourist hat bereits Hilfe von einem anderen Guide erhalten.",
+        "T_LEFT_CORRECTLY": "Der Tourist hat die Verbindung beendet."
     },
     "G_AREAS": {
         "G_AREAS": "Guide Gebiete",

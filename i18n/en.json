@@ -38,7 +38,7 @@
 		"SMALL_SCREEN_MESSAGE": "You might need a bigger screen to access all contents of this website.",
 		"T_LEFT_MESSAGE": "The tourist's connection was interrupted.",
 		"TO_LATE_MESSAGE": "The tourist already received help from another guide.",
-		"T_LEFT_CORRECTLY": "G.T_LEFT_CORRECTLY"
+		"T_LEFT_CORRECTLY": "The tourist closed the connection."
 	},
 	"G_AREAS": {
 		"ADD": "Add",

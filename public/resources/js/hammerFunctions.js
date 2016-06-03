@@ -57,6 +57,7 @@ $(document).ready(function () {
         }
 
     });
+    /*
     $("#videoSettings").on('click', function(e){
         if(showLogs) console.log('videoSettings  button clicked');
         $('.navbar-collapse').collapse('hide');
@@ -85,8 +86,10 @@ $(document).ready(function () {
         /*
         $("hammerDraggable").css('background-color', 'rgba(255,255,255,' + alpha + ')');​
         */
+/*
 
-        $(hammerDraggable ).fadeTo( "fast" , alpha);
+        $( "#hammerVideo" ).fadeTo( 0 , alpha);
+        $( "#videoContainer" ).fadeTo( 0 , alpha);
 
         //$("hammerDraggable").css("background-color", hex2rgba("#ABCDEF", 0.6));
         //$("hammerDraggable").opacity ($("#opacityRange").val()/100);
@@ -108,6 +111,7 @@ $(document).ready(function () {
         $(hammerDraggable).width( size);
         $(hammerDraggable).height(size );
     });
+    */
 
 });
 $( window ).resize(checkPos);

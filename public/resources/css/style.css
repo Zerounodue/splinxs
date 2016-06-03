@@ -358,9 +358,6 @@ footer {
     transition: opacity 400ms ease-in;
 }
 
-
-
-
 .helpForm{
     background-color: #f5f5f5;
     border-radius: 15px;
@@ -371,9 +368,6 @@ footer {
     border: 4px;
     border-style: solid;
     border-color: #2585C4;
-
-
-
 
     -webkit-animation: borderColorChange 4s infinite; /* Chrome, Safari, Opera */
 

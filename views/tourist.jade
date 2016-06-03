@@ -59,7 +59,7 @@ block hangUp
     img.hangUp(src='resources/images/icons/hangUp.png', alt='hang up', id="hangUp", hidden)
 block append navbarli
     li
-        a#touristControlsBtn __controls
+        a#controlsBtn __controls
 
 block content
     #leftDialog.modalDialog(hidden)
@@ -98,6 +98,25 @@ block content
                         button#leaveYes.btn.btn-green.btn-status(style="margin-bottom:10px;") #{__('GENERAL.YES')}
                     .col-md-6
                         button#leaveNo.btn.btn-white.btn-status(style="margin-bottom:10px") #{__('GENERAL.NO')}
+    #videoControlsDialog.modalDialog(hidden)
+        .row
+            .col-sm-12
+                img.x.closeVideoControlsDialog(src='resources/images/icons/x.png', alt='close icon')
+        center(style="padding:10px")
+            .alertForm.sliderContainer
+                p controls
+                .row
+                    .col-sm-12
+                        p __Opacity
+                        input#opacityRange(type='range', value='100' step='5')
+
+                .row
+                    .col-sm-12
+                        p __Size
+                        input#sizeRange(type='range', value='40' min="10")
+                .row(style="margin-top:20px")
+                    .col-md-12
+                        button.btn.btn-green.btn-status.closeVideoControlsDialog(style="margin-bottom:10px;") #{__('GENERAL.OK')}
 
     #loadBox.load(hidden='')
         h2 #{__('T.LOADING_H2')}
@@ -123,18 +142,18 @@ block content
             button#btn_unmuteVideo(type='button') __unmute video
             #myVideo
     #content
+        //
+            #touristControls.controlsPage(hidden)
+                .row
+                    .col-sm-12
+                        img.x(src='resources/images/icons/x.png', alt='close icon', id="btn_touristClose")
+                .row
+                    .col-sm-12
+                        h2(style='text-align: center;') __Controls
 
-        #touristControls.controlsPage(hidden)
-            .row
-                .col-sm-12
-                    img.x(src='resources/images/icons/x.png', alt='close icon', id="btn_touristClose")
-            .row
-                .col-sm-12
-                    h2(style='text-align: center;') __Controls
-
-            //button#btn_joinConnection(type='button') __join connection
-            button#btn_closeConnection(type='button', hidden='') #{__('T.CLOSE_CONNECTION')}
-            //br
+                //button#btn_joinConnection(type='button') __join connection
+                button#btn_closeConnection(type='button', hidden='') #{__('T.CLOSE_CONNECTION')}
+                //br
             //#audioControlsBox(hidden='')
                 //button#btn_startAudio(type='button') __start audio
                 //button#btn_stopAudio(type='button') __stop audio

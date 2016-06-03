@@ -327,8 +327,6 @@ function onMessage(message) {
             hideVideo();
             ico_video.hide(150);
 
-
-            
         }
         else if (message.videoState == videoStates.showVideo){
             if (showLogs) console.log('guide: peer videoState = showVideo');
@@ -339,7 +337,6 @@ function onMessage(message) {
             unmuteVideo();
             showVideo();
             ico_video.show(150);
-
         }
         return;
     }
@@ -374,8 +371,9 @@ function onMessage(message) {
 
 
 
-    //tourist closed the connection
+    //tourist closed the connection correctly
     if(message.closeConnection){
+        $('#connectionClosed').show();
         connectionClosed();
         return;
     }
@@ -547,7 +545,7 @@ function connectionClosed() {
     hideVideo();
     hideAudioVideoIcons();
     showWaitingBox();
-    $('#connectionClosed').show();
+
     stopStream();
     connection.alreadyOpened = false;
     peerAudioStream = null;

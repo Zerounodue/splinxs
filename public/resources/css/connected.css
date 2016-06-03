@@ -132,3 +132,8 @@ video{
     }
 }
 /* hang Up icon */
+
+.sliderContainer{
+    padding-left: 20px;
+    padding-right: 20px;
+}

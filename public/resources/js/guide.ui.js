@@ -47,10 +47,6 @@ function initGuideUI(){
 
     initGuideButtons();
     initChat();
-
-
-
-
 }
 
 function setAvailable(){
@@ -82,11 +78,11 @@ function hideAudioVideoIcons(){
 }
 
 function hideGuideControls(){
-    $("#guideControls").hide(animDur);
+    $("#videoControlsDialog").hide(animDur);
 }
 
 function showGuideControls(){
-    $("#guideControls").show(animDur);
+    $("#videoControlsDialog").show(animDur);
 }
 
 //TODO remove this unused function
@@ -191,14 +187,14 @@ function initGuideButtons() {
         if(showLogs) console.log('btn unavailable clicked');
         setAvailable();
     });
-    $("#guideControlsBtn").on('click', function(e){
+    $("#controlsBtn").on('click', function(e){
         if(showLogs) console.log('guideControlsBtn  button clicked');
         $('.navbar-collapse').collapse('hide');
         showGuideControls();
     });
 
 
-    $("#btn_guideClose").on('click', function(e){
+    $(".closeVideoControlsDialog").on('click', function(e){
         if(showLogs) console.log('guide close button clicked');
         hideGuideControls();
     });
@@ -214,6 +210,7 @@ function initGuideButtons() {
     });
 
     $("#leaveYes").on('click', function(e){
+        sureWantLeaveDialog.hide(animDur);
         closeConnection();
     });
     $("#leaveNo, #sureWantLeaveDialog_X").on('click', function(e){
@@ -325,6 +322,8 @@ function initGuideButtons() {
     $(".toLateDialogClose").click(function (e) {
         $('.modalDialog').hide(animDur);
     });
+
+    
 
 
 

@@ -77,7 +77,7 @@ block hangUp
     img.hangUp(src='resources/images/icons/hangUp.png', alt='hang up', id="hangUp", hidden)
 block append navbarli
     li
-        a#guideControlsBtn __controls
+        a#controlsBtn(hidden) __controls
     li
         a(href="/logout" id="a_logout") #{__('MENU.LOGOUT')}
     li.dropdown
@@ -95,24 +95,25 @@ block append navbarli
                 a(href) __set available
 
 block content
-    #guideControls.controlsPage(hidden)
-        .row
-            .col-sm-12
-                img.x(src='resources/images/icons/x.png', alt='close icon', id="btn_guideClose")
-        .row
-            .col-sm-12
-                h2(style='text-align: center;') __Controls
+    //
+        #guideControls.controlsPage(hidden)
+            .row
+                .col-sm-12
+                    img.x(src='resources/images/icons/x.png', alt='close icon', id="btn_guideClose")
+            .row
+                .col-sm-12
+                    h2(style='text-align: center;') __Controls
 
-        button#btn_closeConnection(type='button', hidden) #{__('G.CLOSE_CONNECTION')}
-        br
-        #audioControlsBox(hidden='')
-            //button#btn_startAudio(type='button') __start audio
-            //button#btn_stopAudio(type='button') __stop audio
+            button#btn_closeConnection(type='button', hidden) #{__('G.CLOSE_CONNECTION')}
+            br
+            #audioControlsBox(hidden='')
+                //button#btn_startAudio(type='button') __start audio
+                //button#btn_stopAudio(type='button') __stop audio
 
-        br
-        #videoControlsBox.video(hidden='')
-            //button#btn_stopVideo(type='button') __stop video
-            //#videoContainer
+            br
+            #videoControlsBox.video(hidden='')
+                //button#btn_stopVideo(type='button') __stop video
+                //#videoContainer
 
 
     #waitingBox
@@ -255,6 +256,26 @@ block content
                 .row(style="margin-top:20px")
                     .col-md-12
                         button.btn.btn-green.btn-status.toLateDialogClose(style="margin-bottom:10px;") #{__('GENERAL.OK')}
+
+    #videoControlsDialog.modalDialog(hidden)
+        .row
+            .col-sm-12
+                img.x.closeVideoControlsDialog(src='resources/images/icons/x.png', alt='close icon')
+        center(style="padding:10px")
+            .alertForm.sliderContainer
+                p controls
+                .row
+                    .col-sm-12
+                        p __Opacity
+                        input#opacityRange(type='range', value='100' step='5')
+
+                .row
+                    .col-sm-12
+                        p __Size
+                        input#sizeRange(type='range', value='40' min="10")
+                .row(style="margin-top:20px")
+                    .col-md-12
+                        button.btn.btn-green.btn-status.closeVideoControlsDialog(style="margin-bottom:10px;") #{__('GENERAL.OK')}
 
 
 

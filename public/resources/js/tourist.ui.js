@@ -64,6 +64,7 @@ function showAudioVideoIcons(){
 function hideAudioVideoIcons(){
     $("#ico_audio").hide();
     $("#ico_video").hide();
+
 }
 
 function initTouristButtons(){
@@ -109,17 +110,15 @@ function initTouristButtons(){
     });
 
 
-    $("#touristControlsBtn").on('click', function(e){
-        if(showLogs) console.log('guideControlsBtn  button clicked');
+    $("#controlsBtn").on('click', function(e){
+        if(showLogs) console.log('touristControlsBtn  button clicked');
         $('.navbar-collapse').collapse('hide');
-        $("#touristControls").show(animDur);
+        $("#videoControlsDialog").show(animDur);
     });
 
-
-    $("#btn_touristClose").on('click', function(e){
-        if(showLogs) console.log('tour close button clicked nothing happens... not implemented');
-
-        $("#touristControls").hide(animDur);
+    $(".closeVideoControlsDialog").on('click', function(e){
+        if(showLogs) console.log('guide close button clicked');
+        $("#videoControlsDialog").hide(animDur);
     });
 
     $("#btn_gps_tourist").on('click', function(e){

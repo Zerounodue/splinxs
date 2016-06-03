@@ -76,6 +76,33 @@ function initUI(isGuide){
         myAvatarIcon = "resources/images/tourist.png";
         peerAvatarIcon = "resources/images/guide.png";
     }
+
+    $("#opacityRange").on("input change", function() {
+
+        var alpha = $(this).val()/100;
+
+        $( "#hammerVideo" ).fadeTo( 0 , alpha);
+        $( "#videoContainer" ).fadeTo( 0 , alpha);
+
+        //$("#hammerdrag").css("background-color", hex2rgba("#ABCDEF", 0.6));
+        //$("#hammerdrag").opacity ($("#opacityRange").val()/100);
+    });
+    $("#sizeRange").on("input change", function() {
+        size=$("#sizeRange").val()*5 +10;
+
+        if( size > $(hammerContainer).width() || size > $(hammerContainer).height()){
+            if($(hammerContainer).width()<$(hammerContainer).height()){
+                size = $(hammerContainer).width();
+            }
+            else{
+                size= $(hammerContainer).height();
+            }
+
+        }
+        checkPos();
+        $(hammerDraggable).width( size);
+        $(hammerDraggable).height(size );
+    });
 }
 /**
  * shows the chat box
@@ -347,18 +374,21 @@ function showAudioControls(){
  */
 function hideAudioControls(){
     audioControlsDiv.hide();
+
 }
 /**
  * shows the video controls
  */
 function showVideoControls(){
     videoControlsDiv.show();
+
 }
 /**
  * hides the video controls
  */
 function hideVideoControls(){
     videoControlsDiv.hide();
+
 }
 
 /**

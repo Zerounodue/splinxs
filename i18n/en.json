@@ -17,10 +17,10 @@
 		"SPLINXS": "Splinxs",
 		"SUBMIT": "Submit",
 		"SURE_TO_LEAVE": "Do you really want to leave this website?",
+                "SURE_WANT_LEAVE": "Are you sure you want to close the connection?",
 		"TOURIST": "Tourist",
 		"VIDEO": "Video",
-		"YES": "Yes",
-		"SURE_WANT_LEAVE": "GENERAL.SURE_WANT_LEAVE"
+		"YES": "Yes"
 	},
 	"G": {
 		"ATTENTION": "Attention",

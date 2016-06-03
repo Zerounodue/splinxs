@@ -49,8 +49,13 @@ html
             block navbar-brand
               a(class='navbar-brand', href='/')
                 img(style='height:100%', src='../resources/images/splinxs.png')
+            block hangUpCollapse
+
           #navbar-ex-collapse.collapse.navbar-collapse
+
             ul.nav.navbar-nav.navbar-right
+              block hangUp
+
               block navbarli
               li.dropdown
                 a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')

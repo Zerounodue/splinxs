@@ -71,7 +71,10 @@ block append stylesheets
 block navbar-brand
     a(class='navbar-brand')
         img(style='height:100%', src='resources/images/splinxs.png')
-
+block hangUpCollapse
+    img.hangUpCollapse(src='resources/images/icons/hangUp.png', alt='hang up', id="hangUpCollapse", hidden)
+block hangUp
+    img.hangUp(src='resources/images/icons/hangUp.png', alt='hang up', id="hangUp", hidden)
 block append navbarli
     li
         a#guideControlsBtn __controls

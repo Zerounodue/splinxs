@@ -26,6 +26,8 @@ var primaryPanel;
 var isTypingSpan;
 
 var chatIsMinimised=false;
+var hangUp;
+var hangUpCollapse;
 
 
 var smallChatColors = {
@@ -63,6 +65,9 @@ function initUI(isGuide){
     videoControlsDiv = $("#ico_video");
     audioControlsDiv = $("#ico_audio");
     spinner = $('.spinnerChat');
+    hangUp = $('#hangUp');
+    hangUpCollapse = $('#hangUpCollapse');
+
     if(isGuide){
         myAvatarIcon = "resources/images/guide.png";
         peerAvatarIcon = "resources/images/tourist.png";
@@ -77,6 +82,8 @@ function initUI(isGuide){
  */
 function showChat() {
     chatBox.show();
+    hangUp.show();
+    hangUpCollapse.show();
     spinner.css('display', 'none');
 }
 /**
@@ -84,6 +91,8 @@ function showChat() {
  */
 function hideChat() {
     chatBox.hide();
+    hangUp.hide();
+    hangUpCollapse.hide();
 }
 
 //TODO remove these two functions

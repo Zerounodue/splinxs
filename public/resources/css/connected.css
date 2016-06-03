@@ -97,3 +97,38 @@ video{
         height: 40px;
     }
 }
+
+
+/* hang Up icon */
+.hangUp{
+    float: left;
+    margin: 10px;
+    width:30px;
+    height:30px;
+}
+.hangUp:hover {
+    cursor: pointer;
+}
+
+.hangUpCollapse{
+    float: right;
+    margin: 10px;
+    width:30px;
+    height:30px;
+}
+.hangUpCollapse:hover {
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    .hangUpCollapse{
+        visibility: hidden;
+    }
+
+}
+@media (max-width: 768px) {
+    .hangUp{
+        visibility: hidden;
+    }
+}
+/* hang Up icon */

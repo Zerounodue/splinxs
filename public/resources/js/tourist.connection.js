@@ -105,7 +105,37 @@ function initTouristWebRTC(){
     };
     
     //rmc line 567
-    connection.mediaConstraints.video.optional[1].facingMode = "environment";
+    //connection.mediaConstraints.video.optional[1].facingMode = "environment";
+
+    /* //can't be used to change to another camera
+    connection.mediaConstraints.video.optional.forEach(function (optional) {
+        if(optional.facingMode){
+            optional.facingMode = "environment";
+        }
+    });
+    */
+
+    //to change to back camera
+    var secondVideoDeviceId = null;
+    var devicesLength = 0;
+
+    //http://www.rtcmulticonnection.org/docs/selectDevices/
+    connection.DetectRTC.MediaDevices.forEach(function (device) {
+        //check if 2 cameras are available
+        if (device.kind.indexOf('video') !== -1) {
+            devicesLength++;
+            if (devicesLength == 2) {
+                secondVideoDeviceId = device.id;
+            }
+        }
+
+        if (secondVideoDeviceId != null) {
+            //use back camera            
+            connection.mediaConstraints.video.optional = [{
+                    sourceId: secondVideoDeviceId
+                }];
+        }
+    });
     
     initTouristWebRTCEvents();
 }
@@ -172,10 +202,6 @@ function initTouristWebRTCEvents(){
             }
 
 
-
-            
-            
-
             /*
             if(event.stream.isVideo){
                 if (showLogs) console.log('tourist: local video stream started');
@@ -227,13 +253,14 @@ function initTouristWebRTCEvents(){
             }, 2000);
             */
             
-            /* //to change to back camera
+            /*
+            //to change to back camera
             var secondVideoDeviceId = null;
             var devicesLength = 0;
             
             //http://www.rtcmulticonnection.org/docs/selectDevices/
             connection.DetectRTC.MediaDevices.forEach(function (device) {
-
+                
                 if (device.kind.indexOf('video') !== -1) {
                     devicesLength++;
                     if (devicesLength == 2) {
@@ -246,16 +273,16 @@ function initTouristWebRTCEvents(){
                     console.warn('setting facing mode to environment');
                     
                     //use back camera
-                    connection.mediaConstraints.video.optional[1].facingMode = "environment";
+                    //connection.mediaConstraints.video.optional[1].facingMode = "environment";
                     
-                    //connection.mediaConstaints.video.optional = [{
-                    //        sourceId: secondVideoDeviceId
-                    //    }];
+                    debugger;
+                    
+                    connection.mediaConstraints.video.optional = [{
+                            sourceId: secondVideoDeviceId
+                        }];
                     
                 }
 
-                //startAudioStream();
-                
             });
             */
             
@@ -477,6 +504,7 @@ function initTouristSocket(){
     if(showLogs) console.log('tourist: init touristSocket');
     touristSocket = io.connect('https://splinxs.ti.bfh.ch/tourist');
     //touristSocket = io.connect('https://localhost/tourist');
+    //touristSocket = io.connect('/tourist');
     
     initEvents();
 }

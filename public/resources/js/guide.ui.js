@@ -206,6 +206,14 @@ function initGuideButtons() {
         centerAndResize();
     });
 
+    //closes the tourist's connection, the guide stays connected
+    $("#hangUp, #hangUpCollapse").click(function (e) {
+        if (showLogs) console.log('guide: closing connection');
+        closeConnection();
+    });
+
+
+
 
 
     /*

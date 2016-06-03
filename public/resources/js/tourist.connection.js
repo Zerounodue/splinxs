@@ -509,8 +509,6 @@ function closeConnection(){
 
 function connectionClosed(){
     if (showLogs) console.log('tourist: connection closed by guide');
-    //TODO do nicer
-    setConfirmUnload(false);
     window.location = "/";
 }
 

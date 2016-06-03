@@ -115,7 +115,7 @@ function initTouristButtons(){
 
 
     $("#btn_touristClose").on('click', function(e){
-        if(showLogs) console.log('guide close button clicked');
+        if(showLogs) console.log('tour close button clicked nothing happens... not implemented');
 
         $("#touristControls").hide(animDur);
     });
@@ -127,6 +127,12 @@ function initTouristButtons(){
     //Ok buttons of tourist alert
     $(".t_redirectHome").on('click', function(e){
         connectionClosed();
+    });
+
+    //closes the tourist's connection, the guide stays connected, tourist redirects home
+    $("#hangUp, #hangUpCollapse").click(function (e) {
+        if (showLogs) console.log('guide: closing connection');
+        closeConnection();
     });
 }
 

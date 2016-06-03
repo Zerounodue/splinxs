@@ -103,9 +103,10 @@ function initTouristWebRTC(){
         OfferToReceiveAudio: true,
         OfferToReceiveVideo: true//DetectRTC.hasWebcam
     };
-
-
-
+    
+    //rmc line 567
+    connection.mediaConstraints.video.optional[1].facingMode = "environment";
+    
     initTouristWebRTCEvents();
 }
 
@@ -225,8 +226,43 @@ function initTouristWebRTCEvents(){
                 event.mediaElement.play();
             }, 2000);
             */
-            //connection.dontCaptureUserMedia = false;
+            
+            /* //to change to back camera
+            var secondVideoDeviceId = null;
+            var devicesLength = 0;
+            
+            //http://www.rtcmulticonnection.org/docs/selectDevices/
+            connection.DetectRTC.MediaDevices.forEach(function (device) {
+
+                if (device.kind.indexOf('video') !== -1) {
+                    devicesLength++;
+                    if (devicesLength == 2) {
+                        secondVideoDeviceId = device.id;
+                    }
+                }
+                
+                if (secondVideoDeviceId != null) {
+                    
+                    console.warn('setting facing mode to environment');
+                    
+                    //use back camera
+                    connection.mediaConstraints.video.optional[1].facingMode = "environment";
+                    
+                    //connection.mediaConstaints.video.optional = [{
+                    //        sourceId: secondVideoDeviceId
+                    //    }];
+                    
+                }
+
+                //startAudioStream();
+                
+            });
+            */
+            
             startAudioStream();
+           
+            //connection.dontCaptureUserMedia = false;
+            //startAudioStream();
             //startVideoStream();
         }
 

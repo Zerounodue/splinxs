@@ -16,6 +16,7 @@
 		"SPLINXS": "Splinxs",
 		"SUBMIT": "Invia",
 		"SURE_TO_LEAVE": "Vuoi davvero abbandonare la pagina?",
+		"SURE_WANT_LEAVE": "Sei sicuro che vuoi chiudere la connessione?",
 		"TOURIST": "Turista",
 		"VIDEO": "Video",
 		"OK": "Ok",
@@ -32,10 +33,12 @@
 		"T_HELP_MESSAGE": "Un turista ha bisogno, vuoi aiutarlo ora?",
 		"UNAVAILABLE": "Occupato",
 		"STATUS": "Stato:",
-		"SMALL_SCREEN_MESSAGE": "G.SMALL_SCREEN_MESSAGE",
-		"T_LEFT_MESSAGE": "G.T_LEFT_MESSAGE",
-		"TO_LATE_MESSAGE": "G.TO_LATE_MESSAGE",
-		"BAD_BROWSER_MESSAGE": "G.BAD_BROWSER_MESSAGE"
+		"SMALL_SCREEN_MESSAGE": "Il tuo schermo potrebbe essere troppo piccolo per supportare le funzioni",
+		"T_LEFT_MESSAGE": "Connessione con il turista interrotta",
+		"TO_LATE_MESSAGE": "Il turista ha già ricevuto aiuto da un'altra guida",
+		"T_LEFT_CORRECTLY": "Il turista ha chiuso la connessione",
+		"NO_LANG_SELECTED": "Devi aggiungere almeno una lingua",
+		"NO_AREA_SELECTED": "Devi selezionare almeno un area"
 	},
 	"G_AREAS": {
 		"G_AREAS": "Aree della guide",
@@ -122,11 +125,11 @@
 		"NO_MICROPHONE": "Non hai un microfono",
 		"LOADING_H2": "Sto cercado una guida",
 		"LOADING_P": "Potrebbe durare qualche secondo, prego attendere.",
-		"ATTENTION": "T.ATTENTION",
-		"T_LEFT_MESSAGE": "T.T_LEFT_MESSAGE",
-		"SORRY": "T.SORRY",
-		"NO_MATCH_MESSAGE": "T.NO_MATCH_MESSAGE",
-		"NO_LANG_SELECTED": "T.NO_LANG_SELECTED"
+		"ATTENTION": "Attenzione",
+		"SORRY": "Accipicchia",
+		"NO_MATCH_MESSAGE": "Nessuna guida trovata",
+		"NO_LANG_SELECTED": "Devi selezionare almeno una lingua",
+		"G_LEFT_MESSAGE": "La connessione con la guida è stata interrotta"
 	},
 	"T_LANGUAGES": {
 		"T_LANGUAGES": "Lingue del turista",

@@ -159,6 +159,13 @@ router.post('/index', function (req, res, next) {
         });
         //callback when db query completed
         function callback(){
+            if (guideList.indexOf(req.body.username) > -1){
+                func.redirectHome(res);
+                return;
+            }
+            
+            guideList.push(req.body.username);
+            
             req.session.username = req.body.username;
             req.session.guide = true;
             req.session.loggedIn = false;

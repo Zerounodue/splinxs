@@ -143,6 +143,11 @@ module.exports = exports = function(io) {
             if(socket.tourist){
                 sendGuideClosedConnectionRequest(socket.tourist);
             }
+            //guide logged out, can log in again
+            var index = guideList.indexOf(socket.username);
+            if(index > -1){
+                guideList.splice(index, 1);
+            }
         });
 
     });

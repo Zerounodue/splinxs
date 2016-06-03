@@ -30,8 +30,8 @@ var LocalStrategy = require('passport-local').Strategy;
 var app = express();
 var io = socket_io();
 app.io = io;
-
-
+//stores logged in guides
+guideList = [];
 
 
 

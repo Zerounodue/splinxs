@@ -19,6 +19,7 @@ var loadBox;
 var content;
 var ico_audio;
 var ico_video;
+var sureWantLeaveDialog;
 
 var audioMuted = false;
 var videoMuted = true;
@@ -34,6 +35,7 @@ function initTouristUI(){
     content = $("#content");
     ico_audio = $("#ico_audio");
     ico_video = $("#ico_video");
+    sureWantLeaveDialog = $("#sureWantLeaveDialog");
     //setConfirmUnload(true);
     initTouristButtons();
     initChat();
@@ -131,8 +133,15 @@ function initTouristButtons(){
 
     //closes the tourist's connection, the guide stays connected, tourist redirects home
     $("#hangUp, #hangUpCollapse").click(function (e) {
-        if (showLogs) console.log('guide: closing connection');
+        if (showLogs) console.log('tourist: closing connection');
+        sureWantLeaveDialog.show(animDur);
+    });
+
+    $("#leaveYes").on('click', function(e){
         closeConnection();
+    });
+    $("#leaveNo, #sureWantLeaveDialog_X").on('click', function(e){
+        sureWantLeaveDialog.hide(animDur);
     });
 }
 

@@ -19,7 +19,7 @@ var mapControls;
 var ico_audio;
 var ico_video;
 var waitingBox;
-
+var sureWantLeaveDialog;
 
 
 
@@ -41,6 +41,7 @@ function initGuideUI(){
     ico_audio = $("#ico_audio");
     ico_video = $("#ico_video");
     waitingBox = $("#waitingBox");
+    sureWantLeaveDialog = $("#sureWantLeaveDialog");
     
     //setConfirmUnload(true);
 
@@ -209,8 +210,16 @@ function initGuideButtons() {
     //closes the tourist's connection, the guide stays connected
     $("#hangUp, #hangUpCollapse").click(function (e) {
         if (showLogs) console.log('guide: closing connection');
+        sureWantLeaveDialog.show(animDur);
+    });
+
+    $("#leaveYes").on('click', function(e){
         closeConnection();
     });
+    $("#leaveNo, #sureWantLeaveDialog_X").on('click', function(e){
+        sureWantLeaveDialog.hide(animDur);
+    });
+
 
 
 
@@ -314,7 +323,7 @@ function initGuideButtons() {
         connectionClosed();
     });
     $(".toLateDialogClose").click(function (e) {
-        $('#toLateDialog').hide(animDur);
+        $('.modalDialog').hide(animDur);
     });
 
 

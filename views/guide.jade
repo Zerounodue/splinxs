@@ -229,6 +229,32 @@ block content
                 .row(style="margin-top:20px")
                     .col-md-12
                         button.btn.btn-green.btn-status.toLateDialogClose(style="margin-bottom:10px;") #{__('GENERAL.OK')}
+    //message displyed when leaving from page
+    #sureWantLeaveDialog.modalDialog(hidden)
+        .row
+            .col-sm-12
+                img.x(src='resources/images/icons/x.png', alt='close icon', id="sureWantLeaveDialog_X")
+        center(style="padding:10px")
+            .alertForm
+                h1 #{__('G.ATTENTION')}
+                p #{__('GENERAL.SURE_WANT_LEAVE')}
+                .row(style="margin-top:20px")
+                    .col-md-6
+                        button#leaveYes.btn.btn-green.btn-status(style="margin-bottom:10px;") #{__('GENERAL.YES')}
+                    .col-md-6
+                        button#leaveNo.btn.btn-white.btn-status(style="margin-bottom:10px") #{__('GENERAL.NO')}
+    //message displayed when tourist close correctly the connection
+    #connectionClosed.modalDialog(hidden)
+        .row
+            .col-sm-12
+                img.x.toLateDialogClose(src='resources/images/icons/x.png', alt='close icon')
+        center(style="padding:10px")
+            .alertForm
+                h1 #{__('G.ATTENTION')}
+                p #{__('G.T_LEFT_CORRECTLY')}
+                .row(style="margin-top:20px")
+                    .col-md-12
+                        button.btn.btn-green.btn-status.toLateDialogClose(style="margin-bottom:10px;") #{__('GENERAL.OK')}
 
 
 

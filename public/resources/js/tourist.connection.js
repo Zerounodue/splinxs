@@ -2,7 +2,7 @@
  * Copyright Ⓒ 2016 Splinxs
  * Authors: Elia Kocher, Philippe Lüthi
  * This file is part of Splinxs.
- * 
+ *
  * Splinxs is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License V3 as published by
  * the Free Software Foundation, see <http://www.gnu.org/licenses/>.
@@ -50,7 +50,7 @@ function initTouristConnection(){
     if(showLogs) console.log('init tourist connection');
 
     showLoadBox();
-    
+
     findGuideTimeout = setTimeout(function () {
         hideLoadBox();
         //alert('__sorry, no matching guide could be found...');
@@ -61,14 +61,14 @@ function initTouristConnection(){
     }, findGuideTimeoutTimer);
 
     //params needed to send data over websocket
-    
-    
+
+
     //if(!supportsOnlyWebsocket()){
-        initTouristWebRTC();
+    initTouristWebRTC();
     //}
-    
+
     //connection.videosContainer = $("#videoContainer");
-    
+
     initTouristSocket();
 }
 
@@ -84,9 +84,9 @@ function initTouristWebRTC(){
     } else {
         //console.warn('Neither Chrome nor Firefox. This might NOT work.');
     }
-    
+
     connection.dontCaptureUserMedia = true;
-    
+
     //TODO check if this works
     connection.session = {
         data: true
@@ -98,15 +98,45 @@ function initTouristWebRTC(){
         //,audio: true//DetectRTC.hasMicrophone
         //,video: true//DetectRTC.hasWebcam
     };
-    
+
     connection.sdpConstraints.mandatory = {
         OfferToReceiveAudio: true,
         OfferToReceiveVideo: true//DetectRTC.hasWebcam
     };
-    
+
     //rmc line 567
-    connection.mediaConstraints.video.optional[1].facingMode = "environment";
-    
+    //connection.mediaConstraints.video.optional[1].facingMode = "environment";
+
+    /* //can't be used to change to another camera
+     connection.mediaConstraints.video.optional.forEach(function (optional) {
+     if(optional.facingMode){
+     optional.facingMode = "environment";
+     }
+     });
+     */
+
+    //to change to back camera
+    var secondVideoDeviceId = null;
+    var devicesLength = 0;
+
+    //http://www.rtcmulticonnection.org/docs/selectDevices/
+    connection.DetectRTC.MediaDevices.forEach(function (device) {
+        //check if 2 cameras are available
+        if (device.kind.indexOf('video') !== -1) {
+            devicesLength++;
+            if (devicesLength == 2) {
+                secondVideoDeviceId = device.id;
+            }
+        }
+
+        if (secondVideoDeviceId != null) {
+            //use back camera            
+            connection.mediaConstraints.video.optional = [{
+                sourceId: secondVideoDeviceId
+            }];
+        }
+    });
+
     initTouristWebRTCEvents();
 }
 
@@ -135,7 +165,7 @@ function initTouristWebRTCEvents(){
             if(showLogs) console.warn('0 streams...');
             return;
         }
-        
+
         if(event.stream.type == "local"){
 
 
@@ -172,47 +202,43 @@ function initTouristWebRTCEvents(){
             }
 
 
-
-            
-            
-
             /*
-            if(event.stream.isVideo){
-                if (showLogs) console.log('tourist: local video stream started');
-                //TODO do other things?
-                event.mediaElement.controls=false;
-                event.mediaElement.autoplay=true;
+             if(event.stream.isVideo){
+             if (showLogs) console.log('tourist: local video stream started');
+             //TODO do other things?
+             event.mediaElement.controls=false;
+             event.mediaElement.autoplay=true;
 
-                //TODO make nicer code
-                var video = $("#videoContainer");
-                video.append(event.mediaElement);
-                showVideo();
-                
-                //TODO make in ui script
-                video.show();
-                $("#hammerVideo").show();
-                
-                //connection.videosContainer.append(event.mediaElement);
-            }else if(event.stream.isAudio){
-                if (showLogs) console.log('tourist: local audio stream started');
-                //might never happen...
-            }
-            */
+             //TODO make nicer code
+             var video = $("#videoContainer");
+             video.append(event.mediaElement);
+             showVideo();
+
+             //TODO make in ui script
+             video.show();
+             $("#hammerVideo").show();
+
+             //connection.videosContainer.append(event.mediaElement);
+             }else if(event.stream.isAudio){
+             if (showLogs) console.log('tourist: local audio stream started');
+             //might never happen...
+             }
+             */
         }else if(event.stream.type == "remote"){
             if (showLogs) console.warn('tourist: remote stream (audio) started');
             /*
-            if(event.stream.isAudio){
-                if (showLogs) console.log('tourist: remote audio stream started');
-                var audio = $("#audioDiv");
-                audio.append(event.mediaElement);
-                //TODO check if this actually does something
-                event.mediaElement.play();
-                setTimeout(function () {
-                    event.mediaElement.play();
-                }, 2000);
-            }
-            */
-            
+             if(event.stream.isAudio){
+             if (showLogs) console.log('tourist: remote audio stream started');
+             var audio = $("#audioDiv");
+             audio.append(event.mediaElement);
+             //TODO check if this actually does something
+             event.mediaElement.play();
+             setTimeout(function () {
+             event.mediaElement.play();
+             }, 2000);
+             }
+             */
+
             //if (showLogs) console.log('tourist: remote audio stream started');
             var audio = $("#audioDiv");
             audio.append(event.mediaElement);
@@ -221,53 +247,54 @@ function initTouristWebRTCEvents(){
             event.mediaElement.volume = 1;
             //TODO check if this actually does something
             /*
-            event.mediaElement.play();
-            setTimeout(function () {
-                event.mediaElement.play();
-            }, 2000);
-            */
-            
-            /* //to change to back camera
-            var secondVideoDeviceId = null;
-            var devicesLength = 0;
-            
-            //http://www.rtcmulticonnection.org/docs/selectDevices/
-            connection.DetectRTC.MediaDevices.forEach(function (device) {
+             event.mediaElement.play();
+             setTimeout(function () {
+             event.mediaElement.play();
+             }, 2000);
+             */
 
-                if (device.kind.indexOf('video') !== -1) {
-                    devicesLength++;
-                    if (devicesLength == 2) {
-                        secondVideoDeviceId = device.id;
-                    }
-                }
-                
-                if (secondVideoDeviceId != null) {
-                    
-                    console.warn('setting facing mode to environment');
-                    
-                    //use back camera
-                    connection.mediaConstraints.video.optional[1].facingMode = "environment";
-                    
-                    //connection.mediaConstaints.video.optional = [{
-                    //        sourceId: secondVideoDeviceId
-                    //    }];
-                    
-                }
+            /*
+             //to change to back camera
+             var secondVideoDeviceId = null;
+             var devicesLength = 0;
 
-                //startAudioStream();
-                
-            });
-            */
-            
+             //http://www.rtcmulticonnection.org/docs/selectDevices/
+             connection.DetectRTC.MediaDevices.forEach(function (device) {
+
+             if (device.kind.indexOf('video') !== -1) {
+             devicesLength++;
+             if (devicesLength == 2) {
+             secondVideoDeviceId = device.id;
+             }
+             }
+
+             if (secondVideoDeviceId != null) {
+
+             console.warn('setting facing mode to environment');
+
+             //use back camera
+             //connection.mediaConstraints.video.optional[1].facingMode = "environment";
+
+             debugger;
+
+             connection.mediaConstraints.video.optional = [{
+             sourceId: secondVideoDeviceId
+             }];
+
+             }
+
+             });
+             */
+
             startAudioStream();
-           
+
             //connection.dontCaptureUserMedia = false;
             //startAudioStream();
             //startVideoStream();
         }
 
     };
-    
+
     connection.onmute = function (event) {
         event.mediaElement.pause();
     };
@@ -275,7 +302,7 @@ function initTouristWebRTCEvents(){
     connection.onunmute = function (event) {
         event.mediaElement.play();
     };
-    
+
     /**
      * fires when the signalling websocket was connected successfully
      * this socket will be used as a fall back if SCTP is not available
@@ -286,18 +313,18 @@ function initTouristWebRTCEvents(){
         websocket = socket;
         //setSocketCustomEvent();
         //connection;
-        
+
         //TODO call guide
         //establishConnectionWithGuide();
-        
+
         //initConnectionWithGuide();
-        
-    
+
+
         //channel = 'guide1';
         //connection.socketCustomEvent = channel;
-        
+
         //setSocketCustomEvent();
-        
+
         //to make sure everything is ready
     });
 }
@@ -393,7 +420,7 @@ function mapMessage(mapMessage) {
  */
 function initConnectionWithGuide() {
     if(showLogs) console.log('tourist: initiating connection');
-    
+
     //send message to peer if I do not support sctp
     if (supportsOnlyWebsocket()) {
         sendUseWebsocketConnection();
@@ -415,7 +442,7 @@ function establishConnectionWithGuide() {
 
     //connection established, save in case connection is interrupted
     storeConnection();
-    
+
     hideLoadBox();
     showChatMapGUI();
     showTouristUI();
@@ -464,11 +491,11 @@ function checkPreviousConnectionInterrupted(){
             var currTime = getCurrentTimeMillis();
             var diff = currTime - t;
             /* //TODO redo
-            if(diff < localStoragePreviousConnectionTimeout){
-                if(showLogs) console.log('tourist: previous connection was interrupted, guide: ' + c);
-                //channels.splice(0, 0, c);
-            }
-            */
+             if(diff < localStoragePreviousConnectionTimeout){
+             if(showLogs) console.log('tourist: previous connection was interrupted, guide: ' + c);
+             //channels.splice(0, 0, c);
+             }
+             */
         }
     }
 }
@@ -476,19 +503,20 @@ function checkPreviousConnectionInterrupted(){
 function initTouristSocket(){
     if(showLogs) console.log('tourist: init touristSocket');
     //touristSocket = io.connect('https://splinxs.ti.bfh.ch/tourist');
-    touristSocket = io.connect('https://localhost/tourist');
-    
+    //touristSocket = io.connect('https://localhost/tourist');
+    touristSocket = io.connect('/tourist');
+
     initEvents();
 }
 
 function initEvents(){
     if(showLogs) console.log('tourist: init touristSocket evetns');
-    
+
     touristSocket.on('connect', function(){
         if(showLogs) console.log('tourist: touristSocket connect');
         touristSocketSendRequest(touristRequests.help);
     });
-    
+
     touristSocket.on(username, function(msg){
         if(showLogs) console.log('tourist: touristSocket message on: ' + username);
         if(!msg){
@@ -521,7 +549,7 @@ function initEvents(){
             }
         }
     });
-    
+
 }
 
 function touristSocketSendRequest(r){
@@ -600,6 +628,6 @@ function stopVideoStream(){
     }
 
     connection.renegotiate();
-    
-    
+
+
 }

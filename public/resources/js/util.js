@@ -201,3 +201,11 @@ function clearLocalStorage(){
         localStorage.clear();
     }
 }
+
+function decodeEntities(encodedString) {
+    var textArea = document.createElement('textarea');
+    textArea.innerHTML = encodedString;
+    var ret = textArea.innerHTML;
+    textArea.remove();
+    return ret;
+}

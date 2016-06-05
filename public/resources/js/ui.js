@@ -410,10 +410,13 @@ function initChat(){
         //cannot send to peer if not connected
         if(!c2P) return;
         if(showLogs) console.log('send chat clicked');
+        /*
         var chatInput = $("#inp_chat");
         var message = chatInput.val();
         sendMessageToPeer(message, true);
         chatInput.val("");
+        */
+        sendChatMessage();
     });
 
     $("#inp_chat").keypress(function (e) {
@@ -422,12 +425,23 @@ function initChat(){
         //send message when enter key is pressed
         if (e.which == 13) {
             if(showLogs) console.log('enter on chat input');
+            /*
             var chatInput = $("#inp_chat");
             var message = chatInput.val();
             sendMessageToPeer(message, true);
             chatInput.val("");
+            */
+            sendChatMessage();
         }
     });
+
+    function sendChatMessage(){
+        var chatInput = $("#inp_chat");
+        var message = chatInput.val();
+        message = decodeEntities(message);
+        sendMessageToPeer(message, true);
+        chatInput.val("");
+    }
 
     $("#inp_chat").keyup(function (e) {
         //cannot send to peer if not connected

@@ -129,7 +129,7 @@ function vibrate(vibration) {
                 navigator.vibrate([0]);
                 break;
             case vibrations.message:
-                navigator.vibrate([150, 100, 100, 100, 150]); // intervall, pause, intervall, pause...
+                navigator.vibrate([75, 100, 100]); // intervall, pause, intervall, pause...
                 break;
             case vibrations.connectionRequest:
                 navigator.vibrate([

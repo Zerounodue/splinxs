@@ -210,18 +210,6 @@ function sendMapData(data){
     sendMessageToPeer({map: data}, false);
 }
 /**
- * when a message arrived from SCTP or Websocket this function has to be called
- * plays a sound, appends the message to the chat, vibrates
- * @param {String} message message sent by the peer
- */
-function messageArrived(message) {
-    if (showLogs) console.log('messageArrived: ' + message);
-    //play message sound
-    playSound(sounds.message_arrival);
-    appendPeerMessageToChat(message, peername);
-    vibrate();
-}
-/**
  * checks if only websocket is supported
  * @returns {Boolean} true if connection supports only websocket
  */

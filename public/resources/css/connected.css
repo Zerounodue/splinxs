@@ -123,12 +123,16 @@ video{
 @media (min-width: 768px) {
     .hangUpCollapse{
         visibility: hidden;
+        display: none;
     }
 
 }
 @media (max-width: 768px) {
     .hangUp{
         visibility: hidden;
+        display: none;
+        height: 0px;
+        width: 0px;
     }
 }
 /* hang Up icon */
@@ -136,4 +140,9 @@ video{
 .sliderContainer{
     padding-left: 20px;
     padding-right: 20px;
+}
+
+#controlsBtn{
+    cursor: pointer;
+    display: none;
 }

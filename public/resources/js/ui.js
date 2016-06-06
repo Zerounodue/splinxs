@@ -42,6 +42,8 @@ var videoDiv;
 var videoControlsDiv;
 var audioControlsDiv;
 
+var videoControlsNavBarButton;
+
 var myAvatarIcon;
 var peerAvatarIcon;
 
@@ -67,6 +69,7 @@ function initUI(isGuide){
     spinner = $('.spinnerChat');
     hangUp = $('#hangUp');
     hangUpCollapse = $('#hangUpCollapse');
+    videoControlsNavBarButton = $('#controlsBtn');
 
     if(isGuide){
         myAvatarIcon = "resources/images/guide.png";
@@ -396,12 +399,14 @@ function hideVideoControls(){
  */
 function hideVideo(){
     videoDiv.hide(250);
+    videoControlsNavBarButton.hide();
 }
 /**
  * shows the video div
  */
 function showVideo(){
     videoDiv.show(250);
+    videoControlsNavBarButton.show();
 }
 
 function initChat(){

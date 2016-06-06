@@ -70,6 +70,8 @@ function initTouristConnection(){
     //connection.videosContainer = $("#videoContainer");
 
     initTouristSocket();
+
+    getGEOLocation();
 }
 
 function initTouristWebRTC(){
@@ -448,7 +450,7 @@ function establishConnectionWithGuide() {
     showTouristUI();
     centerAndResize();
     //get current location and send to guide
-    getGEOLocation();
+    //getGEOLocation();
     initToutistOrientation();
 
 

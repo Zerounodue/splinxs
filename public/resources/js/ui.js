@@ -399,14 +399,14 @@ function hideVideoControls(){
  */
 function hideVideo(){
     videoDiv.hide(250);
-    videoControlsNavBarButton.hide();
+    videoControlsNavBarButton.css('display','none');
 }
 /**
  * shows the video div
  */
 function showVideo(){
     videoDiv.show(250);
-    videoControlsNavBarButton.show();
+    videoControlsNavBarButton.css('display','block');
 }
 
 function initChat(){

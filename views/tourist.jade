@@ -59,7 +59,7 @@ block hangUp
     img.hangUp(src='resources/images/icons/hangUp.png', alt='hang up', id="hangUp", hidden)
 block append navbarli
     li
-        a#controlsBtn(hidden) __controls
+        a#controlsBtn(hidden) #{__('MENU.CONTROLS')}
 
 block content
     #leftDialog.modalDialog(hidden)

@@ -77,7 +77,7 @@ block hangUp
     img.hangUp(src='resources/images/icons/hangUp.png', alt='hang up', id="hangUp", hidden)
 block append navbarli
     li
-        a#controlsBtn(hidden) __controls
+        a#controlsBtn(hidden) #{__('MENU.CONTROLS')}
     li
         a(href="/logout" id="a_logout") #{__('MENU.LOGOUT')}
     li.dropdown

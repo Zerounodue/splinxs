@@ -14,8 +14,6 @@
  * Module dependencies.
  */
 var fs = require('fs');
-
-
 var app = require('../app');
 //var httpApp = require('../httpApp');
 var debug = require('debug')('test:server');
@@ -23,11 +21,9 @@ var https = require('https');
 //var http = require('http');
 
 
-
 /**
  * Get port from environment and store in Express.
  */
-
 var port = normalizePort(process.env.PORT || '443');
 //var httpPort = normalizePort('80');
 
@@ -36,7 +32,7 @@ app.set('port', port);
 
 
 /**
- * Create HTTP server.
+ * Create HTTP server for redirect from port 80
  */
 /*
 http.createServer(httpApp).listen(httpApp.get('port'), function() {
@@ -47,12 +43,12 @@ http.createServer(httpApp).listen(httpApp.get('port'), function() {
 /**
  * Create HTTPS server.
  */
-
  var server = https.createServer({
  key: fs.readFileSync('/etc/letsencrypt/live/splinxs.ti.bfh.ch/privkey.pem'),
  cert: fs.readFileSync('/etc/letsencrypt/live/splinxs.ti.bfh.ch/cert.pem'),
  ca: fs.readFileSync('/etc/letsencrypt/live/splinxs.ti.bfh.ch/chain.pem')
  }, app);
+//for loca usage use fake certificates
 /*
 var server = https.createServer({
 	key: fs.readFileSync('./selfCert/key.pem'),
@@ -60,25 +56,11 @@ var server = https.createServer({
 }, app);
 */
 
-
-
-
-// io = require('socket.io')(server);
-
-
-
 /**
  * Socket.io
  */
-
 var io = app.io;
 io.attach(server);
-
-
-
-
-
-
 
 server.listen(port);
 server.on('error', onError);
@@ -107,7 +89,6 @@ function normalizePort(val) {
 /**
  * Event listener for HTTP(S) server "error" event.
  */
-
 function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
@@ -143,4 +124,3 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
-

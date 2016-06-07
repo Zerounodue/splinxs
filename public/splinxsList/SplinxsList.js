@@ -2,7 +2,7 @@
  * Copyright Ⓒ 2016 Splinxs
  * Authors: Elia Kocher, Philippe Lüthi
  * This file is part of Splinxs.
- * 
+ *
  * Splinxs is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License V3 as published by
  * the Free Software Foundation, see <http://www.gnu.org/licenses/>.
@@ -17,6 +17,7 @@
 var list = [];
 
 module.exports = {
+
     /**
      * gets the number of items in the list
      * @returns {number} number of items in the list
@@ -109,6 +110,7 @@ module.exports = {
             item = list[index];
         }
         return item;
+
     },
     /**
      * returns a number > -1 if the given guide is in the list
@@ -185,6 +187,35 @@ module.exports = {
         return ret;
     }
 };
+
+/**
+ * gets an array of all indexes where the guide could be found, might be empty
+ * @param {string} g guide to search for
+ * @returns {Array[int]} an array containing all the indexes where the guide could be found
+ */
+function getAllGuides(g) {
+    var ret = [];
+    for (var i = 0; i < list.length; i++) {
+        if (list[i].guide == g) {
+            ret.push(i);
+        }
+    }
+    return ret;
+}
+/**
+ * gets an array of all indexes where the tourist could be found, might be empty
+ * @param {string} t tourist to search for
+ * @returns {Array[int]} an array containing all the indexes where the tourist could be found
+ */
+function getAllTourists(t) {
+    var ret = [];
+    for (var i = 0; i < list.length; i++) {
+        if (list[i].tourist == t) {
+            ret.push(i);
+        }
+    }
+    return ret;
+}
 /**
  * adds an item to the list
  * @param {Object{guide: string, tourist: string}} item to add
@@ -193,9 +224,31 @@ function add(item) {
     list.push(item);
 }
 /**
+ * removes an item from the list
+ * @param {Object{guide: string, tourist: string}} item to remove
+ */
+this.removeItem = function (item) {
+    var index = findIndex(item);
+    if (index > -1) {
+        removeAtIndex(index);
+    }
+};
+/**
  * removes an item at the given index
  * @param {number} i index where the item should be removed
  */
 function removeAtIndex(i) {
     list.splice(i, 1);
+}
+/**
+ * returns a number > -1 if the item is in the list
+ * @param {Object{guide: string, tourist: string}} item to search for
+ * @returns {number} index of the item, -1 if there is none
+ */
+function findIndex(item) {
+    //callback for Array.findIndex()
+    function matchItem(e, i, array) {
+        return (e.guide === item.guide && e.tourist === item.tourist);
+    }
+    return list.findIndex(matchItem);
 }

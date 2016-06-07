@@ -13,18 +13,14 @@ var router = express.Router();
 
 //mongodb stuff
 var passport = require('passport');
-//var Account = require('../models/account');
 var Guide = require('../models/guide');
 var GuideLanguage = require('../models/guideLanguage');
-
 //https://github.com/meikidd/iso-639-1
 var ISO6391 = require('iso-639-1');
 //https://www.npmjs.com/package/email-validator
 var emailValidator = require("email-validator");
-
 //functions used in all routes
-var func  = require('../public/resources/js/functions.js');
-
+var func = require('../public/resources/js/functions.js');
 
 router.get('/register', function(req, res) {
     res.render('index', {title: "Register"});
@@ -96,7 +92,6 @@ router.get('/logout', function(req, res) {
     res.redirect('/');
 });
 
-
 router.get('/guideLanguages', function(req, res) {
     //needs to be a guide
     if(!func.hasSession(req) || !func.isGuide(req)){
@@ -156,11 +151,7 @@ router.post('/guideLanguages', function(req, res) {
         //save languages in list of all languages that guides can speak
         GuideLanguage.update(null, {$addToSet: {codes: {$each: langs}}}, function (err, raw){
             if(err){
-                console.log("GuideLanguage update error: " + err);
                 return handleError(err);
-            }else{
-                //everything ok
-                console.log("GuideLanguage all ok: " + raw);
             }
         });
         if(func.isLoggedIn(req)){
@@ -183,11 +174,9 @@ router.post('/guideLanguages', function(req, res) {
         func.redirectHome(res);
         return;
     }
-
 });
 
 router.get('/guideAreas', function(req, res) {
-    
     //needs to be a guide
     if(!func.hasSession(req) || !func.isGuide(req)){
         func.redirectHome(res);
@@ -216,8 +205,6 @@ router.get('/guideAreas', function(req, res) {
         func.renderGuideAreas(res);
         return;
     }
-
-    //func.renderGuideAreas(res);
 });
 
 router.post('/guideAreas', function(req, res) {
@@ -259,7 +246,6 @@ router.post('/guideAreas', function(req, res) {
         
         if(func.isLoggedIn(req)){
             //send to guide site
-            //func.renderGuide(res);
             func.redirectGuide(res);
             return;
         }else{
@@ -311,18 +297,4 @@ router.get('/guide', function(req, res) {
     return;
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 module.exports = router;
-

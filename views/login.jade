@@ -14,14 +14,11 @@ center
     .loginRegisterForm
       img.s(src='resources/images/splinxsLogoS.png', alt='s')
       h1.loginTitle #{__('LOGIN.LOGIN')}
-      //p.lead __Say something worthwhile here.
       p.lead #{__('LOGIN.LOGIN_MESSAGE')}
       if loginError == "ERROR_MESSAGE"
         .alert.alert-green(role="alert")
           |#{__('LOGIN.ERROR_MESSAGE')}
-
       form.form-signin(id="loginForm" role='form', action="/index",method="post", style='max-width: 300px;')
-
         input.form-control.inputTop(maxlength="40" type='text', name="username", placeholder="#{__('LOGIN.USERNAME')}", required, autofocus, value='#{username ? username : ""}')
         input.form-control.inputBottom(maxlength="40" type='password', name="password", placeholder="#{__('LOGIN.PASSWORD')}", required)
         .row.row-login
@@ -35,5 +32,3 @@ center
             a(href="/guidePassword") #{__('LOGIN.FORGOT')}
           .col-xs-6
             a#a-register #{__('LOGIN.SIGN_UP')}
-            //a(href="/register") __Sign up now!
-

@@ -15,7 +15,6 @@ block append stylesheets
 block append scripts
   script(src='resources/js/tourist.languages.js')
 
-
 block content
     center
         a.back(id="backArrow" href="/")
@@ -23,12 +22,8 @@ block content
             #backText #{__('GENERAL.BACK')}
         h2(style="display: inline;") #{__('T_LANGUAGES.SPOKEN_LANGUAGES')}
         p #{__('T_LANGUAGES.LANGUAGES_INTRO')}
-
         .centerForm
-
-            //- var nativeNames = langs.getAllNativeNames()//"#{codes}"
-            //- var codes = langs.getAllCodes()
-            //codes is passed ad parameter when rendering the page
+            //codes is passed as parameter when rendering the page
             each code, index in codes
                 div(data-toggle='buttons')
                     - var nativeName = langs.getNativeName(code)
@@ -42,14 +37,11 @@ block content
                     else
                         label.btn.btn-primary.btn-checkbox(for='' + code + '',id='' + code + '1') #{nativeName}
                             input(type="checkbox", name="language", id='' + code + '' code='' + code + '')
-
                     .row(id="div_" + code + "",style="display: none;"   )
                         .col-xs-6.skillText
                             |#{__('T_LANGUAGES.SKILL')}:
                         .col-xs-6
                             div.div-radio(  data-toggle='buttons')
-
-
                                 label.btn.btn-primary.btn-radio.radio-left(id="rb" + code + "3")
                                     input( type="radio", name="skill_" + code + "", value="3" checked)
                                     | +
@@ -59,7 +51,6 @@ block content
                                 label.btn.btn-primary.btn-radio.radio-right.active(id="rb" + code + "1")
                                     input( type="radio", name="skill_" + code + "", value="1" checked)
                                     | +++
-
                     script.
                         $("#!{code}1").click(function(){
                             if( $("#!{code}").prop( "checked" ) ){
@@ -88,7 +79,6 @@ block content
             br
             //if user is logged in => guide
             button.btn.btn-white.btn-send(id='btn_sendLanguages') #{__('T_LANGUAGES.SEND')}
-
     #nothingSelected.modalDialog(hidden)
         .row
             .col-sm-12
@@ -100,4 +90,3 @@ block content
                 .row(style="margin-top:20px")
                     .col-md-12
                         button.btn.btn-blue.btn-status.toLateDialogClose.nothingSelectedClose(style="margin-bottom:10px;") #{__('GENERAL.OK')}
-

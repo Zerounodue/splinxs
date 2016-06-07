@@ -11,9 +11,7 @@
 extends layout
 
 block append scripts
-
     script(src='resources/js/rmc3@3.3.5.min.js')
-    // socket.io for signaling
     script(src='/socket.io/socket.io.js')
     script(src='resources/js/DetectRTC.js')
     script(src='resources/js/connection.js')
@@ -33,21 +31,13 @@ block append scripts
             touristPos.lng = !{lng};
             DetectRTC.load(function () {
                 detectRTCcapabilities();
-                /*
-                if (!DetectRTC.hasMicrophone) {
-
-                    //alert("#{__('T.NO_MICROPHONE')}");
-                }
-                */
                 initSplinxs();
                 //false because he is not a guide
                 initUI(false);
                 initTouristUI();
                 initTouristConnection();
             });
-
       });
-
 block append stylesheets
     link(rel='stylesheet', href='resources/css/connected.css')
     link(rel='stylesheet', href='resources/css/chat.css')
@@ -58,7 +48,6 @@ block hangUp
 block append navbarli
     li
         a#controlsBtn(hidden) #{__('MENU.CONTROLS')}
-
 block content
     #leftDialog.modalDialog(hidden)
         .row
@@ -107,7 +96,6 @@ block content
                     .col-sm-12
                         p __Opacity
                         input#opacityRange(type='range', value='100' step='5')
-
                 .row
                     .col-sm-12
                         p __Size
@@ -115,104 +103,19 @@ block content
                 .row(style="margin-top:20px")
                     .col-md-12
                         button.btn.btn-green.btn-status.closeVideoControlsDialog(style="margin-bottom:10px;") #{__('GENERAL.OK')}
-
     #loadBox.load(hidden='')
         h2 #{__('T.LOADING_H2')}
-
         p #{__('T.LOADING_P')}
         #load1.loadDot
         #load2.loadDot
         #load3.loadDot
-    //
-        main#content
-          //button#btn_joinConnection(type='button') __join connection
-          button#btn_closeConnection(type='button', hidden='') __close connection
-          br
-          #audio(hidden='')
-            button#btn_startAudio(type='button') __start audio
-            button#btn_stopAudio(type='button') __stop audio
-            #audioDiv
-          br
-          #video.video(hidden='')
-            button#btn_shareVideo(type='button') __start video
-            button#btn_stopVideo(type='button') __stop video
-            button#btn_muteVideo(type='button') __mute video
-            button#btn_unmuteVideo(type='button') __unmute video
-            #myVideo
     #content
-        //
-            #touristControls.controlsPage(hidden)
-                .row
-                    .col-sm-12
-                        img.x(src='resources/images/icons/x.png', alt='close icon', id="btn_touristClose")
-                .row
-                    .col-sm-12
-                        h2(style='text-align: center;') __Controls
-
-                //button#btn_joinConnection(type='button') __join connection
-                button#btn_closeConnection(type='button', hidden='') #{__('T.CLOSE_CONNECTION')}
-                //br
-            //#audioControlsBox(hidden='')
-                //button#btn_startAudio(type='button') __start audio
-                //button#btn_stopAudio(type='button') __stop audio
-
-            //br
-            //#videoControlsBox.video(hidden='')
-                //button#btn_shareVideo(type='button') __start video
-                //button#btn_stopVideo(type='button') __stop video
-                //button#btn_muteVideo(type='button') __mute video
-                //button#btn_unmuteVideo(type='button') __unmute video
-                //#myVideo
-
-        .chatBox(id="chatBox" hidden)
-            .panel.panel-primary(id="primaryPanel")
-                .panel-heading(id="headingPanel")
-                    span
-                        .chatLeft
-                            img.chatLeftIcon(src='resources/images/icons/chatWhite.png', alt='chat')
-
-                            //span#spn_isTyping.text-center.message
-                            //#{__('GENERAL.CHAT')}
-                            .spinnerChat(hidden)
-                                .bounceChat1
-                                .bounceChat2
-                                .bounceChat3
-
-
-                            img.chatRightIcon(src='resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")
-                //
-                  span.glyphicon.glyphicon-comment
-                  |  #{__('GENERAL.CHAT')}
-                  span#spn_isTyping.text-center
-
-                    img(src='resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")
-                    //
-                        button#btn_minimiseChat.btn.btn-default.btn-xs(type='button')
-                          span.glyphicon.glyphicon-chevron-down
-                        ul.dropdown-menu.slidedown
-                          li
-                            a(href='#')
-                              span.glyphicon.glyphicon-refresh
-                              | __Refresh
-                          li
-                            a(href='#')
-                              span.glyphicon.glyphicon-ok-sign
-                              | __Available
-                .panel-body(id="bodyPanel")
-                    ul#chat.chat
-                .panel-footer(id="footerPanel")
-                    .input-group
-                        input#inp_chat.form-control.input-sm(type='text', placeholder="#{__('G.TYPE_MESSAGE')}")
-                        span.input-group-btn
-                            button#btn_chat.btn.btn-sm #{__('GENERAL.SEND')}
-
-        // that alerts are added here
+        //that alerts are added here
         audio#audioPlayer
         //audio is added here alays hidden
         #audioDiv(hidden)
         #hammerVideo(hidden)
             #videoContainer
-
         #hammerContainer
             script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing,places&callback=initMap')
         .audioVideoControls
@@ -224,8 +127,3 @@ block content
                     a.get-gps(id="btn_gps_tourist")
                         img.gps-image(src='resources/images/icons/gps.png', alt='gps', id="img_location")
 block foot
-//
-    div(id="smallChat", class="smallChat", hidden)
-        img#smallChatImg.smallChatImg(src='resources/images/smallChat.png', alt='chat')
-        span#smallChatText.smallChatText Chat
-        img.smallChatUp(src='resources/images/arrowUp.png', alt='up')

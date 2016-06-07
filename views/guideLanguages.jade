@@ -16,7 +16,6 @@ block append scripts
     script(src='resources/js/jquery-2.2.0.min.js')
     script(src='resources/js/guide.languages.js')
     script(src='resources/js/modernizr-custom.min.js')
-
 block content
     center
         a.back(id="backArrow" href="/")
@@ -24,13 +23,10 @@ block content
             #backText #{__('GENERAL.BACK')}
         h2(style="display: inline;") #{__('G_LANGUAGES.TITLE')}
         .centerForm
-            //form(id="frm_languages" method="post" action="/guideLanguages")
-            //- var nativeNames = langs.getAllNativeNames()
             - var codes = langs.getAllCodes()
             script.
               languages = !{JSON.stringify(savedLangs)};
             p #{__('G_LANGUAGES.LANGUAGES_INTRO')}
-
             .row
                 .col-sm-12
                     input.form-control.datalist(id="inp_languages" type="text" list="languages" placeholder="#{__('G_LANGUAGES.SEARCH')}")
@@ -42,12 +38,9 @@ block content
             .row
                 .col-sm-12
                     div(id="div_selectedLanguages")
-                      //p __selected languages
-                    //if user is logged in => guides
             .row
                 .col-sm-12
                     button.btn.btn-primary.btn-send(id='btn_sendLanguages') #{__('G_LANGUAGES.SEND')}
-
     #nothingSelected.modalDialog(hidden)
         .row
             .col-sm-12

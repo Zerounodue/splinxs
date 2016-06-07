@@ -11,18 +11,14 @@
 extends layout
 
 block append scripts
-
     script(src='resources/js/rmc3@3.3.5.min.js')
-    // socket.io for signaling
     script(src='/socket.io/socket.io.js')
     script(src='resources/js/DetectRTC.js')
-
     script(src='resources/js/connection.js')
     script(src='resources/js/guide.connection.js')
     script(src='resources/js/util.js')
     script(src='resources/js/ui.js')
     script(src='resources/js/guide.ui.js')
-
     script(src='resources/js/map.js')
     script(src='resources/js/guide.map.js')
     script(src='resources/js/hammerV2.0.8.js')
@@ -30,41 +26,27 @@ block append scripts
     script.
       $(document).ready(function () {
             username = "!{name}";
-
-            //var DetectRTC = require('detectrtc');
             DetectRTC.load(function () {
                 if (!(DetectRTC.browser.isChrome || DetectRTC.browser.isFirefox || DetectRTC.browser.isOpera)) {
                     alert("#{__('ERROR.CRAPPY_BROWSER_GUIDE')}");
                     window.location = "/logout";
                     return;
                 }
-                //console.warn(DetectRTC.hasMicrophone);
                 detectRTCcapabilities();
-                //does not seem to work
-                // it works, when it does not work, it causes also other trubles
                 if (!DetectRTC.hasMicrophone) {
                     alert("#{__('ERROR.NO_MICROPHONE')}");
-                    //window.location="/logout";
-                    //return;
                 }
 
                 initSplinxs();
-                //true because he is  a guide
+                //true for guides
                 initUI(true);
                 initGuideUI();
-                //don't show gui! show it only if clients connect
-                //showChatMapGUI();
-                //TODO check this
-                //showGuideUI();
                 initGuideConnection();
             });
-
       });
-
 block append stylesheets
     link(rel='stylesheet', href='resources/css/connected.css')
     link(rel='stylesheet', href='resources/css/chat.css')
-
 //the guide has no link to home clicking on the splinxs brand
 block navbar-brand
     a(class='navbar-brand')
@@ -91,109 +73,7 @@ block append navbarli
                 a(href="/guidePassword" id="a_guidePassword") #{__('MENU.CHANGE_PASSWORD')}
             li
                 a(href) __set available
-
 block content
-    //
-        #guideControls.controlsPage(hidden)
-            .row
-                .col-sm-12
-                    img.x(src='resources/images/icons/x.png', alt='close icon', id="btn_guideClose")
-            .row
-                .col-sm-12
-                    h2(style='text-align: center;') __Controls
-
-            button#btn_closeConnection(type='button', hidden) #{__('G.CLOSE_CONNECTION')}
-            br
-            #audioControlsBox(hidden='')
-                //button#btn_startAudio(type='button') __start audio
-                //button#btn_stopAudio(type='button') __stop audio
-
-            br
-            #videoControlsBox.video(hidden='')
-                //button#btn_stopVideo(type='button') __stop video
-                //#videoContainer
-
-
-    #waitingBox
-        center
-            h1 #{__('G.ONLINE')}
-            h5 #{__('G.MESSAGE_H5')}
-            h3 #{__('G.STATUS')} 
-                span(id="spn_stateA", style="color:#28B294") #{__('G.AVAILABLE')}
-                span(id="spn_stateU", style="color:red", hidden) #{__('G.UNAVAILABLE')}
-            .buttonBox
-                button.btn.btn-green.btn-status(id='btn_available', type="button") #{__('G.CHANGE_STATUS')}
-                button.btn.btn-white.btn-status(id='btn_unavailable', type="button", style="display: none;") #{__('G.CHANGE_STATUS')}
-
-
-    //
-        main#content
-          button#btn_closeConnection(type='button', hidden) __close connection
-          br
-          #audio(hidden='')
-            button#btn_startAudio(type='button') __start audio
-            button#btn_stopAudio(type='button') __stop audio
-            #audioDiv
-          br
-          #video.video(hidden='')
-            button#btn_stopVideo(type='button') __stop video
-            #videoContainer
-          br
-          span __state:
-          span(id="spn_state") __available
-          br
-          button(id='btn_available', type="button") __set available
-          br
-          button(id='btn_unavailable', type="button") __set unavailable
-          br
-          div(id="mapControls", hidden)
-
-          div(id="map", hidden)
-
-    .chatBox(id="chatBox" hidden)
-        .panel.panel-primary(id="primaryPanel")
-            .panel-heading(id="headingPanel")
-                span
-                    .chatLeft
-                        img.chatLeftIcon(src='resources/images/icons/chatWhite.png', alt='chat')
-
-                        //span#spn_isTyping.text-center.message
-                        .spinnerChat(hidden)
-                            .bounceChat1
-                            .bounceChat2
-                            .bounceChat3
-                        //#{__('GENERAL.CHAT')}
-
-
-                        img.chatRightIcon(src='resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")
-            //
-              span.glyphicon.glyphicon-comment
-              |  #{__('GENERAL.CHAT')}
-              span#spn_isTyping.text-center
-
-                img(src='resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")
-                //
-                    button#btn_minimiseChat.btn.btn-default.btn-xs(type='button')
-                      span.glyphicon.glyphicon-chevron-down
-                    ul.dropdown-menu.slidedown
-                      li
-                        a(href='#')
-                          span.glyphicon.glyphicon-refresh
-                          | __Refresh
-                      li
-                        a(href='#')
-                          span.glyphicon.glyphicon-ok-sign
-                          | __Available
-            .panel-body(id="bodyPanel")
-                ul#chat.chat
-            .panel-footer(id="footerPanel")
-                .input-group
-                    input#inp_chat.form-control.input-sm(type='text', placeholder="#{__('G.TYPE_MESSAGE')}")
-                    span.input-group-btn
-                        button#btn_chat.btn.btn-sm #{__('GENERAL.SEND')}
-        // </div>
-
-    // <div id="confirmDiv">
     #modalDialog.modalDialog(hidden)
         center(style="padding:10px")
             .helpForm
@@ -254,39 +134,29 @@ block content
                 .row(style="margin-top:20px")
                     .col-md-12
                         button.btn.btn-green.btn-status.toLateDialogClose(style="margin-bottom:10px;") #{__('GENERAL.OK')}
-
     #videoControlsDialog.modalDialog(hidden)
         .row
             .col-sm-12
                 img.x.closeVideoControlsDialog(src='resources/images/icons/x.png', alt='close icon')
         center(style="padding:10px")
             .alertForm.sliderContainer
-                p controls
+                p #{__('GENERAL.CONTROLS')}
                 .row
                     .col-sm-12
-                        p __Opacity
+                        p #{__('GENERAL.OPACITY')}
                         input#opacityRange(type='range', value='100' step='5')
-
                 .row
                     .col-sm-12
-                        p __Size
+                        p #{__('GENERAL.SIZE')}
                         input#sizeRange(type='range', value='40' min="10")
                 .row(style="margin-top:20px")
                     .col-md-12
                         button.btn.btn-green.btn-status.closeVideoControlsDialog(style="margin-bottom:10px;") #{__('GENERAL.OK')}
-
-
-
-
-
-
-
     // ringtone  and chat alert are added here
     audio#audioPlayer
     #audioDiv(hidden)
     #hammerVideo(hidden)
         #videoContainer
-
     #hammerContainer(hidden)
         script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBfwr4Jux2OwmpetTfqEYpGBoX95Z5obkI&libraries=drawing,places&callback=initMap')
     .audioVideoControls
@@ -297,14 +167,4 @@ block content
             .col-md-12(style="padding-left:0")
                 a.get-gps(id="btn_gps_guide")
                     img.gps-image(src='resources/images/icons/gps.png', alt='gps', id="img_location")
-
-//
 block foot
-    //
-        div(id="smallChat", class="smallChat", hidden)
-            img#smallChatImg.smallChatImg(src='resources/images/smallChat.png', alt="#{__('GENERAL.CHAT')}")
-            span#smallChatText.smallChatText #{__('GENERAL.CHAT')}
-            img.smallChatUp(src='resources/images/arrowUp.png', alt='up')
-
-
-

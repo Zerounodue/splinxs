@@ -20,7 +20,6 @@ block content
         var otherError = "#{__('T_LOCATION.OTHER_ERROR')}";
         var tryAgainMessage = "#{__('T_LOCATION.AUTO_GPS')}";
     loadPopup.loadingPopup(id="loadPopup")
-
         // close the popup and stop trying getting position
         .row
             .col-sm-12
@@ -45,11 +44,9 @@ block content
                 img.x(src='resources/images/icons/x.png', alt='close icon', id="img_declinedClose")
         .row
             .col-sm-12
-
                 div(style='text-align: center;')
                     h2 #{__('T_LOCATION.IMP_GET_GPS')}
                     //the div errorMessage will be filled from the JS file depending on the error
-
                     div#errorMessage
                     a.btn.btn-default.btn-blue.btn-map(id="btn_declinedClose") #{__('T_LOCATION.OK')}
     infoPopup.loadingPopup(id="infoPopup", hidden)
@@ -67,16 +64,12 @@ block content
                     a.btn.btn-default.btn-blue.btn-map(id="btn_infoOk") #{__('T_LOCATION.OK')}
                     //the div tryAgain will be filled from the JS if permission is not denied
                     div#tryAgain
-
-
-
     .container.rightIcon
         .row
             .col-md-12(style="pagging-left:0")
                 a.get-gps(id="btn_gps")
                     img.gps-image(src='resources/images/icons/gps.png', alt='gps', id="img_location")
     .container.front
-        //img(src='resources/images/icons/orientation_small.png', alt='location', id="img_location")
         .row
             .col-sm-6.text-center
                 a.btn.btn-default.btn-white.btn-map-bottom(id="btn_info") #{__('T_LOCATION.INFO')}

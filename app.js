@@ -9,11 +9,9 @@
  */
 
 var express = require('express'),
-	session = require('express-session'), //session (required also for i18n)
-    i18n = require('./i18n'); //mashpie i18n-node module https://github.com/mashpie/i18n-node/
-    socket_io = require('socket.io')
-
-	//enforce = require('express-sslify'); //for redirect everything to ssh
+session = require('express-session'), //session (required also for i18n)
+i18n = require('./i18n'); //mashpie i18n-node module https://github.com/mashpie/i18n-node/
+socket_io = require('socket.io');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -25,16 +23,12 @@ var mongoose = require("mongoose");
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-
-
 var app = express();
 var io = socket_io();
 app.io = io;
+
 //stores logged in guides
 guideList = [];
-
-
-
 
 /**
  *Signaling-server for RTCMultiConnection
@@ -45,17 +39,13 @@ require('./Signaling-Server.js')(io, function (socket) {
         var added = false;
 
         if (!params.socketCustomEvent) {
-            //params.socketCustomEvent = 'custom-message';
             return;
         } else {
             //for guides
             addEvent(params.socketCustomEvent);
             console.log("guide event: " + params.socketCustomEvent);
         }
-
-
-        //for tourists
-        //allows to add one additional event (for websocket chat with guide)
+        //For Tourist's allows to add one additional event (for websocket chat with guide)
         socket.on('addEvent', function (msg) {
             if (added) return;
             if (!msg || !msg.event) return;
@@ -64,9 +54,7 @@ require('./Signaling-Server.js')(io, function (socket) {
             addEvent(event);
             added = true;
         });
-
-    } catch (e) {
-    }
+    } catch (e) {}
 
     function addEvent(event) {
         socket.on(event, function (message) {
@@ -79,14 +67,11 @@ require('./Signaling-Server.js')(io, function (socket) {
 
 });
 
-
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-
 require('./Splinxs-socket.js')(io);
-
 
 var sessionMiddleware = session({
     secret: "SplinxsSecret",
@@ -98,36 +83,14 @@ app.io.use(function(socket, next) {
     sessionMiddleware(socket.request, socket.request.res, next);
 });
 
-
 app.use(sessionMiddleware);
-
-
-
-
-// use HTTPS(true) in case you are behind a load balancer (e.g. Heroku) 
-//app.use(enforce.HTTPS());
-
-
-
-
-
-
 
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-//this is new: does i need that????
-//app.use(express.static(__dirname + '/public'));
-//app.use(express.static(__dirname + '/public/tourist'));
-//app.use(express.static(__dirname + '/public/guide'));
-//
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
-
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -135,14 +98,10 @@ app.set('view engine', 'jade');
 
 app.use(i18n);
 
-
-
 //routes
 var routes = require('./routes/index');
 var tourist = require('./routes/tourist');
 var guide = require('./routes/guide');
-
-
 
 //new for mongo db
 app.use(passport.initialize());
@@ -150,23 +109,11 @@ app.use(passport.session());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-/*
-// passport config
-var Account = require('./models/account');
-passport.use(new LocalStrategy(Account.authenticate()));
-passport.serializeUser(Account.serializeUser());
-passport.deserializeUser(Account.deserializeUser());
-*/
-
 // passport config
 var Guide = require('./models/guide');
 passport.use(new LocalStrategy(Guide.authenticate()));
 passport.serializeUser(Guide.serializeUser());
 passport.deserializeUser(Guide.deserializeUser());
-
-
-
 
 //mongo db stuff
 //http://mherman.org/blog/2015/01/31/local-authentication-with-passport-and-express-4/#.VwaB16R96Uk
@@ -183,8 +130,6 @@ db.once("open", function (callback) {
     console.log("Connection succeeded.");
 });
 
-
-
 app.use('/', routes);
 app.use('/', tourist);
 app.use('/', guide);
@@ -199,10 +144,9 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handlers
+// --- error handlers
 
-// development error handler
-// will print stacktrace
+// development error handler will print stacktrace
 //TODO comment this section for production mode
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
@@ -214,8 +158,7 @@ if (app.get('env') === 'development') {
   });
 }
 
-// production error handler
-// no stacktraces leaked to user
+// production error handler no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
@@ -223,6 +166,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;

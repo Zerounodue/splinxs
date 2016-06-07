@@ -16,8 +16,6 @@ block append stylesheets
 block append scripts
     script(src='resources/js/index.functions.js')
     script(src='resources/js/modernizr-custom.min.js')
-
-
 block navbar-brand
     a#navbar-brand-scroll.navbar-brand
         img(style='height:100%', src='resources/images/splinxs.png')
@@ -30,8 +28,6 @@ block append navbarli
         a(onclick="scrollTo('#aboutSlide')") #{__('MENU.ABOUT_US')}
     li.liClose
         a(onclick="scrollTo('#contactSlide')") #{__('MENU.CONTACT')}
-
-
 block content    
     if registerError
         body#body(onload='$("registerPopup").show();')
@@ -41,10 +37,8 @@ block content
         body#body(onload='$("registartionOKPopup").show();')
     else
         body#body
-
     registartionOKPopup.registartionOKPopup(hidden)
         include registrationOK.jade
-
     loginPopup.loginPopup(hidden)
         include login.jade
     registerPopup.registerPopup(hidden)

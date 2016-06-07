@@ -8,15 +8,12 @@
  * the Free Software Foundation, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * Created by Zerododici on 14.04.16.
- */
 module.exports = exports = function(io) {
     var Guide = require('./models/guide');
     
     var splinxsList = require('./public/splinxsList/SplinxsList');
 
-    var showLogs = true;
+    var showLogs = false;
     
     var guideStates = {
         state: "state",
@@ -71,7 +68,6 @@ module.exports = exports = function(io) {
             //check if guide is same as in session
             if(socket.request.session.username != socket.username){
                 if(showLogs) console.log('session username and socket name do not match');
-                //send a request to redirect home? or simply do nothing at all
                 return;
             }
             
@@ -79,12 +75,6 @@ module.exports = exports = function(io) {
                 if (showLogs) console.log('Splinxs-socket: available, ' + socket.username);
                 if (socket.username) {
                     setGuideState(socket.username, guideStates.available);
-
-                    /* to test cancel request
-                     setTimeout(function(){
-                     sendCancelRequest(socket.username);
-                     }, 5000);
-                     */
                 }
             }else if(state == guideStates.unavailable){
                 if(showLogs) console.log('Splinxs-socket: unavailable, ' + socket.username);
@@ -155,11 +145,6 @@ module.exports = exports = function(io) {
     function sendHelpRequest(g){
         sendMessageGuide(g, {request: guideRequests.help});
     }
-    /*
-    function sendCancelRequest(guide){
-        sendMessageGuide(guide, {request: guideRequests.cancel});
-    }
-    */
     function sendTooLateRequest(g){
         sendMessageGuide(g, {request: guideRequests.tooLate});
     }
@@ -282,9 +267,5 @@ module.exports = exports = function(io) {
     function isNumeric(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
-    
-    
-    
-    
 
 };

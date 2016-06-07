@@ -4,7 +4,6 @@ var i18n = require('i18n');//mashpie i18n-node module https://github.com/mashpie
 i18n.configure({
     // setup some locales - other locales default to en silently
     locales:['en', 'de', 'it'],
-
     // where to store json files - defaults to './locales' relative to modules directory - changed to i18n
     directory: __dirname + '/i18n',
     defaultLocale: 'en',
@@ -15,9 +14,6 @@ i18n.configure({
     // query parameter to switch locale (ie. /home?lang=ch) - defaults to NULL
     queryParameter: 'lang',
 });
-
-
-
 
 module.exports = function(req, res, next) {
 

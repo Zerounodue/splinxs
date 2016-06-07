@@ -14,7 +14,6 @@ center
     .loginRegisterForm
       h1.registerTitle #{__('REGISTER.REGISTER')}
       p.lead #{__('REGISTER.SIGN_UP_MESSAGE')}
-
       if registerError == "USERNAME_TAKEN"
         .alert.alert-green(role="alert")
           | #{__('REGISTER.USERNAME_TAKEN')}

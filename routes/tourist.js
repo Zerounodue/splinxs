@@ -10,22 +10,17 @@
 
 var express = require('express');
 var router = express.Router();
-
 var GuideLanguage = require('../models/guideLanguage');
-
 //https://github.com/meikidd/iso-639-1
 var ISO6391 = require('iso-639-1');
-
 //functions used in all routes
-var func  = require('../public/resources/js/functions.js');
-
+var func = require('../public/resources/js/functions.js');
 
 router.get('/touristLanguages', function(req, res) {
     if(func.isGuide(req)){
         func.redirectHome(res);
         return;
     }
-    
     GuideLanguage.findOne({}, 'codes', {lean: true}, function (err, langs){
         if (err) {
             console.log('error getting guide languages: ' + err);
@@ -34,7 +29,6 @@ router.get('/touristLanguages', function(req, res) {
         req.session.username = func.createTouristUsername();
         func.renderTouristLanguages(res, langs.codes.sort());
     });
-
 });
 
 router.post('/touristLanguages', function(req, res) {
@@ -48,9 +42,7 @@ router.post('/touristLanguages', function(req, res) {
     }
     var langs = JSON.parse(req.body.languages);
     var validLangs = true;
-    
     var codes = [];
-    
     for (var i = 0; i <  langs.length; i++){
         if(!ISO6391.validate(langs[i].code)){
             validLangs = false;
@@ -59,7 +51,6 @@ router.post('/touristLanguages', function(req, res) {
             codes.push(langs[i].code);
         }
     }
-
     if(validLangs){
         req.session.languages = codes;
         //send to tourist location
@@ -68,7 +59,6 @@ router.post('/touristLanguages', function(req, res) {
         //invalid language(s)
         redirectHome(res);
     }
-
 });
 
 router.get('/touristLocation', function(req, res) {
@@ -120,6 +110,5 @@ router.post('/tourist', function(req, res) {
         return;
     }
 });
-
 
 module.exports = router;

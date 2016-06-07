@@ -14,22 +14,14 @@ html
     title #{title}
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    //maximum-scale=1, user-scalable=no  cannot zoom, this is required at least for mobile site
     meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
     link(rel='icon', href='../resources/images/logo.png', type='image/gif')
     block stylesheets
       link(rel='stylesheet', href='../resources/css/bootstrap.min.css')
       link(rel='stylesheet', href='../resources/css/style.css')
-
     block scripts
       script(src='../resources/js/jquery-2.2.0.min.js')
       script(src='../resources/js/bootstrap-3.3.4.min.js')
-      script.
-        function myFunction() {
-          return "Write something clever here...";
-        }
-
-
   body
     header
     .topbar
@@ -45,17 +37,13 @@ html
               span.icon-bar
               span.icon-bar
               span.icon-bar
-
             block navbar-brand
               a(class='navbar-brand', href='/')
                 img(style='height:100%', src='../resources/images/splinxs.png')
             block hangUpCollapse
-
           #navbar-ex-collapse.collapse.navbar-collapse
-
             ul.nav.navbar-nav.navbar-right
               block hangUp
-
               block navbarli
               li.dropdown
                 a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
@@ -71,4 +59,4 @@ html
     block content
     block foot
       #footer
-        p Version: 0.9.2
+        p Version: 1.0.0

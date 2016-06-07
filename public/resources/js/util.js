@@ -21,7 +21,6 @@ var vibrations;
 var isTypingTimeout = null;
 var typingTimeout = 2000;
 
-
 /**
  * initialises the used variables
  * !needs to be called in document.ready()!
@@ -43,19 +42,7 @@ function initSplinxs() {
     };
     
     navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
-
 }
-
-/*
- function sendCustomMessage(message){
- message.userid = connection.userid;
- message.extra = connection.extra;
- connection.sendCustomMessage(message);
- }
- */
-
-
-
 /**
  * gets the current time in the format HH:MM:SS
  * @returns {String} returns the current time in the format HH:MM:SS
@@ -87,8 +74,7 @@ function getCurrentTimeMillis(){
  * @param {sounds} sound sound that should be played
  */
 function playSound(sound) {
-    console.log('play sound: ' + sound);
-
+    if(showLogs) console.log('play sound: ' + sound);
     switch (sound) {
         case sounds.call_answer:
             audioPlayer.src = sounds.call_answer;
@@ -102,15 +88,12 @@ function playSound(sound) {
         default:
             audioPlayer.src = "";
             break;
-
     }
-
     if (audioPlayer.src != "") {
         console.log('playing sound');
         audioPlayer.play();
     }
 }
-
 /**
  * stops the sound that might be playing
  */
@@ -144,17 +127,17 @@ function vibrate(vibration) {
         }
     }
 }
-
+/**
+ * stopps the vibration
+ */
 function stopVibration(){
     vibrate(vibrations.stop);
 }
-
-
 /**
  * sends a message to the peer that I am typing
  */
 function meIsTyping() {
-    console.log('me is typing');
+    if(showLogs) console.log('me is typing');
     //will send the typing message only if it is already expired => saves data
     if (isTypingTimeout == null) {
         sendMessageToPeer({
@@ -168,7 +151,7 @@ function meIsTyping() {
  * sends a message to the peer that I stopped typing
  */
 function meStoppedTyping() {
-    console.log('me stopped typing');
+    if(showLogs) console.log('me stopped typing');
     isTypingTimeout = null;
     sendMessageToPeer({
         stoppedTyping: true
@@ -201,7 +184,9 @@ function clearLocalStorage(){
         localStorage.clear();
     }
 }
-
+/*
+ * decodes html entities
+ */
 function decodeEntities(encodedString) {
     var textArea = document.createElement('textarea');
     textArea.innerHTML = encodedString;

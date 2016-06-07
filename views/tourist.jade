@@ -91,18 +91,18 @@ block content
                 img.x.closeVideoControlsDialog(src='resources/images/icons/x.png', alt='close icon')
         center(style="padding:10px")
             .alertForm.sliderContainer
-                p controls
-                .row
-                    .col-sm-12
-                        p __Opacity
-                        input#opacityRange(type='range', value='100' step='5')
-                .row
-                    .col-sm-12
-                        p __Size
-                        input#sizeRange(type='range', value='40' min="10")
-                .row(style="margin-top:20px")
-                    .col-md-12
-                        button.btn.btn-green.btn-status.closeVideoControlsDialog(style="margin-bottom:10px;") #{__('GENERAL.OK')}
+                p #{__('GENERAL.CONTROLS')}
+                    .row
+                        .col-sm-12
+                            p #{__('GENERAL.OPACITY')}
+                            input#opacityRange(type='range', value='100' step='5')
+                    .row
+                        .col-sm-12
+                            p #{__('GENERAL.SIZE')}
+                            input#sizeRange(type='range', value='40' min="10")
+                    .row(style="margin-top:20px")
+                        .col-md-12
+                            button.btn.btn-green.btn-status.closeVideoControlsDialog(style="margin-bottom:10px;") #{__('GENERAL.OK')}
     #loadBox.load(hidden='')
         h2 #{__('T.LOADING_H2')}
         p #{__('T.LOADING_P')}
@@ -110,6 +110,25 @@ block content
         #load2.loadDot
         #load3.loadDot
     #content
+        .chatBox(id="chatBox" hidden)
+            .panel.panel-primary(id="primaryPanel")
+                .panel-heading(id="headingPanel")
+                    span
+                        .chatLeft
+                            img.chatLeftIcon(src='resources/images/icons/chatWhite.png', alt='chat')
+
+                            .spinnerChat(hidden)
+                                .bounceChat1
+                                .bounceChat2
+                                .bounceChat3
+                            img.chatRightIcon(src='resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")
+                .panel-body(id="bodyPanel")
+                    ul#chat.chat
+                .panel-footer(id="footerPanel")
+                    .input-group
+                        input#inp_chat.form-control.input-sm(type='text', placeholder="#{__('G.TYPE_MESSAGE')}")
+                        span.input-group-btn
+                            button#btn_chat.btn.btn-sm #{__('GENERAL.SEND')}
         //that alerts are added here
         audio#audioPlayer
         //audio is added here alays hidden

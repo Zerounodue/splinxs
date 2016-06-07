@@ -71,9 +71,35 @@ block append navbarli
                 a(href="/guideAreas" id="a_guideAreas") #{__('MENU.CHANGE_AREAS')}
             li
                 a(href="/guidePassword" id="a_guidePassword") #{__('MENU.CHANGE_PASSWORD')}
-            li
-                a(href) __set available
 block content
+    #waitingBox
+        center
+            h1 #{__('G.ONLINE')}
+            h5 #{__('G.MESSAGE_H5')}
+            h3 #{__('G.STATUS')}
+                span(id="spn_stateA", style="color:#28B294") #{__('G.AVAILABLE')}
+                span(id="spn_stateU", style="color:red", hidden) #{__('G.UNAVAILABLE')}
+            .buttonBox
+                button.btn.btn-green.btn-status(id='btn_available', type="button") #{__('G.CHANGE_STATUS')}
+                button.btn.btn-white.btn-status(id='btn_unavailable', type="button", style="display: none;") #{__('G.CHANGE_STATUS')}
+    .chatBox(id="chatBox" hidden)
+        .panel.panel-primary(id="primaryPanel")
+            .panel-heading(id="headingPanel")
+                span
+                    .chatLeft
+                        img.chatLeftIcon(src='resources/images/icons/chatWhite.png', alt='chat')
+                        .spinnerChat(hidden)
+                            .bounceChat1
+                            .bounceChat2
+                            .bounceChat3
+                        img.chatRightIcon(src='resources/images/icons/arrowDown.png', alt='close', id="btn_minimiseChat")
+            .panel-body(id="bodyPanel")
+                ul#chat.chat
+            .panel-footer(id="footerPanel")
+                .input-group
+                    input#inp_chat.form-control.input-sm(type='text', placeholder="#{__('G.TYPE_MESSAGE')}")
+                    span.input-group-btn
+                        button#btn_chat.btn.btn-sm #{__('GENERAL.SEND')}
     #modalDialog.modalDialog(hidden)
         center(style="padding:10px")
             .helpForm

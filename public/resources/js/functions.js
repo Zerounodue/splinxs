@@ -14,6 +14,8 @@
 var ISO6391 = require('iso-639-1');
 //var i18n = require("i18n-express");
 
+var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
 this.redirectHome = function(res){
     res.redirect('/');
 };
@@ -135,9 +137,20 @@ this.isNumeric = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
 //-----tourist
+/*
+ * creates a 20 character long random string
+ */
 this.createTouristUsername = function(){
-    //TODO make better
-    return Date.now();
+    var ts = Math.floor(Date.now());
+    var uid = ts.toString();
+    for (var i = 0; i < 7; i++) {
+        //choose random position in id
+        var pos = Math.floor(Math.random() * (uid.length + 1));
+        //choose random character
+        var character = charset.charAt(Math.floor(Math.random() * charset.length));
+        uid = uid.substr(0, pos) + character + uid.substr(pos);
+    }
+    return uid;
 };
 
 this.redirectTourist = function(res){

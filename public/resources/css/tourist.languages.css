@@ -39,7 +39,6 @@
 .btn-checkbox:hover{
     background-color: #116494;
     border-color: #115179;
-
 }
 
 .btn-checkbox.focus,
@@ -93,8 +92,6 @@
     border-color: #104555;
 }
 
-
-
 .radio-left{
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
@@ -112,7 +109,6 @@
     border-bottom-left-radius: 0;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
-
 }
 
 .centerForm{
@@ -129,4 +125,3 @@
     box-shadow: 0px 0px 20px #c7c7c7;
     color: #2585C4;
 }
-

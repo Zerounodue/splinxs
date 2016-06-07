@@ -21,13 +21,8 @@ var ico_video;
 var waitingBox;
 var sureWantLeaveDialog;
 
-
-
-//var showLogs=true;
-
 var audioMuted = false;
 var videoMuted = false;
-
 
 /**
  * initialises ui variables for guide
@@ -44,7 +39,6 @@ function initGuideUI(){
     sureWantLeaveDialog = $("#sureWantLeaveDialog");
     
     //setConfirmUnload(true);
-
     initGuideButtons();
     initChat();
 }
@@ -64,12 +58,6 @@ function setUnavailable(){
 
     $("#btn_available").hide();
     $("#btn_unavailable").show();
-
-}
-
-function showAudioVideoIcons(){
-    $("#ico_audio").show();
-    //$("#ico_video").show();
 }
 
 function hideAudioVideoIcons(){
@@ -84,7 +72,6 @@ function hideGuideControls(){
 function showGuideControls(){
     $("#videoControlsDialog").show(animDur);
 }
-
 
 function showModalDialog(content) {
     modalContent.text(content);
@@ -101,7 +88,6 @@ function showWaitingBox(){
 function hideWaitingBox(){
     waitingBox.hide();
 }
-
 
 function showTouristRequestsGuidePrompt(){
     console.log('torist in need of help!!!');
@@ -126,7 +112,6 @@ function initGuideButtons() {
 
     $("#modalYes").click(function () {
         if (showLogs) console.log('guide: modalYes button clicked');
-
         //send accepted to tourist
         guideAcceptsRequest();
         hideTouristRequestGuidePrompt();
@@ -141,14 +126,12 @@ function initGuideButtons() {
         guideDeclinesRequest();
         hideTouristRequestGuidePrompt();
     });
-    
 
     //closes the tourist's connection, the guide stays connected
     $("#btn_closeConnection").click(function (e) {
         if (showLogs) console.log('closing connection');
         closeConnection();
     });
-
 
     //set the confirmUnload to false, if the guide clicks on this links he knows he will leave the page
     $("#a_logout").click(function (e) {
@@ -182,8 +165,7 @@ function initGuideButtons() {
         $('.navbar-collapse').collapse('hide');
         showGuideControls();
     });
-
-
+    
     $(".closeVideoControlsDialog").on('click', function(e){
         if(showLogs) console.log('guide close button clicked');
         hideGuideControls();
@@ -206,64 +188,6 @@ function initGuideButtons() {
     $("#leaveNo, #sureWantLeaveDialog_X").on('click', function(e){
         sureWantLeaveDialog.hide(animDur);
     });
-
-
-
-
-
-
-    /*
-    //---map controls to set update interval of tourist---
-    $("#btn_updateIntervalOff").click(function (e) {
-        if (showLogs) console.log('update interval off button clicked');
-        sendUpdateInterval(updateIntervals.off);
-    });
-
-    $("#btn_updateIntervalBatman").click(function (e) {
-        if (showLogs) console.log('update interval batman button clicked');
-        sendUpdateInterval(updateIntervals.batman);
-    });
-
-    $("#btn_updateIntervalSpiderman").click(function (e) {
-        if (showLogs) console.log('update interval spiderman button clicked');
-        sendUpdateInterval(updateIntervals.spiderman);
-    });
-
-    $("#btn_updateIntervalIronman").click(function (e) {
-        if (showLogs) console.log('update interval ironman button clicked');
-        sendUpdateInterval(updateIntervals.ironman);
-    });
-
-    $("#btn_updateIntervalSuperman").click(function (e) {
-        if (showLogs) console.log('update interval superman button clicked');
-        sendUpdateInterval(updateIntervals.superman);
-    });
-
-    $("#btn_updateIntervalFlash").click(function (e) {
-        if (showLogs) console.log('update interval flash button clicked');
-        sendUpdateInterval(updateIntervals.flash);
-    });
-    */
-   /*
-    $("#btn_startAudio").click(function (e) {
-        if (showLogs) console.log('guide: start audio button clicked');
-        //connection.dontCaptureUserMedia = false;
-        connection.addStream({
-            audio: true
-            //video: true
-            //,oneway: true
-        });
-    });
-    */
-   /*
-    $("#btn_stopAudio").click(function (e) {
-        if (showLogs) console.log('guide: stop audio button clicked');
-        connection.attachStreams.forEach(function (stream) {
-            stream.stop();
-        });
-        connection.renegotiate();
-    });
-    */
 
     $("#ico_audio").click(function (e) {
         if (showLogs) console.log('guide: audio icon clicked, will mute: ' + !audioMuted);
@@ -302,8 +226,6 @@ function initGuideButtons() {
         videoMuted = !videoMuted;
     });
 
-
-
     $(".leftDialogClose").click(function (e) {
         $('#leftDialog').hide(animDur);
         connectionClosed();
@@ -311,22 +233,9 @@ function initGuideButtons() {
     $(".toLateDialogClose").click(function (e) {
         $('.modalDialog').hide(animDur);
     });
-
-    
-
-
-
 }
 
-/*
-function setConfirmUnload(on) {
-    window.onbeforeunload = (on) ? unloadMessage : null;
-}
 
-function unloadMessage() {
-    return "__Are you sure you want to leave this page?";
-}
-*/
 function muteAudio(){
     connection.attachStreams.forEach(function (stream) {
         if (stream.type == "local") {
@@ -334,13 +243,6 @@ function muteAudio(){
                 if (showLogs) console.log('guide: muting audio stream');
                 stream.mute();
             }
-            
-            /*
-            if (stream.isAudio) {
-                if (showLogs) console.log('guide: muting audio stream');
-                stream.mute();
-            }
-            */
         }
     });
 }
@@ -352,12 +254,6 @@ function unmuteAudio(){
                 if (showLogs) console.log('guide: unmuting audio stream');
                 stream.unmute();
             }
-            /*
-            if (stream.isAudio) {
-                if (showLogs) console.log('guide: unmuting audio stream');
-                stream.unmute();
-            }
-            */
         }
     });
 }

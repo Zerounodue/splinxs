@@ -18,10 +18,7 @@
 showLogs = true;
 
 var c2P = false; //connected to peer
-
 var channel;
-
-//var connection = new RTCMultiConnection();
 
 var touristRequests = {
     request: "request",
@@ -37,7 +34,6 @@ var touristResponses = {
 var saveConnInterval;
 var saveConnIntervalTimer = 60000;
 var localStorageConnectionName = "connection";
-var localStoragePreviousConnectionTimeout = 20 * 60 * 1000;//20 min in milliseconds
 
 var findGuideTimeout;
 var findGuideTimeoutTimer = 60000;
@@ -50,27 +46,15 @@ function initTouristConnection(){
     if(showLogs) console.log('init tourist connection');
 
     showLoadBox();
-
     findGuideTimeout = setTimeout(function () {
         hideLoadBox();
-        //alert('__sorry, no matching guide could be found...');
         $('#noMatchDialog').show();
-        //connectionClosed is performed when pressing on the ok button
-        //connectionClosed();
 
     }, findGuideTimeoutTimer);
 
     //params needed to send data over websocket
-
-
-    //if(!supportsOnlyWebsocket()){
     initTouristWebRTC();
-    //}
-
-    //connection.videosContainer = $("#videoContainer");
-
     initTouristSocket();
-
     getGEOLocation();
 }
 
@@ -84,12 +68,10 @@ function initTouristWebRTC(){
     } else if (typeof MediaStream !== 'undefined') {
         connection.attachStreams.push(new MediaStream());
     } else {
-        //console.warn('Neither Chrome nor Firefox. This might NOT work.');
+        if(showlogs)console.log('Neither Chrome nor Firefox. This might NOT work.');
     }
 
     connection.dontCaptureUserMedia = true;
-
-
     connection.session = {
         data: true
         ,audio: true
@@ -98,9 +80,8 @@ function initTouristWebRTC(){
 
     connection.sdpConstraints.mandatory = {
         OfferToReceiveAudio: true,
-        OfferToReceiveVideo: true//DetectRTC.hasWebcam
+        OfferToReceiveVideo: true
     };
-
 
     //to change to back camera
     var secondVideoDeviceId = null;
@@ -115,7 +96,6 @@ function initTouristWebRTC(){
                 secondVideoDeviceId = device.id;
             }
         }
-
         if (secondVideoDeviceId != null) {
             //use back camera            
             connection.mediaConstraints.video.optional = [{
@@ -123,18 +103,14 @@ function initTouristWebRTC(){
             }];
         }
     });
-
     initTouristWebRTCEvents();
 }
 
 function initTouristWebRTCEvents(){
     connection.onopen = function (event) {
         if (showLogs) console.log('tourist: connection opened');
-
         if (connection.alreadyOpened) return;
         connection.alreadyOpened = true;
-
-
     };
 
     connection.onmessage = function (message) {
@@ -152,38 +128,18 @@ function initTouristWebRTCEvents(){
             if(showLogs) console.warn('0 streams...');
             return;
         }
-
         if(event.stream.type == "local"){
-
-
             if(audioStream == null){
                 audioStream = event.stream.id;
                 if (showLogs) console.warn('tourist: local stream audio started');
-
-
                 //this code is only because the audio contains a video
                 event.mediaElement.controls = false;
                 event.mediaElement.autoplay = true;
                 event.mediaElement.volume = 1;
-
                 $("#videoContainer").append(event.mediaElement);
-
-
-
             }else{
-                console.error('Video works, change code here');
-                return;
-
-
-                if (showLogs) console.warn('tourist: local stream video started');
-                event.mediaElement.controls = false;
-                event.mediaElement.autoplay = true;
-                event.mediaElement.volume = 1;
-
-                $("#videoContainer").append(event.mediaElement);
-                showVideo();
+                if(showlogs)console.log('Video works, change code here');
             }
-
 
         }else if(event.stream.type == "remote"){
             if (showLogs) console.warn('tourist: remote stream (audio) started');
@@ -193,7 +149,6 @@ function initTouristWebRTCEvents(){
             event.mediaElement.controls = false;
             event.mediaElement.autoplay = true;
             event.mediaElement.volume = 1;
-
 
             startAudioStream();
 
@@ -337,11 +292,7 @@ function establishConnectionWithGuide() {
     showChatMapGUI();
     showTouristUI();
     centerAndResize();
-    //get current location and send to guide
-    //getGEOLocation();
     initToutistOrientation();
-
-
 
 }
 /**
@@ -368,11 +319,8 @@ function saveConnection(){
     saveToLocalStorage(localStorageConnectionName, data);
 }
 
-
 function initTouristSocket(){
     if(showLogs) console.log('tourist: init touristSocket');
-    //touristSocket = io.connect('https://splinxs.ti.bfh.ch/tourist');
-    //touristSocket = io.connect('https://localhost/tourist');
     touristSocket = io.connect('/tourist');
 
     initEvents();
@@ -405,20 +353,15 @@ function initEvents(){
                 channel = guide;
                 connection.channel = channel;
                 connection.socketCustomEvent = channel;
-                //initTouristWebRTC();
                 addWebsocketEvent();
                 setSocketCustomEvent();
                 initConnectionWithGuide();
             }else if(res == touristResponses.guideClosedConnection){
                 if(showLogs) console.log('tourist: touristSocket guide closed connection request');
                 $('#leftDialog').show();
-                //alert('__Guide left connection in a mean way...');
-                //connectionClosed is performed when pressing on the ok button
-                //connectionClosed();
             }
         }
     });
-
 }
 
 function touristSocketSendRequest(r){
@@ -455,48 +398,7 @@ function startAudioStream(){
         });
         connection.attachStreams = [];
     }
-
     connection.addStream({
         audio: true
     });
-}
-
-function startVideoStream(){
-    connection.dontCaptureUserMedia = false;
-
-    if (connection.attachStreams.length) {
-        connection.getAllParticipants().forEach(function (p) {
-            connection.attachStreams.forEach(function (stream) {
-                connection.peers[p].peer.removeStream(stream);
-            });
-        });
-        connection.attachStreams = [];
-    }
-
-    connection.addStream({
-        audio: true,
-        video: true
-        //,oneway: true
-    });
-
-}
-
-function stopVideoStream(){
-    if (connection.attachStreams.length) {
-        connection.getAllParticipants().forEach(function (p) {
-            connection.attachStreams.forEach(function (stream) {
-                connection.peers[p].peer.removeStream(stream);
-            });
-        });
-
-        connection.attachStreams.forEach(function (stream) {
-            stream.stop();
-        });
-
-        connection.attachStreams = [];
-    }
-
-    connection.renegotiate();
-
-
 }

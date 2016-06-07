@@ -21,16 +21,9 @@ var markers = [];
 var markerCount = 0;
 var userMarker = null;
 var touristPos = {lat: 0, lng: 0};
-
-
-//var touristPos =  {lat: 46.947098, lng: 7.444146};
-//
-var touristPosMarker;
 var greenMarker;
 var blueMarker;
-
-
-
+var line;
 /*user position marker */
 var symbolLeft = {
     path: 'M10.5,0L10.5,22.4L0,30L10.5,0',
@@ -48,27 +41,11 @@ var symbolRight = {
     scale:1,
     rotation:0
 };
-var line;
-/*user position marker */
 
-//Bundesplatz Bern
-//var defaultLocation = {lat: 46.947098, lng: 7.444146};
 
 //used to delay click to allow doubleclick
 var click_timeout;
 var click_timeoutTimer = 200; //ms
-/*
-var updateIntervals = { //ms
-    off: -0,
-    batman: 60000,
-    spiderman: 30000,
-    ironman: 10000,
-    superman: 5000,
-    flash: 1000
-};
-var updateIntervalTimer = updateIntervals.ironman;
-var updateInterval;
-*/
 
 /**
  * callback when the map script has been successfully loaded
@@ -149,10 +126,8 @@ function addTouristsMarker(id, position){
     var marker = new google.maps.Marker({
         position: position,
         map: map,
-        //title: 'Hello World!',
         id: id,
         icon: blueMarker
-        //icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
     });
     
     addMarker(marker);
@@ -169,11 +144,8 @@ function addGuidesMarker(id, position){
     var marker = new google.maps.Marker({
         position: position,
         map: map,
-        //title: 'Hello World!',
         id: id,
         icon: greenMarker
-        //icon: '/resources/images/icons/greenMarker.png'
-        //icon: 'https://maps.google.com/mapfiles/ms/icons/green-dot.png'
     });
     
     addMarker(marker);
@@ -187,7 +159,6 @@ function addMarker(marker) {
     if(showLogs) console.log('add marker: ' + marker.id);
     
     markerCount = marker.id;
-    
     marker.addListener('click', function (event) {
         var id = marker.id;
         if(showLogs) console.log('marker: ' + id + ' clicked');
@@ -204,7 +175,6 @@ function addMarker(marker) {
  */
 function removeMarker(id) {
     if(showLogs) console.log('removing marker: ' + id);
-    //marker.setMap(null);
     markers = jQuery.grep(markers, function (value) {
         if(value.id != id){
             return value.id != id;
@@ -220,12 +190,6 @@ function removeMarker(id) {
 function setTouristLocation(pos){
     if(showLogs) console.log('tourist location lat: ' + pos.lat + ' lng: ' + pos.lng);
     touristPos=pos;
-    //line.path=[pos, pos];
-
-    //line.setMap(null);
-    //line.setMap(map);
-
-    //userMarker.setPosition(pos);
     if(line != null)line.setMap(null);
 
     line = new google.maps.Polyline({
@@ -233,13 +197,10 @@ function setTouristLocation(pos){
         icons: [
             {
                 icon: symbolLeft,
-                //offset: '0%'
             }, {
                 icon: symbolRight,
-                //offset: '50%'
             }
         ],
-
         map: map
     });
 }
@@ -266,21 +227,14 @@ function setTouristOrientation(orient) {
                     //offset: '50%'
                 }
             ],
-
             map: map
         });
-
     }
 
     if(line != null) {
         line.setMap(null);
         line.setMap(map);
     }
-    //line.icons=icons;
-    //line.map =map;
-    ////userMarker.icon= touristPosMarker;
-    //userMarker.icon.rotation=45;
-    //userMarker.setMap(map);
 }
 
 /**
@@ -289,18 +243,7 @@ function setTouristOrientation(orient) {
  */
 function addTouristMarker() {
     if(showLogs) console.log('add user marker');
-    //touristPos=pos;
-    /*
-    touristPosMarker = {
-        url: '/resources/images/icons/positionArrow.svg',
-        size: new google.maps.Size(42, 60),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(11, 15),
-        scaledSize: new google.maps.Size(21, 30),
-        rotation: 45
 
-    };
-    */
     symbolLeft.origin= new google.maps.Point(0, 0);
     symbolLeft.anchor= new google.maps.Point(11, 15);
     symbolLeft.scaledSize= new google.maps.Size(21, 30);
@@ -327,35 +270,7 @@ function addTouristMarker() {
         line.setMap(null);
         line=null;
     }
-
-
 }
-
-
-/*
-function getGEOLocation() {
-    // Try HTML5 geolocation.
-    var pos = {lat: null, lng: null};
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            //map.setCenter(pos);
-        }, function () {
-            if(showLogs) console.warn('The Geolocation service failed');
-        });
-    } else {
-        // Browser doesn't support Geolocation
-        if(showLogs) console.info('Your browser does not support geolocation');
-    }
-    
-    return pos;
-}
-*/
-
 
 // Sets the map on all markers in the array.
 function setMapOnAll(map) {
@@ -369,7 +284,6 @@ function clearMarkers() {
     setMapOnAll(null);
 }
 
-
 // Deletes all markers in the array by removing references to them.
 function deleteAllMarkers() {
     clearMarkers();
@@ -380,4 +294,3 @@ function centerAndResize(){
     map.setCenter(touristPos);
     map.setZoom(15);
 }
-

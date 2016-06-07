@@ -36,14 +36,12 @@ function initTouristUI(){
     ico_audio = $("#ico_audio");
     ico_video = $("#ico_video");
     sureWantLeaveDialog = $("#sureWantLeaveDialog");
-    //setConfirmUnload(true);
     initTouristButtons();
     initChat();
 }
 
 function showTouristUI(){
     if(showLogs) console.log('tourist: show gui');
-    //showAudioVideoIcons();
 }
 
 function showLoadBox(){
@@ -54,11 +52,6 @@ function showLoadBox(){
 function hideLoadBox(){
     loadBox.hide();
     content.show();
-}
-
-function showAudioVideoIcons(){
-    $("#ico_audio").show();
-    $("#ico_video").show();
 }
 
 function hideAudioVideoIcons(){
@@ -98,17 +91,14 @@ function initTouristButtons(){
             ico_video.removeClass('lightColor');
             ico_video.attr('src','resources/images/icons/videoOn.png');
             showVideoStream();
-            //unmuteVideo();
         }else{
             //mute video
             ico_video.addClass('lightColor');
             ico_video.attr('src','resources/images/icons/videoOff.png');
             hideVideoStream();
-            //muteVideo();
         }
         videoMuted = !videoMuted;
     });
-
 
     $("#controlsBtn").on('click', function(e){
         if(showLogs) console.log('touristControlsBtn  button clicked');
@@ -151,12 +141,6 @@ function muteAudio(){
                 if (showLogs) console.log('tourist: muting audio stream');
                 stream.mute();
             }
-            /*
-            if (stream.isAudio) {
-                if (showLogs) console.log('tourist: muting audio stream');
-                stream.mute();
-            }
-            */
         }
     });
 }
@@ -168,46 +152,9 @@ function unmuteAudio(){
                 if (showLogs) console.log('tourist: unmuting audio stream');
                 stream.unmute();
             }
-            /*
-            if (stream.isAudio) {
-                if (showLogs) console.log('tourist: unmuting audio stream');
-                stream.unmute();
-            }
-            */
         }
     });
 }
-
-function muteVideo() {
-    connection.attachStreams.forEach(function (stream) {
-        if (stream.type == "local") {
-            if (stream.isVideo) {
-                if (showLogs) console.log('tourist: muting video stream');
-                stream.mute();
-            }
-        }
-    });
-}
-
-function unmuteVideo(){
-    connection.attachStreams.forEach(function (stream) {
-        if (stream.type == "local") {
-            if (stream.isVideo) {
-                if (showLogs) console.log('tourist: unmuting video stream');
-                stream.unmute();
-            }
-        }
-    });
-}
-/*
-function setConfirmUnload(on) {
-    window.onbeforeunload = (on) ? unloadMessage : null;
-}
-
-function unloadMessage() {
-    return "__Are you sure you want to leave this page?";
-}
-*/
 
 function hideVideoStream(){
     hideVideo();

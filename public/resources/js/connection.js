@@ -244,19 +244,7 @@ function supportsVideoOnly(){
 function supportsAudioVideo(){
     return connectionState.Media == connectionStates.Media.AudioVideo;
 }
-/**
- * closes the current connection
- */
-/*
-function closeConnection() {
-    connection.close();
-    
-    connection.attachStreams.forEach(function (stream) {
-        stream.stop();
-    });
-    
-}
-*/
+
 /**
  * closes all media streams
  * !does not affect sctp/websocket text chat!
@@ -266,7 +254,6 @@ function stopStreams() {
         stream.stop();
     });
 }
-
 
 function sendHideVideo(){
     if (showLogs) console.log('sending: only websocket hideVideo');

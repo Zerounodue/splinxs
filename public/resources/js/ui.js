@@ -28,7 +28,6 @@ var chatIsMinimised=false;
 var hangUp;
 var hangUpCollapse;
 
-
 var smallChatColors = {
     no_message: "#2585C4",
     new_message: "#28B294"
@@ -40,9 +39,7 @@ var videoDiv;
 //audio and video contols (buttons) that are shown or hidden depending of if the feauture is supported
 var videoControlsDiv;
 var audioControlsDiv;
-
 var videoControlsNavBarButton;
-
 var myAvatarIcon;
 var peerAvatarIcon;
 
@@ -57,7 +54,6 @@ function initUI(isGuide){
     chat = $("#chat");
     headingPanel = $("#headingPanel");
     primaryPanel = $("#primaryPanel");
-    //smallChat = $("#smallChat");
     chatBox = $("#chatBox");
     isTypingSpan = $("#spn_isTyping");
     mapDiv = $("#hammerContainer");
@@ -79,14 +75,10 @@ function initUI(isGuide){
     }
 
     $("#opacityRange").on("input change", function() {
-
         var alpha = $(this).val()/100;
 
         $( "#hammerVideo" ).fadeTo( 0 , alpha);
         $( "#videoContainer" ).fadeTo( 0 , alpha);
-
-        //$("#hammerdrag").css("background-color", hex2rgba("#ABCDEF", 0.6));
-        //$("#hammerdrag").opacity ($("#opacityRange").val()/100);
     });
     $("#sizeRange").on("input change", function() {
         size=$("#sizeRange").val()*5 +10;
@@ -98,7 +90,6 @@ function initUI(isGuide){
             else{
                 size= $(hammerContainer).height();
             }
-
         }
         checkPos();
         $(hammerDraggable).width( size);
@@ -206,8 +197,6 @@ function changeToSmallChat() {
  * hides the small chat and displays the "normal" chaat
  */
 function changeToChat() {
-    //chatBox.fadeIn();
-    //smallChat.fadeOut();
     chatIsMinimised = false;
     setSmallChatNoMessageColor();
 }
@@ -231,23 +220,19 @@ function setSmallChatNoMessageColor() {
  */
 function peerIsTyping(peername) {
     console.log(peername + " is typing");
-    //isTypingSpan.text(peername + " is typing...");
     spinner.css('display', 'inline');
-    //isTypingSpan.text("...");
 }
 /**
  * removes the "[peername] is typing..." from the chat
  */
 function peerStoppedTyping() {
     console.log("stopped typing");
-    //isTypingSpan.text("");
     spinner.css('display', 'none');
 }
 /**
  * displays all gui elements available for the current connection
  */
 function showChatMapGUI(){
-
     if(supportsOnlyWebsocket()){
         showWebsocketOnlyGUI();
 
@@ -278,8 +263,6 @@ function showWebsocketOnlyGUI(){
     showChat();
     showMap();
     $("#btn_closeConnection").show();
-
-
 }
 /**
  * will display the elements necessary for a connection with no media
@@ -287,10 +270,8 @@ function showWebsocketOnlyGUI(){
 function showNoMediaGUI(){
     if(showLogs) console.log('show no media gui');
     showChat();
-
     showMap();
     $("#btn_closeConnection").show();
-
 }
 /**
  * will display all gui elements for a Webrtc conection
@@ -298,7 +279,6 @@ function showNoMediaGUI(){
 function showAudioVideoGUI(){
     if(showLogs) console.log('show audio and video gui');
     showChat();
-
     showMap();
     showVideoControls();
     showAudioControls();
@@ -372,7 +352,6 @@ function hideVideoControls(){
     videoControlsDiv.hide();
 
 }
-
 /**
  * hides the video div
  */
@@ -394,12 +373,6 @@ function initChat(){
         //cannot send to peer if not connected
         if(!c2P) return;
         if(showLogs) console.log('send chat clicked');
-        /*
-        var chatInput = $("#inp_chat");
-        var message = chatInput.val();
-        sendMessageToPeer(message, true);
-        chatInput.val("");
-        */
         sendChatMessage();
     });
 
@@ -409,12 +382,6 @@ function initChat(){
         //send message when enter key is pressed
         if (e.which == 13) {
             if(showLogs) console.log('enter on chat input');
-            /*
-            var chatInput = $("#inp_chat");
-            var message = chatInput.val();
-            sendMessageToPeer(message, true);
-            chatInput.val("");
-            */
             sendChatMessage();
         }
     });
@@ -434,7 +401,6 @@ function initChat(){
         meIsTyping();
     });
 
-
     $("#btn_minimiseChat").click(function (e) {
         if(showLogs) console.log('btn_minimiseChat button clicked');
 
@@ -443,35 +409,17 @@ function initChat(){
             $("#chatBox").addClass("borderBottom");
             $(".panel").addClass("borderBottom");
 
-            //$("#footerPanel").addClass("hidden");
-            //$("#footerPanel").hide("Blind",500);
             $("#btn_minimiseChat").attr("src", "resources/images/icons/arrowUp.png");
-            //$("#chat").addClass("hidden");
             changeToSmallChat();
         }else{
             $("#chatBox").removeClass("zeroBottom");
             $("#chatBox").removeClass("borderBottom");
             $(".panel").removeClass("borderBottom");
 
-            //$("#footerPanel").show("Blind", 500);
-            //$("#footerPanel").removeClass("hidden");
             $("#btn_minimiseChat").attr("src", "resources/images/icons/arrowDown.png");
             changeToChat();
         }
-
-
     });
-    /*
-    $("#btn_minimiseChat").click(function (e) {
-        if(showLogs) console.log('minimise chat');
-        changeToSmallChat();
-    });
-
-    $("#smallChat").click(function (e) {
-        if(showLogs) console.log('maximising chat');
-        changeToChat();
-    });
-    */
 }
 /**
  * when a message arrived from SCTP or Websocket this function has to be called

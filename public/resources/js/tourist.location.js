@@ -37,6 +37,69 @@ var loadPopup;
 var infoPopup;
 var declinedPopup;
 
+$(document).ready(function () {
+    if(showLogs) console.log('document ready');
+
+    loadPopup = $('loadPopup');
+    infoPopup = $('infoPopup');
+    declinedPopup = $('declinedPopup');
+
+    $("#btn_submit").on('click', function (e) {
+        if(showLogs) console.log('submit button clicked');
+        if(marker && isValidGEOPosition(marker.position)){
+            submitLocation();
+        }else{
+            showInfoPopup();
+        }
+    });
+
+    $("#btn_info").on('click', function(e){
+        if(showLogs) console.log('info ok button clicked');
+        showInfoPopup();
+    });
+
+    $("#btn_infoOk").on('click', function(e){
+        if(showLogs) console.log('info ok button clicked');
+        hideInfoPopup();
+    });
+
+
+    $("#img_infoClose").on('click', function(e){
+        if(showLogs) console.log('info close img clicked');
+        hideInfoPopup();
+    });
+
+    $("#btn_loadClose").on('click', function(e){
+        if(showLogs) console.log('load close button clicked');
+        //stop watching (updating and trying to get the position) if the user close the popup
+        navigator.geolocation.clearWatch(watchID);
+        fillTryAgainDiv();
+        hideLoadPopup();
+    });
+
+    $("#img_loadClose").on('click', function(e){
+        if(showLogs) console.log('load close img clicked');
+        //stop watching (updating and trying to get the position) if the user close the popup
+        navigator.geolocation.clearWatch(watchID);
+        hideLoadPopup();
+    });
+
+    $("#btn_declinedClose").on('click', function(e){
+        if(showLogs) console.log('declined close button clicked');
+        hideDeclinedPopup();
+    });
+
+    $("#img_declinedClose").on('click', function(e){
+        if(showLogs) console.log('declined close img clicked');
+        hideDeclinedPopup();
+    });
+    $("#btn_gps").on('click', function(e){
+        if(showLogs) console.log('gps img clicked');
+        getGEOLocation();
+    });
+
+});
+
 /**
  * callback when the map script has been successfully loaded
  */
@@ -62,7 +125,6 @@ function initMap(){
     };
     
     addMapListeners();
-    //addMarker(defaultLocation);
     getGEOLocation();
 }
 /**
@@ -97,11 +159,6 @@ function addMarker(position) {
         map: map,
         icon: blueMarker
     });
-    /* not needed
-    marker.addListener('click', function (event) {
-        if(showLogs) console.log('marker clicked');
-    });
-    */
 }
 /**
  * gets the geo location
@@ -160,80 +217,10 @@ function updateMarker(pos){
         else {
             marker.setPosition(pos);
         }
-        //map.panTo(pos);
-
     }else{
         if(showLogs) console.log("invalid position");
     }
 }
-
-
-
-
-$(document).ready(function () {
-    if(showLogs) console.log('document ready');
-
-    loadPopup = $('loadPopup');
-    infoPopup = $('infoPopup');
-    declinedPopup = $('declinedPopup');
-    
-
-    
-    $("#btn_submit").on('click', function (e) {
-        if(showLogs) console.log('submit button clicked');
-        if(marker && isValidGEOPosition(marker.position)){
-            submitLocation();
-        }else{
-            showInfoPopup();
-        }
-    });
-
-    $("#btn_info").on('click', function(e){
-        if(showLogs) console.log('info ok button clicked');
-        showInfoPopup();
-    });
-
-    $("#btn_infoOk").on('click', function(e){
-       if(showLogs) console.log('info ok button clicked');
-        hideInfoPopup();
-    });
-    
-    
-    $("#img_infoClose").on('click', function(e){
-       if(showLogs) console.log('info close img clicked');
-        hideInfoPopup();
-    });
-
-    $("#btn_loadClose").on('click', function(e){
-       if(showLogs) console.log('load close button clicked');
-        //stop watching (updating and trying to get the position) if the user close the popup
-        navigator.geolocation.clearWatch(watchID);
-        fillTryAgainDiv();
-        hideLoadPopup();
-    });
-    
-    $("#img_loadClose").on('click', function(e){
-       if(showLogs) console.log('load close img clicked');
-        //stop watching (updating and trying to get the position) if the user close the popup
-        navigator.geolocation.clearWatch(watchID);
-        hideLoadPopup();
-    });
-
-    $("#btn_declinedClose").on('click', function(e){
-       if(showLogs) console.log('declined close button clicked');
-        hideDeclinedPopup();
-    });
-    
-    $("#img_declinedClose").on('click', function(e){
-       if(showLogs) console.log('declined close img clicked');
-        hideDeclinedPopup();
-    });
-    $("#btn_gps").on('click', function(e){
-        if(showLogs) console.log('gps img clicked');
-        getGEOLocation();
-    });
-    
-});
 
 function showInfoPopup(){
     infoPopup.show(animDur);
@@ -280,14 +267,12 @@ function fillTryAgainDiv(){
         getGEOLocation();
     });
 }
-
 /**
  * submits the position with a POST method
  * action ="/touristLocation"
  */
 function submitLocation(){
     var pos = JSON.stringify(marker.position);
-    
     // Create the form object
     var locForm = document.createElement("form");
     locForm.setAttribute("method", "post");

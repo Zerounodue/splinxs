@@ -17,8 +17,6 @@
 //variables
 var showLogs = true;
 var languages = [];
-var localStorageKey = "languages";
-var nativeNames = [];
 //DOM elements
 var langForm;
 var inp_lang;
@@ -26,17 +24,12 @@ var selectedLanguages;
 var animDur = 150;
 
 $(document).ready(function () {
-
     if (showLogs) console.log('selectLanguages document ready');
-
-    
-    
     dataList = $("#languages");
     selectedLanguages = $("#div_selectedLanguages");
     inp_lang = $("#inp_languages");
     sel_languages = $("#sel_languages");
     langForm = $("#frm_languages");
-
 
     //add existing languages
     addSavedLanguages();
@@ -48,8 +41,6 @@ $(document).ready(function () {
     sel_languages.on('change', function (e) {
         tryaddLanguage($(this).val());
     });
-
-
     
     $("#btn_sendLanguages").on('click', function (e) {
         if(showLogs) console.log('send languages button clicked');
@@ -57,7 +48,6 @@ $(document).ready(function () {
         if(languages.length > 0){
             submitLanguages();
         }else{
-            //alert('__no languages selected');
             $("#nothingSelected").show();
             //prevent form from being submitted
             return false;
@@ -69,7 +59,6 @@ $(document).ready(function () {
     });
 
     if (!Modernizr.datalistelem) {
-        //alert('This browser does not support HTML5 datalist element, please use the select');
         $("#inp_languages").hide(animDur);
     }
 
@@ -87,7 +76,6 @@ function addLanguage(c) {
             break;
         }
     }
-
     //only add if the language is not already in the list
     if (!exists) {
         if (showLogs) console.log('add language code: ' + c);
@@ -119,10 +107,7 @@ function removeLanguage(c) {
  */
 function addSelectedLanguageToDOM(c) {
     if (showLogs) console.log('add language to DOM');
-    
     var nativeName = $("#languages option[code='" + c + "']").attr('value');
-
-
     var html =
         "<div class='div-languages ' style='display:none' id='div_lang_" + c + "'>"
             + nativeName
@@ -138,8 +123,6 @@ function addSelectedLanguageToDOM(c) {
     if(languages.length >1){
         $("#div_lang_"+languages[languages.length-2]).removeClass('div-languages-last');
     }
-
-
     $("#btn_lang_" + c).click(function () {
         if (showLogs) console.log('remove lang ' + c + ' button clicked');
         $("#div_lang_" + c).hide(animDur, function() {
@@ -148,9 +131,6 @@ function addSelectedLanguageToDOM(c) {
     });
 
     $("#div_lang_" + c).show(animDur);
-
-
-
 }
 /**
  * removes a selected language element
@@ -176,16 +156,7 @@ function removeSelectedLanguageFromDOM(c, i) {
  */
 function addSavedLanguages(){
     if(showLogs) console.log('add saved languages');
-    //languages empty => new tourist or guide
-    /*
-    if(languages.length < 1){
-        languages = getFromLocalStorage(localStorageKey);
-        //new tourist
-        if(languages == null){
-            languages = [];
-        }
-    }
-    */
+
     //saved languages available
     if(languages.length > 0){
         if(showLogs) console.log('saved languages: ' + languages.length);
@@ -216,25 +187,6 @@ function submitLanguages(){
     languagesForm.appendChild(hiddenField);
     document.body.appendChild(languagesForm); // inject the form object into the body section
     languagesForm.submit();
-
-    //old code whit firefox problem
-    /*
-    //sort languages by code
-    languages.sort(compareLanguages);
-    //saveToLocalStorage(localStorageKey, languages);
-    var langs = JSON.stringify(languages);
-    
-    langForm.empty();
-     $('<input id=\'langs\'/>').attr('type', 'hidden')
-          .attr('name', "languages")
-          .attr('value', langs)
-          .appendTo('#frm_languages');
-    langForm.submit();
-    */
-
-
-
-    
 }
 
 function tryaddLanguage(input){
@@ -244,7 +196,6 @@ function tryaddLanguage(input){
     }
 
 }
-
 
 /**
  * compares if the first value is smaller, bigger or the same as the first value
@@ -258,5 +209,3 @@ function compareLanguages(a, b)
     if (a > b) return 1;
     return 0;
 }
-
-

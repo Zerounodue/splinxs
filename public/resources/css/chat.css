@@ -10,7 +10,6 @@
 
 /* chatbox*/
 
-
 .chatBox {
     padding-top: 70px;
     position: fixed;
@@ -20,7 +19,6 @@
     width: 250px;
     transition: all 0.5s;
     z-index: 100;
-
 }
 
 .chat
@@ -46,7 +44,6 @@
 {
     margin-right: 60px;
 }
-
 
 .chat li .chat-body p
 {
@@ -80,14 +77,6 @@
 
 }
 
-/*
-#btn_minimiseChat{
-    margin-top: 3px;
-    height: 15px;
-    position: fixed;
-    right: 15px;
-}
-*/
 .btn-sm{
     color: white;
     background-color: #28B294;
@@ -96,7 +85,6 @@
 .btn-sm.focus, .btn-sm:focus, .btn-sm:hover {
     color: white;
 }
-
 
 .zeroBottom{
     height: 41px;
@@ -126,7 +114,6 @@
 
 }
 
-
 .chatLeft{
     height: 41px;
     width: auto;
@@ -153,8 +140,6 @@
     width: 15px;
     height: 15px;
     background-color: #333;
-
-
     border-radius: 100%;
     display: inline-block;
     -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
@@ -193,8 +178,6 @@
 }
 /* End Spinner */
 
-
-
 @media screen and (max-width: 500px){
     .chatBox {
         width: 100%;
@@ -228,5 +211,3 @@
         padding: 7px;
     }
 }
-
-

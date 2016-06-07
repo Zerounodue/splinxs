@@ -8,7 +8,6 @@
  * the Free Software Foundation, see <http://www.gnu.org/licenses/>.
  */
 
-
 .nav.navbar-nav.navbar-right li a {
     color: #676A6C;
   
@@ -29,8 +28,6 @@ body{
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color:#676A6C;
     padding-top: 70px; /* for topbar and navbar*/
-
-
 }
 
 .touristLink {
@@ -115,8 +112,6 @@ footer {
     float: left;
 }
 
-
-
 /*loading animation*/
 .load {
     width: 100%;
@@ -177,7 +172,6 @@ footer {
     83% {opacity : 1;}
     100% {opacity : 0;}
 }
-
 
 /* Firefox */
 
@@ -263,8 +257,6 @@ footer {
     animation: borderColorChange 4s infinite;
 }
 
-
-
 /* Chrome, Safari, Opera */
 @-webkit-keyframes borderColorChange {
     0% {border-color: #2585C4;}
@@ -289,9 +281,6 @@ footer {
 
 /* map */
 /*do not use #map, this will apply on all maps!!!!! use class */
-
-
-
 .map{
     width: 85%;
     height: 100%;
@@ -299,10 +288,7 @@ footer {
 }
 /* map */
 
-
-
 /*button*/
-
 .btn-blue{
     font-weight: bold;
     color: white;
@@ -371,15 +357,12 @@ footer {
     cursor: pointer;
 }
 
-
 .backArrow{
     position: relative;
     width:20px;
     height:20px;
     margin-right: 10px;
 }
-
-
 
 .back{
     display: flex;
@@ -402,7 +385,6 @@ footer {
         display: none;
     }
 }
-
 
 /* location icon */
 .leftIcon{
@@ -447,8 +429,6 @@ footer {
 }
 .md-scroll-mask { position: initial;}
 /* location icon */
-
-
 
 .alertForm{
     background-color: #f5f5f5;

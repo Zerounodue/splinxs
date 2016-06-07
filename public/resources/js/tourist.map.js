@@ -30,7 +30,6 @@ function addGuideTouristMarker(id, position){
     addTouristsMarker(id, position);
 }
 
-
 /**
  * gets the tourist's geo location
  * and sends it to the guide when it's updated
@@ -43,13 +42,6 @@ function getGEOLocation() {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-            //not working
-            /*
-             if ((position.coords.heading != null) && (!isNaN(position.coords.heading))) {
-             touristOrient = position.coords.heading;
-             console.warn("OK"+touristOrient);
-             }
-             */
             if(touristPos.lat != null && touristPos.lng != null) {
                 
                 setTouristLocation(touristPos);
@@ -73,7 +65,6 @@ function getGEOLocation() {
             else{
                 if(showLogs) console.warn('Impossible get location');
             }
-
         });
     } else {
         // Browser doesn't support Geolocation
@@ -81,35 +72,14 @@ function getGEOLocation() {
     }
 }
 
-
-
-
-
-
-
 /**
  * sends the tourist's location a
  */
 function sendTouristLocation(){
-    /*
-     if(touristPos.lat != null && touristPos.lng != null){
-     data.tourist.pos = touristPos;
-     //set position on tourist map
-     setTouristLocation(touristPos);
-     }
-     */
     if(showLogs) console.warn('sending tourist location ');
 
-    //var data = {tourist: { pos: null, orientation: null }};
     data.tourist.pos = touristPos;
     sendMapData(data);
-    /*
-    if(data.tourist != null){
-        sendMapData(data);
-    }else{
-        if(showLogs) console.warn('Tourist: invalid  location, will not send to guide');
-    }
-    */
 }
 
 /**
@@ -118,38 +88,18 @@ function sendTouristLocation(){
 function sendTouristOrientation(touristOrient){
     if(showLogs) console.log('sending tourist  orientation');
 
-    //var data = data.tourist.orientation = touristOrient;
     data.tourist.orientation = touristOrient;
     sendMapData(data);
-        //set orientation on tourist map
-        //setTouristOrientation(touristOrient);
-
-
-    /*
-    if(data.tourist != null){
-
-    }else{
-        if(showLogs) console.warn('Tourist: invalid  orientation, will not send to guide');
-    }
-    */
 }
-
 
 function initToutistOrientation(){
     window.addEventListener('deviceorientation', function(e) {
-        //if (showLogs)console.log('tourist: orientation changed');
-        /*
-         var heading = 'heading: ' + e.webkitCompassHeading +
-         '\n' +
-         'headingAccuracy: ' + e.webkitCompassAccuracy;
-         alert(heading);
-         */
         //only for webkit browser (iOS)
         if ( e.webkitCompassHeading != null) {
             touristOrient = e.webkitCompassHeading;
         }
         else{
-            //android
+            //Android
             if(e.alpha != null){
                 touristOrient=e.alpha;
             }

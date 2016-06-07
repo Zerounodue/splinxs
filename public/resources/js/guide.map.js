@@ -14,8 +14,6 @@
  * used by guides
  */
 
-//variables
-
 /**
  * adds a new marker created by the guide to the map and saves it in an array
  * @param {int} id id of marker

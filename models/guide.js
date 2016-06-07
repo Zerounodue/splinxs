@@ -32,8 +32,6 @@ Guide.statics.findMatchingGuides = function (params) {
     
     this.find({languages: { $in: params.languages}});
     
-    //this.find({languages: { $in: params.languages}}).isInArea(params.position);
-    
 };
 
 Guide.methods.isInArea = function isInArea (pos) {

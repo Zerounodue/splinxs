@@ -39,8 +39,6 @@ var guideResponses = {
     accept: 1
 };
 
-
-
 //guide channel
 var channel;
 var audioStream = null;
@@ -61,7 +59,6 @@ function initGuideWebRTC(){
     connection.channel = channel;
     connection.socketCustomEvent = connection.channel;
     
-    
     if (typeof webkitMediaStream !== 'undefined') {
         connection.attachStreams.push(new webkitMediaStream());
     }
@@ -71,16 +68,11 @@ function initGuideWebRTC(){
     else {
         console.error('Neither Chrome nor Firefox. This demo may NOT work.');
     }
-    
 
     connection.dontCaptureUserMedia = true;
-
     connection.session = {
         data: true
-        //audio: 'two-way'
-       // data: true
         ,audio: true
-        //,video: true
     };
 
     connection.sdpConstraints.mandatory = {
@@ -91,9 +83,6 @@ function initGuideWebRTC(){
     if(DetectRTC.browser.isChrome || DetectRTC.browser.isFirefox || DetectRTC.browser.isOpera){
         connection.open(connection.channel);
     }
-
-    //connection.videosContainer = $("#videoContainer");
-
     initGuideWebRTCEvents();
 }
 
@@ -105,7 +94,6 @@ function initGuideWebRTCEvents(){
         if (connection.alreadyOpened) return;
         connection.alreadyOpened = true;
         startAudioStream();
-        //showAudioVideoIcons();
     };
 
 
@@ -131,20 +119,6 @@ function initGuideWebRTCEvents(){
                 if (showLogs) console.log('guide: local audio stream started');
                 audioStream = event.stream.id;
             }
-            /*
-            if(event.stream.isAudio){
-                if (showLogs) console.log('guide: local audio stream started');
-                /*
-                connection.videosContainer.append(event.mediaElement);
-                event.mediaElement.play();
-                setTimeout(function () {
-                    event.mediaElement.play();
-                }, 2000);
-                */
-               /*
-            }
-            */
-
         }else if(event.stream.type == "remote"){
             if (showLogs) console.warn('guide: remote stream started');
             //if (showLogs) console.log('guide: remote stream started');
@@ -154,21 +128,12 @@ function initGuideWebRTCEvents(){
 
                  if (showLogs) console.warn('guide: remote audio stream started');
 
-
                  event.mediaElement.controls = false;
                  event.mediaElement.autoplay = true;
                  event.mediaElement.volume = 1;
-                // bug: peer recive video instread of audio, so it will be added on videoContainer
-                //var audio = $("#audioDiv");
-                //audio.append(event.mediaElement);
+
                 var video = $("#videoContainer");
                 video.append(event.mediaElement);
-
-                /*
-                if (showLogs) console.warn('guide: remote audio stream started');
-                var audio = $("#audioDiv");
-                audio.append(event.mediaElement);
-                */
             }else{
                 if (showLogs) console.log('guide: remote video stream started');
                 event.mediaElement.controls=false;
@@ -180,26 +145,19 @@ function initGuideWebRTCEvents(){
 
                 showVideo();
             }
-
         }
         else{
             if (showLogs) console.warn('guide: unknow stream started');
         }
-
     };
     
     connection.onmute = function (event) {
-        //to set a picture instead of the last printscreen
-        //e.mediaElement.setAttribute('poster', 'photo.jpg');
         event.mediaElement.pause();
     };
 
     connection.onunmute = function (event) {
-        //to remove picture set in onmute
-        //e.mediaElement.removeAttribute('poster');
         event.mediaElement.play();
     };
-    
     
     connection.onstreamended = function (event) {
         if(showLogs) console.log('guide: stream ended');
@@ -209,7 +167,6 @@ function initGuideWebRTCEvents(){
 
             stopStream();
         }
-        
     };
     
 
@@ -290,8 +247,7 @@ function onMessage(message) {
         if(supportsOnlyWebsocket()){
             sendUseWebsocketConnection();
         }
-        
-        //peername = message.username;
+
         peername = "Tourist";
         sendUsername(username);
         showChatMapGUI();
@@ -308,8 +264,6 @@ function onMessage(message) {
         centerAndResize();
         return;
     }
-
-
 
     //tourist closed the connection correctly
     if(message.closeConnection){
@@ -391,7 +345,6 @@ function guideDeclinesRequest(){
     clearTimeout(conEstabTimeout);
     conEstabTimeout = null;
 }
-
 
 function initGuideSocket(){
     if(showLogs) console.log('guide: init guideSocket');
@@ -475,7 +428,6 @@ function connectionClosed() {
     hideVideo();
     hideAudioVideoIcons();
     showWaitingBox();
-
     stopStream();
     connection.alreadyOpened = false;
     peerAudioStream = null;
@@ -508,25 +460,5 @@ function startAudioStream(){
 }
 
 function stopStream(){
-    /*
-    if (connection.attachStreams.length) {
-        connection.getAllParticipants().forEach(function (p) {
-            connection.attachStreams.forEach(function (stream) {
-                connection.peers[p].peer.removeStream(stream);
-            });
-        });
-
-        connection.attachStreams.forEach(function (stream) {
-            stream.stop();
-        });
-
-        connection.attachStreams = [];
-        
-        if (c2P) {
-            //connection.renegotiate();
-        }
-    }
-    */
-   
     connection.dontCaptureUserMedia = true;
 }

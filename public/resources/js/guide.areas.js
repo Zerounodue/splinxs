@@ -36,14 +36,9 @@ var defaultLocation = {lat: 0, lng: 0};
 //circles loaded from db
 var existingCircles = null;
 
-//var areaForm;
-
 var animDur = 400;
 var infoPopup;
 var backArrow;
-
-
-
 
 $(document).ready(function () {
     if (showLogs) console.log('guide areas document ready');
@@ -52,7 +47,6 @@ $(document).ready(function () {
         //remove the class that makes the element move when there is no place for the sb and the controls
         $("#mapControls").removeClass('controls-move');
         $("#mapInfos").removeClass('info-move');
-
     }
     infoPopup = $("#infoPopup");
     //areaForm = $("#frm_areas");
@@ -72,7 +66,6 @@ $(document).ready(function () {
     $(".nothingSelectedClose").click(function () {
         $("#nothingSelected").hide(animDur);
     });
-    
 
     $("#mapControlRemoveCircles").click(function () {
         if(showLogs) console.log('mapControlRemoveCircles clicked');
@@ -114,9 +107,6 @@ $(document).ready(function () {
     });
 
 });
-
-
-
 
 /**
  * callback when the map script has been successfully loaded
@@ -270,12 +260,6 @@ function addSearchBoxListeners(){
         map.fitBounds(bounds);
     });
 }
-/* might be needed if map shows gray
-function resizeMap() {
-    google.maps.event.trigger(map, 'resize');
-    map.setZoom(map.getZoom());
-}
-*/
 
 /**
  * gets all the circles set by the user or null

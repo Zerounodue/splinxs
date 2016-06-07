@@ -21,24 +21,16 @@ var languages = [];
 var localStorageKey = "languages";
 var animDur = 400;
 
-
-
 $(document).ready(function () {
     if(showLogs) console.log('tourist languages document ready');
-    
     //add existing languages
     addSavedLanguages();
     
-    
-    
     $("#btn_sendLanguages").on('click', function (e) {
         if(showLogs) console.log('send languages button clicked');
-
-        
         if(languages.length > 0){
             submitLanguages();
         }else{
-            //alert('__no languages selected');
             $("#nothingSelected").show();
             //prevent form from being submitted
             return false;
@@ -122,7 +114,6 @@ function displaySelectedLanguage(code, skill){
 
     $('input[name="skill_' + code + '"][value="' + skill + '"]').prop('checked', true);
     $("#rb"+ code + skill).addClass("active");//this is important!
-
     $("#div_" + code).show();
 }
 
@@ -157,7 +148,6 @@ function clearLanguageStorage(){
 }
 
 function submitLanguages(){
-
     //sort languages by code
     languages.sort(compareLanguages);
     saveToLocalStorage(localStorageKey, languages);
@@ -177,8 +167,6 @@ function submitLanguages(){
     langForm.appendChild(langsInput);
     document.body.appendChild(langForm); // inject the form object into the body section
     langForm.submit();
-    
-    
 }
 
 /**

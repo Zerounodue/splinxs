@@ -1,37 +1,24 @@
 /**
- * index.functions.js
- * contains functions for scrolling
- * used in the index and login
+ * Copyright Ⓒ 2016 Splinxs
+ * Authors: Elia Kocher, Philippe Lüthi
+ * This file is part of Splinxs.
+ *
+ * Splinxs is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License V3 as published by
+ * the Free Software Foundation, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * index.functions.js
+ * contains functions for scrolling & ui elements in the index site
+ * used in the index and login
+ */
 
 var showLogs = true;
 var animDur = 400;
 
 $(document).ready(function () {
     if(showLogs) console.log('document index.functions ready');
-/*
-    // Opera 8.0+
-    var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-    // Firefox 1.0+
-    var isFirefox = typeof InstallTrigger !== 'undefined';
-    // At least Safari 3+: "[object HTMLElementConstructor]"
-    var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
-    // Internet Explorer 6-11
-    var isIE = /*@cc_on!@*/false || !!document.documentMode;
-    // Edge 20+
-    /*
-    var isEdge = !isIE && !!window.StyleMedia;
-    // Chrome 1+
-    var isChrome = !!window.chrome && !!window.chrome.webstore;
-    // Blink engine detection
-    var isBlink = (isChrome || isOpera) && !!window.CSS;
-
-    if (isChrome || isFirefox || isOpera || is) {
-        //
-        console.log('Browser '+ isChrome);
-    }
-*/
 
     loginPopup = $('loginPopup');
     registerPopup = $('registerPopup');
@@ -77,7 +64,6 @@ $(document).ready(function () {
         
     });
 
-
     $("#a-register").on('click', function(e){
         if(showLogs) console.log('regiser link clicked');
         loginPopup.hide(0);
@@ -114,10 +100,6 @@ $(document).ready(function () {
         $("#badBrowserLoginDialog").hide(animDur);
     });
 
-
-
-
-
     if(Modernizr.geolocation && Modernizr.eventlistener && Modernizr.input && Modernizr.inputtypes && Modernizr.json && Modernizr.websockets && Modernizr.datalistelem && Modernizr.localstorage &&  Modernizr.getusermedia &&  Modernizr.datachannel &&  Modernizr.peerconnection){
         if(showLogs) console.log('Good browser');
     }
@@ -126,13 +108,10 @@ $(document).ready(function () {
         $("#badBrowserDialog").show();
     }
 
-
     //close the collapsed navbar (movile view) after clicking on it
     $('.liClose').click('liClose', function() {
         $('.navbar-collapse').collapse('hide');
     });
-
-
 });
 
 function hideAndScroll(isLogin){
@@ -144,55 +123,6 @@ function hideAndScroll(isLogin){
     }
     enableScroll();
 }
-
-
-/*
-//check if browser supports all features
-DetectRTC.load(function () {
-    if (DetectRTC.hasMicrophone) {
-        // seems current system has at least one audio input device
-        console.log('has microphone');
-    }
-    if (DetectRTC.hasSpeakers) {
-        // seems current system has at least one audio output device
-        console.log('has speakers');
-    }
-    if (DetectRTC.hasWebcam) {
-        // seems current system has at least one video input device
-        console.log('has webcam');
-    }
-    if (!DetectRTC.isWebRTCSupported) {
-        // seems no WebRTC compatible client
-        console.log('does not support WebRTC');
-        showError();
-    }
-    if (DetectRTC.isAudioContextSupported) {
-        // seems Web-Audio compatible client
-        console.log('Web-Audio ok');
-    }
-    if (DetectRTC.isScreenCapturingSupported) {
-        // seems WebRTC screen capturing feature is supported on this client
-        console.log('screen capturing ok');
-    }
-    if (DetectRTC.isSctpDataChannelsSupported) {
-        // seems WebRTC SCTP data channels feature are supported on this client
-        console.log('SCTP ok');
-    }
-    if (DetectRTC.isRtpDataChannelsSupported) {
-        // seems WebRTC (old-fashioned) RTP data channels feature are supported on this client
-        console.log('RTP data channel ok');
-    }
-
-});
-
-function showError() {
-    var startSection = $("#startSection");
-    var errorSection = $("#errorSection");
-    startSection.hide();
-    errorSection.show();
-}
- */
-
 
 var animating = false;
 /*Scroll transition to anchor*/
@@ -210,7 +140,6 @@ function scrollTo(section) {
     return false;
 };
 
-
 function disableScroll(){
     $( "#body" ).addClass( "indexBody" );
 }
@@ -218,31 +147,20 @@ function enableScroll(){
     $( "#body" ).removeClass( "indexBody" );
 }
 
-
-
-
-
 //for registartion
 function validate() {
     var password1 = $("#password").val();
     var password2 = $("#papssword_confirm").val();
-    //custom validity does not seem to work with jquery...
     var pw1 = document.getElementById('password');
-    //var pw2 = document.getElementById('papssword_confirm');
-
     if(password1.length > 0 && password2.length > 0){
         if (password1 == password2) {
             $( "#firstPasswordGroup" ).removeClass( "has-error" );
             $( "#secondPasswordGroup" ).removeClass( "has-error" );
             pw1.setCustomValidity("");
-            //pw2.setCustomValidity("");
         } else {
             $( "#firstPasswordGroup" ).addClass( "has-error" );
             $( "#secondPasswordGroup" ).addClass( "has-error" );
             pw1.setCustomValidity("__Passwords do not match");
-
-            //pw2.setCustomValidity("__Passwords do not match");
         }
     }
 }
-

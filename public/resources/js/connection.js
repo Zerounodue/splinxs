@@ -253,12 +253,18 @@ function stopStreams() {
         stream.stop();
     });
 }
-
+/**
+ * Send a message to the guide by using SCTP or WebSockets
+ * containing the respective video state to hide the video
+ */
 function sendHideVideo(){
     if (showLogs) console.log('sending: only websocket hideVideo');
     sendMessageToPeer({videoState: videoStates.hideVideo}, false);
 }
-
+/**
+ * Send a message to the guide by using SCTP or WebSockets
+ * containing the respective video state to show the video
+ */
 function sendShowVideo(){
     if (showLogs) console.log('sending: only websocket showVideo');
     sendMessageToPeer({videoState: videoStates.showVideo}, false);

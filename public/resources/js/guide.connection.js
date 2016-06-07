@@ -44,6 +44,10 @@ var channel;
 var audioStream = null;
 var peerAudioStream = null;
 
+/**
+ * Set the channel name used by the WebRTC connection
+ * calls functions to init WebRTC & WebSocket connection
+ */
 function initGuideConnection(){
     if(showLogs) console.log('init guide connection');    
     channel = username;
@@ -51,7 +55,9 @@ function initGuideConnection(){
     initGuideWebRTC();
     initGuideSocket();
 }
-
+/**
+ * Set the some parameter for the WebRTC connection and opens the connection
+ */
 function initGuideWebRTC(){
     if(showLogs) console.log("guide: init guide WebRTC");
     connection = new RTCMultiConnection();
@@ -85,7 +91,10 @@ function initGuideWebRTC(){
     }
     initGuideWebRTCEvents();
 }
-
+/**
+ * inits the onmessage, on streamand on open events
+ * manages what happens when a stream is opened
+ */
 function initGuideWebRTCEvents(){
     if(showLogs) console.log("guide: init guide WebRTC events");
     connection.onopen = function (event) {
@@ -150,11 +159,9 @@ function initGuideWebRTCEvents(){
             if (showLogs) console.log('guide: unknow stream started');
         }
     };
-    
     connection.onmute = function (event) {
         event.mediaElement.pause();
     };
-
     connection.onunmute = function (event) {
         event.mediaElement.play();
     };
@@ -345,7 +352,9 @@ function guideDeclinesRequest(){
     clearTimeout(conEstabTimeout);
     conEstabTimeout = null;
 }
-
+/**
+ * opens a WebSocket connection
+ */
 function initGuideSocket(){
     if(showLogs) console.log('guide: init guideSocket');
     //guideSocket = io.connect('https://splinxs.ti.bfh.ch/guide');
@@ -354,7 +363,10 @@ function initGuideSocket(){
     
     initEvents();
 }
-
+/**
+ * inits the socket on 'connect', on 'username' events
+ * manages what happens when a messages comes in
+ */
 function initEvents(){
     if(showLogs) console.log('guide: init guideSocket evetns');
     
@@ -403,20 +415,32 @@ function initEvents(){
         }
     });
 }
-
+/**
+ * send a message to the tourist that the connection request was accepted
+ * @param {Object} r the guideResponse accept object
+ */
 function guideSocketSendResponse(r){
     guideSocketSendMessage(guideResponses.response, {response: r, name: username});
 }
-
+/**
+ * send a message to the server when the status (available, unavailable) is changed
+ * @param {Object} s the guideStates available / unavailable object
+ */
 function guideSocketSendState(s){
     guideSocketSendMessage(guideStates.state, {state: s, name: username});
 }
-
+/**
+ * send a message to the server with a topic
+ * @param {Object} topic topic to send the message
+ * @param {Object} msg message to emit
+ */
 function guideSocketSendMessage(topic, msg){
     if(showLogs) console.log('guide: guideSocket send on: ' + topic + ', message: ' + msg);
     guideSocket.emit(topic, msg);
 }
-
+/**
+ * hide & cleans the chat, the map the video, and shows the waiting box
+ */
 function connectionClosed() {
     if (showLogs) console.log('guide: connection closed by tourist');
     c2P = false;
@@ -436,13 +460,17 @@ function connectionClosed() {
     //check again what the guide's browser is capable of
     detectRTCcapabilities();
 }
-
+/**
+ * calls functions neede to properly close the connection
+ */
 function closeConnection(){
     if (showLogs) console.log('guide: closing tourist connection');
     sendCloseConnection();
     connectionClosed();
 }
-
+/**
+ * starts the audio/video stream
+ */
 function startAudioStream(){
     connection.dontCaptureUserMedia = false;
     if (connection.attachStreams.length) {
@@ -458,7 +486,9 @@ function startAudioStream(){
         audio: true
     });
 }
-
+/**
+ * stop the audio/video stream
+ */
 function stopStream(){
     connection.dontCaptureUserMedia = true;
 }

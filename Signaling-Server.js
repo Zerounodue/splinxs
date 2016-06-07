@@ -6,8 +6,6 @@ module.exports = exports = function(io, socketCallback) {
     var listOfUsers = {};
     var shiftedModerationControls = {};
     var ScalableBroadcast;
-    //TODO remove comments
-    //var io = require('socket.io');
 
     try {
         //io = io(app);

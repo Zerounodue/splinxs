@@ -32,7 +32,6 @@ block content
             each code, index in codes
                 div(data-toggle='buttons')
                     - var nativeName = langs.getNativeName(code)
-                    //TODO change id   code1 is not so good
                     //for the first element (rounded border) else if for the last element
                     if index == 0
                         label.btn.btn-primary.btn-checkbox.btn-checkbox-first(for='' + code + '',id='' + code + '1') #{nativeName}
@@ -43,9 +42,6 @@ block content
                     else
                         label.btn.btn-primary.btn-checkbox(for='' + code + '',id='' + code + '1') #{nativeName}
                             input(type="checkbox", name="language", id='' + code + '' code='' + code + '')
-
-                    //TODO is defualt skill already saved???
-                    // whitout setSkill()
 
                     .row(id="div_" + code + "",style="display: none;"   )
                         .col-xs-6.skillText

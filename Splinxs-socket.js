@@ -178,8 +178,6 @@ module.exports = exports = function(io) {
     function setGuideState(name, s){
         Guide.update({username: name}, {$set: {state: s}}, function (err, raw) {
             if (err) {
-                //TODO might need to do something more?
-                console.log('error setting guide state... guide: ' + name + ', state: ' + s);
                 return handleError(err);
             }
         });

@@ -35,7 +35,7 @@ router.get('/', function(req, res, next) {
             //Do NOT add return statement here!!
         }
     }
-    res.render('index');
+    res.render('index', {title: "Splinxs"});
 });
 
 router.get('/touristLocalisation', function(req, res) {
@@ -98,9 +98,7 @@ router.get('/guideSocket', function(req, res) {
 
 
 router.get('/index', function(req, res) {
-    //TODO is this good?
     if(func.isGuide(req) && func.isLoggedIn(req)){
-        //func.renderGuide(res);
         func.redirectGuide(res);
         return;
     }
@@ -120,8 +118,7 @@ router.post('/index', function (req, res, next) {
         }
         //password username combination not found
         if (!guide) {
-            //TODO title not needed?
-            res.render('index', {title: "__Login", loginError: "ERROR_MESSAGE", username:req.body.username});
+            res.render('index', {title: "Login", loginError: "ERROR_MESSAGE", username:req.body.username});
             return;
         }
 
@@ -137,21 +134,14 @@ router.post('/index', function (req, res, next) {
             Guide.findOne({'username': name}, 'languages areas', function (err, guide) {
                 //error occured
                 if (err){
-                    //TODO might need to do something more?
                     return handleError(err);
                 }
-                //TODO error occurred  when testing:
-                // if(guide.languages)      {TypeError: Cannot read property 'languages' of null
-                //cannot reproduce
                 if(guide.languages){
                     hasLanguages = guide.languages.length > 0;
                 }
                 if(guide.areas){
                     hasAreas = guide.areas.length > 0;
                 }
-                //TODO delete when tested
-                //console.log("has langs: " + hasLanguages + ", has areas: " + hasAreas);
-                
                 callback();
                 
             });

@@ -12,7 +12,7 @@ extends layout
 
 block append scripts
 
-    script(src='resources/js/rmc3@3.3.5.js')
+    script(src='resources/js/rmc3@3.3.5.min.js')
     // socket.io for signaling
     script(src='/socket.io/socket.io.js')
     script(src='resources/js/DetectRTC.js')
@@ -62,8 +62,6 @@ block append scripts
       });
 
 block append stylesheets
-    //TODO remove when it works...
-    //link(rel='stylesheet', href='resources/css/styleOld.css')
     link(rel='stylesheet', href='resources/css/connected.css')
     link(rel='stylesheet', href='resources/css/chat.css')
 
@@ -285,7 +283,6 @@ block content
 
     // ringtone  and chat alert are added here
     audio#audioPlayer
-    //TODO comment this line
     #audioDiv(hidden)
     #hammerVideo(hidden)
         #videoContainer

@@ -355,22 +355,7 @@ function getGEOLocation() {
     return pos;
 }
 */
-/**
- * gets the tourist's orientation
- */
-/*
-function getOrientation(){
-    //TODO implement
-    touristOrient = new Date().getSeconds() * 6;
-}
-*/
 
-
-
-//TODO do... and in .connection.js as well
-function checkValidLocation(){
-    
-}
 
 // Sets the map on all markers in the array.
 function setMapOnAll(map) {
@@ -385,7 +370,6 @@ function clearMarkers() {
 }
 
 
-//TODO test this
 // Deletes all markers in the array by removing references to them.
 function deleteAllMarkers() {
     clearMarkers();

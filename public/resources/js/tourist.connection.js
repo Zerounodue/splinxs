@@ -89,16 +89,11 @@ function initTouristWebRTC(){
 
     connection.dontCaptureUserMedia = true;
 
-    //TODO check if this works
+
     connection.session = {
         data: true
         ,audio: true
-        //audio: 'two-way',
         ,video: true
-        //oneway: true
-        //data: true
-        //,audio: true//DetectRTC.hasMicrophone
-        //,video: true//DetectRTC.hasWebcam
     };
 
     connection.sdpConstraints.mandatory = {
@@ -106,16 +101,6 @@ function initTouristWebRTC(){
         OfferToReceiveVideo: true//DetectRTC.hasWebcam
     };
 
-    //rmc line 567
-    //connection.mediaConstraints.video.optional[1].facingMode = "environment";
-
-    /* //can't be used to change to another camera
-     connection.mediaConstraints.video.optional.forEach(function (optional) {
-     if(optional.facingMode){
-     optional.facingMode = "environment";
-     }
-     });
-     */
 
     //to change to back camera
     var secondVideoDeviceId = null;
@@ -181,9 +166,7 @@ function initTouristWebRTCEvents(){
                 event.mediaElement.autoplay = true;
                 event.mediaElement.volume = 1;
 
-                //TODO make nicer code
-                var video = $("#videoContainer");
-                video.append(event.mediaElement);
+                $("#videoContainer").append(event.mediaElement);
 
 
 
@@ -193,106 +176,27 @@ function initTouristWebRTCEvents(){
 
 
                 if (showLogs) console.warn('tourist: local stream video started');
-                event.mediaElement.controls = true;
+                event.mediaElement.controls = false;
                 event.mediaElement.autoplay = true;
                 event.mediaElement.volume = 1;
 
-                //TODO make nicer code
-                var video = $("#videoContainer");
-                video.append(event.mediaElement);
+                $("#videoContainer").append(event.mediaElement);
                 showVideo();
             }
 
 
-            /*
-             if(event.stream.isVideo){
-             if (showLogs) console.log('tourist: local video stream started');
-             //TODO do other things?
-             event.mediaElement.controls=false;
-             event.mediaElement.autoplay=true;
-
-             //TODO make nicer code
-             var video = $("#videoContainer");
-             video.append(event.mediaElement);
-             showVideo();
-
-             //TODO make in ui script
-             video.show();
-             $("#hammerVideo").show();
-
-             //connection.videosContainer.append(event.mediaElement);
-             }else if(event.stream.isAudio){
-             if (showLogs) console.log('tourist: local audio stream started');
-             //might never happen...
-             }
-             */
         }else if(event.stream.type == "remote"){
             if (showLogs) console.warn('tourist: remote stream (audio) started');
-            /*
-             if(event.stream.isAudio){
-             if (showLogs) console.log('tourist: remote audio stream started');
-             var audio = $("#audioDiv");
-             audio.append(event.mediaElement);
-             //TODO check if this actually does something
-             event.mediaElement.play();
-             setTimeout(function () {
-             event.mediaElement.play();
-             }, 2000);
-             }
-             */
 
-            //if (showLogs) console.log('tourist: remote audio stream started');
             var audio = $("#audioDiv");
             audio.append(event.mediaElement);
-            event.mediaElement.controls = true;
+            event.mediaElement.controls = false;
             event.mediaElement.autoplay = true;
             event.mediaElement.volume = 1;
-            //TODO check if this actually does something
-            /*
-             event.mediaElement.play();
-             setTimeout(function () {
-             event.mediaElement.play();
-             }, 2000);
-             */
 
-            /*
-             //to change to back camera
-             var secondVideoDeviceId = null;
-             var devicesLength = 0;
-
-             //http://www.rtcmulticonnection.org/docs/selectDevices/
-             connection.DetectRTC.MediaDevices.forEach(function (device) {
-
-             if (device.kind.indexOf('video') !== -1) {
-             devicesLength++;
-             if (devicesLength == 2) {
-             secondVideoDeviceId = device.id;
-             }
-             }
-
-             if (secondVideoDeviceId != null) {
-
-             console.warn('setting facing mode to environment');
-
-             //use back camera
-             //connection.mediaConstraints.video.optional[1].facingMode = "environment";
-
-             debugger;
-
-             connection.mediaConstraints.video.optional = [{
-             sourceId: secondVideoDeviceId
-             }];
-
-             }
-
-             });
-             */
 
             startAudioStream();
 
-            //connection.dontCaptureUserMedia = false;
-            //startAudioStream();
-            //startVideoStream();
         }
 
     };
@@ -313,21 +217,6 @@ function initTouristWebRTCEvents(){
     connection.connectSocket(function (socket) {
         if (showLogs) console.log('tourist: websocket connected');
         websocket = socket;
-        //setSocketCustomEvent();
-        //connection;
-
-        //TODO call guide
-        //establishConnectionWithGuide();
-
-        //initConnectionWithGuide();
-
-
-        //channel = 'guide1';
-        //connection.socketCustomEvent = channel;
-
-        //setSocketCustomEvent();
-
-        //to make sure everything is ready
     });
 }
 
@@ -437,7 +326,6 @@ function establishConnectionWithGuide() {
     clearTimeout(findGuideTimeout);
     c2P = true;
 
-    //TODO verify if this works
     if(!supportsOnlyWebsocket()){
         connection.join(connection.channel);
     }
@@ -469,7 +357,6 @@ function storeConnection(){
         }, saveConnIntervalTimer);
     } else {
         if(showLogs) console.log('tourist: localstorage not supported...');
-        //TODO use cookies?
     }
 }
 /**
@@ -480,27 +367,7 @@ function saveConnection(){
     var data = {channel: connection.channel, time: getCurrentTimeMillis()};
     saveToLocalStorage(localStorageConnectionName, data);
 }
-/**
- * checks if a previous connection with a guide has been interrupted
- * adds this connection to the first of the list
- */
-function checkPreviousConnectionInterrupted(){
-    var data = getFromLocalStorage(localStorageConnectionName);
-    if(data != null){
-        var c = data.channel;
-        var t = data.time;
-        if(t > 0 && c != ""){
-            var currTime = getCurrentTimeMillis();
-            var diff = currTime - t;
-            /* //TODO redo
-             if(diff < localStoragePreviousConnectionTimeout){
-             if(showLogs) console.log('tourist: previous connection was interrupted, guide: ' + c);
-             //channels.splice(0, 0, c);
-             }
-             */
-        }
-    }
-}
+
 
 function initTouristSocket(){
     if(showLogs) console.log('tourist: init touristSocket');

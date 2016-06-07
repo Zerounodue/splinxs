@@ -18,7 +18,6 @@
 
 //div containing the chat
 var chatBox;
-//TODO no idea??
 var chat;
 //chat elements
 var headingPanel;
@@ -55,7 +54,6 @@ var spinner;
  */
 function initUI(isGuide){
     if (showLogs) console.log('init gui');
-    //TODO makes this sense? doese chat exist?
     chat = $("#chat");
     headingPanel = $("#headingPanel");
     primaryPanel = $("#primaryPanel");
@@ -125,19 +123,6 @@ function hideChat() {
     hangUpCollapse.hide();
 }
 
-//TODO remove these two functions
-/**
- * shows the small chat
- */
-function showSmallChat() {
-    smallChat.show();
-}
-/**
- * hides the small chat
- */
-function hideSmallChat() {
-    smallChat.hide();
-}
 function emptyChat(){
     chat.empty();
 }
@@ -277,9 +262,9 @@ function showChatMapGUI(){
                     showAudioOnlyGUI();
                 } else if(supportsVideoOnly()){
                     showVideoOnlyGUI();
-                }//TODO else?? show waring?
+                }
                 else{
-                    console.warn("nothing supported");
+                    if(shologs)console.log("nothing supported");
                 }
             }
         }
@@ -291,9 +276,7 @@ function showChatMapGUI(){
 function showWebsocketOnlyGUI(){
     if(showLogs) console.log('show websocket only gui');
     showChat();
-
     showMap();
-    //TODO hide mic, video, etc.
     $("#btn_closeConnection").show();
 
 
@@ -306,8 +289,6 @@ function showNoMediaGUI(){
     showChat();
 
     showMap();
-    //TODO hide mic, video, etc.
-    //TODO peer might have media available
     $("#btn_closeConnection").show();
 
 }
@@ -319,7 +300,6 @@ function showAudioVideoGUI(){
     showChat();
 
     showMap();
-    //TODO show audio, video, etc.
     showVideoControls();
     showAudioControls();
     $("#btn_closeConnection").show();
@@ -333,7 +313,6 @@ function showAudioOnlyGUI(){
     showChat();
 
     showMap();
-    //TODO show audio...
     showAudioControls();
     $("#btn_closeConnection").show();
 

@@ -131,21 +131,6 @@ this.touristHasUsername = function(req){
     return has;
 };
 
-//TODO delete?
-/*
-this.hasSetLanguages = function(req){
-    var has = false;
-    
-    if(req.session){
-        if(req.session.setLanguages){
-            has = true;
-        }
-    }
-    
-    return has;
-};
-*/
-
 this.isNumeric = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };

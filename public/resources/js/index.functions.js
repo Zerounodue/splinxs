@@ -7,7 +7,6 @@
 
 var showLogs = true;
 var animDur = 400;
-var goodBrowser=false;
 
 $(document).ready(function () {
     if(showLogs) console.log('document index.functions ready');
@@ -121,17 +120,10 @@ $(document).ready(function () {
 
     if(Modernizr.geolocation && Modernizr.eventlistener && Modernizr.input && Modernizr.inputtypes && Modernizr.json && Modernizr.websockets && Modernizr.datalistelem && Modernizr.localstorage &&  Modernizr.getusermedia &&  Modernizr.datachannel &&  Modernizr.peerconnection){
         if(showLogs) console.log('Good browser');
-        //TODO want to use this variable?
-        goodBrowser=true;
     }
     else{
         if(showLogs) console.log('The browser is bullshit');
-        //TODO want to use this variable?
-        goodBrowser=false;
-        setTimeout(function(){
-            $("#badBrowserDialog").show();
-            //alert("__\nYour browser does not support the required features\nWe recommend to use Google Chrome");
-        }, 500);
+        $("#badBrowserDialog").show();
     }
 
 

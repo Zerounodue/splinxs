@@ -27,7 +27,7 @@ var func  = require('../public/resources/js/functions.js');
 
 
 router.get('/register', function(req, res) {
-    res.render('index', {title: "__Register"});
+    res.render('index', {title: "Register"});
 });
 
 router.post('/register', function(req, res) {
@@ -66,15 +66,12 @@ router.post('/register', function(req, res) {
         if (err) {
             //username already exists
             if(err.name == "UserExistsError"){
-                //TODO title not needed?
-                res.render('index', {title: "__Register", registerError: "USERNAME_TAKEN", email: email});
-                //TODO remove commented old version line if the above line works
-                //res.render('register', {title: "__Register", error: "__username already taken", email: email});
+                res.render('index', {title: "Register", registerError: "USERNAME_TAKEN", email: email});
                 return;
             }
             //duplicate key -> email
             if(err.code == 11000){
-                res.render('index', {title: "__Register", registerError: "EMAIL_TAKEN", username: name});
+                res.render('index', {title: "Register", registerError: "EMAIL_TAKEN", username: name});
                 return;
             }
             func.redirectHome(res);
@@ -112,7 +109,6 @@ router.get('/guideLanguages', function(req, res) {
         Guide.findOne({'username': req.session.username}, 'languages', {lean: true}, function (err, guide) {
             //error occured
             if (err) {
-                //TODO might need to do something more?
                 return handleError(err);
             }
             if (guide.languages && guide.languages.length > 0) {
@@ -154,7 +150,6 @@ router.post('/guideLanguages', function(req, res) {
         //save to db
         Guide.update({ username: req.session.username }, { $set: { languages: langs } },  function (err, raw){
             if(err){
-                //TODO might need to do something more?
                 return handleError(err);
             }
         });
@@ -162,7 +157,6 @@ router.post('/guideLanguages', function(req, res) {
         GuideLanguage.update(null, {$addToSet: {codes: {$each: langs}}}, function (err, raw){
             if(err){
                 console.log("GuideLanguage update error: " + err);
-                //TODO might need to do something more?
                 return handleError(err);
             }else{
                 //everything ok
@@ -170,12 +164,8 @@ router.post('/guideLanguages', function(req, res) {
             }
         });
         if(func.isLoggedIn(req)){
-            //send to guide site
-            //TODO chech this :
-            // instead to renderGuide i redirect to '/' this is in my opinion better because the url changes
-            // if you do renderGuide() the URL remains /guideLanguages --> if the user reload the page then he will be redirected in /guideLanguages   !!BAD!!
-            res.redirect('/');
-            //func.renderGuide(res);
+            //send to guide site (when logged in it redirects to guide)
+            func.redirectHome(res);
             return;
         }else{
             req.session.hasLanguages = true;
@@ -210,7 +200,6 @@ router.get('/guideAreas', function(req, res) {
         Guide.findOne({'username': req.session.username}, 'areas', {lean: true}, function (err, guide) {
             //error occured
             if (err) {
-                //TODO might need to do something more?
                 return handleError(err);
             }
             if (guide.areas && guide.areas.length > 0) {
@@ -245,7 +234,6 @@ router.post('/guideAreas', function(req, res) {
 
     var areas = JSON.parse(req.body.areas);
     var validAreas = true;
-    //TODO check if works
     if( Object.prototype.toString.call( areas ) === '[object Array]'){
         for (var i = 0; i <  areas.length; i++){
             if(!areas[i].radius || areas[i].radius == null || !areas[i].lat || !areas[i].lng || areas[i].lat == null || areas[i].lng == null){
@@ -265,7 +253,6 @@ router.post('/guideAreas', function(req, res) {
         //save to db
         Guide.update({ username: req.session.username }, { $set: { areas: areas } },  function (err, raw){
             if(err){
-                //TODO might need to do something more?
                 return handleError(err);
             }
         });
@@ -283,7 +270,7 @@ router.post('/guideAreas', function(req, res) {
                 return;
             }else{
                 //send home that guide can login
-                res.render('index', {title: "__Login", registrationOK: "TRUE"});
+                res.render('index', {title: "Login", registrationOK: "TRUE"});
                 func.redirectHome(res);
                 return;
             }
@@ -297,15 +284,6 @@ router.post('/guideAreas', function(req, res) {
 });
 
 router.get('/guidePassword', function(req, res) {
-    //TODO implement site
-    //this site is currently used both for change the password as a guide and if a guide forgot his password
-    //if this site is used for change the password, he needs to be a logged in guide
-    /*
-    if(!func.hasSession(req) || !func.isLoggedIn(req) || !func.isGuide(req)){
-        func.redirectHome(res);
-        return;
-    }
-    */
     func.renderGuidePW(res);
     return;
 });
@@ -320,9 +298,7 @@ router.post('/guidePassword', function(req, res) {
     if (!req.body || !req.body.password){
         func.redirectHome(res);
         return;
-    }   
-    //TODO implement
-    
+    }
 });
 
 router.get('/guide', function(req, res) {

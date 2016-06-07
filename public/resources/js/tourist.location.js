@@ -174,7 +174,7 @@ $(document).ready(function () {
     if(showLogs) console.log('document ready');
 
     loadPopup = $('loadPopup');
-    infoPopup = $('infopopup');
+    infoPopup = $('infoPopup');
     declinedPopup = $('declinedPopup');
     
 
@@ -184,9 +184,7 @@ $(document).ready(function () {
         if(marker && isValidGEOPosition(marker.position)){
             submitLocation();
         }else{
-            //TODO return false needed?
             showInfoPopup();
-            //return false;
         }
     });
 

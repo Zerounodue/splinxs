@@ -13,15 +13,7 @@ extends layout
 block append stylesheets
     link(rel='stylesheet', href='resources/css/style-index.css')
     link(rel='stylesheet', href='resources/css/login.css')
-// For the moblie menu
-// <script type="text/javascript" src="resources/js/jquery-2.0.3.min.js"></script>
-// <script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
-// <script type="text/javascript" src="resources/js/jquery-1.10.2.min.js"></script>
 block append scripts
-    //TODO is rmc needed here???
-
-    //script(src='resources/js/rmc3@3.3.5.min.js')
-    //script(src='resources/js/DetectRTC.js')
     script(src='resources/js/index.functions.js')
     script(src='resources/js/modernizr-custom.min.js')
 
@@ -30,7 +22,6 @@ block navbar-brand
     a#navbar-brand-scroll.navbar-brand
         img(style='height:100%', src='resources/images/splinxs.png')
 block append navbarli
-    //TODO do onClick in js file? is it worth it?
     li.liClose
         a(onclick="scrollTo('#body')") #{__('MENU.HOME')}
     li.liClose
@@ -43,14 +34,11 @@ block append navbarli
 
 block content    
     if registerError
-        //TODO do it in js file? is it worth it?
         body#body(onload='$("registerPopup").show();')
     else if loginError
-        //TODO do it in js file? is it worth it?
         body#body(onload='$("loginPopup").show();')
     else if registrationOK
         body#body(onload='$("registartionOKPopup").show();')
-
     else
         body#body
 

@@ -39,8 +39,7 @@ var guideResponses = {
     accept: 1
 };
 
-var ongoingConnectionInterval;
-var ongoingConnectionIntervalTimer = 60 * 1000; //60 seconds
+
 
 //guide channel
 var channel;
@@ -51,14 +50,7 @@ function initGuideConnection(){
     if(showLogs) console.log('init guide connection');    
     channel = username;
 
-    //TODO check if this works
-
-    //if(!supportsOnlyWebsocket()){
-
-        initGuideWebRTC();
-    //}
-    //connection.channel = channel;
-    //connection.socketCustomEvent = connection.channel;
+    initGuideWebRTC();
     initGuideSocket();
 }
 
@@ -178,13 +170,8 @@ function initGuideWebRTCEvents(){
                 audio.append(event.mediaElement);
                 */
             }else{
-                console.error('Video works, change code here');
-                return;
-
-
-                if (showLogs) console.warn('guide: remote video stream started');
-                //TODO do other things?
-                event.mediaElement.controls=true;
+                if (showLogs) console.log('guide: remote video stream started');
+                event.mediaElement.controls=false;
                 event.mediaElement.autoplay=true;
                 event.mediaElement.volume = 1;
 
@@ -192,39 +179,8 @@ function initGuideWebRTCEvents(){
                 video.append(event.mediaElement);
 
                 showVideo();
-
-
-
-
             }
 
-            /*
-            if(event.stream.isVideo){
-                if (showLogs) console.log('guide: remote video stream started');
-                //TODO do other things?
-                event.mediaElement.controls=false;
-                event.mediaElement.autoplay=true;
-
-                //connection.videosContainer.append(event.mediaElement);
-
-                var video = $("#videoContainer");
-                video.append(event.mediaElement);
-                showVideo();
-            }else if(event.stream.isAudio){
-                if (showLogs) console.log('guide: remote audio stream started');
-                var audio = $("#audioDiv");
-                audio.append(event.mediaElement);
-
-
-                
-                
-                event.mediaElement.play();
-                setTimeout(function () {
-                    event.mediaElement.play();
-                }, 2000);
-                
-            }
-            */
         }
         else{
             if (showLogs) console.warn('guide: unknow stream started');
@@ -249,22 +205,10 @@ function initGuideWebRTCEvents(){
         if(showLogs) console.log('guide: stream ended');
         
         if(event.stream.type == "remote"){
-            //TODO better do with hammer thingy?
             $("#videoContainer").empty();
-            //$("#videoContainer").hide();
 
             stopStream();
         }
-        
-        //$("#videoContainer").empty();
-
-        //event.mediaElement.remove();
-
-        /*
-        connection.attachStreams.forEach(function (stream) {
-            stream.stop();
-        });
-        */
         
     };
     
@@ -323,7 +267,7 @@ function onMessage(message) {
             //start video
             ico_video.addClass('lightColor');
             ico_video.attr('src','../resources/images/icons/videoOff.png');
-            muteVideo();
+            //mute video
             hideVideo();
             ico_video.hide(150);
 
@@ -334,7 +278,7 @@ function onMessage(message) {
             //stop video
             ico_video.removeClass('lightColor');
             ico_video.attr('src','../resources/images/icons/videoOn.png');
-            unmuteVideo();
+            //unmute video
             showVideo();
             ico_video.show(150);
         }
@@ -347,15 +291,11 @@ function onMessage(message) {
             sendUseWebsocketConnection();
         }
         
-        peername = message.username;
+        //peername = message.username;
+        peername = "Tourist";
         sendUsername(username);
         showChatMapGUI();
         hideVideoControls();
-        informServerOngoingConnection();
-        //set param on db that guide is connected to tourist
-        ongoingConnectionInterval = setInterval(function () {
-            informServerOngoingConnection();
-        }, ongoingConnectionIntervalTimer);
         //connection with tourist started
         c2P = true;
         setUnavailable();
@@ -452,17 +392,6 @@ function guideDeclinesRequest(){
     conEstabTimeout = null;
 }
 
-function informServerOngoingConnection(){
-    if(showLogs) console.log('guide: informing server that connection is ongoing');
-    //TODO save in db timestamp of ongoing connection
-}
-/**
- * stopps the guide from sending messages to the server that a connection is ongoing
- */
-function ongoingConnectionClosed(){
-    if(showLogs) console.log('guide: ongoing connection closed normally');
-    clearInterval(ongoingConnectionInterval);
-}
 
 function initGuideSocket(){
     if(showLogs) console.log('guide: init guideSocket');
@@ -538,7 +467,7 @@ function guideSocketSendMessage(topic, msg){
 function connectionClosed() {
     if (showLogs) console.log('guide: connection closed by tourist');
     c2P = false;
-    //TODO put all in function in guide ui
+
     hideChat();
     emptyChat();
     hideMap();

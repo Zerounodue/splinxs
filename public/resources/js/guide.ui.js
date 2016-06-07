@@ -85,11 +85,6 @@ function showGuideControls(){
     $("#videoControlsDialog").show(animDur);
 }
 
-//TODO remove this unused function
-function showGuideUI(){
-    if(showLogs) console.log('guide: show gui');
-    mapControls.show();
-}
 
 function showModalDialog(content) {
     modalContent.text(content);
@@ -146,12 +141,7 @@ function initGuideButtons() {
         guideDeclinesRequest();
         hideTouristRequestGuidePrompt();
     });
-
-    $("#btn_stopVideo").click(function (e) {
-        if (showLogs) console.log('stop video clicked');
-        //TODO mute video
-        stopVideo();
-    });
+    
 
     //closes the tourist's connection, the guide stays connected
     $("#btn_closeConnection").click(function (e) {
@@ -298,15 +288,14 @@ function initGuideButtons() {
             //start video
             ico_video.removeClass('lightColor');
             ico_video.attr('src','../resources/images/icons/videoOn.png');
-
-            unmuteVideo();
+            //unmute video
             showVideo();
         }
         else{
             //stop video
             ico_video.addClass('lightColor');
             ico_video.attr('src','../resources/images/icons/videoOff.png');
-            muteVideo();
+            //mute video
             hideVideo();
 
         }
@@ -373,32 +362,3 @@ function unmuteAudio(){
     });
 }
 
-function muteVideo() {
-    //TODO send to tourist a request to mute video?
-    /* not working now, because of comment above
-    connection.attachStreams.forEach(function (stream) {
-        if (stream.type == "remote") {
-            if (stream.isVideo) {
-                if (showLogs) console.log('guide: muting video stream');
-                stream.mute();
-            }
-        }
-    });
-    */
-   //hideVideo();
-}
-
-function unmuteVideo(){
-    //TODO send to tourist a request to mute video?
-    /* not working now, because of comment above
-    connection.attachStreams.forEach(function (stream) {
-        if (stream.type == "remote") {
-            if (stream.isVideo) {
-                if (showLogs) console.log('guide: unmuting video stream');
-                stream.unmute();
-            }
-        }
-    });
-    */
-   //showVideo();
-}

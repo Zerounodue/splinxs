@@ -267,15 +267,6 @@ function stopStreams() {
     });
 }
 
-//TODO delete?
-function stopVideo() {
-    //removes all media streams
-    connection.attachStreams.forEach(function (stream) {
-        stream.stop();
-    });
-    connection.renegotiate();
-
-}
 
 function sendHideVideo(){
     if (showLogs) console.log('sending: only websocket hideVideo');

@@ -43,15 +43,6 @@ require('./Signaling-Server.js')(io, function (socket) {
     try {
         var params = socket.handshake.query;
         var added = false;
-        //TODO remove comments
-        // "socket" object is totally in your own hands!
-        // do whatever you want!
-
-        // in your HTML page, you can access socket as following:
-        // connection.socketCustomEvent = 'custom-message';
-        // var socket = connection.getSocket();
-        // socket.emit(connection.socketCustomEvent, { test: true });
-
 
         if (!params.socketCustomEvent) {
             //params.socketCustomEvent = 'custom-message';
@@ -79,8 +70,6 @@ require('./Signaling-Server.js')(io, function (socket) {
 
     function addEvent(event) {
         socket.on(event, function (message) {
-            //TODO delete when everything works
-            console.log('-----rmc signalling server: event, ' + event + ', message, ' + message);
             try {
                 socket.broadcast.emit(event, message);
             } catch (e) {
@@ -99,20 +88,8 @@ require('./Signaling-Server.js')(io, function (socket) {
 require('./Splinxs-socket.js')(io);
 
 
-
-
-/*
-var sessionOptions = {
-  //TODO change secret and option
-  secret: "secret",
-  resave : true,
-  saveUninitialized : false
-};
-*/
-
 var sessionMiddleware = session({
-    //TODO change secret and option
-    secret: "secret",
+    secret: "SplinxsSecret",
     resave: true,
     saveUninitialized: false
 });

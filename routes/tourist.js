@@ -21,14 +21,6 @@ var func  = require('../public/resources/js/functions.js');
 
 
 router.get('/touristLanguages', function(req, res) {
-    //TODO is this intelligent? can't a guide do tourist things?
-    //do an automatic logout or tell the guide he has to logout
-    // hard redirect is not user friendly
-
-    //1. there is no link for the guide to go to this website, if he does, then he has to enter the url himself
-    //-> he does something that is not "allowed" thus it does not have to be user friendly
-    //2. it just makes no sense at all that a guide does tourist things, a guide is there to help, when he wants to get help, he becomes a tourist...
-    //-> he can log out and use the link to go to the tourit site, which is "allowed"
     if(func.isGuide(req)){
         func.redirectHome(res);
         return;

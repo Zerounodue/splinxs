@@ -15,7 +15,7 @@
  */
 
 //variables
-showLogs = true;
+showLogs = false;
 
 var c2P = false; //connected to peer
 var channel;
@@ -125,13 +125,13 @@ function initTouristWebRTCEvents(){
     connection.onstream = function (event) {
         if (showLogs) console.log('tourist: stream started');
         if (!event.stream.getAudioTracks().length && !event.stream.getVideoTracks().length) {
-            if(showLogs) console.warn('0 streams...');
+            if(showLogs) console.log('0 streams...');
             return;
         }
         if(event.stream.type == "local"){
             if(audioStream == null){
                 audioStream = event.stream.id;
-                if (showLogs) console.warn('tourist: local stream audio started');
+                if (showLogs) console.log('tourist: local stream audio started');
                 //this code is only because the audio contains a video
                 event.mediaElement.controls = false;
                 event.mediaElement.autoplay = true;
@@ -142,7 +142,7 @@ function initTouristWebRTCEvents(){
             }
 
         }else if(event.stream.type == "remote"){
-            if (showLogs) console.warn('tourist: remote stream (audio) started');
+            if (showLogs) console.log('tourist: remote stream (audio) started');
 
             var audio = $("#audioDiv");
             audio.append(event.mediaElement);
@@ -244,10 +244,10 @@ function mapMessage(mapMessage) {
                 if(pos.lat && pos.lng){
                     addGuidesMarker(id, pos);
                 }else{
-                    if(showLogs) console.warn('invalid lcoation: ' + pos);
+                    if(showLogs) console.log('invalid lcoation: ' + pos);
                 }
             }else{
-                if(showLogs) console.warn('invalid marker id: ' + id + ' pos: ' + pos);
+                if(showLogs) console.log('invalid marker id: ' + id + ' pos: ' + pos);
             }
         }
         if(marker.rem){
@@ -256,7 +256,7 @@ function mapMessage(mapMessage) {
             if(id > -1){
                 removeMarker(id);
             }else{
-                if(showLogs) console.warn('invalid id to remove marker: ' + id);
+                if(showLogs) console.log('invalid id to remove marker: ' + id);
             }
         }
     }

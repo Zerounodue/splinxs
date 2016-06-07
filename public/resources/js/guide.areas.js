@@ -15,7 +15,7 @@
  */
 
 //variables
-var showLogs = true;
+var showLogs = false;
 var map;
 var drawingManager;
 var searchBox;

@@ -15,7 +15,7 @@
  */
 
 //variables
-var showLogs = true;
+var showLogs = false;
 var map;
 var marker;
 
@@ -182,7 +182,7 @@ function getGEOLocation() {
             fillTryAgainDiv();
         }, function (error) { //error function
             //user did not allow google maps
-            if(showLogs) console.warn('The Geolocation service failed');
+            if(showLogs) console.log('The Geolocation service failed');
             if (error.code == error.PERMISSION_DENIED){
                 document.getElementById('errorMessage').innerHTML = permissionError;
             }

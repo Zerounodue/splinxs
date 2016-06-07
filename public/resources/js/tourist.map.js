@@ -53,22 +53,22 @@ function getGEOLocation() {
                 }
             }
             else{
-                if(showLogs) console.warn('Tourist: invalid  location, will not send to guide');
+                if(showLogs) console.log('Tourist: invalid  location, will not send to guide');
             }
             //map.setCenter(pos);
         }, function (error) { //error function
             //user did not allow google maps
             if(showLogs) console.log('The Geolocation service failed');
             if (error.code == error.PERMISSION_DENIED){
-                if(showLogs) console.warn('Location: permission denied');
+                if(showLogs) console.log('Location: permission denied');
             }
             else{
-                if(showLogs) console.warn('Impossible get location');
+                if(showLogs) console.log('Impossible get location');
             }
         });
     } else {
         // Browser doesn't support Geolocation
-        if(showLogs) console.warn('Your browser does not support geolocation');
+        if(showLogs) console.log('Your browser does not support geolocation');
     }
 }
 
@@ -76,7 +76,7 @@ function getGEOLocation() {
  * sends the tourist's location a
  */
 function sendTouristLocation(){
-    if(showLogs) console.warn('sending tourist location ');
+    if(showLogs) console.log('sending tourist location ');
 
     data.tourist.pos = touristPos;
     sendMapData(data);

@@ -14,7 +14,7 @@
  * used in the index and login
  */
 
-var showLogs = true;
+var showLogs = false;
 var animDur = 400;
 
 $(document).ready(function () {

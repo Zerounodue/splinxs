@@ -15,7 +15,7 @@
  */
 
 //variables
-showLogs = true;
+showLogs = false;
 
 firstTime = true;
 
@@ -113,20 +113,20 @@ function initGuideWebRTCEvents(){
         }
 
         if(event.stream.type == "local"){
-            if (showLogs) console.warn('guide: local stream started');
+            if (showLogs) console.log('guide: local stream started');
             
             if(audioStream == null){
                 if (showLogs) console.log('guide: local audio stream started');
                 audioStream = event.stream.id;
             }
         }else if(event.stream.type == "remote"){
-            if (showLogs) console.warn('guide: remote stream started');
+            if (showLogs) console.log('guide: remote stream started');
             //if (showLogs) console.log('guide: remote stream started');
 
             if(peerAudioStream == null){
                 peerAudioStream = event.stream.id;
 
-                 if (showLogs) console.warn('guide: remote audio stream started');
+                 if (showLogs) console.log('guide: remote audio stream started');
 
                  event.mediaElement.controls = false;
                  event.mediaElement.autoplay = true;
@@ -147,7 +147,7 @@ function initGuideWebRTCEvents(){
             }
         }
         else{
-            if (showLogs) console.warn('guide: unknow stream started');
+            if (showLogs) console.log('guide: unknow stream started');
         }
     };
     
@@ -291,7 +291,7 @@ function mapMessage(mapMessage) {
                     firstTime=false;
                 }
             }else{
-                if(showLogs) console.warn('invalid location: ' + pos);
+                if(showLogs) console.log('invalid location: ' + pos);
             }
         }
         if (tourist.orientation > -1) {
@@ -310,10 +310,10 @@ function mapMessage(mapMessage) {
                 if(pos.lat && pos.lng){
                     addTouristsMarker(id, pos);
                 }else{
-                    if(showLogs) console.warn('invalid location: ' + pos);
+                    if(showLogs) console.log('invalid location: ' + pos);
                 }
             }else{
-                if(showLogs) console.warn('invalid marker id: ' + id + ' pos: ' + pos);
+                if(showLogs) console.log('invalid marker id: ' + id + ' pos: ' + pos);
             }
         }
         if(marker.rem){
@@ -322,7 +322,7 @@ function mapMessage(mapMessage) {
             if(id > -1){
                 removeMarker(id);
             }else{
-                if(showLogs) console.warn('invalid id to remove marker: ' + id);
+                if(showLogs) console.log('invalid id to remove marker: ' + id);
             }
         }
     }

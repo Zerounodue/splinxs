@@ -15,7 +15,7 @@
  */
 
 //variables
-var showLogs = true;
+var showLogs = false;
 
 var connectionState = {
     DataChannel: {},
@@ -83,7 +83,6 @@ function detectRTCcapabilities(){
                 connectionState.Media = connectionStates.Media.Video;
             }
             else{
-                if (showLogs){console.warn("DetectRTC failed or no Microphone & Webcam installed");}
                 connectionState.Media = connectionStates.Media.None;
             }
         }

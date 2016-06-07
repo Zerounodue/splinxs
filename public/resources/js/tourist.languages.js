@@ -15,7 +15,7 @@
  */
 
 //variables
-var showLogs = true;
+var showLogs = false;
 //{code: string, skill: number}
 var languages = [];
 var localStorageKey = "languages";

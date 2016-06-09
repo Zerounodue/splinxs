@@ -16,7 +16,7 @@
 
 var showLogs = false;
 var animDur = 400;
-
+var scrollAnimationDur = 750;
 $(document).ready(function () {
     if(showLogs) console.log('document index.functions ready');
 
@@ -132,7 +132,7 @@ function scrollTo(section) {
         animating = true;
         $('body').animate({
                 scrollTop: $(section).offset().top
-            }, 750, function () {
+            }, scrollAnimationDur, function () {
                 animating = false;
             }
         );

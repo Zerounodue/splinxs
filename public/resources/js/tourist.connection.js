@@ -68,7 +68,7 @@ function initTouristWebRTC(){
     } else if (typeof MediaStream !== 'undefined') {
         connection.attachStreams.push(new MediaStream());
     } else {
-        if(showlogs)console.log('Neither Chrome nor Firefox. This might NOT work.');
+        if(showLogs)console.log('Neither Chrome nor Firefox. This might NOT work.');
     }
 
     connection.dontCaptureUserMedia = true;

@@ -297,4 +297,24 @@ router.get('/guide', function(req, res) {
     return;
 });
 
+router.get('/initDB', function(req, res) {
+    //this must be done the first time or create the collection by hand
+    GuideLanguage.count(function(err, c) {
+        console.log(c);
+        if (c<1){
+            GuideLanguage.create({ codes: ['en'] }, function (err, small) {
+                if (err) return handleError(err);
+                else {
+                    console.log("GuideLanguages mongoDB document created");
+                }
+            })
+        }
+        else{
+            console.log("GuideLanguages mongoDB document already exists");
+        }
+    });
+    func.redirectHome(res);
+});
+
+
 module.exports = router;

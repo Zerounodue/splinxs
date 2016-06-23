@@ -138,6 +138,7 @@ module.exports = exports = function(io) {
             if(index > -1){
                 guideList.splice(index, 1);
             }
+            splinxsList.removeGuide(socket.username);
         });
 
     });
@@ -214,6 +215,7 @@ module.exports = exports = function(io) {
             if(socket.guide){
                 sendTouristClosedConnectionRequest(socket.guide);
             }
+            splinxsList.removeTourist(socket.username);
         });
         
     });

@@ -1,0 +1,173 @@
+//**
+ * Copyright Ⓒ 2016 Splinxs
+ * Authors: Elia Kocher, Philippe Lüthi
+ * This file is part of Splinxs.
+ * 
+ * Splinxs is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License V3 as published by
+ * the Free Software Foundation, see <http://www.gnu.org/licenses/>.
+ */
+
+extends layout
+
+block append stylesheets
+    link(rel='manifest', href='resources/beta/manifest.json')
+    // Add to home screen for Safari on iOS
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name='apple-mobile-web-app-status-bar-style', content='black')
+    meta(name='apple-mobile-web-app-title', content='Splinxs')
+    link(rel='apple-touch-icon', href='resources/images/logo200.png"')
+    meta(name='msapplication-TileImage', content='resources/images/logo200.png"')
+    meta(name='msapplication-TileColor', content='#2F3BA2')
+
+    link(rel='stylesheet', href='resources/css/style-index.css')
+    link(rel='stylesheet', href='resources/css/login.css')
+block append scripts
+    script(src='resources/js/index.functions.js')
+    script(src='resources/js/modernizr-custom.min.js')
+block navbar-brand
+    a#navbar-brand-scroll.navbar-brand
+        img(style='height:100%', src='resources/images/splinxs.png')
+block append navbarli
+    li.liClose
+        a(onclick="scrollTo('#body')") #{__('MENU.HOME')}
+    li.liClose
+        a(onclick="scrollTo('#splinxsSlide')") #{__('MENU.WHAT_IS_SPLINXS')}
+    li.liClose
+        a(onclick="scrollTo('#aboutSlide')") #{__('MENU.ABOUT_US')}
+    li.liClose
+        a(onclick="scrollTo('#contactSlide')") #{__('MENU.CONTACT')}
+block content    
+    if registerError
+        body#body(onload='$("registerPopup").show();')
+    else if loginError
+        body#body(onload='$("loginPopup").show();')
+    else if registrationOK
+        body#body(onload='$("registartionOKPopup").show();')
+    else
+        body#body
+    registartionOKPopup.registartionOKPopup(hidden)
+        include registrationOK.jade
+    loginPopup.loginPopup(hidden)
+        include login.jade
+    registerPopup.registerPopup(hidden)
+        include register.jade
+    #smallScreenDialog.modalDialog(hidden)
+        .row
+            .col-sm-12
+                img.x.alertDialogClose(src='resources/images/icons/x.png', alt='close icon')
+        center(style="padding:10px")
+            .alertForm
+                h1 #{__('G.ATTENTION')}
+                p #{__('G.SMALL_SCREEN_MESSAGE')}
+                .row(style="margin-top:20px")
+                    .col-md-12
+                        button.btn.btn-green.btn-status.alertDialogClose(style="margin-bottom:10px;") #{__('GENERAL.OK')}
+    #badBrowserDialog.modalDialog(hidden)
+        .row
+            .col-sm-12
+                img.x.alertDialogClose(src='resources/images/icons/x.png', alt='close icon')
+        center(style="padding:10px")
+            .alertForm
+                h1 #{__('G.ATTENTION')}
+                p #{__('ERROR.CRAPPY_BROWSER')}
+                .row(style="margin-top:20px")
+                    .col-md-12
+                        button.btn.btn-green.btn-status.alertDialogClose(style="margin-bottom:10px;") #{__('GENERAL.OK')}
+    //This messag is shown when a guide try to login with a bad browser
+    #badBrowserLoginDialog.modalDialog(hidden)
+        .row
+            .col-sm-12
+                img.x.alertDialogClose(src='resources/images/icons/x.png', alt='close icon')
+        center(style="padding:10px")
+            .alertForm
+                h1 #{__('G.ATTENTION')}
+                p #{__('ERROR.CRAPPY_BROWSER_GUIDE')}
+                .row(style="margin-top:20px")
+                    .col-md-12
+                        button.btn.btn-green.btn-status.alertDialogClose(style="margin-bottom:10px;") #{__('GENERAL.OK')}
+    // --- SLIDES START
+    #homeSlide.slide
+        .container
+            // --- TITLE
+            .row
+                .col-xs-12.text-center
+                    h1 #{__('INDEX.SPLINXS_SUBTITLE')}
+            // --- BUTTON
+            .row
+                .col-sm-6.text-center
+                    a#touristButton.btn.btn-default.btn-green.btn-index(href='/touristLanguages') #{__('INDEX.I_AM_TOURIST')}
+                .col-sm-6.text-center
+
+                    a#btn-guide.btn.btn-default.btn-green.btn-index #{__('INDEX.I_AM_GUIDE')}
+            // --- DESCRIPTION
+            .row
+                .col-sm-12.splinxsDescription
+                    div
+                        b #{__('GENERAL.TOURIST')}:
+                        |  #{__('INDEX.DESCRIPTION_TOURIST')}
+                        br
+                        br
+                        b #{__('GENERAL.GUIDE')}:
+                        |  #{__('INDEX.DESCRIPTION_GUIDE')}
+    #errorSection(hidden='')
+        h1 WebRT not supported!
+    #splinxsSlide.slide
+        .section
+            .container
+                .row
+                    .col-md-12
+                        h1.text-center #{__('MENU.WHAT_IS_SPLINXS')}
+                .row
+                    .col-xs-3
+                        img.media-object.pull-right.splinxsSlideIcon(src='resources/images/icons/chatWhite.png', height='50px')
+                    .col-xs-9
+                        h4.media-heading #{__('GENERAL.CHAT')}
+                        p #{__('INDEX.CHAT_DESCRIPTION')}
+                .row
+                    .col-xs-3
+                        img.media-object.pull-right.splinxsSlideIcon(src='resources/images/icons/audioWhite.png', height='50px')
+                    .col-xs-9
+                        h4.media-heading #{__('GENERAL.AUDIO')}
+                        p #{__('INDEX.AUDIO_DESCRIPTION')}
+                .row
+                    .col-xs-3
+                        img.media-object.pull-right.splinxsSlideIcon(src='resources/images/icons/videoWhite.png', height='50px')
+                    .col-xs-9
+                        h4.media-heading #{__('GENERAL.VIDEO')}
+                        p #{__('INDEX.VIDEO_DESCRIPTION')}
+                .row
+                    .col-xs-3
+                        img.media-object.pull-right.splinxsSlideIcon(src='resources/images/icons/orientatioWhite.png', height='50px')
+                    .col-xs-9
+                        h4.media-heading #{__('GENERAL.LOCATION')}
+                        p #{__('INDEX.LOCATION_DESCRIPTION')}
+    #aboutSlide.slide
+        .section
+            .container
+                .row
+                    .col-md-12
+                        h1.text-center  #{__('MENU.ABOUT_US')}
+                        p.text-center #{__('MENU.ABOUT_US_INTRODUCTION')}
+                .row
+                    .col-md-6
+                        img.center-block.img-circle.img-responsive(src='resources/images/aboutUs.png')
+                        h3.text-center Philippe Lüthi
+                        p.text-center #{__('MENU.ABOUT_US_PHIL')}
+                    .col-md-6
+                        img.center-block.img-circle.img-responsive(src='resources/images/aboutUs.png')
+                        h3.text-center Elia Kocher
+                        p.text-center #{__('MENU.ABOUT_US_ELIA')}
+    #contactSlide.slide
+        .section
+            .container
+                .row
+                    .col-md-12
+                        img.center-block.img-responsive(src='resources/images/icons/mailWhite.png', style='height:150px')
+                        h1.text-center  #{__('MENU.CONTACT')}
+                        p.text-center #{__('MENU.CONTACT_DESCRIPTION')}
+                        h2.text-center #{__('MENU.CONTACT_MAIL')}
+    #footerSlide.slide
+        .content
+            #copyright  Copyright © 2016 Elia Kocher & Philippe Lüthi
+    // --- SLIDES END

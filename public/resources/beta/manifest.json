@@ -1,0 +1,13 @@
+{
+  "name": "Realtime tourist guidance",
+  "short_name": "Splinxs",
+  "icons": [{
+    "src": "/resources/images/logo200.png",
+      "sizes": "200x200",
+      "type": "image/png"
+    }],
+  "start_url": "/beta",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2585C4"
+}

@@ -114,4 +114,9 @@ router.post('/index', function (req, res, next) {
     })(req, res, next);
 });
 
+router.get('/beta', function(req, res) {
+
+    res.render('beta', {title: "beta"});
+});
+
 module.exports = router;

@@ -11,24 +11,31 @@
 extends layout
 
 block append stylesheets
-    link(rel='manifest', href='resources/beta/manifest.json')
-    // Add to home screen for Safari on iOS
-    meta(name='apple-mobile-web-app-capable', content='yes')
-    meta(name='apple-mobile-web-app-status-bar-style', content='white')
-    meta(name='apple-mobile-web-app-title', content='Splinxs')
-    link(rel='apple-touch-icon', href='resources/images/logo200.png')
-    link(rel='apple-touch-icon' sizes='120x120' href='resources/images/logo120.png')
-    link(rel='apple-touch-icon' sizes='152x152' href='resources/images/logo152.png')
-    link(rel='apple-touch-icon' sizes='167x167' href='resources/images/logo167.png')
-    link(rel='apple-touch-icon' sizes='180x180' href='resources/images/logo180.png')
-    meta(name='msapplication-TileImage', content='resources/images/logo200.png')
-    meta(name='msapplication-TileColor', content='#2F3BA2')
 
     link(rel='stylesheet', href='resources/css/style-index.css')
     link(rel='stylesheet', href='resources/css/login.css')
 block append scripts
     script(src='resources/js/index.functions.js')
     script(src='resources/js/modernizr-custom.min.js')
+
+    link(rel='manifest', href='resources/beta/manifest.json')
+    //android fullscreen
+    meta(name='mobile-web-app-capable' content='yes')
+    // Add to home screen for Safari on iOS
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    //meta(name='apple-mobile-web-app-status-bar-style', content='white')
+    meta(name='apple-mobile-web-app-title', content='Splinxs')
+    link(rel='apple-touch-icon', href='resources/images/logo200.png')
+
+    link(rel='apple-touch-icon' sizes='120x120' href='resources/images/logo120.png')
+    link(rel='apple-touch-icon' sizes='152x152' href='resources/images/logo152.png')
+    link(rel='apple-touch-icon' sizes='167x167' href='resources/images/logo167.png')
+    link(rel='apple-touch-icon' sizes='180x180' href='resources/images/logo180.png')
+
+    link(rel='apple-touch-startup-image' href='/startup-image.png')
+
+    meta(name='msapplication-TileImage', content='resources/images/logo200.png')
+    meta(name='msapplication-TileColor', content='#2F3BA2')
 block navbar-brand
     a#navbar-brand-scroll.navbar-brand
         img(style='height:100%', src='resources/images/splinxs.png')

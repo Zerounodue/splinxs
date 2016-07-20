@@ -47,6 +47,7 @@
 		"G_AREAS": "Aree della guide",
 		"PAN": "Muovi",
 		"ADD": "Aggiungi",
+                "CONTINUE": "Continua",
 		"REMOVE": "Rimuovi",
 		"SEARCH": "Cerca un luogo...",
 		"OK": "Ok",
@@ -57,6 +58,7 @@
 		"REMOVE_DESCRIPTION": "Clicca su un area per rimuoverla"
 	},
 	"G_LANGUAGES": {
+                "CONTINUE": "Continua",
 		"TITLE": "Lingue della guide",
 		"SEARCH": "Scrivi per cercare",
 		"SEND": "Invia le lingue",
@@ -64,6 +66,7 @@
 		"OPTIONS": "Seletiona un opzione"
 	},
 	"G_PASSWORD": {
+                "CONTINUE": "Continua",
 		"G_PASSWORD": "Password della guida"
 	},
 	"MENU": {
@@ -136,6 +139,7 @@
 		"G_LEFT_MESSAGE": "La connessione con la guida è stata interrotta"
 	},
 	"T_LANGUAGES": {
+                "CONTINUE": "Continua",
 		"T_LANGUAGES": "Lingue del turista",
 		"SEND": "Invia le lingue",
 		"SKILL": "Seleziona il livello",

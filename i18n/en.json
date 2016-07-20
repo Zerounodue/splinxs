@@ -46,6 +46,7 @@
 	"G_AREAS": {
 		"ADD": "Add",
 		"ADD_DESCRIPTION": "Click on the map to draw an area",
+                "CONTINUE": "Continue",
 		"DESCRIPTION": "Add circles to mark the region that you know well. Only tourists that are in these regions will contact you.  You can change the center and radius of existing circles or delete them.",
 		"G_AREAS": "Guide Areas",
 		"OK": "Ok",
@@ -57,6 +58,7 @@
 		"SEND_AREAS": "Send areas"
 	},
 	"G_LANGUAGES": {
+                "CONTINUE": "Continue",
 		"LANGUAGES_INTRO": "Please choose all your spooken languages",
 		"OPTIONS": "Select your option",
 		"SEARCH": "Type to search",
@@ -64,6 +66,7 @@
 		"TITLE": "Guide Languages"
 	},
 	"G_PASSWORD": {
+                "CONTINUE": "Continue",
 		"G_PASSWORD": "Guide Password"
 	},
 	"MENU": {
@@ -136,6 +139,7 @@
 		"NO_MATCH_MESSAGE": "No matching guide could be found."
 	},
 	"T_LANGUAGES": {
+            "CONTINUE": "Continue",
 		"T_LANGUAGES": "Tourist Languages",
 		"LANGUAGES_INTRO": "Select all your spoken languages and the relative skill",
 		"SEND": "Send languages",

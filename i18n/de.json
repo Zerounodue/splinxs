@@ -47,6 +47,7 @@
         "G_AREAS": "Guide Gebiete",
         "PAN": "Ziehen",
         "ADD": "Hinzufügen",
+        "CONTINUE": "Weiter",
         "REMOVE": "Entfernen",
         "SEARCH": "Suche einen Ort...",
         "OK": "Ok",
@@ -57,6 +58,7 @@
         "REMOVE_DESCRIPTION": "Klicke auf ein Gebiet um es zu löschen"
     },
     "G_LANGUAGES": {
+        "CONTINUE": "Weiter",
         "TITLE": "Guide Sprachen",
         "SEARCH": "Eingeben um zu suchen",
         "SEND": "Sprachen senden",
@@ -64,6 +66,7 @@
         "OPTIONS": "Wähle eine Option"
     },
     "G_PASSWORD": {
+        "CONTINUE": "Weiter",
         "G_PASSWORD": "Guide Passwort"
     },
     "MENU": {
@@ -136,6 +139,7 @@
         "NO_MATCH_MESSAGE": "Kein passender Guide konnte gefunden werden."
     },
     "T_LANGUAGES": {
+        "CONTINUE": "Weiter",
         "T_LANGUAGES": "Tourist Sprachen",
         "SEND": "Sprachen senden",
         "SKILL": "Niveau wählen",

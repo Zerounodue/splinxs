@@ -10,6 +10,7 @@
 		"CANCEL": "Annulla",
 		"CHAT": "Chat",
                 "CONTROLS": "Controlli",
+                "ERROR": "Errore",
 		"GUIDE": "Guide",
 		"NO": "No",
 		"LOCATION": "Posizione",
@@ -25,6 +26,11 @@
 		"OK": "Ok",
 		"YES": "Si"
 	},
+        "CHOOSE_IMG": {
+            "ERROR_CANT_PICK_FILE": "___translate",
+            "ERROR_FILE_TOO_BIG": "___translate _SIZE KBytes.",
+            "ERROR_INVALID_FILE_TYPE": "___translate"
+        },
 	"G": {
 		"ATTENTION": "Attenzione",
 		"AVAILABLE": "Disponibile",

@@ -23,6 +23,8 @@ block append scripts
     script(src='resources/js/guide.map.js')
     script(src='resources/js/hammerV2.0.8.js')
     script(src='resources/js/hammerFunctions.js')
+    script(src='resources/js/chooseImg.js')
+    script(src='resources/js/featherlight.min.js')
     script.
       $(document).ready(function () {
             username = "!{name}";
@@ -47,6 +49,8 @@ block append scripts
 block append stylesheets
     link(rel='stylesheet', href='resources/css/connected.css')
     link(rel='stylesheet', href='resources/css/chat.css')
+    link(rel='stylesheet', href='resources/css/featherlight.min.css')
+    link(rel='stylesheet', href='resources/css/chooseImg.css')
 //the guide has no link to home clicking on the splinxs brand
 block navbar-brand
     a(class='navbar-brand')
@@ -72,6 +76,7 @@ block append navbarli
             li
                 a(href="/guidePassword" id="a_guidePassword") #{__('MENU.CHANGE_PASSWORD')}
 block content
+    include chooseImg.jade
     #waitingBox
         center
             h1 #{__('G.ONLINE')}

@@ -10,6 +10,7 @@
         "CANCEL": "Abbrechen",
         "CHAT": "Chat",
         "CONTROLS": "Videoeinstellungen",
+        "ERROR": "Fehler",
         "GUIDE": "Guide",
         "NO": "Nein",
         "LOCATION": "Position",
@@ -24,6 +25,11 @@
         "VIDEO": "Video",
         "OK": "Ok",
         "YES": "Ja"
+    },
+    "CHOOSE_IMG": {
+        "ERROR_CANT_PICK_FILE": "Dein Browser unterstützts es nicht ein Bild auszuwählen.",
+        "ERROR_FILE_TOO_BIG": "Die das bild darf nicht grösser sein als _SIZE KBytes.",
+        "ERROR_INVALID_FILE_TYPE": "Es dürfen nur Bilder ausgewählt werden."
     },
     "G": {
         "ATTENTION": "Aufgepasst",

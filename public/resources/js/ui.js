@@ -123,7 +123,8 @@ function emptyChat(){
  * @param {String} message message to append to chat
  */
 function appendMyMessageToChat(message) {
-
+    //used for textarea
+    message = message.replace("\n", "<br>");
     var m =
             '<li class="right clearfix">'
             + '<span class="chat-img pull-right">'
@@ -132,7 +133,7 @@ function appendMyMessageToChat(message) {
             + '<div class="chat-body clearfix">'
             + '<div class="header">'
             + '<small class=" text-muted"><span class="glyphicon glyphicon-time"></span>' + getCurrentTime() + '</small>'
-            + '<strong class="pull-right primary-font">' + 'me' + '</strong>'
+            + '<strong class="pull-right primary-font">' + 'Me' + '</strong>'
             + '</div>'
             + '<p>' + message + '</p>'
             + '</div>'
@@ -148,7 +149,8 @@ function appendMyMessageToChat(message) {
  * @param {String} peername name of peer who sent the message
  */
 function appendPeerMessageToChat(message, peername) {
-
+    //used for textarea
+    message = message.replace("\n", "<br>");
     var m =
             '<li class="left clearfix">'
             + '<span class="chat-img pull-left">'
@@ -376,13 +378,25 @@ function initChat(){
         sendChatMessage();
     });
 
-    $("#inp_chat").keypress(function (e) {
+    $("#inp_chat").keyup(function (e) {
         //cannot send to peer if not connected
         if(!c2P) return;
         //send message when enter key is pressed
-        if (e.which == 13) {
-            if(showLogs) console.log('enter on chat input');
-            sendChatMessage();
+        if (e.keyCode == 13) {
+            if(showLogs) console.info('enter on chat input');
+            /*
+            //use for line breaks
+            var content = this.value;  
+            var caret = getCaret(this);
+            if(e.shiftKey){
+                this.value = content.substring(0, caret - 1) + "\n" + content.substring(caret, content.length);
+                e.stopPropagation();
+            }else{
+                this.value = content.substring(0, caret - 1) + content.substring(caret, content.length);
+                sendChatMessage();
+            }
+            */
+           sendChatMessage();
         }
     });
 
@@ -431,5 +445,80 @@ function messageArrived(message) {
     //play message sound
     playSound(sounds.message_arrival);
     vibrate(vibrations.message);
-    appendPeerMessageToChat(message, peername);
+    if(message.image){
+        appendPeerImageToChat(message.buffer, peername);
+    }else{
+        //used for textarea
+        message = message.replace("\n", "<br>");
+        appendPeerMessageToChat(message, peername);
+    }
+}
+
+
+function appendPeerImageToChat(img, peername){
+    var m =
+            '<li class="left clearfix">'
+            + '<span class="chat-img pull-left">'
+            + '<img src="' + peerAvatarIcon + '" alt="Peer Avatar" class="img-circle">'
+            + '</span>'
+            + '<div class="chat-body clearfix">'
+            + '<div class="header">'
+            + '<strong class="primary-font">' + peername + '</strong> <small class="pull-right text-muted">'
+            + '<span class="glyphicon glyphicon-time"></span>' + getCurrentTime() + '</small>'
+            + '</div>'
+            //featherlight
+            + '<a href="' + img + '" data-featherlight="image">'
+            + '<img src="' + img + '" alt="image" style="max-width: 100px; max-height:100px;" />'
+            + '</a>'
+            //featherlight
+            + '</div>'
+            + '</li>'
+        ;
+    appendMessageToChat(m);
+}
+
+
+function appendMyImageToChat(img) {
+
+    var m =
+            '<li class="right clearfix">'
+            + '<span class="chat-img pull-right">'
+            + '<img src="' + myAvatarIcon + '" alt="My Avatar" class="img-circle">'
+            + '</span>'
+            + '<div class="chat-body clearfix">'
+            + '<div class="header">'
+            + '<small class=" text-muted"><span class="glyphicon glyphicon-time"></span>' + getCurrentTime() + '</small>'
+            + '<strong class="pull-right primary-font">' + 'Me' + '</strong>'
+            + '</div>'
+            //featherlight
+            + '<a href="' + img + '" data-featherlight="image">'
+            + '<img src="' + img + '" alt="image" style="max-width: 100px; max-height:100px;" />'
+            + '</a>'
+            //featherlight
+            + '</div>'
+            + '</li>'
+        ;
+    appendMessageToChat(m);
+}
+
+/**
+ * to add a new line to the text area
+ * @param {type} el
+ * @returns {re@call;duplicate.text.length|Number}
+ */
+function getCaret(el) { 
+    if (el.selectionStart) { 
+        return el.selectionStart; 
+    } else if (document.selection) { 
+        el.focus();
+        var r = document.selection.createRange(); 
+        if (r == null) { 
+            return 0;
+        }
+        var re = el.createTextRange(), rc = re.duplicate();
+        re.moveToBookmark(r.getBookmark());
+        rc.setEndPoint('EndToStart', re);
+        return rc.text.length;
+    }  
+    return 0; 
 }

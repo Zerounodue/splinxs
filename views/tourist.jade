@@ -23,6 +23,8 @@ block append scripts
     script(src='resources/js/tourist.map.js')
     script(src='resources/js/hammerV2.0.8.js')
     script(src='resources/js/hammerFunctions.js')
+    script(src='resources/js/chooseImg.js')
+    script(src='resources/js/featherlight.min.js')
     script.
       $(document).ready(function () {
             username = "!{name}";
@@ -41,6 +43,8 @@ block append scripts
 block append stylesheets
     link(rel='stylesheet', href='resources/css/connected.css')
     link(rel='stylesheet', href='resources/css/chat.css')
+    link(rel='stylesheet', href='resources/css/featherlight.min.css')
+    link(rel='stylesheet', href='resources/css/chooseImg.css')
 block hangUpCollapse
     img.hangUpCollapse(src='resources/images/icons/hangUp.png', alt='hang up', id="hangUpCollapse", hidden)
 block hangUp
@@ -49,6 +53,7 @@ block append navbarli
     li
         a#controlsBtn(hidden) #{__('MENU.CONTROLS')}
 block content
+    include chooseImg.jade
     #leftDialog.modalDialog(hidden)
         .row
             .col-sm-12

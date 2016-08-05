@@ -76,7 +76,6 @@ function detectRTCcapabilities(){
         if(DetectRTC.hasMicrophone && DetectRTC.hasWebcam){
             connectionState.Media = connectionStates.Media.AudioVideo;
         }else{
-            //debugger;
             if(DetectRTC.hasMicrophone){
                 connectionState.Media = connectionStates.Media.Audio;
             }else if(DetectRTC.hasWebcam){
@@ -103,8 +102,12 @@ function sendMessageToPeer(message, appendChat) {
         } else if (connectionState.DataChannel == connectionStates.DataChannel.Websocket) {
             sendMessageWebsocket(message);
         }
-        if (appendChat) {
-            appendMyMessageToChat(message);
+        if (appendChat) {     
+            if(message.image){
+                appendMyImageToChat(message.buffer);
+            }else{
+                appendMyMessageToChat(message);
+            }
         }
     }
 }
@@ -268,4 +271,10 @@ function sendHideVideo(){
 function sendShowVideo(){
     if (showLogs) console.log('sending: only websocket showVideo');
     sendMessageToPeer({videoState: videoStates.showVideo}, false);
+}
+
+function sendImage(img){
+    if(showLogs) console.log('sending: image');
+    
+    sendMessageToPeer({image: true, buffer: img}, true);
 }

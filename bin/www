@@ -43,19 +43,20 @@ http.createServer(httpApp).listen(httpApp.get('port'), function() {
 /**
  * Create HTTPS server.
  */
+/*
  var server = https.createServer({
  key: fs.readFileSync('/etc/letsencrypt/live/splinxs.ti.bfh.ch/privkey.pem'),
  cert: fs.readFileSync('/etc/letsencrypt/live/splinxs.ti.bfh.ch/cert.pem'),
  ca: fs.readFileSync('/etc/letsencrypt/live/splinxs.ti.bfh.ch/chain.pem')
  }, app);
-
+*/
 //for local usage use fake certificates
-/*
+
 var server = https.createServer({
 	key: fs.readFileSync('./selfCert/key.pem'),
 	cert: fs.readFileSync('./selfCert/cert.pem')
 }, app);
-*/
+
 
 /**
  * Socket.io

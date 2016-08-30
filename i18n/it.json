@@ -68,7 +68,7 @@
 		"TITLE": "Lingue della guide",
 		"SEARCH": "Scrivi per cercare",
 		"SEND": "Invia le lingue",
-		"LANGUAGES_INTRO": "Prego selezioni le lingue parlate, vada in fondo alla pagina per continuare",
+		"LANGUAGES_INTRO": "Prego selezioni le lingue parlate",
 		"OPTIONS": "Seletiona un opzione"
 	},
 	"G_PASSWORD": {
@@ -150,7 +150,7 @@
 		"SEND": "Invia le lingue",
 		"SKILL": "Seleziona il livello",
 		"SPOKEN_LANGUAGES": "Lingue parlate",
-		"LANGUAGES_INTRO": "Selezione le lingue che parli e il relativo livello di conoscenza"
+		"LANGUAGES_INTRO": "Selezione le lingue che parli e il relativo livello di conoscenza, vada in fondo alla pagina per continuare"
 	},
 	"T_LOCATION": {
 		"GETTING_GPS": "Ricerco la posizione, prego attendere....",

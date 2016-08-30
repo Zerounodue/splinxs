@@ -15,30 +15,30 @@
  */
 var fs = require('fs');
 var app = require('../app');
-//var httpApp = require('../httpApp');
+var httpApp = require('../httpApp');
 var debug = require('debug')('test:server');
 var https = require('https');
-//var http = require('http');
+var http = require('http');
 
 
 /**
  * Get port from environment and store in Express.
  */
 var port = normalizePort(process.env.PORT || '443');
-//var httpPort = normalizePort('80');
+var httpPort = normalizePort('80');
 
 app.set('port', port);
-//httpApp.set('port', httpPort);
+httpApp.set('port', httpPort);
 
 
 /**
  * Create HTTP server for redirect from port 80
  */
-/*
+
 http.createServer(httpApp).listen(httpApp.get('port'), function() {
     console.log('Express server listening on port ' + httpApp.get('port') + ' and redirecting everithing on port 443');
 });
-*/
+
 
 /**
  * Create HTTPS server.
@@ -48,7 +48,8 @@ http.createServer(httpApp).listen(httpApp.get('port'), function() {
  cert: fs.readFileSync('/etc/letsencrypt/live/splinxs.ti.bfh.ch/cert.pem'),
  ca: fs.readFileSync('/etc/letsencrypt/live/splinxs.ti.bfh.ch/chain.pem')
  }, app);
-//for loca usage use fake certificates
+
+//for local usage use fake certificates
 /*
 var server = https.createServer({
 	key: fs.readFileSync('./selfCert/key.pem'),

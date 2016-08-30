@@ -68,7 +68,7 @@
         "TITLE": "Guide Sprachen",
         "SEARCH": "Eingeben um zu suchen",
         "SEND": "Sprachen senden",
-        "LANGUAGES_INTRO": "Bitte wähle deine Sprachen",
+        "LANGUAGES_INTRO": "Bitte wähle deine Sprachen dann scrolle nach unten um fortzufahren",
         "OPTIONS": "Wähle eine Option"
     },
     "G_PASSWORD": {
@@ -78,7 +78,7 @@
     "MENU": {
         "ABOUT_US": "Über uns",
         "ABOUT_US_ELIA": "Kann italienisch sprechen",
-        "ABOUT_US_INTRODUCTION": "Wir sind beide Studenten der Berner Fachhochschule in Biel.",
+        "ABOUT_US_INTRODUCTION": "Wir haben bei der Berner Fachhochschule in Biel studiert, jetzt arbeiten wir in der IT Banche",
         "ABOUT_US_PHIL": "Kann nicht italienisch sprechen",
         "CHANGE_AREAS": "Gebiete ändern",
         "CHANGE_LANGUAGES": "Sprachen ändern",

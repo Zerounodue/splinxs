@@ -68,7 +68,7 @@
 		"TITLE": "Lingue della guide",
 		"SEARCH": "Scrivi per cercare",
 		"SEND": "Invia le lingue",
-		"LANGUAGES_INTRO": "Prego selezioni le lingue parlate",
+		"LANGUAGES_INTRO": "Prego selezioni le lingue parlate, vada in fondo alla pagina per continuare",
 		"OPTIONS": "Seletiona un opzione"
 	},
 	"G_PASSWORD": {
@@ -78,7 +78,7 @@
 	"MENU": {
 		"ABOUT_US": "Chi siamo",
 		"ABOUT_US_ELIA": "Parla italiano",
-		"ABOUT_US_INTRODUCTION": "Siamo entrambi studenti presso la BFH a Bienne",
+		"ABOUT_US_INTRODUCTION": "Abbiamo studiato presso la BFH a Bienne, ora lavoriamo nel campo dell'informatica",
 		"ABOUT_US_PHIL": "Non parla italiano",
 		"CHANGE_AREAS": "Alterare aree",
 		"CHANGE_LANGUAGES": "Alterare lingue",

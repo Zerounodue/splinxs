@@ -78,7 +78,7 @@
 	"MENU": {
 		"ABOUT_US": "About us",
 		"ABOUT_US_ELIA": "Can speak Italian!",
-		"ABOUT_US_INTRODUCTION": "We are both students at the Bern University of Applied Sciences in Biel",
+		"ABOUT_US_INTRODUCTION": "We were students at the Bern University of Applied Sciences in Biel, now we work in the IT branch",
 		"ABOUT_US_PHIL": "Can't speak Italian...",
 		"CHANGE_AREAS": "Change areas",
 		"CHANGE_LANGUAGES": "Change languages",
@@ -147,7 +147,7 @@
 	"T_LANGUAGES": {
 		"CONTINUE": "Continue",
 		"T_LANGUAGES": "Tourist Languages",
-		"LANGUAGES_INTRO": "Select all your spoken languages and the relative skill",
+		"LANGUAGES_INTRO": "Select all your spoken languages and the relative skill, scroll down to continue",
 		"SEND": "Send languages",
 		"SKILL": "Choose your skill",
 		"SPOKEN_LANGUAGES": "Spoken languages"
